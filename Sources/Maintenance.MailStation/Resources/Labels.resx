@@ -1,0 +1,339 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Abort" xml:space="preserve">
+    <value>ABORTED</value>
+  </data>
+  <data name="Action" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="Active" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="Back_to_list" xml:space="preserve">
+    <value>Back to list</value>
+  </data>
+  <data name="BCC" xml:space="preserve">
+    <value>BCC</value>
+  </data>
+  <data name="Body" xml:space="preserve">
+    <value>Body</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="CC" xml:space="preserve">
+    <value>CC</value>
+  </data>
+  <data name="Confirm_AbortJob" xml:space="preserve">
+    <value>Do you want to abort this task?</value>
+  </data>
+  <data name="Confirm_CancelEditRecipient" xml:space="preserve">
+    <value>Do you want to cancel the Editing recipient?</value>
+  </data>
+  <data name="Confirm_CancelInsertRecipient" xml:space="preserve">
+    <value>Do you want to cancel the Inserting recipient?</value>
+  </data>
+  <data name="Confirm_EditRecipient" xml:space="preserve">
+    <value>Do you want to edit recipient?</value>
+  </data>
+  <data name="Confirm_InsertRecipient" xml:space="preserve">
+    <value>Do you want to insert recipient?</value>
+  </data>
+  <data name="Confirm_RetryMissingJob" xml:space="preserve">
+    <value>Do you want to retry the missing job of the report?</value>
+  </data>
+  <data name="Confirm_RetrySendMail" xml:space="preserve">
+    <value>Do you want to retry the sending mail of the report?</value>
+  </data>
+  <data name="Confirm_RunNow" xml:space="preserve">
+    <value>Do you want to run this Mail now?</value>
+  </data>
+  <data name="CopyPrefix" xml:space="preserve">
+    <value>_Copy</value>
+  </data>
+  <data name="Create_New_User" xml:space="preserve">
+    <value>Create New User</value>
+  </data>
+  <data name="Data_not_ready" xml:space="preserve">
+    <value>Data not ready</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="EditRecipient_Success" xml:space="preserve">
+    <value>Update recipient successfully!</value>
+  </data>
+  <data name="Edit_Recipient" xml:space="preserve">
+    <value>Edit Recipient</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Email1" xml:space="preserve">
+    <value>Email1</value>
+  </data>
+  <data name="Email2" xml:space="preserve">
+    <value>Email2</value>
+  </data>
+  <data name="Email3" xml:space="preserve">
+    <value>Email3</value>
+  </data>
+  <data name="Email_SymbolMulti" xml:space="preserve">
+    <value>Email(s)</value>
+  </data>
+  <data name="Failed" xml:space="preserve">
+    <value>Failed</value>
+  </data>
+  <data name="From" xml:space="preserve">
+    <value>From</value>
+  </data>
+  <data name="Group" xml:space="preserve">
+    <value>Group</value>
+  </data>
+  <data name="ID" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="Inactive" xml:space="preserve">
+    <value>Inactive</value>
+  </data>
+  <data name="InsertRecipient_Success" xml:space="preserve">
+    <value>Insert recipient successfully!</value>
+  </data>
+  <data name="Insert_Recipient" xml:space="preserve">
+    <value>Insert Recipient</value>
+  </data>
+  <data name="Last_Run" xml:space="preserve">
+    <value>Last Run</value>
+  </data>
+  <data name="Log" xml:space="preserve">
+    <value>Log</value>
+  </data>
+  <data name="Log_details" xml:space="preserve">
+    <value>Log details</value>
+  </data>
+  <data name="Log_Time" xml:space="preserve">
+    <value>Log Time</value>
+  </data>
+  <data name="Mail_Date" xml:space="preserve">
+    <value>Mail Date</value>
+  </data>
+  <data name="Mail_Delivery_System" xml:space="preserve">
+    <value>Mail Delivery System</value>
+  </data>
+  <data name="Mail_Detail" xml:space="preserve">
+    <value>Mail Detail</value>
+  </data>
+  <data name="Mail_Name" xml:space="preserve">
+    <value>Mail Name</value>
+  </data>
+  <data name="Manage_Recipient" xml:space="preserve">
+    <value>Manage Recipient</value>
+  </data>
+  <data name="Message" xml:space="preserve">
+    <value>Message</value>
+  </data>
+  <data name="Missing" xml:space="preserve">
+    <value>Missing</value>
+  </data>
+  <data name="NAP_User" xml:space="preserve">
+    <value>NAP User</value>
+  </data>
+  <data name="Note" xml:space="preserve">
+    <value>Note</value>
+  </data>
+  <data name="Not_Refresh" xml:space="preserve">
+    <value>Not Refresh</value>
+  </data>
+  <data name="Owners" xml:space="preserve">
+    <value>Owners</value>
+  </data>
+  <data name="Refresh" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="Relevant_Mail" xml:space="preserve">
+    <value>Relevant Mail</value>
+  </data>
+  <data name="Report" xml:space="preserve">
+    <value>Report</value>
+  </data>
+  <data name="Running" xml:space="preserve">
+    <value>Running</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Scheduled_Time" xml:space="preserve">
+    <value>Scheduled Time</value>
+  </data>
+  <data name="Sent" xml:space="preserve">
+    <value>Sent</value>
+  </data>
+  <data name="Site" xml:space="preserve">
+    <value>Site</value>
+  </data>
+  <data name="Stack_Trace" xml:space="preserve">
+    <value>Stack Trace</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="Subject" xml:space="preserve">
+    <value>Subject</value>
+  </data>
+  <data name="Submit" xml:space="preserve">
+    <value>Submit</value>
+  </data>
+  <data name="Succeeded" xml:space="preserve">
+    <value>Succeeded</value>
+  </data>
+  <data name="SymbolNumber_RelevantMail" xml:space="preserve">
+    <value>No. Relevant Mail</value>
+  </data>
+  <data name="Symbol_No" xml:space="preserve">
+    <value>#</value>
+  </data>
+  <data name="Symbol_Second" xml:space="preserve">
+    <value>s</value>
+  </data>
+  <data name="SystemName" xml:space="preserve">
+    <value>Mail Station</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="To" xml:space="preserve">
+    <value>To</value>
+  </data>
+  <data name="Trigger" xml:space="preserve">
+    <value>Trigger</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>Username</value>
+  </data>
+  <data name="Waiting" xml:space="preserve">
+    <value>Waiting</value>
+  </data>
+</root>

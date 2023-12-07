@@ -1,0 +1,50 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="EasyNetQ" Version="7.7.0" />
+    <PackageReference Include="Fanex.Data.ProxyClient" Version="0.0.2-alpha07" />
+    <PackageReference Include="Fanex.Logging" Version="2.0.1.1" />
+    <PackageReference Include="Fanex.MailDeliver.MailClient" Version="2.0.9" />
+    <PackageReference Include="Fanex.MailStation.Core" Version="2.0.0" />
+    <PackageReference Include="Fanex.NAP.Client" Version="2.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SiteFunctionKeys.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>SiteFunctionKeys.tt</DependentUpon>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="SiteFunctionKeys.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SiteFunctionKeys.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="ViewResource.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ViewResource.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="ViewResource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ViewResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>

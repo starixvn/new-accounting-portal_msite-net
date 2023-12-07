@@ -1,0 +1,885 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Accounting" xml:space="preserve">
+    <value>Accounting</value>
+  </data>
+  <data name="Action" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="Active" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="ActiveEndDate" xml:space="preserve">
+    <value>Active End</value>
+  </data>
+  <data name="ActiveStartDate" xml:space="preserve">
+    <value>Active Start</value>
+  </data>
+  <data name="AddSuccessMsg" xml:space="preserve">
+    <value>{0} has been added successfully. You will be redirected in &lt;span class='msec'&gt;{1}&lt;/span&gt; seconds.</value>
+  </data>
+  <data name="Affiliate" xml:space="preserve">
+    <value>Affiliate</value>
+  </data>
+  <data name="Affiliate_Admin" xml:space="preserve">
+    <value>Affiliate Admin</value>
+  </data>
+  <data name="Agency" xml:space="preserve">
+    <value>Agency</value>
+  </data>
+  <data name="Agent" xml:space="preserve">
+    <value>Agent</value>
+  </data>
+  <data name="Alerts" xml:space="preserve">
+    <value>Alerts</value>
+  </data>
+  <data name="Alias" xml:space="preserve">
+    <value>Alias</value>
+  </data>
+  <data name="AliasDatabaseServer" xml:space="preserve">
+    <value>Alias Database Server</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="All_Server" xml:space="preserve">
+    <value>All Servers</value>
+  </data>
+  <data name="All_Site" xml:space="preserve">
+    <value>All Sites</value>
+  </data>
+  <data name="Application_Name" xml:space="preserve">
+    <value>Application</value>
+  </data>
+  <data name="AppLogs" xml:space="preserve">
+    <value>App Logs</value>
+  </data>
+  <data name="AppLogs_MangeMachines" xml:space="preserve">
+    <value>Manage Servers</value>
+  </data>
+  <data name="AppLogs_ViewLog" xml:space="preserve">
+    <value>View Logs</value>
+  </data>
+  <data name="Backup" xml:space="preserve">
+    <value>Backup</value>
+  </data>
+  <data name="Backup_Connection_String" xml:space="preserve">
+    <value>Backup Connection String</value>
+  </data>
+  <data name="Back_To_List" xml:space="preserve">
+    <value>Back To List</value>
+  </data>
+  <data name="Between_Retries" xml:space="preserve">
+    <value>Between retries</value>
+  </data>
+  <data name="Bet_Count" xml:space="preserve">
+    <value>Bet Count</value>
+  </data>
+  <data name="Body" xml:space="preserve">
+    <value>Body</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Category" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="ChangeConnection" xml:space="preserve">
+    <value>Change Connection</value>
+  </data>
+  <data name="Change_Connection_FromDb" xml:space="preserve">
+    <value>Change Connection From Database Server</value>
+  </data>
+  <data name="ComputerIdle" xml:space="preserve">
+    <value>Computer is idle</value>
+  </data>
+  <data name="Config" xml:space="preserve">
+    <value>Config</value>
+  </data>
+  <data name="Connection" xml:space="preserve">
+    <value>Connection</value>
+  </data>
+  <data name="ConnectionString" xml:space="preserve">
+    <value>Connection String</value>
+  </data>
+  <data name="Create" xml:space="preserve">
+    <value>Create</value>
+  </data>
+  <data name="Created_Date" xml:space="preserve">
+    <value>Created Date</value>
+  </data>
+  <data name="Create_Job" xml:space="preserve">
+    <value>Create Job</value>
+  </data>
+  <data name="Create_New" xml:space="preserve">
+    <value>Create New</value>
+  </data>
+  <data name="Create_New_Alias" xml:space="preserve">
+    <value>Create New Alias</value>
+  </data>
+  <data name="Create_Schedule" xml:space="preserve">
+    <value>Create Schedule</value>
+  </data>
+  <data name="Create_Step" xml:space="preserve">
+    <value>Create Step</value>
+  </data>
+  <data name="CREDIT_SITES" xml:space="preserve">
+    <value>CREDIT SITES</value>
+  </data>
+  <data name="Current_Connection_String" xml:space="preserve">
+    <value>Current Connection String</value>
+  </data>
+  <data name="Current_Execution_Status" xml:space="preserve">
+    <value>Execution Status</value>
+  </data>
+  <data name="Customer_Win_Loss" xml:space="preserve">
+    <value>Customer Win Loss</value>
+  </data>
+  <data name="Daily" xml:space="preserve">
+    <value>Daily</value>
+  </data>
+  <data name="Database" xml:space="preserve">
+    <value>Database</value>
+  </data>
+  <data name="DatabaseServer" xml:space="preserve">
+    <value>Database Server</value>
+  </data>
+  <data name="Database_Name" xml:space="preserve">
+    <value>Database Name</value>
+  </data>
+  <data name="Data_Source" xml:space="preserve">
+    <value>Data Source</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="Date_Created" xml:space="preserve">
+    <value>Date Created</value>
+  </data>
+  <data name="Date_Modified" xml:space="preserve">
+    <value>Date Modified</value>
+  </data>
+  <data name="Date_Type" xml:space="preserve">
+    <value>Date Type</value>
+  </data>
+  <data name="Default" xml:space="preserve">
+    <value>Default</value>
+  </data>
+  <data name="DEPOSIT_SITES" xml:space="preserve">
+    <value>DEPOSIT SITES</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="Disabled" xml:space="preserve">
+    <value>Disabled</value>
+  </data>
+  <data name="DrawFilter" xml:space="preserve">
+    <value>Draw Filter</value>
+  </data>
+  <data name="Duration" xml:space="preserve">
+    <value>Duration</value>
+  </data>
+  <data name="DW" xml:space="preserve">
+    <value>DW</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="EditConnection" xml:space="preserve">
+    <value>Edit Connection</value>
+  </data>
+  <data name="EditMachine" xml:space="preserve">
+    <value>Edit Machine Information</value>
+  </data>
+  <data name="Enabled" xml:space="preserve">
+    <value>Enabled</value>
+  </data>
+  <data name="Environment" xml:space="preserve">
+    <value>Environment</value>
+  </data>
+  <data name="Environment_Production" xml:space="preserve">
+    <value>Production</value>
+  </data>
+  <data name="Environment_UAT" xml:space="preserve">
+    <value>UAT</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="Execute_SP_Log" xml:space="preserve">
+    <value>Execute SP Log</value>
+  </data>
+  <data name="Executing" xml:space="preserve">
+    <value>Executing</value>
+  </data>
+  <data name="Execution_Status" xml:space="preserve">
+    <value>Execution</value>
+  </data>
+  <data name="Exec_Statuc" xml:space="preserve">
+    <value>Exec Status</value>
+  </data>
+  <data name="Export_Connection" xml:space="preserve">
+    <value>Export Connection</value>
+  </data>
+  <data name="Fail" xml:space="preserve">
+    <value>Fail</value>
+  </data>
+  <data name="Field_Name" xml:space="preserve">
+    <value>Field Name</value>
+  </data>
+  <data name="FileAttachment" xml:space="preserve">
+    <value>File Attachment</value>
+  </data>
+  <data name="Filter" xml:space="preserve">
+    <value>Filter</value>
+  </data>
+  <data name="Free_Text" xml:space="preserve">
+    <value>Free Text</value>
+  </data>
+  <data name="FreqAgentStart" xml:space="preserve">
+    <value>SQL Server Agent service starts</value>
+  </data>
+  <data name="FreqComputerIdle" xml:space="preserve">
+    <value>Computer is idle</value>
+  </data>
+  <data name="FreqMonthlyRelative" xml:space="preserve">
+    <value>Monthly Relative</value>
+  </data>
+  <data name="FreqOneTime" xml:space="preserve">
+    <value>One time only</value>
+  </data>
+  <data name="FreqSubSpecificTime" xml:space="preserve">
+    <value>At the specified time</value>
+  </data>
+  <data name="FrequentSubType" xml:space="preserve">
+    <value>Frequent Sub</value>
+  </data>
+  <data name="FrequentType" xml:space="preserve">
+    <value>Frequent</value>
+  </data>
+  <data name="From" xml:space="preserve">
+    <value>From</value>
+  </data>
+  <data name="FromMail" xml:space="preserve">
+    <value>From Mail</value>
+  </data>
+  <data name="From_DbServer" xml:space="preserve">
+    <value>From Database Server</value>
+  </data>
+  <data name="Function_Name" xml:space="preserve">
+    <value>Function</value>
+  </data>
+  <data name="Hours" xml:space="preserve">
+    <value>Hours</value>
+  </data>
+  <data name="ID" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="Idle" xml:space="preserve">
+    <value>Idle</value>
+  </data>
+  <data name="Information" xml:space="preserve">
+    <value>Information</value>
+  </data>
+  <data name="Initial_Catalog" xml:space="preserve">
+    <value>Initial Catalog</value>
+  </data>
+  <data name="InputLengthValidationMsg" xml:space="preserve">
+    <value>The {0} field must be at least {2} and maximum {1} characters long.</value>
+  </data>
+  <data name="InsertMachine" xml:space="preserve">
+    <value>Insert Machine</value>
+  </data>
+  <data name="Integrated_Security" xml:space="preserve">
+    <value>Integrated Security</value>
+  </data>
+  <data name="InvalidNameValidationMsg" xml:space="preserve">
+    <value>The Name field can only contain A-Z, a-z, 0-9, underscore, and spaces.</value>
+  </data>
+  <data name="IsActive" xml:space="preserve">
+    <value>Is Active</value>
+  </data>
+  <data name="IsAgent" xml:space="preserve">
+    <value>Is Agent</value>
+  </data>
+  <data name="IsAuth" xml:space="preserve">
+    <value>SSL</value>
+  </data>
+  <data name="IsDefault" xml:space="preserve">
+    <value>Is Default</value>
+  </data>
+  <data name="IsEncrypt" xml:space="preserve">
+    <value>Is Encrypt</value>
+  </data>
+  <data name="IsProduction" xml:space="preserve">
+    <value>Is Production</value>
+  </data>
+  <data name="Job" xml:space="preserve">
+    <value>Job</value>
+  </data>
+  <data name="JobLog" xml:space="preserve">
+    <value>Job Log</value>
+  </data>
+  <data name="JobManagement" xml:space="preserve">
+    <value>Sql Jobs</value>
+  </data>
+  <data name="Jobs" xml:space="preserve">
+    <value>Jobs</value>
+  </data>
+  <data name="Job_Log_Management" xml:space="preserve">
+    <value>Job Logs</value>
+  </data>
+  <data name="Last_Run_Date" xml:space="preserve">
+    <value>Last Run</value>
+  </data>
+  <data name="Last_Run_Outcome" xml:space="preserve">
+    <value>Last Run Outcome</value>
+  </data>
+  <data name="Latest_Send_Date" xml:space="preserve">
+    <value>Latest Send Date</value>
+  </data>
+  <data name="LetstalkNotification" xml:space="preserve">
+    <value>Risk &amp; Control Letstalk Notification</value>
+  </data>
+  <data name="Local_Time_Range" xml:space="preserve">
+    <value>Local Time Range</value>
+  </data>
+  <data name="Log" xml:space="preserve">
+    <value>Log</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="LoginName" xml:space="preserve">
+    <value>Login Name</value>
+  </data>
+  <data name="LogStatus_Monitored" xml:space="preserve">
+    <value>Handled</value>
+  </data>
+  <data name="LogStatus_Unmonitored" xml:space="preserve">
+    <value>Unhandled</value>
+  </data>
+  <data name="LogTime" xml:space="preserve">
+    <value>Log Time</value>
+  </data>
+  <data name="Log_Date" xml:space="preserve">
+    <value>Log Date</value>
+  </data>
+  <data name="Log_ID" xml:space="preserve">
+    <value>Log Id</value>
+  </data>
+  <data name="Log_Management" xml:space="preserve">
+    <value>Log Management</value>
+  </data>
+  <data name="Machine" xml:space="preserve">
+    <value>Machine</value>
+  </data>
+  <data name="MachineType" xml:space="preserve">
+    <value>Machine Type</value>
+  </data>
+  <data name="MachineType_Production" xml:space="preserve">
+    <value>Production</value>
+  </data>
+  <data name="MachineType_UAT" xml:space="preserve">
+    <value>UAT</value>
+  </data>
+  <data name="Machine_IP" xml:space="preserve">
+    <value>Machine IP</value>
+  </data>
+  <data name="Machine_Name" xml:space="preserve">
+    <value>Machine Name</value>
+  </data>
+  <data name="Mail" xml:space="preserve">
+    <value>Mail</value>
+  </data>
+  <data name="MailFrom" xml:space="preserve">
+    <value>Mail From</value>
+  </data>
+  <data name="Mail_Bcc" xml:space="preserve">
+    <value>Bcc</value>
+  </data>
+  <data name="Mail_Cc" xml:space="preserve">
+    <value>Cc</value>
+  </data>
+  <data name="Mail_Config" xml:space="preserve">
+    <value>Application Management</value>
+  </data>
+  <data name="Mail_Date" xml:space="preserve">
+    <value>Mail Date</value>
+  </data>
+  <data name="Mail_Function" xml:space="preserve">
+    <value>Mail Function</value>
+  </data>
+  <data name="Mail_List" xml:space="preserve">
+    <value>Report</value>
+  </data>
+  <data name="Mail_Setting" xml:space="preserve">
+    <value>Smtp Servers</value>
+  </data>
+  <data name="Mail_To" xml:space="preserve">
+    <value>To</value>
+  </data>
+  <data name="Manage_Alias" xml:space="preserve">
+    <value>Manage Alias</value>
+  </data>
+  <data name="Manage_Connection" xml:space="preserve">
+    <value>Manage Connection</value>
+  </data>
+  <data name="Manage_Server" xml:space="preserve">
+    <value>Manage Database Server</value>
+  </data>
+  <data name="Manage_Site" xml:space="preserve">
+    <value>Manage Site</value>
+  </data>
+  <data name="Master" xml:space="preserve">
+    <value>Master</value>
+  </data>
+  <data name="Message" xml:space="preserve">
+    <value>Message</value>
+  </data>
+  <data name="Minutes" xml:space="preserve">
+    <value>Minutes</value>
+  </data>
+  <data name="Modified_Date" xml:space="preserve">
+    <value>Modified Date</value>
+  </data>
+  <data name="Modifier" xml:space="preserve">
+    <value>Modifier</value>
+  </data>
+  <data name="Monitor" xml:space="preserve">
+    <value>Monitor</value>
+  </data>
+  <data name="Monitor_Server" xml:space="preserve">
+    <value>Monitor Servers</value>
+  </data>
+  <data name="Monthly" xml:space="preserve">
+    <value>Monthly</value>
+  </data>
+  <data name="MonthlyRelative" xml:space="preserve">
+    <value>Monthly Relative</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="New_Value" xml:space="preserve">
+    <value>New Value</value>
+  </data>
+  <data name="Next_Run_Date" xml:space="preserve">
+    <value>Next Run</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="NoInformationAvailable" xml:space="preserve">
+    <value>No Information Available</value>
+  </data>
+  <data name="None" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="N_A" xml:space="preserve">
+    <value>N/A</value>
+  </data>
+  <data name="Obsolete" xml:space="preserve">
+    <value>Obsolete</value>
+  </data>
+  <data name="Old_Value" xml:space="preserve">
+    <value>Old Value</value>
+  </data>
+  <data name="OneTime" xml:space="preserve">
+    <value>One time only</value>
+  </data>
+  <data name="On_Fail_Action" xml:space="preserve">
+    <value>On Fail Action</value>
+  </data>
+  <data name="On_Success_Action" xml:space="preserve">
+    <value>On Success Action</value>
+  </data>
+  <data name="Operators" xml:space="preserve">
+    <value>Operators</value>
+  </data>
+  <data name="Page_Size" xml:space="preserve">
+    <value>Page Size</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="Performing_Completion_Actions" xml:space="preserve">
+    <value>Performing completion actions</value>
+  </data>
+  <data name="Port" xml:space="preserve">
+    <value>Port</value>
+  </data>
+  <data name="Primary_Connection" xml:space="preserve">
+    <value>Primary Connection</value>
+  </data>
+  <data name="RequiredMsg" xml:space="preserve">
+    <value>The {0} field is required.</value>
+  </data>
+  <data name="Resend" xml:space="preserve">
+    <value>Resend</value>
+  </data>
+  <data name="Retries_Attempted" xml:space="preserve">
+    <value>Retries Attempted</value>
+  </data>
+  <data name="rptLicWinLoss" xml:space="preserve">
+    <value>rptLicWinLoss</value>
+  </data>
+  <data name="rpt_betting" xml:space="preserve">
+    <value>rpt_betting</value>
+  </data>
+  <data name="Run_Time" xml:space="preserve">
+    <value>Run Time</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Schedule" xml:space="preserve">
+    <value>Schedule</value>
+  </data>
+  <data name="ScheduleAcEndDate" xml:space="preserve">
+    <value>Active End Date</value>
+  </data>
+  <data name="ScheduleAcStartDate" xml:space="preserve">
+    <value>Active Start Date</value>
+  </data>
+  <data name="ScheduleFreq" xml:space="preserve">
+    <value>Frequent</value>
+  </data>
+  <data name="ScheduleFreqSub" xml:space="preserve">
+    <value>Frequent Sub</value>
+  </data>
+  <data name="ScheduleManagement" xml:space="preserve">
+    <value>Sql Schedules</value>
+  </data>
+  <data name="ScheduleName" xml:space="preserve">
+    <value>Schedule</value>
+  </data>
+  <data name="Schedules" xml:space="preserve">
+    <value>Schedules</value>
+  </data>
+  <data name="ScheduleTotalJob" xml:space="preserve">
+    <value>Total Job</value>
+  </data>
+  <data name="SearchText" xml:space="preserve">
+    <value>Search Text</value>
+  </data>
+  <data name="Secondary_Connection" xml:space="preserve">
+    <value>Secondary Connection</value>
+  </data>
+  <data name="Seconds" xml:space="preserve">
+    <value>Seconds</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Send</value>
+  </data>
+  <data name="Sender_Email" xml:space="preserve">
+    <value>Sender Email</value>
+  </data>
+  <data name="Send_Fail" xml:space="preserve">
+    <value>Fail</value>
+  </data>
+  <data name="Send_Success" xml:space="preserve">
+    <value>Success</value>
+  </data>
+  <data name="Server" xml:space="preserve">
+    <value>Server</value>
+  </data>
+  <data name="ServerAlias" xml:space="preserve">
+    <value>Server Alias</value>
+  </data>
+  <data name="ServerManagement" xml:space="preserve">
+    <value>Database Servers</value>
+  </data>
+  <data name="Server_Error" xml:space="preserve">
+    <value>Server Error</value>
+  </data>
+  <data name="Server_IP" xml:space="preserve">
+    <value>Server IP</value>
+  </data>
+  <data name="ServiceMonitoring" xml:space="preserve">
+    <value>Service Monitoring</value>
+  </data>
+  <data name="ServiceName" xml:space="preserve">
+    <value>Service Name</value>
+  </data>
+  <data name="Setting" xml:space="preserve">
+    <value>Smtp Servers</value>
+  </data>
+  <data name="Setting_Name" xml:space="preserve">
+    <value>Setting Name</value>
+  </data>
+  <data name="Severity" xml:space="preserve">
+    <value>Severity</value>
+  </data>
+  <data name="Severity_Critical" xml:space="preserve">
+    <value>Critical</value>
+  </data>
+  <data name="Severity_Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="Severity_Information" xml:space="preserve">
+    <value>Information</value>
+  </data>
+  <data name="Severity_Verbose" xml:space="preserve">
+    <value>Verbose</value>
+  </data>
+  <data name="Severity_Warning" xml:space="preserve">
+    <value>Warning</value>
+  </data>
+  <data name="Show" xml:space="preserve">
+    <value>Show</value>
+  </data>
+  <data name="Site" xml:space="preserve">
+    <value>Site</value>
+  </data>
+  <data name="Sites" xml:space="preserve">
+    <value>Sites</value>
+  </data>
+  <data name="SpecifedTime" xml:space="preserve">
+    <value>At the specified time</value>
+  </data>
+  <data name="SqlAgentLog" xml:space="preserve">
+    <value>Agent Log</value>
+  </data>
+  <data name="SqlAgentStarts" xml:space="preserve">
+    <value>Server Agent service starts</value>
+  </data>
+  <data name="SqlServerLog" xml:space="preserve">
+    <value>Server Log</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="Step_Id" xml:space="preserve">
+    <value>Step ID</value>
+  </data>
+  <data name="Step_Management" xml:space="preserve">
+    <value>Step Management</value>
+  </data>
+  <data name="Step_Name" xml:space="preserve">
+    <value>Step Name</value>
+  </data>
+  <data name="Subject" xml:space="preserve">
+    <value>Subject</value>
+  </data>
+  <data name="Submit" xml:space="preserve">
+    <value>Submit</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>Success</value>
+  </data>
+  <data name="sum_winloss" xml:space="preserve">
+    <value>sum_winloss</value>
+  </data>
+  <data name="Super" xml:space="preserve">
+    <value>Super</value>
+  </data>
+  <data name="Suspended" xml:space="preserve">
+    <value>Suspended</value>
+  </data>
+  <data name="SwitchConnection" xml:space="preserve">
+    <value>Switch Connection</value>
+  </data>
+  <data name="Switch_Backup_Connection" xml:space="preserve">
+    <value>Switch Backup Connection</value>
+  </data>
+  <data name="SymbolNo" xml:space="preserve">
+    <value>#</value>
+  </data>
+  <data name="Time" xml:space="preserve">
+    <value>Time</value>
+  </data>
+  <data name="Timestamp" xml:space="preserve">
+    <value>Timestamp</value>
+  </data>
+  <data name="TimeZone" xml:space="preserve">
+    <value>Time Zone</value>
+  </data>
+  <data name="Time_Range" xml:space="preserve">
+    <value>Time Range</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="To" xml:space="preserve">
+    <value>To</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="To_Connection_String" xml:space="preserve">
+    <value>To Connection String</value>
+  </data>
+  <data name="To_DbServer" xml:space="preserve">
+    <value>To Database Server</value>
+  </data>
+  <data name="Turnover" xml:space="preserve">
+    <value>Turnover</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>Update</value>
+  </data>
+  <data name="Update_Alias" xml:space="preserve">
+    <value>Update Alias</value>
+  </data>
+  <data name="UpSuccessMsg" xml:space="preserve">
+    <value>{0} has been updated successfully. You will be redirected in &lt;span class='msec'&gt;{1}&lt;/span&gt; seconds.</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>Username</value>
+  </data>
+  <data name="User_ID" xml:space="preserve">
+    <value>User ID</value>
+  </data>
+  <data name="Value" xml:space="preserve">
+    <value>Value</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>View</value>
+  </data>
+  <data name="View_Application" xml:space="preserve">
+    <value>View Application</value>
+  </data>
+  <data name="View_Report" xml:space="preserve">
+    <value>View Report</value>
+  </data>
+  <data name="Waiting_For_Thread" xml:space="preserve">
+    <value>Waiting for thread</value>
+  </data>
+  <data name="Wap" xml:space="preserve">
+    <value>Wap</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Warning</value>
+  </data>
+  <data name="Weekly" xml:space="preserve">
+    <value>Weekly</value>
+  </data>
+  <data name="WindowsEventLog" xml:space="preserve">
+    <value>Windows Event Log</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+</root>
