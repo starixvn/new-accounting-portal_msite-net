@@ -23,13 +23,10 @@
 // <history>
 // Lasted generated date: <#=        DateTime.Now.ToString() #>
 // </history>
-using System.Diagnostics.CodeAnalysis;
 
 /// <summary>
 /// Site function keys.
 /// </summary>
-[SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Generated code")]
-[SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1602:EnumerationItemsMustBeDocumented", Justification = "Generated code")]
 public static class SiteFunctionKeys
 {
 <#

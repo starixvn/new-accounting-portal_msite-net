@@ -11,18 +11,12 @@
 // </summary>
 //
 // <history>
-// Lasted generated date: 12/7/2023 9:49:13 AM
+// Lasted generated date: 12/7/2023 11:22:22 AM
 // </history>
-
-namespace Maintenance;
-
-using System.Diagnostics.CodeAnalysis;
 
 /// <summary>
 /// Site function keys.
 /// </summary>
-[SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Generated code")]
-[SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1602:EnumerationItemsMustBeDocumented", Justification = "Generated code")]
 public static class SiteFunctionKeys
 {
     public const string Administration = "Administration";

@@ -13,7 +13,7 @@ using Services;
 [NapSuperAuth]
 public class MailRecipientController : Controller
 {
-    private readonly ManageRecipientService manageRecipientService = new ManageRecipientService();
+    private readonly ManageRecipientService manageRecipientService = new();
 
     [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageRecipient, Policy = Constant.Policy.Read)]
     public ActionResult Index()

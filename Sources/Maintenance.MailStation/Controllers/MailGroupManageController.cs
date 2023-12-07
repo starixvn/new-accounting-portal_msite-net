@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 [NapSuperAuth]
 public class MailGroupManageController : Controller
 {
-    private readonly MailGroupService mailGroupService = new MailGroupService();
+    private readonly MailGroupService mailGroupService = new();
 
     [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMailGroup, Policy = Constant.Policy.Read)]
     public ActionResult Index(GetMailGroupCriteria criteria)

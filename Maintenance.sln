@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34316.72
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maintenance.Sites", "Maintenance.Sites\Maintenance.Sites.csproj", "{FD7E678C-41D7-48E8-B7A8-0CA124C1C089}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maintenance.Sites", "Maintenance.Sites\Maintenance.Sites.csproj", "{FD7E678C-41D7-48E8-B7A8-0CA124C1C089}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sources", "Sources", "{957A115C-D934-4E93-9F8C-F09750E69CA7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maintenance", "Sources\Maintenance\Maintenance.csproj", "{EC38518A-B719-48CD-9AA9-3983443D04CF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maintenance", "Sources\Maintenance\Maintenance.csproj", "{EC38518A-B719-48CD-9AA9-3983443D04CF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maintenance.MailStation", "Sources\Maintenance.MailStation\Maintenance.MailStation.csproj", "{3D3A6684-B6F7-4F6A-A392-3E9DA48C21DF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maintenance.Letstalk", "Sources\Maintenance.Letstalk\Maintenance.Letstalk.csproj", "{08F5379F-6C27-4EBD-83F1-C1C5EB7D2FF2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,6 +31,10 @@ Global
 		{3D3A6684-B6F7-4F6A-A392-3E9DA48C21DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3D3A6684-B6F7-4F6A-A392-3E9DA48C21DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3D3A6684-B6F7-4F6A-A392-3E9DA48C21DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08F5379F-6C27-4EBD-83F1-C1C5EB7D2FF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08F5379F-6C27-4EBD-83F1-C1C5EB7D2FF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08F5379F-6C27-4EBD-83F1-C1C5EB7D2FF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08F5379F-6C27-4EBD-83F1-C1C5EB7D2FF2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -36,6 +42,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{EC38518A-B719-48CD-9AA9-3983443D04CF} = {957A115C-D934-4E93-9F8C-F09750E69CA7}
 		{3D3A6684-B6F7-4F6A-A392-3E9DA48C21DF} = {957A115C-D934-4E93-9F8C-F09750E69CA7}
+		{08F5379F-6C27-4EBD-83F1-C1C5EB7D2FF2} = {957A115C-D934-4E93-9F8C-F09750E69CA7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {83106DCB-A4BA-4BE6-B825-287670B4DCA1}

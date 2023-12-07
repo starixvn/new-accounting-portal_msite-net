@@ -5,8 +5,8 @@ using System.Linq;
 using Fanex.Data.Repository;
 using Fanex.NAP.Client.Models;
 using Fanex.NAP.Client.Services;
-using Maintenance.MailStation.Criteria.ManageRecipient;
-using Maintenance.MailStation.Models;
+using Criteria.ManageRecipient;
+using Models;
 
 public class ManageRecipientService : MailStationBaseService
 {

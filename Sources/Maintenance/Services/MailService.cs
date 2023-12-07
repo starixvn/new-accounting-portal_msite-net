@@ -61,26 +61,15 @@ public class MailService : IMailService
 
     private MailStatus _mailStatus;
 
-    private MailService()
-    {
-    }
-
-    public static MailService Create()
-    {
-        return new MailService();
-    }
-
     public List<MailConfig> GetListConfig(string ip = "")
     {
         var configs = new List<MailConfig>();
 
-        using (var client = new MailDeliver())
+        using var client = new MailDeliver();
+        var data = client.GetListConfig(ip);
+        if (data != null)
         {
-            var data = client.GetListConfig(ip);
-            if (data != null)
-            {
-                configs = data.OrderBy(x => x.AppName).ToList();
-            }
+            configs = data.OrderBy(x => x.AppName).ToList();
         }
 
         return configs;
@@ -119,14 +108,12 @@ public class MailService : IMailService
     {
         var mails = new List<MailRecord>();
 
-        using (var client = new MailDeliver())
+        using var client = new MailDeliver();
+        var dateTime = DateTime.Parse(_fromDate);
+        var data = client.GetListMail(_appId, dateTime, _page, _counter);
+        if (data != null)
         {
-            var dateTime = DateTime.Parse(_fromDate);
-            var data = client.GetListMail(_appId, dateTime, _page, _counter);
-            if (data != null)
-            {
-                mails = data.ToList();
-            }
+            mails = data.ToList();
         }
 
         return mails;
@@ -136,23 +123,21 @@ public class MailService : IMailService
     {
         var mails = new List<MailRecord>();
 
-        using (var client = new MailDeliver())
+        using var client = new MailDeliver();
+        var dateTime = DateTime.Parse(_fromDate);
+        var dateTimeTo = DateTime.Parse(_toDate);
+        var data = client.GetListMailByDate(_appId, dateTime, dateTimeTo, ref totalRows, _page, _counter, _mailStatus);
+
+        if (data != null)
         {
-            var dateTime = DateTime.Parse(_fromDate);
-            var dateTimeTo = DateTime.Parse(_toDate);
-            var data = client.GetListMailByDate(_appId, dateTime, dateTimeTo, ref totalRows, _page, _counter, _mailStatus);
-
-            if (data != null)
+            mails = data.Select(mailRecord =>
             {
-                mails = data.Select(mailRecord =>
-                {
-                    mailRecord.MailTo = mailRecord.MailTo.Replace(";", "<br />");
-                    mailRecord.MailBcc = mailRecord.MailBcc.Replace(";", "<br />");
-                    mailRecord.MailCc = mailRecord.MailCc.Replace(";", "<br />");
+                mailRecord.MailTo = mailRecord.MailTo.Replace(";", "<br />");
+                mailRecord.MailBcc = mailRecord.MailBcc.Replace(";", "<br />");
+                mailRecord.MailCc = mailRecord.MailCc.Replace(";", "<br />");
 
-                    return mailRecord;
-                }).ToList();
-            }
+                return mailRecord;
+            }).ToList();
         }
 
         return mails;
@@ -160,23 +145,19 @@ public class MailService : IMailService
 
     public MailRecord GetMail(int mailID)
     {
-        using (var client = new MailDeliver())
-        {
-            return client.GetMail(mailID);
-        }
+        using var client = new MailDeliver();
+        return client.GetMail(mailID);
     }
 
     public List<MailSetting> GetListSetting()
     {
         var settings = new List<MailSetting>();
 
-        using (var client = new MailDeliver())
+        using var client = new MailDeliver();
+        var data = client.GetListSetting();
+        if (data != null)
         {
-            var data = client.GetListSetting();
-            if (data != null)
-            {
-                settings = data.OrderBy(x => x.Server).ToList();
-            }
+            settings = data.OrderBy(x => x.Server).ToList();
         }
 
         return settings;
@@ -186,13 +167,11 @@ public class MailService : IMailService
     {
         var functions = new List<MailFunction>();
 
-        using (var client = new MailDeliver())
+        using var client = new MailDeliver();
+        var data = client.GetListFuntion();
+        if (data != null)
         {
-            var data = client.GetListFuntion();
-            if (data != null)
-            {
-                functions = data.ToList();
-            }
+            functions = data.ToList();
         }
 
         return functions;
@@ -200,10 +179,8 @@ public class MailService : IMailService
 
     public bool SendMail(long mailID)
     {
-        using (var client = new MailDeliver())
-        {
-            client.ReSendMail(mailID);
-        }
+        using var client = new MailDeliver();
+        client.ReSendMail(mailID);
 
         return true;
     }
@@ -214,11 +191,9 @@ public class MailService : IMailService
 
         if (setting != null)
         {
-            using (var client = new MailDeliver())
-            {
-                client.StoreSetting(setting);
-                result = true;
-            }
+            using var client = new MailDeliver();
+            client.StoreSetting(setting);
+            result = true;
         }
 
         return result;
@@ -230,11 +205,9 @@ public class MailService : IMailService
 
         if (config != null)
         {
-            using (var client = new MailDeliver())
-            {
-                client.StoreConfig(config);
-                result = true;
-            }
+            using var client = new MailDeliver();
+            client.StoreConfig(config);
+            result = true;
         }
 
         return result;
@@ -246,11 +219,9 @@ public class MailService : IMailService
 
         if (func != null)
         {
-            using (var client = new MailDeliver())
-            {
-                client.StoreFunction(func);
-                result = true;
-            }
+            using var client = new MailDeliver();
+            client.StoreFunction(func);
+            result = true;
         }
 
         return result;
@@ -258,51 +229,38 @@ public class MailService : IMailService
 
     public MailSetting GetSetting(int settingId)
     {
-        using (var client = new MailDeliver())
-        {
-            return client.GetSetting(settingId);
-        }
+        using var client = new MailDeliver();
+        return client.GetSetting(settingId);
     }
 
     public MailConfig GetConfig(int configId)
     {
-        using (var client = new MailDeliver())
-        {
-            return client.GetConfig(configId);
-        }
+        using var client = new MailDeliver();
+        return client.GetConfig(configId);
     }
 
     public MailFunction GetFunction(int functionId)
     {
-        using (var client = new MailDeliver())
-        {
-            return client.GetFunction(functionId);
-        }
+        using var client = new MailDeliver();
+        return client.GetFunction(functionId);
     }
 
     public IMailService WithStatus(int status)
     {
-        switch (status)
+        _mailStatus = status switch
         {
-            case 0:
-                _mailStatus = MailStatus.All;
-                break;
-            case -1:
-                _mailStatus = MailStatus.Fail;
-                break;
-            case 1:
-                _mailStatus = MailStatus.Success;
-                break;
-        }
+            0 => MailStatus.All,
+            -1 => MailStatus.Fail,
+            1 => MailStatus.Success,
+            _ => _mailStatus
+        };
 
         return this;
     }
 
     public List<MailError> GetError(int mailId)
     {
-        using (var client = new MailDeliver())
-        {
-            return client.GetListError(mailId).ToList();
-        }
+        using var client = new MailDeliver();
+        return client.GetListError(mailId).ToList();
     }
 }

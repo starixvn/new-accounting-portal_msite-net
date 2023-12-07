@@ -6,8 +6,6 @@ using System.Diagnostics.CodeAnalysis;
 
 public static class TimeZoneConstants
 {
-    [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules", "SP2101:MethodMustNotContainMoreLinesThan", Justification = "Reviewed. Suppression is OK here.")]
-    [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules", "SP2100:CodeLineMustNotBeLongerThan", Justification = "Reviewed. Suppression is OK here.")]
     [SuppressMessage("Microsoft.Performance", "CA1809:AvoidExcessiveLocals", Justification = "Reviewed. Suppression is OK here.")]
     static TimeZoneConstants()
     {

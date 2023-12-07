@@ -2,13 +2,8 @@ using Maintenance.MailStation.Models;
 
 namespace Maintenance.MailStation.Criteria.MailManage;
 
-public class CreateMailCriteria : UpdateCommandBase
+public class CreateMailCriteria() : UpdateCommandBase
 {
-    public CreateMailCriteria()
-    {
-        IsActive = true;
-    }
-
     public CreateMailCriteria(MailModel model)
         : this()
     {
@@ -58,7 +53,7 @@ public class CreateMailCriteria : UpdateCommandBase
 
     public string MailBcc { get; set; }
 
-    public bool IsActive { get; set; }
+    public bool IsActive { get; set; } = true;
 
     public DateTime? StartOn { get; set; }
 

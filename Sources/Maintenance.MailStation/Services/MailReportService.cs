@@ -11,9 +11,8 @@ using Microsoft.Extensions.Configuration;
 using Quartz;
 using Quartz.Spi;
 
-public class MailReportService(IDynamicRepository dynamicRepository, IConfiguration configuration) : MailStationBaseService
+public class MailReportService(IDynamicRepository dynamicRepository, IConfiguration configuration, IMailService mailService) : MailStationBaseService
 {
-    private readonly IMailService mailService = MailService.Create();
     private IJobOperationService jobOperationService;
 
     public List<MailTaskModel> MailReport(MailReportCriteria criteria)
@@ -28,7 +27,7 @@ public class MailReportService(IDynamicRepository dynamicRepository, IConfigurat
             var getAllScheduleCriteria = new GetAllScheduleCriteria { MailName = criteria.MailName, SiteId = criteria.SiteId };
             var mailTaskDetails = GetMailTaskDetails(getAllScheduleCriteria);
 
-            if (criteria.Status == -1 || criteria.Status == (int)JobStatus.Waiting || criteria.Status == (int)JobStatus.Missing)
+            if (criteria.Status is -1 or (int)JobStatus.Waiting or (int)JobStatus.Missing)
             {
                 var ts = new TimeSpan(23, 59, 59);
                 criteria.ToDate += ts;

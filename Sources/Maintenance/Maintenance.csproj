@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="EasyNetQ" Version="7.7.0" />
@@ -33,6 +33,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="SiteFunctionKeys.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>SiteFunctionKeys.tt</DependentUpon>
+    </Compile>
     <Compile Update="ViewResource.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
