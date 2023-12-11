@@ -8,12 +8,8 @@ using Fanex.NAP.Client.Services;
 using Criteria.ManageRecipient;
 using Models;
 
-public class ManageRecipientService : MailStationBaseService
+public class ManageRecipientService(IUserService userService , IDynamicRepository dynamicRepository) : MailStationBaseService
 {
-    private readonly IUserService userService = new UserService();
-
-    private readonly IDynamicRepository dynamicRepository= new DynamicRepository();
-
     public List<RecipientModel> RecipientList(RecipientListCriteria criteria)
     {
         return dynamicRepository.Fetch<RecipientModel>(criteria).ToList();

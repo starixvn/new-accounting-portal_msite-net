@@ -4,7 +4,7 @@ using Maintenance.MailStation.Models;
 namespace Maintenance.MailStation.Services;
 
 using Fanex.Data.Repository;
-using Fanex.MailDeliver.Model;
+using Fanex.MailDeliver.MailClient.Model;
 using Fanex.MailDelivery.Core.Models;
 using Maintenance.Services;
 using Microsoft.Extensions.Configuration;
@@ -13,8 +13,6 @@ using Quartz.Spi;
 
 public class MailReportService(IDynamicRepository dynamicRepository, IConfiguration configuration, IMailService mailService) : MailStationBaseService
 {
-    private IJobOperationService jobOperationService;
-
     public List<MailTaskModel> MailReport(MailReportCriteria criteria)
     {
         var oldStatus = criteria.Status;
@@ -142,10 +140,8 @@ public class MailReportService(IDynamicRepository dynamicRepository, IConfigurat
 
         UpdateRunningTask(mailTask.MailTaskId);
 
-        using (jobOperationService = new JobOperationService(configuration))
-        {
-            jobOperationService.Retry(schedule);
-        }
+        using var jobOperationService = new JobOperationService(configuration);
+        jobOperationService.Retry(schedule);
     }
 
     public void AbortTask(int taskId)
@@ -175,10 +171,8 @@ public class MailReportService(IDynamicRepository dynamicRepository, IConfigurat
         schedule.CurrentFireTime = criteria.ScheduledTime;
         schedule.TaskId = mailTaskId;
 
-        using (jobOperationService = new JobOperationService(configuration))
-        {
-            jobOperationService.Retry(schedule);
-        }
+        using var jobOperationService = new JobOperationService(configuration);
+        jobOperationService.Retry(schedule);
     }
 
     private void UpdateRunningTask(int taskId)

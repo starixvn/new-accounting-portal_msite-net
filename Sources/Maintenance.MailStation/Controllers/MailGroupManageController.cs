@@ -10,10 +10,8 @@ using Fanex.NAP.Client.Helpers.Business;
 using Microsoft.AspNetCore.Mvc;
 
 [NapSuperAuth]
-public class MailGroupManageController : Controller
+public class MailGroupManageController(MailGroupService mailGroupService) : Controller
 {
-    private readonly MailGroupService mailGroupService = new();
-
     [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMailGroup, Policy = Constant.Policy.Read)]
     public ActionResult Index(GetMailGroupCriteria criteria)
     {

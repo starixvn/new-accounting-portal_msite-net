@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Fanex.MailDeliver.MailClient.API;
-using Fanex.MailDeliver.Model;
+using Fanex.MailDeliver.MailClient.Model;
 
 public interface IMailService
 {

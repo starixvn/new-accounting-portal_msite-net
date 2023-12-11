@@ -9,10 +9,8 @@ using Fanex.Data.Repository;
 using Fanex.MailDelivery.Core.Models;
 using Microsoft.Extensions.Configuration;
 
-public class MailManageService(IJobOperationService jobOperationService, IConfiguration configuration) : MailStationBaseService
+public class MailManageService(IJobOperationService jobOperationService, IConfiguration configuration, IDynamicRepository dynamicRepository) : MailStationBaseService
 {
-    private readonly IDynamicRepository dynamicRepository= new DynamicRepository();
-
     public IList<MailModel> MailList(GetMailListCriteria criteria)
     {
         var clientNotifyTimeOutInSecond = configuration.GetValue<int>("MailStation:ClientNotifyTimeOutInSecond");

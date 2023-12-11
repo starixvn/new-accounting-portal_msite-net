@@ -11,10 +11,8 @@ using Microsoft.AspNetCore.Mvc;
 using Services;
 
 [NapSuperAuth]
-public class MailRecipientController : Controller
+public class MailRecipientController(ManageRecipientService manageRecipientService) : Controller
 {
-    private readonly ManageRecipientService manageRecipientService = new();
-
     [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageRecipient, Policy = Constant.Policy.Read)]
     public ActionResult Index()
     {

@@ -5,10 +5,8 @@ namespace Maintenance.MailStation.Services;
 
 using Fanex.Data.Repository;
 
-public class MailGroupService : MailStationBaseService
+public class MailGroupService(IDynamicRepository dynamicRepository) : MailStationBaseService
 {
-    private readonly IDynamicRepository dynamicRepository = new DynamicRepository();
-
     public List<MailGroupModel> GetMailGroups(GetMailGroupCriteria criteria)
     {
         return dynamicRepository.Fetch<MailGroupModel>(criteria).ToList();

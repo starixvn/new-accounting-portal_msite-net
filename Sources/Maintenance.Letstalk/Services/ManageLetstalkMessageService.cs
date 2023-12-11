@@ -2,11 +2,11 @@ namespace Maintenance.Letstalk.Services;
 
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
 using Command;
 using Criteria;
 using Fanex.Data.Repository;
+using Fanex.NAP.Client.Configuration;
 using Fanex.NAP.Client.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -31,23 +31,16 @@ public interface ManageLetstalkMessageService
     CommandResult ResendNotification(ResendNotificationCriteria criteria);
 }
 
-public class ManageLetstalkMessageServiceImp : ManageLetstalkMessageService
+public class ManageLetstalkMessageServiceImp (
+    IUserService userService, 
+    IDynamicRepository dynamicRepository, 
+    INapSettings napSettings) : ManageLetstalkMessageService
 {
-
-    private readonly IUserService userService = new UserService();
-
-    private readonly string environment = ConfigurationManager.AppSettings["Environment"];
-
     private const string uatEnvironment = "UAT";
-
-    private readonly IDynamicRepository dynamicRepository = new DynamicRepository();
 
     public CommandResult InsertNotification(InsertNotificationCriteria criteria, IEnumerable<IFormFile> files)
     {
-        if (environment == uatEnvironment)
-        {
-            criteria.IsTest = true;
-        }
+        criteria.IsTest = napSettings.Environment == uatEnvironment;
 
         dynamicRepository.Execute(criteria);
 
@@ -66,6 +59,7 @@ public class ManageLetstalkMessageServiceImp : ManageLetstalkMessageService
 
         foreach (var recipient in recipientList)
         {
+            var environment = napSettings.Environment;
             if (recipient.Environment.Equals(environment, StringComparison.CurrentCultureIgnoreCase))
             {
                 result.Add(new SelectListItem
@@ -93,10 +87,7 @@ public class ManageLetstalkMessageServiceImp : ManageLetstalkMessageService
 
     public IEnumerable<NotificationModel> GetNotificationList(GetNotificationListCriteria criteria)
     {
-        if (environment == uatEnvironment)
-        {
-            criteria.IsTest = true;
-        }
+        criteria.IsTest = napSettings.Environment == uatEnvironment;
 
         var (notificationList, notificationRecipientList) =dynamicRepository.FetchMultiple<NotificationModel, NotificationRecipientModel>(criteria);
 
@@ -141,10 +132,7 @@ public class ManageLetstalkMessageServiceImp : ManageLetstalkMessageService
 
     public IEnumerable<NotificationModel> GetNotificationById(GetNotificationListCriteria criteria)
     {
-        if (environment == uatEnvironment)
-        {
-            criteria.IsTest = true;
-        }
+        criteria.IsTest = napSettings.Environment == uatEnvironment;
 
         return dynamicRepository.Fetch<NotificationModel>(criteria);
     }

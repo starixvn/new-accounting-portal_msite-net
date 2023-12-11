@@ -1,9 +1,17 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>disable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Sources\Maintenance.Letstalk\Maintenance.Letstalk.csproj" />
+    <ProjectReference Include="..\Sources\Maintenance.MailStation\Maintenance.MailStation.csproj" />
+    <ProjectReference Include="..\Sources\Maintenance.Mail\Maintenance.Mail.csproj" />
+    <ProjectReference Include="..\Sources\Maintenance.TraceSp\Maintenance.TraceSp.csproj" />
+    <ProjectReference Include="..\Sources\Maintenance\Maintenance.csproj" />
+  </ItemGroup>
 
 </Project>

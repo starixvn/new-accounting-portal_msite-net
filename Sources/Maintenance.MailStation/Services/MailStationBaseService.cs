@@ -11,7 +11,7 @@ using Fanex.MailDelivery.Core.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-public class MailStationBaseService
+public class MailStationBaseService()
 {
     private readonly IDynamicRepository dynamicRepository = new DynamicRepository();
 
