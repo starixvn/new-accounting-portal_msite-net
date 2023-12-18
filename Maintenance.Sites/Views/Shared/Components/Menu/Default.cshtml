@@ -1,0 +1,35 @@
+﻿@inject INapSession napSession
+
+@using Fanex.NAP.Client.Models
+@using Fanex.NAP.Client.Helpers.Web
+@{
+    var menuItemList = napSession.MenuItemList != null ? napSession.MenuItemList : new List<MenuItem>();
+    var lvl0MenuItemList = menuItemList.Where(m => m.ParentId == 0).OrderBy(m => m.DisplayOrder).ToList();
+}
+<nav>
+    <ul class="menu">
+        @for (var i = 0; i < lvl0MenuItemList.Count; i++)
+        {
+            var menuItem = lvl0MenuItemList[i];
+            var lvl1MenuItemList = menuItemList.Where(x => x.ParentId == menuItem.Id)
+            .OrderBy(x => x.DisplayOrder).ToList();
+
+            if (lvl1MenuItemList.Any())
+            {
+                <li mid="@menuItem.Id" class="has-kids">
+                    <a href="javascript:;">@menuItem.Name</a>
+                    <ul>
+                        @foreach (var subMenuItem in lvl1MenuItemList)
+                        {
+                            <li mid="@subMenuItem.Id"><a href="@Url.Content(subMenuItem.ValidUrl)">@subMenuItem.Name</a></li>
+                        }
+                    </ul>
+                </li>
+            }
+            else
+            {
+                <li mid="@menuItem.Id"><a href="@Url.Content(menuItem.ValidUrl)">@menuItem.Name</a></li>
+            }
+        }
+    </ul>
+</nav>

@@ -1,0 +1,127 @@
+﻿.btnRefresh, .btnLoading {
+	height: 18px;
+	padding: 0 0 0 7px;
+    width: 45px;
+	cursor: pointer;
+	font-size: 11px;
+	line-height: 18px;
+}
+
+.btnRefresh {
+	-moz-border-radius: 3px; /* Firefox */
+	-webkit-border-radius: 3px; /* Safari and Chrome */
+	border-radius: 3px; /* Opera 10.5+, future browsers, and now also Internet Explorer 6+ using IE-CSS3 */
+	float: left;
+	/*background: url(img/btRefresh.png) no-repeat left top;*/
+	border: 1px solid #ddd;
+	border-top-color: #ABADB3;
+	text-align: center;
+	background-color: #fff;
+}
+
+.btnLoading {
+	background: url(img/btLoading.gif) no-repeat left top;
+}
+
+.btnDown {
+	float: left;
+	position: relative;
+	left: -4px;
+	background: url(img/btnCountDown.png) no-repeat left top;
+	width: 19px;
+	height: 20px;
+	font-size: 11px;
+	line-height: 18px;	
+	-moz-border-radius: 3px; /* Firefox */
+	-webkit-border-radius: 3px; /* Safari and Chrome */
+	border-radius: 3px; /* Opera 10.5+, future browsers, and now also Internet Explorer 6+ using IE-CSS3 */	
+	cursor: pointer;
+}
+
+.btnDown:hover {
+	background: url(img/btnCountDown-hover.png) no-repeat left top;
+	-moz-border-radius: 0; /* Firefox */
+	-webkit-border-radius: 0; /* Safari and Chrome */
+	border-radius: 0; /* Opera 10.5+, future browsers, and now also Internet Explorer 6+ using IE-CSS3 */	
+	width: 19px;
+}
+
+.panelDown {
+	border: solid 1px #d4d4d4;
+	background-color: #fff;
+	width: 66px; /*32*/
+	position: absolute;
+	text-align: left;
+	cursor: default;
+	z-index: 100;
+	margin-left: 47px;
+	display: none;
+
+	.menuitem {
+		padding: 1px 0 1px 7px;
+
+		&.selected, &:hover {
+			background: #3399FF;
+			color: #fff;
+		}
+	}
+}
+
+.miniloading {
+	font-size: 9px;
+	margin-left: -10px;
+}
+
+.btnCountDown {
+	float: left;
+}
+
+.btnCountDown.refresh {
+	float: right;
+	margin: 0 4px 6px 0;
+}
+
+.div_min_bottom {
+	border-bottom: solid 1px white;
+}
+
+/*default padding, margin for tblRpt*/
+.default-tbl {
+	margin: 0;
+}
+
+/* FIX IE */
+
+.eq-ie7 {
+	.btnCountDown {
+		position: relative;
+		z-index: 100;
+
+		.panelDown{
+			left: 0;
+		}
+	}
+}
+
+.btnCountDown .refresh {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background: url("img/btrefresh_new.png") no-repeat scroll 0 0 transparent;
+    border-color: #CCCCCC;
+    border-image: none;
+    border-radius: 0 3px 0 3px;
+    border-style: solid;
+    border-width: 1px 1px 2px;
+    cursor: pointer;
+    height: 18px;
+    margin: -1px 0 0 -7px;
+    width: 18px;
+}
+.btnCountDown span {
+    margin-top: 2px;
+}
+.btnCountDown span, .btnCountDown select {
+    float: left;
+}

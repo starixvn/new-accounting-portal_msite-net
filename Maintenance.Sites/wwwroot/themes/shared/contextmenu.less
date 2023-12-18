@@ -1,0 +1,78 @@
+.action-wrp 
+{
+    .btn-action {
+        background: url("Images/action-ico.png") no-repeat scroll center 0 transparent;
+        cursor: pointer;
+        display: block;
+        font-size: 0;
+        height: 19px;
+        margin: 0 auto;
+        width: 34px;
+        &:hover {
+            background-position: center -56px;
+        }
+    }
+    
+    .relative {
+        position: relative;
+    }
+}
+    
+.actions {
+    -moz-transition: all 0.2s ease-in-out 0s;
+    background-color: #FFFFFF;
+    border-bottom: 5px solid #3C5EA5;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+    margin: 0;
+    padding: 10px 0 5px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 99;
+    min-width: 150px;
+    
+    li {
+        clear: both;
+        display: block;
+        color: #000000;
+        &:hover
+        {
+            background-color: #3C5EA5;
+        }
+            
+        .context-menu-item
+        {
+            display: block;
+            padding: 6px 44px 6px 12px;
+            text-align: left;        
+            &:hover
+            {
+                color: #FFFFFF;
+            }
+        }   
+         
+        .edit-icon {
+            background: url("Images/edit-ico.png") no-repeat scroll right 2px transparent;
+            &:hover
+            {
+                background-position: right -30px;
+            }
+        }
+         
+        .delete-icon {
+            background: url("Images/del-ico.png") no-repeat scroll right 2px transparent;
+            &:hover
+            {
+                background-position: right -30px;
+            }
+        }
+         
+        .copy-icon {
+            background: url("Images/duplicate.png") no-repeat scroll right 2px transparent;
+            &:hover
+            {
+                background-position: right -30px;
+            }
+        }
+    }
+}

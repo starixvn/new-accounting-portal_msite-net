@@ -13,6 +13,7 @@ namespace Maintenance.Mail
     using Fanex.NAP.Client.Helpers.Business;
     using Fanex.NAP.Client.Helpers.Web;
     using Fanex.NAP.Client.Services;
+    using Maintenance.Services;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Rendering;
     using Services;

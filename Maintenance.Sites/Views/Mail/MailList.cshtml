@@ -1,0 +1,116 @@
+﻿@model List<MailRecord>
+@{
+    ViewBag.Title = ViewResource.Mail_List;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var hasLimitedConfigPermission = (bool)ViewBag.HasLimitedConfigPermission;
+}
+@section Head {
+    <link rel="stylesheet" href="/css/mail-list.css" type="text/css" />
+}
+@section Headline {
+    <h1>
+        <span class="title">@ViewBag.Title</span>
+    </h1>
+}
+@using (Html.BeginForm())
+{
+    <section id="filter-bar">
+        <div class="filter-form">
+            <div class="lbl-field width-auto">
+                @Html.Label("Application")
+            </div>
+            <div class="edit-field width-180">
+                @if (hasLimitedConfigPermission)
+                {
+                    @Html.DropDownList("ApplicationID", (List<SelectListItem>)ViewBag.ListMailConfig, new { @class = "width-180" })
+                }
+                else
+                {
+                    @Html.DropDownList("ApplicationID", (List<SelectListItem>)ViewBag.ListMailConfig, "All", new { @class = "width-180" })
+                }
+            </div>
+            <div class="lbl-field width-auto">
+                @Html.Label("Status")
+            </div>
+            <div class="edit-field">
+                @Html.DropDownList("MailStatus", (List<SelectListItem>)ViewBag.MailStatus)
+            </div>
+            <div class="lbl-field width-auto">
+                @Html.Label("From")
+            </div>
+            <div class="edit-field width-120">
+                @Html.TextBox("From", string.Empty, new { @style = "width:77px;margin-right:5px;" })
+            </div>
+            <div class="lbl-field width-auto">
+                @Html.Label("To")
+            </div>
+            <div class="edit-field width-120">
+                @Html.TextBox("To", string.Empty, new { @style = "width:77px;margin-right:5px;" })
+            </div>
+            <div class="submit">
+                <input type="button" value="Submit" id="submit" />
+            </div>
+        </div>
+    </section>
+    <div class="grid-toolbox">
+        <div class="btnResend" style="display:none">
+            <input type="button" value="Resend" id="btnResendMulti" />
+        </div>
+        <div id="refreshCountDownId" refresh-id="refreshCountDown" class="btnCountDown refresh">
+            <span>Refresh</span>
+            <div id="ddlCountDown" class="btnCountDown clearfix">
+                <div id="countdownrefresh" class="btnRefresh" title="Refresh">
+                </div>
+                <div class="btnDown" id="btndown">
+                </div>
+            </div>
+            <ul id="countdownmenu" class="panelDown">
+                <li data-intervaltime="0" class="menuitem">Inactive</li>
+                @for (var i = 15; i <= 75; i += 15)
+                {
+                    <li data-intervaltime="@i.ToString()" class="menuitem">
+                        @(i.ToString())
+                        sec
+                    </li>
+                }
+                <li data-intervaltime="180" class="menuitem">180 sec</li>
+            </ul>
+            <span class="refresh" id="btnrefresh"></span>
+            <input type="hidden" id="apo-on-refresh" value="MailList.generateData(50, 0);" />
+            <input type="hidden" id="inactive" value="Inactive" />
+        </div>
+    </div>
+    <div id="gridId" class="freegrid  content-grid">
+    </div>
+}
+@Html.Hidden("dateFrom", (string)ViewBag.DateFrom)
+@Html.Hidden("dateTo", (string)ViewBag.DateTo)
+@section Foot {
+    <script src="~/scripts/Mail/MailList.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        var dateFrom = $("#dateFrom").val();
+        var dateTo = $("#dateTo").val();
+        var buttonFromImage = '@Url.Content("~/images/calendar.gif")';
+        var buttonToImage = '@Url.Content("~/images/calendar.gif")';
+        $(function () {
+
+            $("#From").val(dateFrom);
+            $("#To").val(dateTo);
+
+            $("#From").datepicker({
+                showOn: "button",
+                buttonImage: buttonFromImage,
+                buttonImageOnly: true,
+                dateFormat: "dd/mm/yy"
+            });
+
+            $("#To").datepicker({
+                showOn: "button",
+                buttonImage: buttonToImage,
+                buttonImageOnly: true,
+                dateFormat: "dd/mm/yy"
+            });
+
+        });
+    </script>
+}

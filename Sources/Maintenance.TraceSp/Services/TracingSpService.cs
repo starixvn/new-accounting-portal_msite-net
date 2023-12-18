@@ -26,10 +26,6 @@ namespace Maintenance.TraceSp.Services
 
         public List<TracingSpViewModel> GetTracingSpData(TracingSp model)
         {
-            var suffixKey = model.Site.Equals("FPS", StringComparison.CurrentCultureIgnoreCase)
-                ? "FPS"
-                : string.Empty;
-
             var criteria = new TracingSpCriteria
             {
                 Site = model.Site,
@@ -40,8 +36,7 @@ namespace Maintenance.TraceSp.Services
                 TraceStartEvents = model.TraceStartEvents,
                 TraceTimer = model.TraceTimer,
                 ErrorMsg = string.Empty,
-                HasError = false,
-                SuffixKey = suffixKey
+                HasError = false
             };
             if (IsExistedError(criteria, model))
             {

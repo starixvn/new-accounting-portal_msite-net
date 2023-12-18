@@ -1,0 +1,34 @@
+﻿@using Fanex.NAP.Client.Session
+@using Microsoft.AspNetCore.Http
+@{
+	var session = new NapSession(new HttpContextAccessor());
+	var menuItemList = session.MenuItemList;
+	var lvl0MenuItemList = menuItemList.Where(m => m.ParentId == 0).OrderBy(m => m.DisplayOrder).ToList();
+}
+<nav>
+	<ul class="menu">
+		@for (int i = 0; i < lvl0MenuItemList.Count; i++)
+		{
+			var menuItem = lvl0MenuItemList[i];
+			var lvl1MenuItemList = menuItemList.Where(x => x.ParentId == menuItem.Id)
+			.OrderBy(x => x.DisplayOrder).ToList();
+
+			if (lvl1MenuItemList.Any())
+			{
+				<li class="has-kids">
+					<a href="javascript:;">@menuItem.Name</a>
+					<ul>
+						@foreach (var subMenuItem in lvl1MenuItemList)
+						{
+							<li><a href="@Url.Content(subMenuItem.ValidUrl)">@subMenuItem.Name</a></li>
+						}
+					</ul>
+				</li>
+			}
+			else
+			{
+				<li><a href="@Url.Content(menuItem.ValidUrl)">@menuItem.Name</a></li>
+			}
+		}
+	</ul>
+</nav>

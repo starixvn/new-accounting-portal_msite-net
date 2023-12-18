@@ -1,0 +1,16 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    ViewBag.Title = string.Format("{0}", "Home");
+}
+@section Head{
+    <link rel="stylesheet" href="/css/mail-list.css" type="text/css" />
+}
+@section HeadLine
+{
+    <h1>
+        <span class="title">@ViewBag.Title</span>
+    </h1>
+}

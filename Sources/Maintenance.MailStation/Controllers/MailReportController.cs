@@ -12,7 +12,7 @@ using Fanex.NAP.Client.Helpers.Web;
 using Microsoft.AspNetCore.Mvc;
 
 [NapSuperAuth]
-public class MailReportController(INapSession napSession, MailReportService mailReportService) : Controller
+public class MailReportController(INapSession napSession, IMailReportService mailReportService) : Controller
 {
     [NapAuth(FunctionKey = MailDeliveryFunctionKeys.MailReport, Policy = Constant.Policy.Read)]
     public ActionResult Index()

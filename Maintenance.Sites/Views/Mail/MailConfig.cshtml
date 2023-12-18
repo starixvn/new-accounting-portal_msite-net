@@ -1,0 +1,137 @@
+﻿@model List<MailConfig>
+@{
+    ViewBag.Title = ViewResource.Mail_Config;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var hasEditRight = (bool)ViewBag.HasEdit;
+}
+@section Head {
+    <link rel="stylesheet" href="/css/mail-list.css" type="text/css" />
+    <style>
+        iframe {
+            position: initial !important;
+        }
+    </style>
+}
+@section Headline {
+    <h1>
+        <span class="title">@ViewBag.Title</span>
+        @if (hasEditRight)
+        { 
+            @Html.ActionLink("+ Create New", "AddMailConfig", "Mail", null, new { @class = "lnk" })
+        }
+    </h1>
+}
+@using (Html.BeginForm())
+{
+    <section id="filter-bar">
+        <div class="filter-form">
+            <div class="lbl-field width-auto">
+                @Html.Label(@ViewResource.Server)
+            </div>
+            <div class="edit-field">
+                @Html.DropDownList("ServerIP", (List<SelectListItem>)ViewBag.ListServerIp, "All")
+            </div>
+            <div class="submit">
+                <input type="submit" value="Submit" />
+            </div>
+        </div>
+    </section>
+}
+<table class="grid">
+    <thead>
+        <tr>
+            <th>
+                @ViewResource.ID
+            </th>
+            <th>
+                @ViewResource.Name
+            </th>
+            <th>
+                @ViewResource.Description
+            </th>
+            <th>
+                @ViewResource.Mail_Setting
+            </th>
+            <th>
+                @ViewResource.FromMail
+            </th>
+            <th>
+                @ViewResource.IsEncrypt
+            </th>
+            <th>
+                @ViewResource.Log
+            </th>
+            <th>
+                @ViewResource.View_Report
+            </th>
+            @if (hasEditRight)
+            { 
+                <th>
+                    @ViewResource.Edit
+                </th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            var i = 1;
+            if (!ReferenceEquals(Model, null))
+            {
+                foreach (var mailItem in Model)
+                {
+                    var row_class = i % 2 == 0 ? "alt" : string.Empty;
+					
+            <tr class="@row_class">
+                <td class="align-center">
+                    @mailItem.AppID
+                </td>
+                <td>
+                    @mailItem.AppName
+                </td>
+                <td>
+                    @mailItem.Description
+                </td>
+                <td>
+                    @mailItem.Setting.SettingName
+                </td>
+                <td class="align-center">
+                    @(string.IsNullOrEmpty(mailItem.MailFrom) ? mailItem.Setting.Username : mailItem.MailFrom)
+                </td>
+                <td class="align-center">
+                    @Html.CheckBox("chbConfig-" + mailItem.AppID.ToString(), mailItem.IsEncrypt, new { @disabled = "disabled" })
+                </td>
+                <td class="align-center">
+                    <div class="icon-view-log" data-appname="@mailItem.AppName" data-appid="@mailItem.AppID"></div>
+                </td>
+                <td class="align-center">
+                    <div class="action-wrp">
+                        @Html.ActionLink(" ", "MailList", new { id = mailItem.AppID }, new { @class = "icon-link" })
+                    </div>
+                </td>
+                @if (hasEditRight)
+                { 
+                    <td class="align-center">
+                        <div class="action-wrp">
+                            @Html.ActionLink("Edit", "EditMailConfig", new { id = mailItem.AppID }, new { @class = "btn-edit" })
+                        </div>
+                    </td>
+                }
+            </tr>               
+                }
+            }
+            else
+            {
+            <tr>
+                <td colspan="5">
+                    Not found !
+                </td>
+            </tr>
+            }
+        }
+    </tbody>
+</table>
+@section Foot
+{
+    <script src="/scripts/lib/Popup/dialogbox.js" type="text/javascript"></script>
+    <script src="/scripts/mail-config.js" type="text/javascript"></script>
+}

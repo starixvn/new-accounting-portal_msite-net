@@ -3,15 +3,40 @@ using Maintenance.MailStation.Models;
 
 namespace Maintenance.MailStation.Services;
 
+using Criteria;
+using Criteria.MailManage;
 using Fanex.Data.Repository;
 using Fanex.MailDeliver.MailClient.Model;
 using Fanex.MailDelivery.Core.Models;
 using Maintenance.Services;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Configuration;
 using Quartz;
 using Quartz.Spi;
 
-public class MailReportService(IDynamicRepository dynamicRepository, IConfiguration configuration, IMailService mailService) : MailStationBaseService
+public interface IMailReportService
+{
+    List<MailTaskModel> MailReport(MailReportCriteria criteria);
+    MailTaskStatusCounterModel GetMailTaskStatusCounter();
+    MailRecord MailDetail(MailDetailCriteria criteria);
+    List<MailLogModel> MailLog(MailLogCriteria criteria);
+    void RetrySendMail(RetrySendMailCriteria criteria);
+    void AbortTask(int taskId);
+    void AddMailLog(AddMailLogCriteria criteria);
+    void RetryMissingJob(RetryMissingTaskCriteria criteria);
+    List<SelectListItem> Sites(bool hasAllElement = true);
+    List<SelectListItem> MailGroups(bool hasAllElement = true);
+    List<SelectListItemExtra> Status(bool hasAllElement = true);
+    List<SelectListItemExtra> TaskStatus(bool hasAllElement = true);
+    List<SelectListItemExtra> Trigger(bool hasAllElement = true);
+    List<SuggestMailModel> SuggestMails(SuggestMailCriteria criteria);
+    CommandResult ExecuteNonQuery(UpdateCommandBase command);
+    MailTaskModel GetMailTaskByID(GetMailTaskByIdCriteria criteria);
+    Schedule GetScheduleByMailId(GetScheduleByIdCriteria criteria);
+    string GetTimeZone();
+}
+
+public class MailReportService(IDynamicRepository dynamicRepository, IConfiguration configuration, IMailService mailService) : MailStationBaseService, IMailReportService
 {
     public List<MailTaskModel> MailReport(MailReportCriteria criteria)
     {

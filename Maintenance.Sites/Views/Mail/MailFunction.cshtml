@@ -1,0 +1,75 @@
+﻿@model List<MailFunction>
+@{
+    ViewBag.Title = "Mail Function";
+    Layout = "~/Views/Shared/_Layout.cshtml";    
+}
+@section Head {
+    <link rel="stylesheet" href="/css/mail-list.css" type="text/css" />
+}
+@section Headline {
+    <h1>
+        <span class="title">@ViewBag.Title</span>
+        @Html.ActionLink("+ Create New", "AddMailFunction", "Mail", null, new { @class = "lnk" })
+    </h1>
+}
+<table class="grid">
+    <thead>
+        <tr>
+            <th>
+                @ViewResource.ID
+            </th>
+            <th>
+                @ViewResource.Name
+            </th>
+            <th>
+                @ViewResource.Application_Name
+            </th>
+            <th>
+                @ViewResource.Mail_Setting
+            </th>
+            <th>
+                @ViewResource.Edit
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            var i = 0;
+            if (!ReferenceEquals(Model, null))
+            {
+                foreach (var mailItem in Model)
+                {
+                    var row_class = i++ % 2 == 0 ? "alt" : string.Empty;
+
+            <tr class="@row_class">
+                <td class="align-center">
+                    @mailItem.FuncID
+                </td>
+                <td>
+                    @mailItem.FuncName
+                </td>
+                <td title="@mailItem.Config.Setting.SettingName">
+                    @mailItem.Config.AppName
+                </td>
+                <td>
+                    @mailItem.Setting.SettingName
+                </td>
+                <td class="align-center">
+                    <div class="action-wrp">
+                        @Html.ActionLink("Edit", "EditMailFunction", new { id = mailItem.FuncID }, new { @class = "btn-edit" })
+                    </div>
+                </td>
+            </tr>
+                }
+            }
+            if (i == 1)
+            {
+            <tr>
+                <td colspan="5" class="align-center">
+                    @ViewResource.NoInformationAvailable
+                </td>
+            </tr>
+            }
+        }
+    </tbody>
+</table>

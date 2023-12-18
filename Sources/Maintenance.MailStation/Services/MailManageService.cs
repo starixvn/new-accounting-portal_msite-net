@@ -5,11 +5,35 @@ using Maintenance.MailStation.Models;
 
 namespace Maintenance.MailStation.Services;
 
+using Criteria;
 using Fanex.Data.Repository;
 using Fanex.MailDelivery.Core.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Configuration;
 
-public class MailManageService(IJobOperationService jobOperationService, IConfiguration configuration, IDynamicRepository dynamicRepository) : MailStationBaseService
+public interface IMailManageService
+{
+    IList<MailModel> MailList(GetMailListCriteria criteria);
+    MailModel MailById(GetMailByIdCriteria criteria);
+    IList<MailActionLogModel> MailLogById(GetMailLogByIdCriteria criteria);
+    CommandResult CreateMail(CreateMailCriteria criteria);
+    CommandResult UpdateMail(UpdateMailCriteria criteria);
+    CommandResult DeleteMail(DeleteMailCriteria criteria);
+    CommandResult CreateMailGroup(CreateMailGroupCriteria criteria);
+    void RunNow(int mailId);
+    List<SelectListItem> Sites(bool hasAllElement = true);
+    List<SelectListItem> MailGroups(bool hasAllElement = true);
+    List<SelectListItemExtra> Status(bool hasAllElement = true);
+    List<SelectListItemExtra> TaskStatus(bool hasAllElement = true);
+    List<SelectListItemExtra> Trigger(bool hasAllElement = true);
+    List<SuggestMailModel> SuggestMails(SuggestMailCriteria criteria);
+    CommandResult ExecuteNonQuery(UpdateCommandBase command);
+    MailTaskModel GetMailTaskByID(GetMailTaskByIdCriteria criteria);
+    Schedule GetScheduleByMailId(GetScheduleByIdCriteria criteria);
+    string GetTimeZone();
+}
+
+public class MailManageService(IJobOperationService jobOperationService, IConfiguration configuration, IDynamicRepository dynamicRepository) : MailStationBaseService, IMailManageService
 {
     public IList<MailModel> MailList(GetMailListCriteria criteria)
     {
@@ -55,21 +79,18 @@ public class MailManageService(IJobOperationService jobOperationService, IConfig
 
         if (result.IsSuccessful && criteria.TriggerType == (int)MailType.Schedule)
         {
-            using (jobOperationService = new JobOperationService(configuration))
+            jobOperationService.PublishScheduleChange(new Schedule
             {
-                jobOperationService.PublishScheduleChange(new Schedule
-                {
-                    Id = criteria.MailId,
-                    Active = criteria.IsActive,
-                    EndTime = criteria.EndOn,
-                    StartTime = criteria.StartOn ?? DateTime.Now,
-                    MaxRetryTimes = criteria.Attempt,
-                    Name = criteria.MailName,
-                    RepeatExpression = criteria.CronExpression,
-                    RetryInterval = criteria.Interval,
-                    SiteId = criteria.SiteId
-                });
-            }
+                Id = criteria.MailId,
+                Active = criteria.IsActive,
+                EndTime = criteria.EndOn,
+                StartTime = criteria.StartOn ?? DateTime.Now,
+                MaxRetryTimes = criteria.Attempt,
+                Name = criteria.MailName,
+                RepeatExpression = criteria.CronExpression,
+                RetryInterval = criteria.Interval,
+                SiteId = criteria.SiteId
+            });
         }
 
         return result;
@@ -89,9 +110,6 @@ public class MailManageService(IJobOperationService jobOperationService, IConfig
     {
         var schedule = GetScheduleByMailId(new GetScheduleByIdCriteria { MailId = mailId });
 
-        using (jobOperationService = new JobOperationService(configuration))
-        {
-            jobOperationService.RunNow(schedule);
-        }
+        jobOperationService.RunNow(schedule);
     }
 }

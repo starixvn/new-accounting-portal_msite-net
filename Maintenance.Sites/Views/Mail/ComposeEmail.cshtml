@@ -1,0 +1,139 @@
+﻿@model MailRecord
+@{
+    ViewBag.Title = "Compose Mail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    bool success = ViewBag.Success != null && ViewBag.Success;
+}
+@section Head {
+    <link rel="stylesheet" href="/css/mail-list.css" type="text/css" />
+}
+@section Headline {
+    <h1>
+        <span class="title">@ViewBag.Title</span>
+        @Html.ActionLink("← " + ViewResource.Back_To_List, "MailList", "Mail", null, new { @class = "lnk" })
+    </h1>
+}
+@using (Html.BeginForm())
+{
+    <div class="form">
+        <div class="form-row summary">
+            <div class="lbl-field">
+            </div>
+            <div class="edit-field">
+                @Html.ValidationSummary()
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="lbl-field">
+                @Html.Label(ViewResource.Application_Name)
+            </div>
+            <div class="edit-field">
+                @Html.DropDownListFor(m => m.AppID, (List<SelectListItem>)ViewBag.ListMailConfig)
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="lbl-field">
+                @Html.Label(ViewResource.MailFrom)
+            </div>
+            <div class="edit-field">
+                @Html.TextBoxFor(m => m.MailFrom)
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="lbl-field">
+                @Html.Label(ViewResource.Mail_To)
+            </div>
+            <div class="edit-field">
+                @Html.TextBoxFor(m => m.MailTo)
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="lbl-field">
+                @Html.Label(ViewResource.Mail_Cc)
+            </div>
+            <div class="edit-field">
+                @Html.TextBoxFor(m => m.MailCc)
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="lbl-field">
+                @Html.Label(ViewResource.Mail_Bcc)
+            </div>
+            <div class="edit-field">
+                @Html.TextBoxFor(m => m.MailBcc)
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="lbl-field">
+                @Html.LabelFor(m => m.Title)
+            </div>
+            <div class="edit-field">
+                @Html.TextBoxFor(m => m.Title)
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="lbl-field">
+                @Html.LabelFor(m => m.Subject)
+            </div>
+            <div class="edit-field">
+                @Html.TextBoxFor(m => m.Subject)
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="lbl-field">
+                @Html.LabelFor(m => m.Body)
+            </div>
+            <div class="edit-field">
+                @Html.TextAreaFor(m => m.Body, new { @style = "width: 556px; height: 125px;" })
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="lbl-field">
+                @Html.Label(ViewResource.FileAttachment)
+            </div>
+            <div class="edit-field">
+                @Html.TextBoxFor(m => m.FileAttachments)
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="lbl-field">
+                @Html.Label(ViewResource.IsEncrypt)
+            </div>
+            <div class="edit-field">
+                @Html.CheckBoxFor(m => m.IsEncrypt)
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="lbl-field">
+            </div>
+            <div class="edit-field">
+                @if (!success)
+                {
+                    <input type="submit" value="@ViewResource.Send" />
+                    <input type="reset" value="@ViewResource.Cancel" />
+                }
+            </div>
+        </div>
+    </div>
+}
+@section Foot
+{
+    <script type="text/javascript">
+        $(function () {
+            $('input[type=reset]').bind('click', function () {
+                window.location.replace(NAP.resolveClientUrl('Mail/MailList'));
+            });
+        });
+    </script>
+    @if (success)
+    {
+        var dialogMsg = string.Format(ViewResource.Send_Success);
+
+        <script type="text/javascript">
+            $(function () {
+                NAP.showSuccessMsg('@dialogMsg', 'Mail/MailList', 6000);
+            });
+
+        </script>
+    }
+}

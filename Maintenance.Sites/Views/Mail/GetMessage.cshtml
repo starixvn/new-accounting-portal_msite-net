@@ -1,0 +1,65 @@
+﻿@model MailRecord
+@{
+    Layout = null;
+}
+@if (!ReferenceEquals(Model, null))
+{ 
+    <div class="form">
+        <div class="form-row required">
+            <div class="lbl-field">
+                @Html.LabelFor(m => m.MailTo, ViewResource.Mail_To)
+            </div>
+            <div class="edit-field">
+                <label>@Html.Raw(@Model.MailTo.Replace(",", "<br/>"))</label>
+            </div>
+        </div>
+        <div class="form-row required">
+            <div class="lbl-field">
+                @Html.LabelFor(m => m.MailCc, ViewResource.Mail_Cc)
+            </div>
+            <div class="edit-field">
+                <label>@Html.Raw(Model.MailCc.Replace(",", "<br/>"))</label>
+            </div>
+        </div>
+        <div class="form-row required">
+            <div class="lbl-field">
+                @Html.LabelFor(m => m.MailBcc, ViewResource.Mail_Bcc)
+            </div>
+            <div class="edit-field">
+                <label>@Html.Raw(@Model.MailBcc.Replace(",", "<br/>"))</label>
+            </div>
+        </div>
+        <div class="form-row required">
+            <div class="lbl-field">
+                @Html.LabelFor(m => m.MailDate, ViewResource.Mail_Date)
+            </div>
+            <div class="edit-field">
+                <label>@Model.MailDate</label>
+            </div>
+        </div>
+        <div class="form-row required">
+            <div class="lbl-field">
+                @Html.LabelFor(m => m.Title, ViewResource.Title)
+            </div>
+            <div class="edit-field">
+                <label>@Model.Title</label>
+            </div>
+        </div>
+        <div class="form-row required">
+            <div class="lbl-field">
+                @Html.LabelFor(m => m.Subject, ViewResource.Subject)
+            </div>
+            <div class="edit-field">
+                <label>@Model.Subject</label>
+            </div>
+        </div>
+        <div class="form-row required">
+            <div class="lbl-field">
+                @Html.LabelFor(m => m.Body, ViewResource.Body)
+            </div>
+            <div class="edit-field">
+                <label>@Html.Raw(Model.Body)</label>
+            </div>
+        </div>
+    </div>
+}

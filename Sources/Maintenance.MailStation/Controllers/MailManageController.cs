@@ -14,7 +14,7 @@ using Fanex.NAP.Client.Helpers.Web;
 using Microsoft.AspNetCore.Mvc;
 
 [NapSuperAuth]
-public class MailManageController(INapSession napSession, MailManageService mailManageService) : Controller
+public class MailManageController(INapSession napSession, IMailManageService mailManageService) : Controller
 {
     [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMail, Policy = Constant.Policy.Read)]
     public ActionResult Index(GetMailListCriteria criteria)

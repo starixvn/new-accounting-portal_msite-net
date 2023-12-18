@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Model;
 
-public interface ManageLetstalkMessageService
+public interface IManageLetstalkMessageService
 {
     CommandResult InsertNotification(InsertNotificationCriteria criteria, IEnumerable<IFormFile> files);
 
@@ -31,10 +31,10 @@ public interface ManageLetstalkMessageService
     CommandResult ResendNotification(ResendNotificationCriteria criteria);
 }
 
-public class ManageLetstalkMessageServiceImp (
+public class ManageLetstalkMessageService(
     IUserService userService, 
     IDynamicRepository dynamicRepository, 
-    INapSettings napSettings) : ManageLetstalkMessageService
+    INapSettings napSettings) : IManageLetstalkMessageService
 {
     private const string uatEnvironment = "UAT";
 
