@@ -89,7 +89,7 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddCommonServices(this IServiceCollection services)
     {
         services.AddSingleton<IDynamicRepository, DynamicRepository>();
-        
+
         return services;
     }
 
@@ -128,8 +128,8 @@ public static class ServiceCollectionExtensions
 
     public static IServiceCollection AddMail(this IServiceCollection services, IConfiguration configuration)
     {
-        AppSettings.AppMailId = configuration.GetValue<string>("MailSetting:MailId");
-        AppSettings.AppMailAddress = configuration.GetValue<string>("MailSetting:MailAddress");
+        AppSettings.AppMailId = configuration.GetValue<string>("MailSettings:MailId");
+        AppSettings.AppMailAddress = configuration.GetValue<string>("MailSettings:MailAddress");
         services.AddTransient<IMailService, MailService>();
         services.AddTransient<IMailRepository, MailRepository>();
 
@@ -153,7 +153,7 @@ public static class ServiceCollectionExtensions
         services.AddTransient<IHttpClientService, HttpClientService>();
         services.AddTransient<ILetstalkReportRestClientService, LetstalkReportRestClientService>();
         services.AddTransient<IManageLetstalkMessageService, ManageLetstalkMessageService>();
-        
+
         return services;
     }
 
@@ -162,7 +162,7 @@ public static class ServiceCollectionExtensions
         services.AddTransient<IDbServerService, DbServerService>();
         services.AddTransient<TraceSp.Services.ISiteService, TraceSp.Services.SiteService>();
         services.AddTransient<ITracingSpService, TracingSpService>();
-        
+
         return services;
     }
 }
