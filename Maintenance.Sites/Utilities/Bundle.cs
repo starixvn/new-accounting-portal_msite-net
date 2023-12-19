@@ -9,7 +9,7 @@ public static class Bundle
     public static void AddLayoutBundle(this IAssetPipeline pipeline, CssSettings cssSetting, CodeSettings scriptSetting)
     {
         pipeline.AddCssBundle(
-            "/css/common.cs",
+            "/css/common.css",
             cssSetting,
             "themes/reset.css",
             "themes/fonts.css",
@@ -21,6 +21,10 @@ public static class Bundle
             "scripts/lib/chosen/chosen.css",
             "scripts/lib/Fanex.Grid/Fanex.Grid.css",
             "scripts/lib/Fanex.Grid/Fanex.Pagination.css");
+        pipeline.AddLessBundle(
+            "/css/common-less.css",
+            "themes/manage/refreshcountdown.less",
+            "themes/manage/letstalknotification.less");
 
         pipeline.AddJavaScriptBundle("/scripts/sharedscripts.js",scriptSetting,
             "scripts/ShareScripts/SharedScriptManager.js",
@@ -40,13 +44,11 @@ public static class Bundle
             "scripts/lib/RefreshCountDown.js");
     }
 
-    public static void AddMailBundle(this IAssetPipeline pipeline, CssSettings cssSetting, CodeSettings scriptSetting)
+    public static void AddMailBundle(this IAssetPipeline pipeline)
     {
         pipeline.AddLessBundle(
             "/css/mail-list.css",
-            "themes/manage/manage.less",
-            "themes/manage/RefreshCountDown.less",
-            "themes/manage/LetstalkNotification.less");
+            "themes/manage/manage.less");
 
         pipeline.AddLessBundle(
             "/css/mail-manage.css",

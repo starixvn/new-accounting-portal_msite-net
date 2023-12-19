@@ -6,6 +6,7 @@ using Fanex.Logging.Extensions;
 using Fanex.Logging.Extensions.AspNetCore;
 using Fanex.Logging.Extensions.Database;
 using Fanex.Logging.Sentry.RavenClient;
+using Fanex.MailDeliver.MailClient;
 using Fanex.NAP.Client.Configuration;
 using Fanex.NAP.Client.Helpers.Web;
 using Fanex.NAP.Client.Services;
@@ -15,6 +16,8 @@ using Mail.Services;
 using MailStation.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.DataProtection;
+using NUglify.Css;
+using NUglify.JavaScript;
 using Services;
 using SharpRaven;
 using StackExchange.Redis;
@@ -70,6 +73,19 @@ public static class ServiceCollectionExtensions
         return services;
     }
 
+    public static IServiceCollection AddBundle(this IServiceCollection services)
+    {
+        services.AddWebOptimizer(pipeline =>
+        {
+            var cssSetting = new CssSettings { OutputMode = NUglify.OutputMode.MultipleLines, CommentMode = CssComment.None };
+            var scriptSetting = new CodeSettings { MinifyCode = true };
+            pipeline.AddLayoutBundle(cssSetting, scriptSetting);
+            pipeline.AddMailBundle();
+        });
+
+        return services;
+    }
+
     public static IServiceCollection AddCommonServices(this IServiceCollection services)
     {
         services.AddSingleton<IDynamicRepository, DynamicRepository>();
@@ -110,8 +126,10 @@ public static class ServiceCollectionExtensions
         return services;
     }
 
-    public static IServiceCollection AddMail(this IServiceCollection services)
+    public static IServiceCollection AddMail(this IServiceCollection services, IConfiguration configuration)
     {
+        AppSettings.AppMailId = configuration.GetValue<string>("MailSetting:MailId");
+        AppSettings.AppMailAddress = configuration.GetValue<string>("MailSetting:MailAddress");
         services.AddTransient<IMailService, MailService>();
         services.AddTransient<IMailRepository, MailRepository>();
 

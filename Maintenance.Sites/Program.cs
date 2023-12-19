@@ -28,7 +28,7 @@ services.AddOneBookUm(configuration);
 services.AddNapClient(configuration);
 services.AddFanexLog(configuration);
 services.AddCommonServices();
-services.AddMail();
+services.AddMail(configuration);
 services.AddMailStation();
 services.AddLetstalk();
 services.AddTraceSp();
@@ -39,11 +39,12 @@ services.AddControllersWithViews(options =>
     options.Filters.Add(new SessionAuthorizeAttribute());
 }).AddNewtonsoftJson();
 
+services.AddBundle();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-app.UseExceptionHandler("/Error");
-
+app.UseWebOptimizer();
 app.UseStaticFiles();
 
 app.UseRouting();
