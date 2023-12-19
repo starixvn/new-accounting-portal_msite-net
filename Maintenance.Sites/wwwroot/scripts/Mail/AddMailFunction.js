@@ -7,7 +7,7 @@ $(document).ready(function () {
 	$('.addconfig').click(function () {
 
 		$.ajax({
-			url: NAP.resolveClientUrl("Mail/AddMailConfigPopUp"),
+			url: "/Mail/AddMailConfigPopUp",
 			type: 'GET',
 			dataType: 'html',
 			cache: false,
@@ -28,7 +28,7 @@ $(document).ready(function () {
 	$('.addsetting').click(function () {
 
 		$.ajax({
-			url: NAP.resolveClientUrl("Mail/AddMailSettingPopUp"),
+			url: "/Mail/AddMailSettingPopUp",
 			type: 'GET',
 			dataType: 'html',
 			cache: false,

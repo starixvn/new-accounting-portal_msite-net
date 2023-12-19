@@ -7,7 +7,7 @@ $(document).ready(function () {
 	$('.btn-edit').click(function () {
 
 		$.ajax({
-			url: NAP.resolveClientUrl("Mail/AddMailSettingPopUp"),
+			url: "/Mail/AddMailSettingPopUp",
 			type: 'GET',
 			dataType: 'html',
 			cache: false,

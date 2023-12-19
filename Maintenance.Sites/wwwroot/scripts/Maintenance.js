@@ -136,7 +136,7 @@ var NAP = (function ($) {
 			setTimeout('NAP.navigateTo("' + url + '")', msec);
 		},
 		navigateTo: function (url) {
-			window.location.replace(NAP.resolveClientUrl(url));
+			window.location.replace(url);
 		},
 		htmlEncode: function (value) {
 			return $('<div/>').text(value).html();
@@ -156,7 +156,7 @@ var NAP = (function ($) {
 				setTimeout('NAP.showSuccessMsgCountDown("' + url + '", ' + msec + ')', 1000);
 				$('.validation-summary-valid .msec').html(msec);
 			} else {
-				window.location.replace(NAP.resolveClientUrl(url));
+				window.location.replace(url);
 			}
 		}
 	};

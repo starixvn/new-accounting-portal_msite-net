@@ -2,11 +2,11 @@ namespace Maintenance.Mail
 {
     using System;
     using System.Collections.Generic;
-    using System.Configuration;
     using System.Globalization;
     using System.IO;
     using System.Linq;
     using Criteria.MailService;
+    using Fanex.MailDeliver.MailClient;
     using Fanex.MailDeliver.MailClient.Model;
     using Fanex.NAP.Client.Attributes;
     using Fanex.NAP.Client.Configuration;
@@ -16,6 +16,7 @@ namespace Maintenance.Mail
     using Maintenance.Services;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Rendering;
+    using Microsoft.Extensions.Configuration;
     using Services;
 
     [NapSuperAuth]
@@ -24,7 +25,8 @@ namespace Maintenance.Mail
         IUserService userService,
         IMailRepository mailRepository,
         INapSession napSession,
-        INapSettings settings) : Controller
+        INapSettings settings,
+        IConfiguration configuration) : Controller
     {
         #region Action
 
@@ -349,7 +351,7 @@ namespace Maintenance.Mail
         {
             InitDataMailConfig();
 
-            ConfigurationManager.AppSettings["app_mail_id"] = mailRecord.AppID.ToString();
+            AppSettings.AppMailId = mailRecord.AppID.ToString();
 
             if (!string.IsNullOrWhiteSpace(mailRecord.FileAttachments))
             {
@@ -606,7 +608,7 @@ namespace Maintenance.Mail
             var listConfig = mailServer.GetListConfig(string.Empty);
             var listConfigPermission = new List<MailConfig>();
 
-            var configPermission = ConfigurationManager.AppSettings["MailPermission:Application"];
+            var configPermission = configuration.GetValue<string>("MailPermission:Application");
             var applicationPermissions = configPermission.Split(';');
 
             foreach (var itemApplicationPermission in applicationPermissions)

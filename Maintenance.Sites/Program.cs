@@ -7,6 +7,7 @@ using Maintenance.Sites.Utilities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using Newtonsoft.Json.Serialization;
 using ONEbook.UM.AspNetCore.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -37,7 +38,10 @@ services.AddControllersWithViews(options =>
 {
     options.Filters.Add(new ServiceFilterAttribute(typeof(CheckUMFilterAttribute)));
     options.Filters.Add(new SessionAuthorizeAttribute());
-}).AddNewtonsoftJson();
+}).AddNewtonsoftJson((options) =>
+{
+    options.SerializerSettings.ContractResolver = new DefaultContractResolver();
+});
 
 services.AddBundle();
 

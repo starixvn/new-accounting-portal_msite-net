@@ -7,7 +7,7 @@ var AddMailSettingPopUp = (function ($) {
 	return {
 		GetListMailSetting: function (mailSettingId) {
 			$.ajax({
-				url: NAP.resolveClientUrl("Mail/GetMailSetting"),
+				url: "/Mail/GetMailSetting",
 				type: 'POST',
 				dataType: 'JSON',
 				cache: false,
@@ -68,7 +68,7 @@ $(document).ready(function () {
 		}
 
 		$.ajax({
-			url: NAP.resolveClientUrl("Mail/AddMailSettingPopUp"),
+			url: "/Mail/AddMailSettingPopUp",
 			data: { server: server, port: port, username: username, password: password, isautho: isAutho },
 			type: 'POST',
 			dataType: 'JSON',

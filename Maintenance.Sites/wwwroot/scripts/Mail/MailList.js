@@ -13,7 +13,7 @@ var MailList = (function ($) {
             index++;
 
             $.ajax({
-                url: NAP.resolveClientUrl("Mail/MailListPagi"),
+                url: "/Mail/MailListPagi",
                 data: { status: status, applicationID: appId, from: from, to: to, page: index, size: pageSize },
                 type: 'POST',
                 dataType: 'JSON',
@@ -118,7 +118,7 @@ var MailList = (function ($) {
 
         resend: function (mailId) {
             $.ajax({
-                url: NAP.resolveClientUrl("Mail/ResendMail"),
+                url: "/Mail/ResendMail",
                 data: { mailId: mailId },
                 type: 'POST',
                 dataType: 'html',
@@ -151,7 +151,7 @@ var MailList = (function ($) {
             if (mailIds && mailIds.length > 0) {
                 if (confirm("Resend the chosen emails ?")) {
                     $.ajax({
-                        url: NAP.resolveClientUrl("Mail/ResendMultipleMails"),
+                        url: "/Mail/ResendMultipleMails",
                         data: $.param({ mailIds: mailIds }, true),
                         type: 'POST',
                         cache: false,
@@ -178,7 +178,7 @@ var MailList = (function ($) {
 
         getMessage: function (mailId) {
             $.ajax({
-                url: NAP.resolveClientUrl("Mail/GetMessage"),
+                url: "/Mail/GetMessage",
                 data: { mailId: mailId },
                 type: 'POST',
                 dataType: 'html',
@@ -202,7 +202,7 @@ var MailList = (function ($) {
 
         getError: function (mailId) {
             $.ajax({
-                url: NAP.resolveClientUrl("Mail/GetError"),
+                url: "/Mail/GetError",
                 data: { mailId: mailId },
                 type: 'POST',
                 dataType: 'html',
