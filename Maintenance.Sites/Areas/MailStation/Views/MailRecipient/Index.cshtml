@@ -1,0 +1,83 @@
+﻿@inject IPermissionService permissionService
+@model RecipientListCriteria
+@{
+    ViewBag.Title = Labels.Manage_Recipient;
+    Layout = "~/Views/Shared/_LayoutWithTimer.cshtml";
+    var hasEditRight = permissionService.HasHostPermission(MailDeliveryFunctionKeys.ManageRecipient);
+}
+@section Head {
+    <link href="~/themes/shared/contextmenu.less" rel="stylesheet" type="text/css" />
+    <link href="~/mailstation/css/ManageRecipient.less" rel="stylesheet" type="text/css" />
+}
+@section Headline {
+    <h1>
+        <span class="title"><span class="first">@Labels.SystemName /</span> @ViewBag.Title</span>
+        @if (hasEditRight)
+        {
+            <div class="button-action">
+                <a id="btnCreateNewUser" class="lnk" href="~/MailStation/MailRecipient/CreateRecipientView">
+                    + @Labels.Create_New_User</a>
+            </div>
+        }
+    </h1>
+}
+<section id="filter-bar">
+    <div class="filter-form">
+        <div class="filter-row">
+            <div class="lbl-field width-80">
+                @Html.LabelFor(m => m.UserName)
+            </div>
+            <div class="edit-field">
+                @Html.EditorFor(m => m.UserName, new { @class = "width-80" })
+            </div>
+            <div class="lbl-field width-80">
+                @Html.LabelFor(m => m.Emails, Labels.Email_SymbolMulti)
+            </div>
+            <div class="edit-field">
+                @Html.EditorFor(m => m.Emails)
+            </div>
+            <div class="lbl-field">
+                <label for="status">
+                @Html.LabelFor(m => m.Status)
+            </div>
+            <div class="edit-field">
+                @Html.DropDownListFor(m => m.Status, (IEnumerable<SelectListItem>)ViewBag.ListStatus)
+            </div>
+            <div class="submit">
+                <input id="button-search" type="submit" value="@Labels.Submit" />
+            </div>
+        </div>
+    </div>
+</section>
+<section id="body">
+    <div id="recipient-list-container" class="recipient-list-container">
+        <div id="recipient-list" class="freegrid display-none">
+        </div>
+    </div>
+    <ul class="actions display-none">
+        <li><a class="edit-icon context-menu-item">@Labels.Edit</a> </li>
+        <li><a class="delete-icon context-menu-item">Delete</a> </li>
+    </ul>
+</section>
+@section Foot {
+    <script src="~/scripts/lib/ContextMenu/ContextMenuController.js" type="text/javascript" ></script>
+    <script src="~/scripts/lib/Popup/dialogbox.js" type="text/javascript" ></script>
+    <script src="~/mailstation/ManageRecipientController.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        window.rootUrl = '@Url.Content("~/")';
+        var viewResources = {
+            hasEditRight: @(hasEditRight ? 1 : 0),
+
+            Id: '@Labels.ID',           
+            Username: '@Labels.Username',
+            Nap_User: '@Labels.NAP_User',
+            Email1: '@Labels.Email1',
+            Email2: '@Labels.Email2',
+            Email3: '@Labels.Email3',
+            No_RelevantMail: '@Labels.SymbolNumber_RelevantMail',
+            Active: '@Labels.Active',
+            Action: '@Labels.Action',
+            Relevant_Mail: '@Labels.Relevant_Mail'
+        };
+    </script>
+}

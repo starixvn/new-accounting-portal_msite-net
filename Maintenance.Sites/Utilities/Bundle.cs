@@ -23,10 +23,11 @@ public static class Bundle
             "scripts/lib/Fanex.Grid/Fanex.Pagination.css");
         pipeline.AddLessBundle(
             "/css/common-less.css",
+            "themes/manage/manage.less",
             "themes/manage/refreshcountdown.less",
             "themes/manage/letstalknotification.less");
 
-        pipeline.AddJavaScriptBundle("/scripts/sharedscripts.js",scriptSetting,
+        pipeline.AddJavaScriptBundle("/scripts/sharedscripts.js", scriptSetting,
             "scripts/lib/jquery-1.8.0.min.js",
             "scripts/lib/jquery-ui-1.8.23.min.js",
             "scripts/lib/jquery.cookie.js",
@@ -42,12 +43,30 @@ public static class Bundle
             "scripts/lib/RefreshCountDown.js");
     }
 
+    public static void AddRawLess(this IAssetPipeline pipeline)
+    {
+        pipeline.CompileLessFiles(
+            "themes/shared/contextmenu.less",
+            "themes/shared/formedit.less",
+            "scripts/lib/InputCombobox/jquery.combobox-ext.less",
+            "scripts/lib/Countdown/CountDown.less",
+            "mailstation/css/createmail.less",
+            "mailstation/css/mailactionlog.less",
+            "mailstation/css/managemail.less",
+            "mailstation/css/updatemail.less",
+            "mailstation/css/createmailgroup.less",
+            "mailstation/css/managemailgroup.less",
+            "mailstation/css/updatemailgroup.less",
+            "mailstation/css/mailreport.less",
+            "mailstation/css/mailreportdetail.less",
+            "mailstation/css/maillog.less",
+            "mailstation/css/ManageRecipient.less",
+            "mailstation/css/CreateRecipient.less",
+            "mailstation/css/UpdateRecipient.less");
+    }
+
     public static void AddMailBundle(this IAssetPipeline pipeline)
     {
-        pipeline.AddLessBundle(
-            "/css/mail-list.css",
-            "themes/manage/manage.less");
-
         pipeline.AddLessBundle(
             "/css/mail-manage.css",
             "themes/manage/log/manage.less");

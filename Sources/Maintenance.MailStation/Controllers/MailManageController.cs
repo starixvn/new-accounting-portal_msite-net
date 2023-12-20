@@ -13,6 +13,7 @@ using Fanex.NAP.Client.Helpers.Business;
 using Fanex.NAP.Client.Helpers.Web;
 using Microsoft.AspNetCore.Mvc;
 
+[Area("MailStation")]
 [NapSuperAuth]
 public class MailManageController(INapSession napSession, IMailManageService mailManageService) : Controller
 {
@@ -26,7 +27,7 @@ public class MailManageController(INapSession napSession, IMailManageService mai
         ViewBag.TimeZoneString = TimeZoneExtension.GetTimeZoneString();
         ViewBag.IsUseCookie = string.IsNullOrEmpty(criteria.Emails) && string.IsNullOrEmpty(criteria.MailGroupId);
 
-        return View("~/Areas/MailStation/ManageMail/ManageMail/Index.cshtml", criteria);
+        return View(criteria);
     }
 
     public JsonResult Sites()
@@ -62,7 +63,7 @@ public class MailManageController(INapSession napSession, IMailManageService mai
         ViewBag.TimeZoneString = TimeZoneExtension.GetTimeZoneString();
         var model = new CreateMailCriteria(mailModel);
 
-        return View("~/Areas/MailStation/ManageMail/CreateMail/Index.cshtml", model);
+        return View(model);
     }
 
     [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMail, Policy = Constant.Policy.Host)]
@@ -96,7 +97,7 @@ public class MailManageController(INapSession napSession, IMailManageService mai
         var mailLog = mailManageService.MailLogById(new GetMailLogByIdCriteria { MailId = mailId });
         ViewBag.TimeZoneString = TimeZoneExtension.GetTimeZoneString();
 
-        return View("~/Areas/MailStation/ManageMail/MailActionLog/Index.cshtml", mailLog.ToList());
+        return View(mailLog.ToList());
     }
 
     [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMail, Policy = Constant.Policy.Host)]
@@ -118,7 +119,7 @@ public class MailManageController(INapSession napSession, IMailManageService mai
         var mailModel = mailManageService.MailById(criteria);
         var model = new UpdateMailCriteria(mailModel);
 
-        return View("~/Areas/MailStation/ManageMail/UpdateMail/Index.cshtml", model);
+        return View(model);
     }
 
     [HttpPost]

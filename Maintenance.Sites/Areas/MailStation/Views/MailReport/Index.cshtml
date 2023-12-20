@@ -1,0 +1,136 @@
+﻿@inject IPermissionService permissionService
+@model MailReportCriteria
+@{
+    ViewBag.Title = Labels.Report;
+    Layout = "~/Views/Shared/_LayoutWithTimer.cshtml";
+    var hasEditRight = permissionService.HasHostPermission(MailDeliveryFunctionKeys.MailReport);
+}
+@section Head {
+    <link href="~/themes/shared/contextmenu.less" rel="stylesheet" type="text/css" />
+    <link href="~/scripts/lib/Countdown/CountDown.less" rel="stylesheet" type="text/css" />
+    <link href="~/mailstation/css/mailreport.less" rel="stylesheet" type="text/css" />
+}
+@section Headline {
+    <h1>
+        <span class="title"><span class="first">@Labels.SystemName /</span> @ViewBag.Title</span>
+    </h1>
+}
+<section id="dashboard" data-current-date="">
+    <div>
+        <ul class="nav nav-pills">
+            <li role="presentation" class="nav-title">Today</li>
+            <li role="presentation"><a href="#" class="status missing-status" data-status-id="8">MISSING (<span class="missing-count">0</span>)</a></li>
+            <li role="presentation"><a href="#" class="status missing-status" data-status-id="3">FAILED (<span class="failed-count">0</span>)</a></li>
+            <li role="presentation"><a href="#" class="status running-status" data-status-id="1">RUNNING (<span class="running-count">0</span>)</a></li>
+            <li role="presentation"><a href="#" class="status" data-status-id="7">SUCCEEDED (<span class="succeeded-count">0</span>)</a></li>
+            <li role="presentation"><a href="#" class="status" data-status-id="4">SENT (<span class="sent-count">0</span>)</a></li>
+        </ul>
+    </div>
+</section>
+<section id="filter-bar">
+    <div class="filter-form">
+        <div class="filter-row">
+            <div class="lbl-field width-80">
+                @Html.LabelFor(m => m.MailName, Labels.Mail_Name)
+            </div>
+            <div class="edit-field" style="width: 372px !important">
+                @Html.TextBoxFor(m => m.MailName, new { style = "width: 360px !important" })
+            </div>
+
+            <div class="lbl-field">
+                @Html.LabelFor(m => m.SiteId, "Site")
+            </div>
+            <div class="edit-field site-box">
+                @Html.DropDownListFor(m => m.SiteId, (IEnumerable<SelectListItem>)ViewBag.ListSite, new { @class = "site-box" })
+            </div>
+            <div class="lbl-field">
+                @Html.LabelFor(m => m.TriggerType, "Trigger")
+            </div>
+            <div class="edit-field">
+                @Html.DropDownListFor(m => m.TriggerType, (IEnumerable<SelectListItem>)ViewBag.ListTriggerType)
+            </div>
+        </div>
+        <div class="filter-row">
+            <div class="lbl-field width-80">
+                @Html.LabelFor(m => m.FromDate, Labels.From)
+            </div>
+            <div class="edit-field">
+                @Html.TextBoxFor(m => m.FromDate, new { @Value = DateTime.Now.ToString("MMM dd,yyyy"), style = "width: 100px" })
+            </div>
+            <div class="lbl-field">
+                @Html.LabelFor(m => m.ToDate, Labels.To)
+            </div>
+            <div class="edit-field">
+                @Html.TextBoxFor(m => m.ToDate, new { @Value = DateTime.Now.ToString("MMM dd,yyyy"), style = "width: 100px" })
+            </div>
+            <div class="lbl-field">
+                @Html.LabelFor(m => m.Status, Labels.Status)
+            </div>
+            <div class="edit-field width-160">
+                @Html.DropDownListFor(m => m.Status, (IEnumerable<SelectListItem>)ViewBag.ListStatus, new { @class = "width-auto" })
+            </div>
+            <div class="submit">
+                <input id="button-search" type="submit" value="@Labels.Submit" />
+            </div>
+            <div class="refreshBox">
+                <div class="refreshIcon" title="@Labels.Refresh">
+                    @Labels.Not_Refresh
+                </div>
+                <div class="refreshDropdownIcon">
+                </div>
+            </div>
+            <div class="countDownOptionContainer">
+            </div>
+        </div>
+    </div>
+</section>
+<section id="body">
+    <div id="mail-report-container" class="mail-report-container">
+        <div id="mail-report" class="freegrid display-none">
+        </div>
+    </div>
+    @Html.Hidden("imagePath", (string)@Url.Content("~/images/calendar.gif"))
+</section>
+@section Foot {
+    <script src="~/scripts/lib/ContextMenu/ContextMenuController.js" type="text/javascript"></script>
+    <script src="~/scripts/lib/custom-datepicker.js" type="text/javascript"></script>
+    <script src="~/scripts/lib/Countdown/CountdownController.js" type="text/javascript"></script>
+    <script src="~/scripts/lib/Popup/dialogbox.js" type="text/javascript"></script>
+    <script src="~/mailstation/MailReportController.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        window.rootUrl = '@Url.Content("~/")';
+        var viewResources = {
+            hasEditRight: @(hasEditRight ? 1 : 0),
+            Id: '@Labels.ID',
+            Mail_Name: '@Labels.Mail_Name',
+            Site: '@Labels.Site',
+            Trigger: '@Labels.Trigger',
+            Scheduled_Time: '@Labels.Scheduled_Time',
+            Last_Run: '@Labels.Last_Run',
+            Status: '@Labels.Status',
+            Action: '@Labels.Action',
+            Log: '@Labels.Log',
+
+            Details: '@Labels.Details',
+            Log_details: '@Labels.Log_details',
+            Not_Refresh: '@Labels.Not_Refresh',
+            Symbol_Second: '@Labels.Symbol_Second',
+            All: '@Labels.All',
+            Active: '@Labels.Active',
+            Inactive: '@Labels.Inactive',
+            Confirm_RetrySendMail: '@Labels.Confirm_RetrySendMail',
+            Confirm_RetryMissingTask: '@Labels.Confirm_RetryMissingJob',
+            Confirm_AbortTask: '@Labels.Confirm_AbortJob',
+
+            Waiting: '@Labels.Waiting',
+            Running: '@Labels.Running',
+            Sent: '@Labels.Sent',
+            Data_not_ready: '@Labels.Data_not_ready',
+            Failed: '@Labels.Failed',
+            Abort: '@Labels.Abort',
+            Succeeded: '@Labels.Succeeded',
+            Missing: '@Labels.Missing',
+            TimeZone: '@ViewBag.TimeZoneString'
+        };
+    </script>
+}

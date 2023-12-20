@@ -1,0 +1,118 @@
+﻿@model GetMailListCriteria
+@inject IPermissionService permissionService
+@{
+    ViewBag.Title = "Manage Mail";
+    Layout = "~/Views/Shared/_LayoutWithTimer.cshtml";
+    var hasEditRight = permissionService.HasHostPermission(MailDeliveryFunctionKeys.ManageMail);
+    var recipient = JsonConvert.SerializeObject(Model);
+}
+@section Head {
+
+    <link href="~/scripts/lib/MultipleSelect/jquery.multiselect.css" rel="stylesheet" type="text/css" />
+    <link href="~/themes/shared/contextmenu.less" rel="stylesheet" type="text/css" />
+    <link href="~/mailstation/css/managemail.less" rel="stylesheet" />
+}
+@section Headline {
+    <h1>
+        <span class="title"><span class="first">@Labels.SystemName /</span> @ViewBag.Title</span>
+        @if (hasEditRight)
+        {
+            <div class="button-action">
+                <a id="btnCreateMail" class="lnk" href="~/MailStation/MailManage/CreateMailView">
+                    + Create
+                    Mail
+                </a>
+            </div>
+        }
+    </h1>
+}
+<section id="filter-bar">
+    <div class="filter-form">
+        <div class="filter-row">
+            <div class="lbl-field width-100">
+                @Html.LabelFor(m => m.MailName, "Mail Name")
+            </div>
+            <div class="edit-field width-300">
+                @Html.TextBoxFor(m => m.MailName, new { @class = "width-300" })
+            </div>
+            <div class="lbl-field">
+                @Html.LabelFor(m => m.IsActive, "Status")
+            </div>
+            <div class="edit-field">
+                @Html.DropDownListFor(m => m.IsActive, ((IEnumerable<SelectListItem>)ViewBag.ListStatus).ToList(), new { @class = "width-80" })
+            </div>
+            <div class="lbl-field">
+                @Html.LabelFor(m => m.MailGroupId, "Group")
+            </div>
+            <div class="edit-field">
+                @Html.HiddenFor(m => m.MailGroupId)
+                <select id="dropdownMailGroup"></select>
+            </div>
+            <div class="lbl-field">
+                @Html.LabelFor(m => m.TriggerType, "Trigger")
+            </div>
+            <div class="edit-field">
+                @Html.DropDownListFor(m => m.TriggerType, (IEnumerable<SelectListItem>)ViewBag.ListTriggerType)
+            </div>
+        </div>
+        <div class="filter-row">
+            <div class="lbl-field width-100">
+                @Html.LabelFor(m => m.Emails, "Email(s)")
+            </div>
+            <div class="edit-field width-300">
+                @Html.TextBoxFor(m => m.Emails, new { @class = "width-300" })
+            </div>
+            <div class="lbl-field">
+                @Html.LabelFor(m => m.SiteId, "Site")
+            </div>
+            <div class="edit-field site-box">
+                @Html.DropDownListFor(m => m.SiteId, (IEnumerable<SelectListItem>)ViewBag.ListSite, new { @class = "site-box" })
+            </div>
+            <div class="submit">
+                <input id="button-search" type="submit" value="Submit" />
+            </div>
+        </div>
+    </div>
+</section>
+<section id="body">
+    <div id="mail-list-container" class="mail-list-container">
+        <div id="mail-list" class="freegrid display-none">
+        </div>
+    </div>
+    <ul class="actions display-none">
+        <li><a class="edit-icon context-menu-item">Edit</a> </li>
+        <li><a class="copy-icon context-menu-item">Copy</a> </li>
+        <li><a class="delete-icon context-menu-item">Delete</a> </li>
+    </ul>
+</section>
+@section Foot {
+    <script src="~/scripts/lib/MultipleSelect/jquery.multiselect.js" type="text/javascript"></script>
+    <script src="~/scripts/lib/ContextMenu/ContextMenuController.js" type="text/javascript"></script>
+    <script src="~/scripts/lib/Popup/dialogbox.js" type="text/javascript"></script>
+    <script src="~/mailstation/mailmanagecontroller.js"></script>
+    <script type="text/javascript">
+        window.rootUrl = '@Url.Content("~/")';
+        var recipient = @Html.Raw(recipient);
+        var viewResources = {
+            hasEditRight: @(hasEditRight ? 1 : 0),
+            Id: '@Labels.ID',
+            Mail_Name: '@Labels.Mail_Name',
+            Group: '@Labels.Group',
+            Site: '@Labels.Site',
+            Trigger: '@Labels.Trigger',
+            To: '@Labels.To',
+            CC: '@Labels.CC',
+            BCC: '@Labels.BCC',
+            Last_Run: '@Labels.Last_Run',
+            Active: '@Labels.Active',
+            Action: '@Labels.Action',
+            Confirm_DeleteMail: 'Do you want to delete the Mail?',
+            Confirm_RunNow: '@Labels.Confirm_RunNow',
+            TimeZone: '@ViewBag.TimeZoneString',
+            Owners: '@Labels.Owners',
+            Log: '@Labels.Log'
+        };
+
+        var isUseCookie = @(ViewBag.IsUseCookie? 1 : 0);
+    </script>
+}

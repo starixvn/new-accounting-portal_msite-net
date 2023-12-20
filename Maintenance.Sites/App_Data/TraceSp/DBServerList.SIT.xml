@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<DBServers>
+  <Server>
+    <Ip>172.16.40.1</Ip>
+    <Name>DB02</Name>
+  </Server>
+  
+  <Server>
+    <Ip>172.16.40.5</Ip>
+    <Name>DB05</Name>
+  </Server>
+  <Server>
+    <Ip>172.16.40.6</Ip>
+    <Name>DB052</Name>
+  </Server>
+  
+ 
+  <Server>
+    <Ip>172.16.40.21</Ip>
+    <Name>DBCUST</Name>
+  </Server>
+  <Server>
+    <Ip>172.16.40.16</Ip>
+    <Name>DBDW</Name>
+  </Server>
+ 
+ 
+  <Server>
+    <Ip>172.16.40.17</Ip>
+    <Name>DBTRANS</Name>
+  </Server>
+  
+ 
+ 
+  <Server>
+    <Ip>172.16.40.7</Ip>
+    <Name>DB055</Name>
+  </Server>
+  <Server>
+    <Ip>172.16.40.13</Ip>
+    <Name>DB06</Name>
+  </Server>
+  <Server>
+    <Ip>172.16.40.8</Ip>
+    <Name>DB05BK1</Name>
+  </Server>
+  
+</DBServers>

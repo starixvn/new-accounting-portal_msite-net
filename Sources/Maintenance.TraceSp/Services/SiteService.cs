@@ -1,27 +1,26 @@
-namespace Maintenance.TraceSp.Services
+namespace Maintenance.TraceSp.Services;
+
+using System.Xml.Serialization;
+using Models;
+
+public interface ISiteService
 {
-    using System.Xml.Serialization;
-    using Models;
+    List<Site> GetSites(string siteXmlPath);
+}
+public class SiteService : ISiteService
+{
+    public List<Site> GetSites(string siteXmlPath)
+    {
+        var sites = new List<Site>();
 
-    public interface ISiteService
-    {
-        List<Site> GetSites(string siteXmlPath);
-    }
-    public class SiteService : ISiteService
-    {
-        public List<Site> GetSites(string siteXmlPath)
+        if (File.Exists(siteXmlPath))
         {
-            var sites = new List<Site>();
+            var deserializer = new XmlSerializer(typeof(List<Site>), new XmlRootAttribute("Sites"));
 
-            if (File.Exists(siteXmlPath))
-            {
-                var deserializer = new XmlSerializer(typeof(List<Site>), new XmlRootAttribute("Sites"));
-
-                using var stream = File.OpenRead(siteXmlPath);
-                sites = deserializer.Deserialize(stream) as List<Site>;
-            }
-
-            return sites.OrderBy(x => x.Name).ToList();
+            using var stream = File.OpenRead(siteXmlPath);
+            sites = deserializer.Deserialize(stream) as List<Site>;
         }
+
+        return sites.OrderBy(x => x.Name).ToList();
     }
 }

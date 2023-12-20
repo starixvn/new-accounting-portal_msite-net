@@ -79,6 +79,7 @@ public static class ServiceCollectionExtensions
         {
             var cssSetting = new CssSettings { OutputMode = NUglify.OutputMode.MultipleLines, CommentMode = CssComment.None };
             var scriptSetting = new CodeSettings { MinifyCode = true };
+            pipeline.AddRawLess();
             pipeline.AddLayoutBundle(cssSetting, scriptSetting);
             pipeline.AddMailBundle();
         });

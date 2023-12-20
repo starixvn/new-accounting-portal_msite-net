@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<DBServers>
+  <Server>
+    <Ip>10.18.200.58</Ip>
+    <Name>DB234</Name>
+  </Server>
+</DBServers>

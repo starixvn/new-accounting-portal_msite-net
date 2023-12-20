@@ -10,6 +10,7 @@ using Fanex.NAP.Client.Helpers.Business;
 using Microsoft.AspNetCore.Mvc;
 using Services;
 
+[Area("MailStation")]
 [NapSuperAuth]
 public class MailRecipientController(IManageRecipientService manageRecipientService) : Controller
 {
@@ -19,7 +20,7 @@ public class MailRecipientController(IManageRecipientService manageRecipientServ
         ViewBag.ListStatus = manageRecipientService.Status();
         ViewBag.TimeZoneString = TimeZoneExtension.GetTimeZoneString();
 
-        return View("~/Areas/MailStation/ManageRecipient/ManageRecipient/Index.cshtml");
+        return View();
     }
 
     [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageRecipient, Policy = Constant.Policy.Host)]
@@ -27,7 +28,7 @@ public class MailRecipientController(IManageRecipientService manageRecipientServ
     {
         ViewBag.TimeZoneString = TimeZoneExtension.GetTimeZoneString();
 
-        return View("~/Areas/MailStation/ManageRecipient/CreateRecipient/Index.cshtml");
+        return View();
     }
 
     [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageRecipient, Policy = Constant.Policy.Read)]
@@ -64,7 +65,7 @@ public class MailRecipientController(IManageRecipientService manageRecipientServ
 
         ViewBag.TimeZoneString = TimeZoneExtension.GetTimeZoneString();
 
-        return View("~/Areas/MailStation/ManageRecipient/UpdateRecipient/Index.cshtml", recipientModel);
+        return View(recipientModel);
     }
 
     [HttpPost]

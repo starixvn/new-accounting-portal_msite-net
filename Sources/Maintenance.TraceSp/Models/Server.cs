@@ -1,9 +1,8 @@
-namespace Maintenance.TraceSp.Models
-{
-    public class Server
-    {
-        public string Name { get; set; }
+namespace Maintenance.TraceSp.Models;
 
-        public string Ip { get; set; }
-    }
+public class Server
+{
+    public string Name { get; set; }
+
+    public string Ip { get; set; }
 }

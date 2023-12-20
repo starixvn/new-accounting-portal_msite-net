@@ -1,30 +1,29 @@
-namespace Maintenance.TraceSp.Services
+namespace Maintenance.TraceSp.Services;
+
+using System.Collections.Generic;
+using System.IO;
+using System.Xml.Serialization;
+using Models;
+
+public interface IDbServerService
 {
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Xml.Serialization;
-    using Models;
+    List<Server> GetDbServerList(string dbServerXmlPath);
+}
 
-    public interface IDbServerService
+public class DbServerService : IDbServerService
+{
+    public List<Server> GetDbServerList(string dbServerXmlPath)
     {
-        List<Server> GetDbServerList(string dbServerXmlPath);
-    }
+        var Servers = new List<Server>();
 
-    public class DbServerService : IDbServerService
-    {
-        public List<Server> GetDbServerList(string dbServerXmlPath)
+        if (File.Exists(dbServerXmlPath))
         {
-            var Servers = new List<Server>();
+            var deserializer = new XmlSerializer(typeof(List<Server>), new XmlRootAttribute("DBServers"));
 
-            if (File.Exists(dbServerXmlPath))
-            {
-                var deserializer = new XmlSerializer(typeof(List<Server>), new XmlRootAttribute("DBServers"));
-
-                using var stream = File.OpenRead(dbServerXmlPath);
-                Servers = deserializer.Deserialize(stream) as List<Server>;
-            }
-
-            return Servers;
+            using var stream = File.OpenRead(dbServerXmlPath);
+            Servers = deserializer.Deserialize(stream) as List<Server>;
         }
+
+        return Servers;
     }
 }

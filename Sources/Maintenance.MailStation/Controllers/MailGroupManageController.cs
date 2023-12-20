@@ -9,6 +9,7 @@ using Fanex.NAP.Client.Attributes;
 using Fanex.NAP.Client.Helpers.Business;
 using Microsoft.AspNetCore.Mvc;
 
+[Area("MailStation")]
 [NapSuperAuth]
 public class MailGroupManageController(IMailGroupService mailGroupService) : Controller
 {
@@ -16,14 +17,14 @@ public class MailGroupManageController(IMailGroupService mailGroupService) : Con
     public ActionResult Index(GetMailGroupCriteria criteria)
     {
         ViewBag.TimeZoneString = TimeZoneExtension.GetTimeZoneString();
-        return View("~/Areas/MailStation/MailGroup/ManageMailGroup/Index.cshtml", criteria);
+        return View(criteria);
     }
 
     [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMailGroup, Policy = Constant.Policy.Host)]
     public ActionResult CreateMailGroupView()
     {
         ViewBag.TimeZoneString = TimeZoneExtension.GetTimeZoneString();
-        return View("~/Areas/MailStation/MailGroup/CreateMailGroup/Index.cshtml");
+        return View();
     }
 
     [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMailGroup, Policy = Constant.Policy.Host)]
@@ -65,7 +66,7 @@ public class MailGroupManageController(IMailGroupService mailGroupService) : Con
 
         ViewBag.TimeZoneString = TimeZoneExtension.GetTimeZoneString();
 
-        return View("~/Areas/MailStation/MailGroup/UpdateMailGroup/Index.cshtml", model);
+        return View(model);
     }
 
     [HttpPost]

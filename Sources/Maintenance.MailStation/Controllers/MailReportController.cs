@@ -11,6 +11,7 @@ using Fanex.NAP.Client.Helpers.Business;
 using Fanex.NAP.Client.Helpers.Web;
 using Microsoft.AspNetCore.Mvc;
 
+[Area("MailStation")]
 [NapSuperAuth]
 public class MailReportController(INapSession napSession, IMailReportService mailReportService) : Controller
 {
@@ -22,11 +23,12 @@ public class MailReportController(INapSession napSession, IMailReportService mai
         ViewBag.ListTriggerType = mailReportService.Trigger();
         ViewBag.TimeZoneString = TimeZoneExtension.GetTimeZoneString();
 
-        return View("~/Areas/MailStation/Report/MailReport/Index.cshtml");
+        return View();
     }
 
     [NapAuth(FunctionKey = MailDeliveryFunctionKeys.MailReport, Policy = Constant.Policy.Read)]
-    public ActionResult MailReport(MailReportCriteria criteria)
+    [HttpPost]
+    public ActionResult MailReport([FromBody] MailReportCriteria criteria)
     {
         return Json(mailReportService.MailReport(criteria));
     }
@@ -43,7 +45,7 @@ public class MailReportController(INapSession napSession, IMailReportService mai
         var mailDetail = mailReportService.MailDetail(new MailDetailCriteria { MailId = mailId });
         ViewBag.TimeZoneString = TimeZoneExtension.GetTimeZoneString();
 
-        return View("~/Areas/MailStation/Report/MailDetail/Index.cshtml", mailDetail);
+        return View(mailDetail);
     }
 
     [NapAuth(FunctionKey = MailDeliveryFunctionKeys.MailReport, Policy = Constant.Policy.Read)]
@@ -52,7 +54,7 @@ public class MailReportController(INapSession napSession, IMailReportService mai
         var mailLog = mailReportService.MailLog(new MailLogCriteria { MailId = mailId });
         ViewBag.TimeZoneString = TimeZoneExtension.GetTimeZoneString();
 
-        return View("~/Areas/MailStation/Report/MailLog/Index.cshtml", mailLog);
+        return View(mailLog);
     }
 
     [NapAuth(FunctionKey = MailDeliveryFunctionKeys.MailReport, Policy = Constant.Policy.Host)]
