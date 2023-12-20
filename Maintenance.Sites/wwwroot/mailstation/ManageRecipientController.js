@@ -68,7 +68,7 @@ var ManageRecipientController = function () {
         };
         self.cachedData.searchParams = searchParams;
         sharedScriptManager.callAjax(self,
-            window.rootUrl + "MailStation/MailRecipient/RecipientList",
+            "/MailStation/MailRecipient/RecipientList",
             searchParams,
             self.renderRecipientList,
             null,
@@ -203,7 +203,7 @@ var ManageRecipientController = function () {
     };
 
     self.editRecipient = function (recipientIndex) {
-        window.location.href = window.rootUrl + "MailStation/MailRecipient/UpdateRecipientView?" +
+        window.location.href = "/MailStation/MailRecipient/UpdateRecipientView?" +
             $.param({
                 recipientId: recipientIndex
             });
@@ -217,7 +217,7 @@ var ManageRecipientController = function () {
                 RecipientId: recipientIndex
             };
 
-            var url = window.rootUrl + "MailStation/MailRecipient/DeleteRecipient";
+            var url = "/MailStation/MailRecipient/DeleteRecipient";
 
             sharedScriptManager.callAjax(self,
             url,

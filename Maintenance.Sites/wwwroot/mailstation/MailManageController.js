@@ -80,7 +80,7 @@ var MailManageController = function () {
 
     self.renderMailGroupFilter = function (result) {
         sharedScriptManager.callAjax(self,
-            window.rootUrl + "MailStation/MailManage/MailGroups",
+            "/MailStation/MailManage/MailGroups",
             null,
             function (result) {
                 var cookie = $.cookie('MailManage');
@@ -150,7 +150,7 @@ var MailManageController = function () {
 
         $.cookie('MailManage', self.reportParams);
         sharedScriptManager.callAjax(self,
-            window.rootUrl + "MailStation/MailManage/MailList",
+            "/MailStation/MailManage/MailList",
             self.reportParams,
             self.renderMailList,
             null,
@@ -334,7 +334,7 @@ var MailManageController = function () {
                 mailId: mailIndex
             };
             sharedScriptManager.callAjax(self,
-            window.rootUrl + "MailStation/MailManage/RunNow",
+            "/MailStation/MailManage/RunNow",
             runNowParams,
             function (result) {
                 result = {
@@ -352,7 +352,7 @@ var MailManageController = function () {
         sharedScriptManager.blockUI();
         NAP.headlineMsgBox.close();
         sharedScriptManager.callAjax(self,
-            window.rootUrl + "MailStation/MailManage/MailList",
+            "/MailStation/MailManage/MailList",
             self.reportParams,
             self.renderMailList,
             null,
@@ -378,7 +378,7 @@ var MailManageController = function () {
                 MailId: mailid
             };
             sharedScriptManager.callAjax(self,
-                window.rootUrl + "MailStation/MailManage/DeleteMail",
+                "/MailStation/MailManage/DeleteMail",
                 deleteParams,
                 self.renderActionResult,
                 null,
@@ -387,14 +387,14 @@ var MailManageController = function () {
     };
 
     self.editMail = function (mailId) {
-        window.location.href = window.rootUrl + "MailStation/MailManage/UpdateMailView?" +
+        window.location.href = "/MailStation/MailManage/UpdateMailView?" +
             $.param({
                 mailId: mailId
             });
     };
 
     self.copyMail = function (mailId) {
-        window.location.href = window.rootUrl + "MailStation/MailManage/CreateMailView?" +
+        window.location.href = "/MailStation/MailManage/CreateMailView?" +
             $.param({
                 mailId: mailId
             });

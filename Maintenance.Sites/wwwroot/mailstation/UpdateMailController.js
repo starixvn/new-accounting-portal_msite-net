@@ -20,7 +20,7 @@ var UpdateMailController = function () {
         maxSelection: null,
         highlight: false,
         allowFreeEntries: false,
-        data: window.rootUrl + "MailStation/MailManage/SuggestMail",
+        data: "/MailStation/MailManage/SuggestMail",
     };
 
     self.initPage = function () {
@@ -141,7 +141,7 @@ var UpdateMailController = function () {
                 if (self.validateForm()) {
                     sharedScriptManager.callAjax(
                         self,
-                        window.rootUrl + "MailStation/MailManage/UpdateMail",
+                        "/MailStation/MailManage/UpdateMail",
                         self.getParams(),
                         function (result) {
                             if (result.IsSuccessful) {
@@ -253,7 +253,7 @@ var UpdateMailController = function () {
     self.addGroup = function (groupName) {
         sharedScriptManager.callAjax(
             self,
-            window.rootUrl + "MailStation/MailManage/AddMailGroup",
+            "/MailStation/MailManage/AddMailGroup",
             { MailGroupName: groupName },
             function (result) {
                 if (result.IsSuccessful) {
@@ -271,7 +271,7 @@ var UpdateMailController = function () {
 
     self.refreshMailGroup = function (groupName) {
         sharedScriptManager.callAjax(self,
-            window.rootUrl + "MailStation/MailManage/MailGroups",
+            "/MailStation/MailManage/MailGroups",
             { hasAllElement: false },
             function (result) {
                 var mailGroupHtml = '';

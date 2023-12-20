@@ -135,7 +135,7 @@ var MailReportController = function () {
 
         sharedScriptManager.blockUI();
         sharedScriptManager.callAjax(self,
-            window.rootUrl + "MailStation/MailReport/MailReport",
+            "/MailStation/MailReport/MailReport",
             self.cachedData.searchParams,
             self.renderMailReport,
             null,
@@ -154,7 +154,7 @@ var MailReportController = function () {
         self.cachedData.searchParams = searchParams;
         $.cookie('MailReport', searchParams);
         sharedScriptManager.callAjax(self,
-            window.rootUrl + "MailStation/MailReport/MailReport",
+            "/MailStation/MailReport/MailReport",
             searchParams,
             self.renderMailReport,
             null,
@@ -163,7 +163,7 @@ var MailReportController = function () {
 
     self.getMailTaskStatusCounter = function () {
         sharedScriptManager.callAjax(self,
-            window.rootUrl + "MailStation/MailReport/GetMailTaskStatusCounter",
+            "/MailStation/MailReport/GetMailTaskStatusCounter",
             null,
             function (result) {
                 if (result) {
@@ -512,7 +512,7 @@ var MailReportController = function () {
                 TaskId: mailIndex
             };
             sharedScriptManager.callAjax(self,
-            window.rootUrl + "MailStation/MailReport/AbortTask",
+            "/MailStation/MailReport/AbortTask",
             abortParams,
             function (result) {
                 result = {
@@ -533,7 +533,7 @@ var MailReportController = function () {
                 TaskId: mailIndex
             };
             sharedScriptManager.callAjax(self,
-            window.rootUrl + "MailStation/MailReport/RetrySendMail",
+            "/MailStation/MailReport/RetrySendMail",
             retryParams,
             function (result) {
                 result = {
@@ -556,7 +556,7 @@ var MailReportController = function () {
                 ScheduledTime: scheduledTime
             };
             sharedScriptManager.callAjax(self,
-            window.rootUrl + "MailStation/MailReport/RetryMissingTask",
+            "/MailStation/MailReport/RetryMissingTask",
             retryParams,
             function (result) {
                 result = {

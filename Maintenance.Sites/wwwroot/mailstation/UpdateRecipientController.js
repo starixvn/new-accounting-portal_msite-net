@@ -57,7 +57,7 @@ var EditRecipientController = function () {
             sharedScriptManager.blockUI();
             var recipientInfo = self.getRecipientInfo();
             sharedScriptManager.callAjax(self,
-            window.rootUrl + "MailStation/MailRecipient/UpdateRecipient",
+            "/MailStation/MailRecipient/UpdateRecipient",
             recipientInfo,
             function (result) {
                 if (result.IsSuccessful) {

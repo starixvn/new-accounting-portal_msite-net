@@ -43,7 +43,7 @@ var InsertMailGroupController = function () {
             if (self.validateForm()) {
                 sharedScriptManager.callAjax(
                     self,
-                    window.rootUrl + "MailStation/MailGroupManage/CreateMailGroup",
+                    "/MailStation/MailGroupManage/CreateMailGroup",
                     self.getParams(),
                     function (result) {
                         if (result.IsSuccessful) {

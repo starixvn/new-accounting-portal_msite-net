@@ -82,7 +82,7 @@ var TracingSPController = function () {
         };
 
         $.ajax({
-            url: window.rootUrl + "ProfilerSP/TracingSp/GetTracingSpData",
+            url: "/TracingSp/GetTracingSpData",
             data: self.params,
             type: 'POST',
             dataType: 'json',

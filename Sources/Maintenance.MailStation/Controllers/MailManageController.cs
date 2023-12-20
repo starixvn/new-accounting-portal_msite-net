@@ -41,7 +41,7 @@ public class MailManageController(INapSession napSession, IMailManageService mai
     }
 
     [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMail, Policy = Constant.Policy.Host)]
-    public JsonResult AddMailGroup(CreateMailGroupCriteria criteria)
+    public JsonResult AddMailGroup([FromBody] CreateMailGroupCriteria criteria)
     {
         return Json(mailManageService.CreateMailGroup(criteria));
     }

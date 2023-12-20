@@ -28,7 +28,7 @@ public class MailGroupManageController(IMailGroupService mailGroupService) : Con
     }
 
     [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMailGroup, Policy = Constant.Policy.Host)]
-    public JsonResult CreateMailGroup(CreateMailGroupCriteria criteria)
+    public JsonResult CreateMailGroup([FromBody] CreateMailGroupCriteria criteria)
     {
         var commandResult = mailGroupService.CreateMailGroup(criteria);
 
@@ -36,7 +36,7 @@ public class MailGroupManageController(IMailGroupService mailGroupService) : Con
     }
 
     [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMailGroup, Policy = Constant.Policy.Read)]
-    public JsonResult MailGroupList(GetMailGroupCriteria criteria)
+    public JsonResult MailGroupList([FromBody] GetMailGroupCriteria criteria)
     {
         var groups = mailGroupService.GetMailGroups(criteria);
 
@@ -44,7 +44,7 @@ public class MailGroupManageController(IMailGroupService mailGroupService) : Con
     }
 
     [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMailGroup, Policy = Constant.Policy.Host)]
-    public ActionResult DeleteMailGroup(DeleteMailGroupCriteria criteria)
+    public ActionResult DeleteMailGroup([FromBody] DeleteMailGroupCriteria criteria)
     {
         var commandResult = mailGroupService.DeleteMailGroup(criteria);
 
@@ -71,7 +71,7 @@ public class MailGroupManageController(IMailGroupService mailGroupService) : Con
 
     [HttpPost]
     [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMailGroup, Policy = Constant.Policy.Host)]
-    public JsonResult UpdateMailGroup(UpdateMailGroupCriteria criteria)
+    public JsonResult UpdateMailGroup([FromBody] UpdateMailGroupCriteria criteria)
     {
         var commandResult = mailGroupService.UpdateMailGroup(criteria);
 

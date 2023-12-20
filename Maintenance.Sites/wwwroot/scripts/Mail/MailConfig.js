@@ -7,7 +7,7 @@ $(document).ready(function () {
         var appId = $(this).data("appid");
         var appName = $(this).data("appname");
         popUpManager.openPopup(
-            window.rootUrl + 'Mail/GetMailConfigLogs?' +
+            '/Mail/GetMailConfigLogs?' +
             $.param({
                 appId: appId
             }),

@@ -1,0 +1,111 @@
+﻿
+@model NotificationModel
+@{
+    ViewBag.Title = "Report";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Head {
+    <link href="~/themes/manage/ManageLetstalkMessage.less" rel="stylesheet" type="text/css" />
+    <link href="~/scripts/lib/Fanex.Multiselect/fanex.multiSelect.css" rel="stylesheet" type="text/css" />
+    <link href="~/scripts/lib/DatetimePicker/jquery.datetimepicker.css" rel="stylesheet" type="text/css" />
+    <link href="~/themes/shared/contextmenu.less" rel="stylesheet" type="text/css" />
+}
+@section Headline {
+    <h1>
+        <span class="title"><span class="black-text">Letstalk Notification </span> / Manage Letstalk Message / Edit Message</span>
+        @Html.ActionLink("← Back To List", "Index", "ManageLetstalkMessage", new { @class = "lnk" })
+    </h1>
+}
+@Html.Hidden("notificationModel", @Html.Raw(JsonConvert.SerializeObject(@Model)))
+<section id="filter-bar" class="manage-letstalk-message">
+    <div class="form">
+        <div id="validation-summary-row" class="form-row display-none">
+            <div class="lbl-field width-120">
+            </div>
+            <div class="edit-field">
+                <div id="validationSummary" style="width: 100%;"></div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="lbl-field width-120">
+                <b>Letstalk Group</b>
+            </div>
+            <div class="edit-field ddl-group">
+                @Html.DropDownList("LetstalkGroup", (List<SelectListItem>)ViewBag.LetstalkGroupList, new { @class = "width-250" })
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="lbl-field width-120">
+                <b>Subject</b>
+            </div>
+            <div class="edit-field">
+                <input type="text" maxlength="256" style="width: 397px;" id="Subject" value="" /><br />
+                <span class="red-color">Max Length: 256 characters</span>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="lbl-field width-120">
+                <b>Message</b>
+            </div>
+            <div class="edit-field lt-content">
+                <textarea id="Message" maxlength="1024" style="width: 402px; height: 152px;"></textarea><br />
+                <span class="red-color">Max Length: 1024 characters</span>
+            </div>
+        </div>
+        @*<div class="form-row">
+                <div class="lbl-field width-100">
+                    Attched file(s)
+                </div>
+                <div class="edit-field width-auto">
+                    <input type="file" id="myFile" name="myFile" multiple onchange="letstalkComposeController.getFiles()" class="width-95"> (Maximum size: 15MB)
+                    <div id="fileList" class="inline-flex"></div>
+                </div>
+            </div>*@
+        <div class="form-row">
+            <div class="lbl-field width-120">
+                <b>Scheduled Time</b>
+            </div>
+            <div class="edit-field width-20">
+                <input type="checkbox" id="chkScheduledTime" />
+            </div>
+            <div id="divScheduledTime" class="float-left">
+                <div class="lbl-field width-120">
+                    Date Time (GMT -4)
+                </div>
+                <div class="edit-field">
+                    @Html.TextBox("ConfigSendTime", "ConfigSendTime", new { @Value = Model.ConfigSendTime.ToString("MMM dd,yyyy HH:mm"), style = "width: 110px", autocomplete = "off" })
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="lbl-field width-120">
+            </div>
+            <div class="edit-field">
+                <input id="btnSave" type="submit" value="Save" class="mr-5" />
+            </div>
+            <div class="edit-field">
+                <input id="btnCancel" type="submit" value="Cancel" />
+            </div>
+        </div>
+    </div>
+</section>
+<section id="body">
+    <div id="letstalk-compose-container" class="letstalk-compose-container">
+        <div id="letstalk-compose" class="freegrid display-none">
+        </div>
+    </div>
+    @Html.Hidden("NotificationID", Model.NotificationID)
+</section>
+@section Foot {
+    <script src="~/scripts/lib/Fanex.Multiselect/fanex.multiSelect.js" type="text/javascript"></script>
+    <script src="~/scripts/lib/ContextMenu/ContextMenuController.js" type="text/javascript"></script>
+    <script src="~/scripts/lib/custom-datepicker.js" type="text/javascript"></script>
+    <script src="~/scripts/lib/DatetimePicker/jquery.datetimepicker.js" type="text/javascript"></script>
+    <script src="~/scripts/lib/Popup/dialogbox.js" type="text/javascript"></script>
+    <script src="~/letstalk/EditLetstalkMessage.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        var viewResources = {
+            UpdateMessageSuccessMsg: '@string.Format(ViewResource.UpSuccessMsg, "Message", 5)',
+        };
+    </script>
+}

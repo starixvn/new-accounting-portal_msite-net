@@ -52,6 +52,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\letstalk\CreateLetstalkMessage.js" />
+    <None Include="wwwroot\letstalk\EditLetstalkMessage.js" />
+    <None Include="wwwroot\letstalk\LetstalkReportController.js" />
+    <None Include="wwwroot\letstalk\ManageLetstalkMessage.js" />
     <None Include="wwwroot\mailstation\CreateMailGroup.js" />
     <None Include="wwwroot\mailstation\CreateRecipientController.js" />
     <None Include="wwwroot\mailstation\css\createmail.css" />

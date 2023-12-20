@@ -18,7 +18,7 @@ public class ManageLetstalkMessageController(
     INapSession napSession, 
     INapSettings napSettings, 
     IUserService userService,
-    ManageLetstalkMessageService manageLetstalkMessageService) : Controller
+    IManageLetstalkMessageService manageLetstalkMessageService) : Controller
 {
     [NapAuth(FunctionKey = SiteFunctionKeys.ManageLetstalkMessage, Policy = Constant.Policy.Read)]
     public ActionResult Index()
@@ -26,14 +26,14 @@ public class ManageLetstalkMessageController(
         ViewBag.HasEdit = HasRight(SiteFunctionKeys.ManageLetstalkMessage, Constant.Policy.Read);
         ViewBag.StatusList = manageLetstalkMessageService.GetStatusList();
         ViewBag.LetstalkGroupList = manageLetstalkMessageService.GetGroups();
-        return View("~/Areas/ManageLetstalkMessage/Index.cshtml");
+        return View();
     }
 
     [NapAuth(FunctionKey = SiteFunctionKeys.ManageLetstalkMessage, Policy = Constant.Policy.Read)]
     public ActionResult CreateLetstalkMessage()
     {
         ViewBag.LetstalkGroupList = manageLetstalkMessageService.GetGroups();
-        return View("~/Areas/ManageLetstalkMessage/CreateLetstalkMessage.cshtml");
+        return View();
     }
 
     [NapAuth(FunctionKey = SiteFunctionKeys.ManageLetstalkMessage, Policy = Constant.Policy.Read)]
@@ -46,7 +46,7 @@ public class ManageLetstalkMessageController(
         };
         ViewBag.LetstalkGroupList = manageLetstalkMessageService.GetGroups();
         var model = manageLetstalkMessageService.GetNotificationById(criteria).FirstOrDefault();
-        return View("~/Areas/ManageLetstalkMessage/EditLetstalkMessage.cshtml", model);
+        return View(model);
     }
 
     [NapAuth(FunctionKey = SiteFunctionKeys.ManageLetstalkMessage, Policy = Constant.Policy.Read)]
@@ -71,7 +71,7 @@ public class ManageLetstalkMessageController(
 
     [NapAuth(FunctionKey = SiteFunctionKeys.ManageLetstalkMessage, Policy = Constant.Policy.Read)]
     [HttpPost]
-    public JsonResult DeleteNotification(DeleteNotificationCriteria criteria)
+    public JsonResult DeleteNotification([FromBody] DeleteNotificationCriteria criteria)
     {
         criteria.LastModifiedBy = napSession.UserId;
         var result = manageLetstalkMessageService.DeleteNotification(criteria);
@@ -80,7 +80,7 @@ public class ManageLetstalkMessageController(
 
     [NapAuth(FunctionKey = SiteFunctionKeys.ManageLetstalkMessage, Policy = Constant.Policy.Read)]
     [HttpPost]
-    public JsonResult ResendNotification(ResendNotificationCriteria criteria)
+    public JsonResult ResendNotification([FromBody] ResendNotificationCriteria criteria)
     {
         var result = manageLetstalkMessageService.ResendNotification(criteria);
         return Json(result);
@@ -95,7 +95,7 @@ public class ManageLetstalkMessageController(
 
     [NapAuth(FunctionKey = SiteFunctionKeys.ManageLetstalkMessage, Policy = Constant.Policy.Read)]
     [HttpPost]
-    public JsonResult GetNotificationList(GetNotificationListCriteria criteria)
+    public JsonResult GetNotificationList([FromBody] GetNotificationListCriteria criteria)
     {
         var result = manageLetstalkMessageService.GetNotificationList(criteria);
         return Json(result);

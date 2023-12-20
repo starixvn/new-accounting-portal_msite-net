@@ -45,7 +45,7 @@ var UpdateMailGroupController = function () {
             if (self.validateForm()) {
                 sharedScriptManager.callAjax(
                     self,
-                    window.rootUrl + "MailStation/MailGroupManage/UpdateMailGroup",
+                    "/MailStation/MailGroupManage/UpdateMailGroup",
                     self.getParams(),
                     function (result) {
                         if (result.IsSuccessful) {

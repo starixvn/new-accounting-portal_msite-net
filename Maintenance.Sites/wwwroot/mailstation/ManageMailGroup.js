@@ -57,7 +57,7 @@ var MailManageController = function () {
         };
 
         sharedScriptManager.callAjax(self,
-            window.rootUrl + "MailStation/MailGroupManage/MailGroupList",
+            "/MailStation/MailGroupManage/MailGroupList",
             self.reportParams,
             self.renderMailGroupList,
             null,
@@ -181,7 +181,7 @@ var MailManageController = function () {
                 MailGroupId: mailGroupId
             };
             sharedScriptManager.callAjax(self,
-                window.rootUrl + "MailStation/MailGroupManage/DeleteMailGroup",
+                "/MailStation/MailGroupManage/DeleteMailGroup",
                 deleteParams,
                 self.renderActionResult,
                 null,
@@ -190,7 +190,7 @@ var MailManageController = function () {
     };
 
     self.editMailGroup = function (mailGroupId) {
-        window.location.href = window.rootUrl + "MailStation/MailGroupManage/UpdateMailGroupView?" +
+        window.location.href = "/MailStation/MailGroupManage/UpdateMailGroupView?" +
             $.param({
                 MailGroupId: mailGroupId
             });

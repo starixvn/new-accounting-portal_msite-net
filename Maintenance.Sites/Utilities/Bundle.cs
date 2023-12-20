@@ -50,6 +50,10 @@ public static class Bundle
             "themes/shared/formedit.less",
             "scripts/lib/InputCombobox/jquery.combobox-ext.less",
             "scripts/lib/Countdown/CountDown.less",
+            "themes/manage/ManageLetstalkMessage.less",
+            "themes/manage/log/mail-config.less",
+            "themes/manage/log/manage.less",
+            "themes/manage/LetstalkReport.less",
             "mailstation/css/createmail.less",
             "mailstation/css/mailactionlog.less",
             "mailstation/css/managemail.less",
@@ -67,19 +71,6 @@ public static class Bundle
 
     public static void AddMailBundle(this IAssetPipeline pipeline)
     {
-        pipeline.AddLessBundle(
-            "/css/mail-manage.css",
-            "themes/manage/log/manage.less");
-
-        pipeline.AddLessBundle(
-            "/css/manage-letstalk-message.css",
-            "themes/manage/ManageLetstalkMessage.less");
-
-        pipeline.AddLessBundle(
-            "/css/mail-config-log.css",
-            "themes/manage/log/mail-config.less");
-
-
         pipeline.AddJavaScriptBundle("/scripts/mail-config.js",
             "scripts/Mail/MailConfig.js");
 

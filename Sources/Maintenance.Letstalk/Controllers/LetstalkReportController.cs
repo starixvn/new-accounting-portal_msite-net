@@ -9,11 +9,11 @@ public class LetstalkReportController(ILetstalkReportRestClientService service) 
 {
     public ActionResult Index()
     {
-        return View("~/Areas/LetstalkReport/Index.cshtml");
+        return View();
     }
 
     [HttpPost]
-    public ActionResult GetTargets(HttpGetLogParams httpParams)
+    public ActionResult GetTargets([FromBody] HttpGetLogParams httpParams)
     {
         var queryParams = new GetLogParams
         {
@@ -27,7 +27,7 @@ public class LetstalkReportController(ILetstalkReportRestClientService service) 
     }
 
     [HttpPost]
-    public ActionResult GetGroupsByTarget(HttpGetLogParams httpParams)
+    public ActionResult GetGroupsByTarget([FromBody] HttpGetLogParams httpParams)
     {
         var queryParams = new GetLogParams
         {
@@ -42,7 +42,7 @@ public class LetstalkReportController(ILetstalkReportRestClientService service) 
     }
 
     [HttpPost]
-    public ActionResult GetReport(HttpGetLogParams httpParams)
+    public ActionResult GetReport([FromBody] HttpGetLogParams httpParams)
     {
         var queryParams = new GetLogParams
         {
@@ -60,7 +60,7 @@ public class LetstalkReportController(ILetstalkReportRestClientService service) 
     }
 
     [HttpPost]
-    public ActionResult ReSendMessage(HttpResendParams httpParams)
+    public ActionResult ReSendMessage([FromBody] HttpResendParams httpParams)
     {
         var resendParams = new ResendParams
         {
@@ -75,7 +75,7 @@ public class LetstalkReportController(ILetstalkReportRestClientService service) 
     }
 
     [HttpPost]
-    public ActionResult ReSendMail(HttpResendParams httpParams)
+    public ActionResult ReSendMail([FromBody] HttpResendParams httpParams)
     {
         var resendParams = new ResendParams
         {
@@ -90,7 +90,7 @@ public class LetstalkReportController(ILetstalkReportRestClientService service) 
     }
 
     [HttpPost]
-    public ActionResult ResendMultiple(HttpResendMultipleParams httpParams)
+    public ActionResult ResendMultiple([FromBody] HttpResendMultipleParams httpParams)
     {
         var result = new List<bool>();
         foreach (var item in httpParams.Data)

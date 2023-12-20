@@ -78,7 +78,7 @@ public static class ServiceCollectionExtensions
         services.AddWebOptimizer(pipeline =>
         {
             var cssSetting = new CssSettings { OutputMode = NUglify.OutputMode.MultipleLines, CommentMode = CssComment.None };
-            var scriptSetting = new CodeSettings { MinifyCode = true };
+            var scriptSetting = new CodeSettings { MinifyCode = false };
             pipeline.AddRawLess();
             pipeline.AddLayoutBundle(cssSetting, scriptSetting);
             pipeline.AddMailBundle();

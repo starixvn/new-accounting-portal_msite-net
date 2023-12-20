@@ -31,7 +31,7 @@ public class TracingSpController(
     }
 
     [HttpPost]
-    public ActionResult GetTracingSpData(TracingSp criteria)
+    public ActionResult GetTracingSpData([FromBody] TracingSp criteria)
     {
         var model = new TracingSp
         {

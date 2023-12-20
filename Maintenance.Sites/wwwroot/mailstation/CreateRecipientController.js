@@ -63,7 +63,7 @@ var CreateRecipientController = function () {
             sharedScriptManager.blockUI();
             sharedScriptManager.callAjax(
                 self,
-                window.rootUrl + "MailStation/MailRecipient/CreateRecipient",
+                "/MailStation/MailRecipient/CreateRecipient",
                 recipientInfo,
                 function (result) {
                     if (result.IsSuccessful) {
@@ -139,7 +139,7 @@ var CreateRecipientController = function () {
             DOMElements.BtnLoading.removeClass("display-none");
             sharedScriptManager.callAjax(
                 self,
-                window.rootUrl + "MailStation/MailRecipient/CheckRecipient",
+                "/MailStation/MailRecipient/CheckRecipient",
                 checkParams,
                 self.renderCheckRecipientInfoResult,
                 null,

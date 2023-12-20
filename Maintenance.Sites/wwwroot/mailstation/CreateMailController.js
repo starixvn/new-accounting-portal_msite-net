@@ -16,7 +16,7 @@ var InsertMailController = function () {
         maxSelection: null,
         highlight: false,
         allowFreeEntries: false,
-        data: window.rootUrl + "MailStation/MailManage/SuggestMail"
+        data: "/MailStation/MailManage/SuggestMail"
     };
 
     self.initPage = function () {
@@ -123,7 +123,7 @@ var InsertMailController = function () {
             if (self.validateForm(params)) {
                 sharedScriptManager.callAjax(
                     self,
-                    window.rootUrl + "MailStation/MailManage/CreateMail",
+                    "/MailStation/MailManage/CreateMail",
                     params,
                     function (result) {
                         if (result.IsSuccessful) {
@@ -230,7 +230,7 @@ var InsertMailController = function () {
         else {
             sharedScriptManager.callAjax(
                 self,
-                window.rootUrl + "MailStation/MailManage/AddMailGroup",
+                "/MailStation/MailManage/AddMailGroup",
                 { MailGroupName: groupName },
                 function (result) {
                     if (!result.IsSuccessful) {
@@ -251,7 +251,7 @@ var InsertMailController = function () {
 
     self.refreshMailGroup = function (selectedGroupName) {
         sharedScriptManager.callAjax(self,
-            window.rootUrl + "MailStation/MailManage/MailGroups",
+            "/MailStation/MailManage/MailGroups",
             { hasAllElement: false },
             function (result) {
                 var mailGroupHtml = '';

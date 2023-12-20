@@ -8,7 +8,7 @@
     bool success = ViewBag.Success != null && ViewBag.Success;    
 }
 @section Head {
-    <link rel="stylesheet" href="/css/mail-list.css" type="text/css" />
+    
 }
 @section Headline {
     <h1>
@@ -95,7 +95,7 @@
 
         <script type="text/javascript">
             $(function () {
-                NAP.showSuccessMsg('@dialogMsg', 'Mail/MailConfig', 6000);
+                NAP.showSuccessMsg('@dialogMsg', '/Mail/MailConfig', 6000);
             });
 
         </script>
