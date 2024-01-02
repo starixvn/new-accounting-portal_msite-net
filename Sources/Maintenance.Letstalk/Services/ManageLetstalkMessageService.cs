@@ -32,8 +32,8 @@ public interface IManageLetstalkMessageService
 }
 
 public class ManageLetstalkMessageService(
-    IUserService userService, 
-    IDynamicRepository dynamicRepository, 
+    IUserService userService,
+    IDynamicRepository dynamicRepository,
     INapSettings napSettings) : IManageLetstalkMessageService
 {
     private const string uatEnvironment = "UAT";
@@ -89,7 +89,7 @@ public class ManageLetstalkMessageService(
     {
         criteria.IsTest = napSettings.Environment == uatEnvironment;
 
-        var (notificationList, notificationRecipientList) =dynamicRepository.FetchMultiple<NotificationModel, NotificationRecipientModel>(criteria);
+        var (notificationList, notificationRecipientList) = dynamicRepository.FetchMultiple<NotificationModel, NotificationRecipientModel>(criteria);
 
         var result = UpdateModelView(notificationList, notificationRecipientList);
         return result;
@@ -133,8 +133,9 @@ public class ManageLetstalkMessageService(
     public IEnumerable<NotificationModel> GetNotificationById(GetNotificationListCriteria criteria)
     {
         criteria.IsTest = napSettings.Environment == uatEnvironment;
+        var (notificationList, _) = dynamicRepository.FetchMultiple<NotificationModel, NotificationRecipientModel>(criteria);
 
-        return dynamicRepository.Fetch<NotificationModel>(criteria);
+        return notificationList;
     }
 
     public CommandResult EditNotification(EditNotificationCriteria criteria, IEnumerable<IFormFile> files)
