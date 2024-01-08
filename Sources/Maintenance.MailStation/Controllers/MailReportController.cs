@@ -72,7 +72,7 @@ public class MailReportController(INapSession napSession, IMailReportService mai
     }
 
     [NapAuth(FunctionKey = MailDeliveryFunctionKeys.MailReport, Policy = Constant.Policy.Read)]
-    public ActionResult RetrySendMail(RetrySendMailCriteria criteria)
+    public ActionResult RetrySendMail([FromBody] RetrySendMailCriteria criteria)
     {
         mailReportService.AddMailLog(new AddMailLogCriteria
         {
