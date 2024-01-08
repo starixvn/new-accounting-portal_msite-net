@@ -1,0 +1,15 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    ViewBag.Title = string.Format("{0}", "Home");
+}
+@section Head{
+}
+@section HeadLine
+{
+    <h1>
+        <span class="title">@ViewBag.Title</span>
+    </h1>
+}

@@ -1,26 +1,20 @@
-namespace Maintenance.Mail
+namespace Maintenance.Sites.Controllers
 {
     using Fanex.Data;
     using Fanex.NAP.Client.Attributes;
-    using Fanex.NAP.Client.Helpers.Web;
     using Microsoft.AspNetCore.Mvc;
 
     [NapSuperAuth]
-    public class HomeController(INapSession napSession ) : Controller
+    public class HomeController : Controller
     {
         public ActionResult Index()
         {
             return View();
         }
 
-        public PartialViewResult _Menu()
-        {
-            ViewBag.Menu = napSession.MenuItemList;
-            return PartialView("~/Views/Shared/_Menu.cshtml");
-        }
-
         public ActionResult ClearFanexDataCache()
         {
+            throw new ArgumentException("Test");
             var content = CacheManager.ClearCache(100).Result;
             return Content(content);
         }

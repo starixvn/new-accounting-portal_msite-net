@@ -62,6 +62,7 @@ app.UseAuthorization();
 NapClientManager
     .UseConfig(app.Services.GetService<INapSettings>())
     .UseSession(app.Services.GetService<INapSession>());
+app.UseStatusCodePagesWithRedirects("/Error/{0}");
 app.MapControllerRoute(
     name: "MailStation",
     pattern: "{area:exists}/{controller=MailManage}/{action=Index}/{id?}");

@@ -19,13 +19,6 @@ public class ErrorHandlerMiddleware(RequestDelegate next, Fanex.Logging.ILogger 
 
     private async Task HandleException(HttpContext context, Exception exception)
     {
-        var logMessage = new LogMessage(exception.Message)
-            .AddSection("Database Info", DatabaseInfoGetters.GetDbExceptionInfo(exception))
-            .AddSection("Server Info", CommonInfoGetters.GetServerInfo())
-            .AddSection("Exception Info", CommonInfoGetters.GetExceptionInfo(exception))
-            .ToString();
-        await logger.ErrorAsync(logMessage);
-
         var requestedWith = context.Request.Headers["X-Requested-With"];
 
         var isAjaxRequest = requestedWith == "XMLHttpRequest";
@@ -36,12 +29,18 @@ public class ErrorHandlerMiddleware(RequestDelegate next, Fanex.Logging.ILogger 
 
         await context.Response.WriteAsync(exception.Message);
 
-        var env = configuration.GetSection("Fanex.NAP.Client:Environment").Value;
+        await context.Response.WriteAsync(Environment.NewLine);
+        await context.Response.WriteAsync(exception.StackTrace);
 
-        if (!env.Equals("LIVE", StringComparison.CurrentCultureIgnoreCase))
+        var env = configuration.GetSection("Fanex.NAP.Client:Environment").Value;
+        if (env.Equals("LIVE", StringComparison.CurrentCultureIgnoreCase))
         {
-            await context.Response.WriteAsync(Environment.NewLine);
-            await context.Response.WriteAsync(exception.StackTrace);
+            var logMessage = new LogMessage(exception.Message)
+                .AddSection("Database Info", DatabaseInfoGetters.GetDbExceptionInfo(exception))
+                .AddSection("Server Info", CommonInfoGetters.GetServerInfo())
+                .AddSection("Exception Info", CommonInfoGetters.GetExceptionInfo(exception))
+                .ToString();
+            await logger.ErrorAsync(logMessage);
         }
     }
 }
