@@ -51,7 +51,7 @@ public class ManageLetstalkMessageController(
 
     [NapAuth(FunctionKey = SiteFunctionKeys.ManageLetstalkMessage, Policy = Constant.Policy.Read)]
     [HttpPost]
-    public JsonResult InsertNotification(FormCollection formValues, IEnumerable<IFormFile> files)
+    public JsonResult InsertNotification(IFormCollection formValues, IEnumerable<IFormFile> files)
     {
         var insertNotificationCriteria = JsonConvert.DeserializeObject<InsertNotificationCriteria>(formValues["insertNotificationCriteria"]);
         insertNotificationCriteria.CreatedBy = napSession.UserId;
@@ -61,7 +61,7 @@ public class ManageLetstalkMessageController(
 
     [NapAuth(FunctionKey = SiteFunctionKeys.ManageLetstalkMessage, Policy = Constant.Policy.Read)]
     [HttpPost]
-    public JsonResult EditNotification(FormCollection formValues, IEnumerable<IFormFile> files)
+    public JsonResult EditNotification(IFormCollection formValues, IEnumerable<IFormFile> files)
     {
         var editNotificationCriteria = JsonConvert.DeserializeObject<EditNotificationCriteria>(formValues["editNotificationCriteria"]);
         editNotificationCriteria.LastModifiedBy = napSession.UserId;

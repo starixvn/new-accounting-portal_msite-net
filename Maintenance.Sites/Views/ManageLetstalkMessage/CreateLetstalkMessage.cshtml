@@ -71,7 +71,7 @@
                     Date Time (GMT -4)
                 </div>
                 <div class="edit-field">
-                    @Html.TextBox("ConfigSendTime", "ConfigSendTime", new { @Value = DateTime.UtcNow.AddHours(-4).ToString("MMM dd,yyyy HH:mm"), style = "width: 110px", autocomplete = "off" })
+                    @Html.TextBox("ConfigSendTime", DateTime.UtcNow.AddHours(-4).ToString("MMM dd,yyyy HH:mm"), new { style = "width: 110px", autocomplete = "off" })
                 </div>
             </div>
         </div>

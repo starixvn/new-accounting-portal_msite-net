@@ -45,7 +45,7 @@ var CreateRecipientController = function () {
     self.bindEvents = function () {
         DOMElements.BtnCancel.click(function () {
             NAP.headlineMsgBox.confirm(viewResources.Confirm_CancelInsertRecipient, function () {
-                NAP.redirect('MailStation/MailRecipient/Index', 0);
+                NAP.redirect('/MailStation/MailRecipient/Index', 0);
             });
         });
 
@@ -70,7 +70,7 @@ var CreateRecipientController = function () {
                         result.Message = viewResources.CreateRecipientSuccessMsg;
                     }
 
-                    sharedScriptManager.showNonQueryResult(result, "MailStation/MailRecipient/Index", 6000);
+                    sharedScriptManager.showNonQueryResult(result, "/MailStation/MailRecipient/Index", 6000);
                 },
                 null,
                 sharedScriptManager.unblockUI

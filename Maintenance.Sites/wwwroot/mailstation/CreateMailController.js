@@ -114,7 +114,7 @@ var InsertMailController = function () {
 
         $("#button-cancel").click(function () {
             NAP.headlineMsgBox.confirm(viewResources.CancelCreateMail, function () {
-                NAP.redirect('MailStation/MailManage/Index', 0);
+                NAP.redirect('/MailStation/MailManage/Index', 0);
             });
         });
 
@@ -130,7 +130,7 @@ var InsertMailController = function () {
                             result.Message = viewResources.CreateMailSuccessMsg;
                         }
 
-                        sharedScriptManager.showNonQueryResult(result, "MailStation/MailManage/Index", 6000);
+                        sharedScriptManager.showNonQueryResult(result, "/MailStation/MailManage/Index", 6000);
                     },
                     null,
                     sharedScriptManager.unblockUI
@@ -169,14 +169,7 @@ var InsertMailController = function () {
                         return false;
                     }
                 }
-            }
-            //            else if (cronExpression.RepeatType === '1') {
-            //                // Weekly
-            //                if ($('[id^="nexcron-weekly-"]:checked').length === 0) {
-            //                    sharedScriptManager.createValidationSummary(['At least one day must be selected.'], false);
-            //                    return false;
-            //                }
-            //            }
+            }           
         }
 
         return true;

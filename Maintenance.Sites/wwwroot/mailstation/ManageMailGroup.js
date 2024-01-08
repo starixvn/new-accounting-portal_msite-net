@@ -161,7 +161,7 @@ var MailManageController = function () {
         $('.ico-relevant-mail').click(function () {
             var $this = $(this);
             var groupid = parseInt($this.attr("groupid"));
-            window.location.href = window.rootUrl + 'MailStation/MailGroupManage/ViewRelevantMail?' + $.param({
+            window.location.href = '/MailStation/MailGroupManage/ViewRelevantMail?' + $.param({
                 mailGroupID: groupid
             });
         });

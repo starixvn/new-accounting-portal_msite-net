@@ -37,7 +37,7 @@ var UpdateMailGroupController = function () {
     self.bindEvents = function () {
         $("#button-cancel").click(function () {
             NAP.headlineMsgBox.confirm(viewResources.CancelUpdateMailGroup, function () {
-                NAP.redirect('MailStation/MailGroupManage/Index', 0);
+                NAP.redirect('/MailStation/MailGroupManage/Index', 0);
             });
         });
 
@@ -52,7 +52,7 @@ var UpdateMailGroupController = function () {
                             result.Message = viewResources.UpdateMailGroupSuccessMsg;
                         }
 
-                        sharedScriptManager.showNonQueryResult(result, "MailStation/MailGroupManage/Index", 6000);
+                        sharedScriptManager.showNonQueryResult(result, "/MailStation/MailGroupManage/Index", 6000);
                     },
                     null,
                     sharedScriptManager.unblockUI

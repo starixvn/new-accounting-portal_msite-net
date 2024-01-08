@@ -311,7 +311,7 @@ var MailManageController = function () {
 
     self.viewMailLog = function (mailId, mailName) {
         popUpManager.openPopup(
-            window.rootUrl + 'MailStation/MailManage/MailActionLog?' +
+            '/MailStation/MailManage/MailActionLog?' +
             $.param({
                 mailId: mailId
             }),

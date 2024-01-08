@@ -22,13 +22,14 @@ var LetstalkReportController = function () {
 
     self.loadFilter = function () {
         self.initDatePicker();
-        self.loadTarget();
-        self.loadGroupsByTarget();
+        
         var cookie = $.cookie('MailReport');
         if (cookie) {
             $('#FromDate').datepicker('setDate', new Date(cookie.FromDate));
             $('#ToDate').datepicker('setDate', new Date(cookie.ToDate));
         }
+        self.loadTarget();
+        self.loadGroupsByTarget();
     };
 
     self.initDatePicker = function () {

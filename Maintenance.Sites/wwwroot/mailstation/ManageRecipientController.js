@@ -243,7 +243,7 @@ var ManageRecipientController = function () {
     };
 
     self.viewRelevantMail = function (recipientIndex) {
-        window.location.href = window.rootUrl + 'MailStation/MailRecipient/ViewRelevantMail?' + $.param({
+        window.location.href = '/MailStation/MailRecipient/ViewRelevantMail?' + $.param({
             recipientId: recipientIndex
         });
     };

@@ -4,6 +4,7 @@ using System.Timers;
 
 namespace Maintenance.MailStation.Logging;
 
+using EasyNetQ.Logging;
 using Fanex.Logging;
 
 public static class RabbitMqLogger
@@ -41,6 +42,11 @@ public class RabbitMqLogProvider : EasyNetQ.Logging.ILogger
 {
     public bool Log(EasyNetQ.Logging.LogLevel logLevel, Func<string> messageFunc, Exception exception = null, params object[] formatParameters)
     {
+        if ((logLevel != LogLevel.Error && logLevel != LogLevel.Fatal) || messageFunc == null)
+        {
+            return true;
+        }
+
         var message = LogMessageFormatter.FormatStructuredMessage(messageFunc(), formatParameters);
 
         if (exception != null)
@@ -49,6 +55,7 @@ public class RabbitMqLogProvider : EasyNetQ.Logging.ILogger
         }
 
         RabbitMqLogger.LogError(message);
+
 
         return true;
     }

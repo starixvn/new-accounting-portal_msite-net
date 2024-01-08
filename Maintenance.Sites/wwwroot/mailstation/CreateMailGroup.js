@@ -35,7 +35,7 @@ var InsertMailGroupController = function () {
     self.bindEvents = function () {
         $("#button-cancel").click(function () {
             NAP.headlineMsgBox.confirm(viewResources.CancelCreateMailGroup, function () {
-                NAP.redirect('MailStation/MailGroupManage/Index', 0);
+                NAP.redirect('/MailStation/MailGroupManage/Index', 0);
             });
         });
 
@@ -50,7 +50,7 @@ var InsertMailGroupController = function () {
                             result.Message = viewResources.CreateMailGroupSuccessMsg;
                         }
 
-                        sharedScriptManager.showNonQueryResult(result, "MailStation/MailGroupManage/Index", 6000);
+                        sharedScriptManager.showNonQueryResult(result, "/MailStation/MailGroupManage/Index", 6000);
                     },
                     null,
                     sharedScriptManager.unblockUI

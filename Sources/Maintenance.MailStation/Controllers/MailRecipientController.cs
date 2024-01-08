@@ -32,7 +32,7 @@ public class MailRecipientController(IManageRecipientService manageRecipientServ
     }
 
     [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageRecipient, Policy = Constant.Policy.Read)]
-    public ActionResult RecipientList(RecipientListCriteria criteria)
+    public ActionResult RecipientList([FromBody] RecipientListCriteria criteria)
     {
         var recipients = manageRecipientService.RecipientList(criteria);
 
@@ -70,7 +70,7 @@ public class MailRecipientController(IManageRecipientService manageRecipientServ
 
     [HttpPost]
     [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageRecipient, Policy = Constant.Policy.Host)]
-    public JsonResult UpdateRecipient(UpdateRecipientCriteria criteria)
+    public JsonResult UpdateRecipient([FromBody] UpdateRecipientCriteria criteria)
     {
         var commandResult = manageRecipientService.UpdateRecipient(criteria);
 
@@ -79,7 +79,7 @@ public class MailRecipientController(IManageRecipientService manageRecipientServ
 
     [HttpPost]
     [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageRecipient, Policy = Constant.Policy.Host)]
-    public JsonResult DeleteRecipient(DeleteRecipientCriteria criteria)
+    public JsonResult DeleteRecipient([FromBody] DeleteRecipientCriteria criteria)
     {
         var commandResult = manageRecipientService.DeleteRecipient(criteria);
 
@@ -88,7 +88,7 @@ public class MailRecipientController(IManageRecipientService manageRecipientServ
 
     [HttpPost]
     [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageRecipient, Policy = Constant.Policy.Host)]
-    public JsonResult CreateRecipient(CreateRecipientCriteria criteria)
+    public JsonResult CreateRecipient([FromBody] CreateRecipientCriteria criteria)
     {
         var commandResult = manageRecipientService.CreateRecipient(criteria);
 
@@ -97,7 +97,7 @@ public class MailRecipientController(IManageRecipientService manageRecipientServ
 
     [HttpPost]
     [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageRecipient, Policy = Constant.Policy.Read)]
-    public JsonResult CheckRecipient(CheckRecipientInfoCriteria criteria)
+    public JsonResult CheckRecipient([FromBody] CheckRecipientInfoCriteria criteria)
     {
         return Json(manageRecipientService.CheckRecipient(criteria));
     }

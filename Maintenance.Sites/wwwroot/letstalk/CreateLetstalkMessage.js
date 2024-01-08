@@ -149,9 +149,6 @@ var CreateLetstalkMessageController = function () {
         if (self.validateForm()) {
             sharedScriptManager.blockUI();
             var data = new FormData();
-            //$.each($("input[type='file']")[0].files, function (i, file) {
-            //    data.append('files', file);
-            //});
             var insertNotificationParams = {
                 ConfigSendTime: DOMElements.ChkScheduledTime.is(":checked") ? DOMElements.ConfigSendTime.val() : null,
                 Title: DOMElements.Subject.val().trim(),

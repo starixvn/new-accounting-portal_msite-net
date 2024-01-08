@@ -23,13 +23,13 @@
                 From
             </div>
             <div class="edit-field width-250">
-                @Html.TextBox("FromDate", "FromDate", new { @Value = DateTime.Now.ToString("MMM dd,yyyy"), style = "width: 100px" })
+                @Html.TextBox("FromDate", DateTime.Now.ToString("MMM dd,yyyy"), new { style = "width: 100px" })
             </div>
             <div class="lbl-field width-100">
                 To
             </div>
             <div class="edit-field">
-                @Html.TextBox("ToDate", "ToDate", new { @Value = DateTime.Now.ToString("MMM dd,yyyy"), style = "width: 100px" })
+                @Html.TextBox("ToDate", DateTime.Now.ToString("MMM dd,yyyy"), new { style = "width: 100px" })
             </div>
         </div>
         <div class="filter-row">

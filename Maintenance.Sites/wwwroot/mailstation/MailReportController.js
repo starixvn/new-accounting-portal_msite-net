@@ -583,7 +583,7 @@ var MailReportController = function () {
 
     self.viewMailDetail = function (mailIndex) {
         popUpManager.openPopup(
-            window.rootUrl + 'MailStation/MailReport/MailDetail?' +
+            '/MailStation/MailReport/MailDetail?' +
             $.param({
                 mailId: mailIndex
             }),
@@ -601,7 +601,7 @@ var MailReportController = function () {
 
     self.viewMailLog = function (mailIndex) {
         popUpManager.openPopup(
-            window.rootUrl + 'MailStation/MailReport/MailLog?' +
+            '/MailStation/MailReport/MailLog?' +
             $.param({
                 mailId: mailIndex
             }),

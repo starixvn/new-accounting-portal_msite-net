@@ -40,9 +40,8 @@ public class JobOperationService : IJobOperationService
     {
         var updateSchedulePublishId = string.Format(MailDeliveryConstants.UpdateScheduleRoutingKeyFormat, schedule.SiteId);
 
-        bus.PubSub.Publish(schedule, updateSchedulePublishId);
-
         legacyBus.PubSub.Publish(schedule, updateSchedulePublishId);
+        bus.PubSub.Publish(schedule, updateSchedulePublishId);
     }
 
     public void RunNow(Schedule schedule)

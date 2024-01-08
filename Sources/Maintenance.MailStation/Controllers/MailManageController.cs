@@ -67,7 +67,7 @@ public class MailManageController(INapSession napSession, IMailManageService mai
     }
 
     [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMail, Policy = Constant.Policy.Host)]
-    public JsonResult CreateMail(CreateMailCriteria criteria)
+    public JsonResult CreateMail([FromBody] CreateMailCriteria criteria)
     {
         if (criteria.StartOn != null)
         {
@@ -84,7 +84,7 @@ public class MailManageController(INapSession napSession, IMailManageService mai
     }
 
     [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMail, Policy = Constant.Policy.Read)]
-    public ActionResult MailList(GetMailListCriteria criteria)
+    public ActionResult MailList([FromBody] GetMailListCriteria criteria)
     {
         var result = mailManageService.MailList(criteria);
 
@@ -101,7 +101,7 @@ public class MailManageController(INapSession napSession, IMailManageService mai
     }
 
     [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMail, Policy = Constant.Policy.Host)]
-    public ActionResult DeleteMail(DeleteMailCriteria criteria)
+    public ActionResult DeleteMail([FromBody] DeleteMailCriteria criteria)
     {
         var commandResult = mailManageService.DeleteMail(criteria);
 
@@ -124,7 +124,7 @@ public class MailManageController(INapSession napSession, IMailManageService mai
 
     [HttpPost]
     [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMail, Policy = Constant.Policy.Host)]
-    public JsonResult UpdateMail(UpdateMailCriteria criteria)
+    public JsonResult UpdateMail([FromBody] UpdateMailCriteria criteria)
     {
         criteria.ModifiedBy = napSession.UserName;
 
