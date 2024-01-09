@@ -1,0 +1,184 @@
+.site-box {
+    width: 292px !important;
+}
+
+.width-80 {
+    width: 80px !important;
+}
+
+.width-40 {
+    width: 40px !important;
+}
+
+.width-160 {
+    width: 160px !important;
+}
+
+.width-auto {
+    width: 100% !important;
+}
+
+#mail-name {
+    width: 300px;
+}
+
+#filter-bar .filter-form .edit-field {
+    #from-date,
+    #to-date {
+        width: 100px;
+    }
+}
+
+.waiting-status {
+    font-weight: bold;
+    color: Green;
+}
+
+.sent-status {
+    font-weight: bold;
+    color: Black;
+}
+
+.failed-status {
+    font-weight: bold;
+    color: Red;
+}
+
+.missing-status {
+    font-weight: bold;
+    color: Red;
+}
+
+.running-status {
+    font-weight: bold;
+
+    .status {
+        color: Blue;
+    }
+}
+
+.data-not-ready-status {
+    color: Red;
+}
+
+.abort-status {
+    font-weight: bold;
+    color: Red;
+}
+
+#mail-report-container {
+    .button-retry {
+        float: none;
+        height: 25px;
+        margin-right: 0px;
+    }
+
+    .button-retry-missing-task {
+        float: none;
+        height: 25px;
+        margin-right: 0px;
+    }
+}
+
+#mail-report-container {
+    .button-abort {
+        float: none;
+        height: 25px;
+        margin-right: 0px;
+    }
+}
+
+input[type="submit"]:hover, input[type="submit"] {
+    background: #549cba;
+    margin-right: 5px;
+}
+
+.grid-fixed-table th {
+    background: -webkit-linear-gradient(#59a1bf, #549cba) #549cba !important;
+    color: #eeeeee;
+}
+
+#filter-bar {
+    .refreshBox {
+        margin-right: 13px;
+    }
+}
+
+.trigger-type {
+    height: 25px;
+    width: 80px;
+    line-height: 25px;
+    vertical-align: middle;
+    color: #FFFFFF;
+
+    &.trigger-function {
+        background: url("images/trigger.png") no-repeat scroll right 2px transparent;
+    }
+
+    &.trigger-schedule {
+        background: url("images/trigger.png") no-repeat scroll right -27px transparent;
+    }
+}
+
+
+#dashboard {
+    height: 50px;
+    margin-top: -10px;
+
+    .nav {
+        padding-left: 0;
+        margin-bottom: 0;
+        list-style: none;
+        margin-left: 5px;
+    }
+
+    .nav-pills > li {
+        float: left;
+        background-color: white;
+        border-top: 3px solid #65adcb;
+
+        &.nav-title {
+            background-color: inherit;
+            border: 0;
+            padding: 5px 0;
+        }
+    }
+
+    .nav > li {
+        position: relative;
+        display: block;
+        font-size: 1.6em;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .nav-pills > li.active > a, .nav-pills > li.active > a:focus, .nav-pills > li.active > a:hover {
+        color: #fff;
+        background-color: #337ab7;
+    }
+
+    .nav-pills > li > a {
+        border-radius: 4px;
+    }
+
+    .nav > li > a {
+        position: relative;
+        display: block;
+        padding: 5px 0;
+        width: 190px;
+        text-align: center;
+        color: black;
+
+        &.missing-status {
+            color: red;
+        }
+
+        &.running-status {
+            color: blue;
+        }
+    }
+
+    .nav-pills > li + li {
+        margin-left: 10px;
+    }
+}
