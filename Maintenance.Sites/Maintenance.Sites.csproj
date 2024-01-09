@@ -51,40 +51,5 @@
     </None>
   </ItemGroup>
 
-  <ItemGroup>
-    <None Include="wwwroot\letstalk\CreateLetstalkMessage.js" />
-    <None Include="wwwroot\letstalk\EditLetstalkMessage.js" />
-    <None Include="wwwroot\letstalk\LetstalkReportController.js" />
-    <None Include="wwwroot\letstalk\ManageLetstalkMessage.js" />
-    <None Include="wwwroot\mailstation\CreateMailGroup.js" />
-    <None Include="wwwroot\mailstation\CreateRecipientController.js" />
-    <None Include="wwwroot\mailstation\css\createmail.css" />
-    <None Include="wwwroot\mailstation\CreateMailController.js" />
-    <None Include="wwwroot\mailstation\css\createmailgroup.less" />
-    <None Include="wwwroot\mailstation\css\CreateRecipient.less" />
-    <None Include="wwwroot\mailstation\css\images\trigger.png" />
-    <None Include="wwwroot\mailstation\css\mailactionlog.less" />
-    <None Include="wwwroot\mailstation\css\maillog.less" />
-    <None Include="wwwroot\mailstation\css\mailreport.less" />
-    <None Include="wwwroot\mailstation\css\mailreportdetail.less" />
-    <None Include="wwwroot\mailstation\css\managemailgroup.less" />
-    <None Include="wwwroot\mailstation\css\ManageRecipient.less" />
-    <None Include="wwwroot\mailstation\css\updatemailgroup.less" />
-    <None Include="wwwroot\mailstation\css\UpdateRecipient.less" />
-    <None Include="wwwroot\mailstation\MailActionLogController.js" />
-    <None Include="wwwroot\mailstation\MailDetailController.js" />
-    <None Include="wwwroot\mailstation\MailLogController.js" />
-    <None Include="wwwroot\mailstation\MailManageController.js" />
-    <None Include="wwwroot\mailstation\css\managemail.less" />
-    <None Include="wwwroot\mailstation\css\updatemail.less" />
-    <None Include="wwwroot\mailstation\MailReportController.js" />
-    <None Include="wwwroot\mailstation\ManageMailGroup.js" />
-    <None Include="wwwroot\mailstation\ManageRecipientController.js" />
-    <None Include="wwwroot\mailstation\UpdateMailController.js" />
-    <None Include="wwwroot\mailstation\UpdateMailGroup.js" />
-    <None Include="wwwroot\mailstation\UpdateRecipientController.js" />
-    <None Include="wwwroot\tracingsp\style.css" />
-    <None Include="wwwroot\tracingsp\TracingSpController.js" />
-  </ItemGroup>
-
+ 
 </Project>
