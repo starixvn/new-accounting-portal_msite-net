@@ -7,11 +7,12 @@ using Maintenance.MailStation.Services;
 
 namespace Maintenance.MailStation.Controllers;
 
-using System.Linq;
 using Fanex.NAP.Client.Attributes;
 using Fanex.NAP.Client.Helpers.Business;
 using Fanex.NAP.Client.Helpers.Web;
+using Maintenance.MailStation.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 [Area("MailStation")]
 [NapSuperAuth]
@@ -140,8 +141,8 @@ public class MailManageController(INapSession napSession, IMailManageService mai
     }
 
     [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMail, Policy = Constant.Policy.Host)]
-    public void RunNow(int mailId)
+    public void RunNow([FromBody] ParamModel paramModel)
     {
-        mailManageService.RunNow(mailId);
+        mailManageService.RunNow(paramModel.MailId);
     }
 }
