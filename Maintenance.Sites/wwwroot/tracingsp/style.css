@@ -1,0 +1,7 @@
+
+.main-dialog-class .ui-widget-content {
+    background-image: none;
+    background-color: #fff;
+    color:#ff0000 !important;
+    font-size: 15px;    
+}

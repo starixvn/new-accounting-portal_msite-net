@@ -1,0 +1,41 @@
+﻿.select2-container .select2-choice {
+    border: 1px solid #549cba;
+    border-radius: 0px;
+    background-image: none;
+}
+.select2-container .select2-choice abbr {
+    display: none;
+    right: 24px;
+    top: 8px;
+    border: 0;
+}
+.select2-container .select2-choice .select2-arrow {
+    width: 15px;
+    height: 16px;
+    right: 5px;
+    top: 3px;
+    border: 1px solid Gray;
+    border-radius: 0px;
+}
+.select2-container .select2-choice .select2-arrow b {
+    background-position: 0 -4px;
+}
+.select2-dropdown-open .select2-choice .select2-arrow b {
+    background-position: -18px -4px;
+}
+.select2-drop {
+    border-radius: 0px;
+    border: 1px solid #549cba;
+}
+.select2-drop:active {
+    border: 1px solid #549cba;
+}
+.select2-search input {
+    margin-top: 4px;
+}
+.select2-dropdown-open .select2-choice {
+    background-color: white;
+}
+.ui-datepicker .ui-datepicker-header {
+    height: 26px;
+}
