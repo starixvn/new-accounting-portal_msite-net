@@ -1,14 +1,14 @@
-﻿@model UpdateMailCriteria
+@model UpdateMailCriteria
 @{
 
     ViewBag.Title = "Update Mail";
     Layout = "~/Views/Shared/_LayoutWithTimer.cshtml";
 }
 @section Head {
-    <link href="~/scripts/lib/NexCron/css/NexCron.css" rel="stylesheet" type="text/css" />
-    <link href="~/scripts/lib/MagicSuggest/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="~/scripts/lib/MagicSuggest/css/magicsuggest-min.css" rel="stylesheet" type="text/css" />
-    <link href="~/scripts/lib/InputCombobox/jquery.combobox-ext.less" rel="stylesheet" type="text/css" />
+    <link href="~/scripts/lib/nexcron/css/nexcron.css" rel="stylesheet" type="text/css" />
+    <link href="~/scripts/lib/magicsuggest/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/scripts/lib/magicsuggest/css/magicsuggest-min.css" rel="stylesheet" type="text/css" />
+    <link href="~/scripts/lib/inputcombobox/jquery.combobox-ext.less" rel="stylesheet" type="text/css" />
     <link href="~/themes/shared/formedit.less" rel="stylesheet" type="text/css" />
     <link href="~/mailstation/css/updatemail.less" rel="stylesheet" />
 }
@@ -152,11 +152,11 @@
 </section>
 @section Foot {
 
-    <script src="~/scripts/lib/InputCombobox/jquery.combobox-ext.js" type="text/javascript"></script>
+    <script src="~/scripts/lib/inputcombobox/jquery.combobox-ext.js" type="text/javascript"></script>
     <script src="~/scripts/lib/custom-datepicker.js" type="text/javascript"></script>
     <script src="~/mailstation/updatemailcontroller.js"></script>
-    <script src="~/scripts/lib/NexCron/js/NexCron.js" type="text/javascript"></script>
-    <script src="~/scripts/lib/MagicSuggest/js/magicsuggest-min.js" type="text/javascript"></script>
+    <script src="~/scripts/lib/nexcron/js/nexcron.js" type="text/javascript"></script>
+    <script src="~/scripts/lib/magicsuggest/js/magicsuggest-min.js" type="text/javascript"></script>
     <script type="text/javascript">
         var viewResources = {
             AddMailGroupSuccessMsg: '@MailStationResources.AddMailGroupSuccessMsg',

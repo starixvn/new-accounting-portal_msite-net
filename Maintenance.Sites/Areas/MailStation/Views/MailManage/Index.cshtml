@@ -1,4 +1,4 @@
-﻿@model GetMailListCriteria
+@model GetMailListCriteria
 @inject IPermissionService permissionService
 @{
     ViewBag.Title = "Manage Mail";
@@ -8,7 +8,7 @@
 }
 @section Head {
 
-    <link href="~/scripts/lib/MultipleSelect/jquery.multiselect.css" rel="stylesheet" type="text/css" />
+    <link href="~/scripts/lib/multipleselect/jquery.multiselect.css" rel="stylesheet" type="text/css" />
     <link href="~/themes/shared/contextmenu.less" rel="stylesheet" type="text/css" />
     <link href="~/mailstation/css/managemail.less" rel="stylesheet" />
 }
@@ -86,9 +86,9 @@
     </ul>
 </section>
 @section Foot {
-    <script src="~/scripts/lib/MultipleSelect/jquery.multiselect.js" type="text/javascript"></script>
-    <script src="~/scripts/lib/ContextMenu/ContextMenuController.js" type="text/javascript"></script>
-    <script src="~/scripts/lib/Popup/dialogbox.js" type="text/javascript"></script>
+    <script src="~/scripts/lib/multipleselect/jquery.multiselect.js" type="text/javascript"></script>
+    <script src="~/scripts/lib/contextmenu/contextmenucontroller.js" type="text/javascript"></script>
+    <script src="~/scripts/lib/popup/dialogbox.js" type="text/javascript"></script>
     <script src="~/mailstation/mailmanagecontroller.js"></script>
     <script type="text/javascript">
         window.rootUrl = '@Url.Content("~/")';

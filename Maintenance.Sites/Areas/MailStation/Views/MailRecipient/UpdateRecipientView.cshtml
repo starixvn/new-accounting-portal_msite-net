@@ -1,11 +1,11 @@
-﻿@model RecipientModel
+@model RecipientModel
 @{
     ViewBag.Title = Labels.Edit_Recipient;
     Layout = "~/Views/Shared/_LayoutWithTimer.cshtml";  
 }
 @section Head {
     <link href="~/themes/shared/formedit.less" rel="stylesheet" type="text/css" />
-    <link href="~/mailstation/css/UpdateRecipient.less" rel="stylesheet" type="text/css" />
+    <link href="~/mailstation/css/updaterecipient.less" rel="stylesheet" type="text/css" />
 }
 @section Headline {
     <h1>
@@ -92,8 +92,8 @@
     </div>
 </section>
 @section Foot {
-    <script src="~/scripts/lib/ContextMenu/ContextMenuController.js" type="text/javascript" ></script>
-    <script src="~/mailstation/UpdateRecipientController.js" type="text/javascript" ></script>
+    <script src="~/scripts/lib/contextmenu/contextmenucontroller.js" type="text/javascript" ></script>
+    <script src="~/mailstation/updaterecipientcontroller.js" type="text/javascript" ></script>
     <script type="text/javascript">
         var viewResources = {
             Confirm_CancelEditRecipient: '@Labels.Confirm_CancelEditRecipient',
