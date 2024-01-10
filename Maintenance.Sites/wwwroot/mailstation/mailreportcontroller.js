@@ -214,7 +214,7 @@ var MailReportController = function () {
         }
         self.cachedData.bodyRows = bodyData;
         var headerColumns = [];
-        headerColumns.push({ HeaderText: viewResources.Id, Width: 40, Name: "ColId", HeaderAlign: "center", CellAlign: "center" });
+        headerColumns.push({ HeaderText: viewResources.Id, Width: 100, Name: "ColId", HeaderAlign: "center", CellAlign: "center" });
         headerColumns.push({ HeaderText: viewResources.Mail_Name, Width: 340, Name: "ColMailName", HeaderAlign: "center", CellAlign: "left", Sort: true });
         headerColumns.push({ HeaderText: viewResources.Site, Width: 150, Name: "ColSite", HeaderAlign: "center", CellAlign: "left", Sort: true });
         headerColumns.push({ HeaderText: viewResources.Trigger, Width: 90, Name: "ColTrigger", HeaderAlign: "center", CellAlign: "center" });
