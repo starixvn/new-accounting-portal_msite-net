@@ -9,6 +9,7 @@ using Fanex.MailDelivery.Core.Models;
 using Fanex.NAP.Client.Attributes;
 using Fanex.NAP.Client.Helpers.Business;
 using Fanex.NAP.Client.Helpers.Web;
+using Maintenance.MailStation.Models;
 using Microsoft.AspNetCore.Mvc;
 
 [Area("MailStation")]
@@ -58,8 +59,9 @@ public class MailReportController(INapSession napSession, IMailReportService mai
     }
 
     [NapAuth(FunctionKey = MailDeliveryFunctionKeys.MailReport, Policy = Constant.Policy.Host)]
-    public void AbortTask(int taskId)
+    public void AbortTask([FromBody] ParamModel paramModel)
     {
+        var taskId = paramModel.TaskId;
         mailReportService.AbortTask(taskId);
 
         mailReportService.AddMailLog(new AddMailLogCriteria
