@@ -71,7 +71,8 @@
 @RenderSection("Foot", false)
 @RenderSection("scripts", false)
 <script type="text/javascript">
-    var serverTimeZone = '@ViewBag.TimeZoneString';
+    var serverTimeZone = '@Html.Raw(@ViewBag.TimeZoneString)';
+
     $(document).ready(function () {
 
         //TIMER
