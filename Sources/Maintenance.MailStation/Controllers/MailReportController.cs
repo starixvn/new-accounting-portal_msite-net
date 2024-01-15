@@ -23,6 +23,7 @@ public class MailReportController(INapSession napSession, IMailReportService mai
         ViewBag.ListSite = mailReportService.Sites();
         ViewBag.ListTriggerType = mailReportService.Trigger();
         ViewBag.TimeZoneString = TimeZoneExtension.GetTimeZoneString();
+        ViewBag.DateTime = DateTime.Now.ToString("MMM dd,yyyy");
 
         return View();
     }

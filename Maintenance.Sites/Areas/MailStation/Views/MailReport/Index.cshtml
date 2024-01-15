@@ -55,13 +55,13 @@
                 @Html.LabelFor(m => m.FromDate, Labels.From)
             </div>
             <div class="edit-field">
-                @Html.TextBoxFor(m => m.FromDate, new { @Value = DateTime.Now.ToString("MMM dd,yyyy"), style = "width: 100px" })
+                @Html.TextBoxFor(m => m.FromDate, new { @Value = ViewBag.DateTime, style = "width: 100px" })
             </div>
             <div class="lbl-field">
                 @Html.LabelFor(m => m.ToDate, Labels.To)
             </div>
             <div class="edit-field">
-                @Html.TextBoxFor(m => m.ToDate, new { @Value = DateTime.Now.ToString("MMM dd,yyyy"), style = "width: 100px" })
+                @Html.TextBoxFor(m => m.ToDate, new { @Value = ViewBag.DateTime, style = "width: 100px" })
             </div>
             <div class="lbl-field">
                 @Html.LabelFor(m => m.Status, Labels.Status)
