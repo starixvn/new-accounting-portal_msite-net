@@ -19,13 +19,13 @@
                 @Html.LabelFor(m => m.FromDate, "From")
             </div>
             <div class="edit-field">
-                @Html.TextBoxFor(m => m.FromDate, new { @Value = DateTime.Now.ToString("MMM dd,yyyy"), style = "width: 100px" })
+	            @Html.TextBox("FromDate", DateTime.Now.ToString("MMM dd,yyyy"), "", new { style = "width: 100px" })
             </div>
             <div class="lbl-field width-120">
                 @Html.LabelFor(m => m.ToDate, "To")
             </div>
             <div class="edit-field">
-                @Html.TextBoxFor(m => m.ToDate, new { @Value = DateTime.Now.ToString("MMM dd,yyyy"), style = "width: 100px" })
+	            @Html.TextBox("ToDate", DateTime.Now.ToString("MMM dd,yyyy"), "", new { style = "width: 100px" })
             </div>            
         </div>
         <div class="filter-row">
