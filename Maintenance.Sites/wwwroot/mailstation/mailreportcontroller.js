@@ -218,8 +218,8 @@ var MailReportController = function () {
         headerColumns.push({ HeaderText: viewResources.Mail_Name, Width: 340, Name: "ColMailName", HeaderAlign: "center", CellAlign: "left", Sort: true });
         headerColumns.push({ HeaderText: viewResources.Site, Width: 150, Name: "ColSite", HeaderAlign: "center", CellAlign: "left", Sort: true });
         headerColumns.push({ HeaderText: viewResources.Trigger, Width: 90, Name: "ColTrigger", HeaderAlign: "center", CellAlign: "center" });
-        headerColumns.push({ HeaderText: viewResources.Scheduled_Time, Width: 150, Name: "ColScheduledTime", HeaderAlign: "center", CellAlign: "center", Sort: true, FormatDateTime: "MMM DD, YYYY hh:mm:ss A" });
-        headerColumns.push({ HeaderText: viewResources.Last_Run, Width: 150, Name: "ColLastSent", HeaderAlign: "center", CellAlign: "center", Sort: true, FormatDateTime: "MMM DD, YYYY hh:mm:ss A" });
+        headerColumns.push({ HeaderText: viewResources.Scheduled_Time + "<br/>(GMT -4)", Width: 150, Name: "ColScheduledTime", HeaderAlign: "center", CellAlign: "center", Sort: true, FormatDateTime: "MMM DD, YYYY hh:mm:ss A" });
+        headerColumns.push({ HeaderText: viewResources.Last_Run + " (GMT -4)", Width: 150, Name: "ColLastSent", HeaderAlign: "center", CellAlign: "center", Sort: true, FormatDateTime: "MMM DD, YYYY hh:mm:ss A" });
         headerColumns.push({ HeaderText: viewResources.Status, Width: 120, Name: "ColStatus", HeaderAlign: "center", CellAlign: "center", Sort: true });
         if (viewResources.hasEditRight) {
             headerColumns.push({ HeaderText: viewResources.Action, Width: 120, Name: "ColAction", HeaderAlign: "center", CellAlign: "center" });
@@ -235,7 +235,6 @@ var MailReportController = function () {
             gridExpandHeight: 350,
             headerColumnHeight: 29,
             showPager: true,
-            timeZone: viewResources.TimeZone,
             customPager: true,
             pagerOption: {
                 itemsPerPage: sharedScriptManager.cachedData.defaultItemsPerPage,
