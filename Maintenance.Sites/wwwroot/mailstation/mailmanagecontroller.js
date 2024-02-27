@@ -207,7 +207,7 @@ var MailManageController = function () {
 
         var headerColumns = [];
         headerColumns.push({ HeaderText: viewResources.Id, Width: 80, Name: "ColId", HeaderAlign: "center", CellAlign: "center" });
-        headerColumns.push({ HeaderText: viewResources.Mail_Name, Width: 215, Name: "ColMailName", HeaderAlign: "center", CellAlign: "left" });
+        headerColumns.push({ HeaderText: viewResources.Mail_Name, Width: 405, Name: "ColMailName", HeaderAlign: "center", CellAlign: "left" });
         headerColumns.push({ HeaderText: viewResources.Group, Width: 90, Name: "ColGroup", HeaderAlign: "center", CellAlign: "left", AllowTruncate: true });
         headerColumns.push({ HeaderText: viewResources.Site, Width: 100, Name: "ColSite", HeaderAlign: "center", CellAlign: "left", AllowTruncate: true });
         headerColumns.push({ HeaderText: viewResources.Trigger, Width: 90, Name: "ColTrigger", HeaderAlign: "center", CellAlign: "center" });
