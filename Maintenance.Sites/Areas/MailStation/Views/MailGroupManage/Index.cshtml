@@ -1,0 +1,54 @@
+@model GetMailGroupCriteria
+@{
+    ViewBag.Title = "Manage Group";
+    Layout = "~/Views/Shared/_LayoutWithTimer.cshtml";
+    var recipient = JsonConvert.SerializeObject(Model);
+}
+@section Head {
+    <link href="~/themes/shared/contextmenu.less" rel="stylesheet" type="text/css" />
+    <link href="~/mailstation/css/managemailgroup.less" rel="stylesheet" />
+}
+@section Headline {
+    <h1>
+        <span class="title"><span class="first">@Labels.SystemName /</span> @ViewBag.Title</span>
+        <div class="button-action">
+            <a id="btnCreateMail" class="lnk" href="~/MailStation/MailGroupManage/CreateMailGroupView">
+                + Create Group</a>
+        </div>
+    </h1>
+}
+<section id="filter-bar">
+        <div class="filter-form">
+            <div class="filter-row">
+                <div class="lbl-field">
+                    @Html.LabelFor(m => m.MailGroupName, "Group")
+                </div>
+                <div class="edit-field width-300">
+                    @Html.TextBoxFor(m => m.MailGroupName, new { })
+                </div>
+                <div class="submit">
+                    <input id="button-search" type="submit" value="Submit" />
+                </div>
+            </div>
+        </div>
+    </section>
+<section id="body">
+    <div id="mail-group-list-container" class="mail-list-container">
+        <div id="mail-group-list" class="freegrid display-none">
+        </div>
+    </div>
+    <ul class="actions display-none">
+        <li><a class="edit-icon context-menu-item">Edit</a> </li>
+        <li><a class="delete-icon context-menu-item">Delete</a> </li>
+    </ul>
+</section>
+@section Foot {
+    <script src="~/scripts/lib/contextmenu/contextmenucontroller.js" type="text/javascript" ></script>
+    <script src="~/mailstation/managemailgroup.js"></script>
+    <script type="text/javascript">
+        window.rootUrl = '@Url.Content("~/")';
+        var viewResources = {
+            Confirm_DeleteMailGroup: '@MailStationResources.ConfirmDeleteMailGroup'
+        };
+    </script>
+}

@@ -1,0 +1,51 @@
+﻿@model MailConfig
+@{
+    ViewBag.Title = ViewResource.Mail_Config;
+    Layout = null;
+}
+@{
+    ViewBag.Title = string.Format("{0} {1}", ViewResource.Create_New, ViewResource.Mail_Config);
+    bool success = ViewBag.Success != null && ViewBag.Success;
+}
+<div class="form">
+    <div class="form-row summary">
+        <div class="lbl-field">
+        </div>
+        <div class="edit-field" id="messageError">
+            @Html.ValidationSummary()
+        </div>
+    </div>
+    <div class="form-row required">
+        <div class="lbl-field">
+            @Html.LabelFor(m => m.AppName)
+        </div>
+        <div class="edit-field">
+            @Html.TextBoxFor(m => m.AppName)
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="lbl-field">
+            @Html.LabelFor(m => m.Description)
+        </div>
+        <div class="edit-field">
+            @Html.TextBoxFor(m => m.Description)
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="lbl-field">
+            @Html.LabelFor(m => m.Setting.SettingID)
+        </div>
+        <div class="edit-field">
+            @Html.DropDownListFor(m => m.Setting.SettingID, (List<SelectListItem>)ViewBag.ListMailSetting)
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="lbl-field">
+        </div>
+        <div class="edit-field">
+            <input type="button" value="@ViewResource.Create" id="btnAddConfigPopUp" />
+            <input type="button" value="@ViewResource.Cancel" id="btnCancelConfigPopUp" />
+        </div>
+    </div>
+</div>
+<script type="text/ecmascript" src="/scripts/add-mail-config-popup.js"></script>

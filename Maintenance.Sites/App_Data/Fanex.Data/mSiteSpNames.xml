@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Functions>  
+  <Function Name="ManageLetstalkMessage">
+    <Setting Key="Notif_GetListNotification" SpName="Notif_GetListNotification" DbName="DBWH.bodb_Notification.bodbAdminNet" />
+    <Setting Key="Notif_InsertNewNotification" SpName="Notif_InsertNewNotification" DbName="DBWH.bodb_Notification.bodbAdminNet" />
+    <Setting Key="Notif_GetListRecipients" SpName="Notif_GetListRecipients" DbName="DBWH.bodb_Notification.bodbAdminNet" />
+    <Setting Key="Notif_EditNotification" SpName="Notif_EditNotification" DbName="DBWH.bodb_Notification.bodbAdminNet" />
+    <Setting Key="Notif_DeleteNotification" SpName="Notif_DeleteNotification" DbName="DBWH.bodb_Notification.bodbAdminNet" />
+    <Setting Key="Notif_ResendNotification" SpName="Notif_ResendNotification" DbName="DBWH.bodb_Notification.bodbAdminNet" />
+  </Function>
+</Functions>

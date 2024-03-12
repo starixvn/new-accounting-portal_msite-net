@@ -4,6 +4,7 @@ using System.Timers;
 
 namespace Maintenance.MailStation.Logging;
 
+using EasyNetQ.Logging;
 using Fanex.Logging;
 
 public static class RabbitMqLogger
@@ -41,6 +42,11 @@ public class RabbitMqLogProvider : EasyNetQ.Logging.ILogger
 {
     public bool Log(EasyNetQ.Logging.LogLevel logLevel, Func<string> messageFunc, Exception exception = null, params object[] formatParameters)
     {
+        if ((logLevel != LogLevel.Error && logLevel != LogLevel.Fatal) || messageFunc == null)
+        {
+            return true;
+        }
+
         var message = LogMessageFormatter.FormatStructuredMessage(messageFunc(), formatParameters);
 
         if (exception != null)
@@ -49,6 +55,7 @@ public class RabbitMqLogProvider : EasyNetQ.Logging.ILogger
         }
 
         RabbitMqLogger.LogError(message);
+
 
         return true;
     }
@@ -60,7 +67,7 @@ public class RabbitMqLogProvider<TCategory> : RabbitMqLogProvider, EasyNetQ.Logg
 
 internal static class LogMessageFormatter
 {
-    private static readonly Regex Pattern = new Regex(@"(?<!{){@?(?<arg>[^ :{}]+)(?<format>:[^}]+)?}",
+    private static readonly Regex Pattern = new(@"(?<!{){@?(?<arg>[^ :{}]+)(?<format>:[^}]+)?}",
         RegexOptions.Compiled);
 
     private static string ReplaceFirst(string text, string search, string replace)
@@ -71,7 +78,7 @@ internal static class LogMessageFormatter
             return text;
         }
 
-        return text.Substring(0, pos) + replace + text.Substring(pos + search.Length);
+        return text[..pos] + replace + text[(pos + search.Length)..];
     }
 
     public static string FormatStructuredMessage(string targetMessage, object[] formatParameters)
@@ -90,7 +97,7 @@ internal static class LogMessageFormatter
 
             if (!int.TryParse(arg, out _))
             {
-                processedArguments = processedArguments ?? new List<string>(formatParameters.Length);
+                processedArguments ??= new List<string>(formatParameters.Length);
                 var argumentIndex = processedArguments.IndexOf(arg);
                 if (argumentIndex == -1)
                 {

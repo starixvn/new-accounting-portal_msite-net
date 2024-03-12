@@ -10,7 +10,7 @@ public interface ICommandResult
 }
 
 
-public class CommandResult : ICommandResult
+public class CommandResult(int code, string message) : ICommandResult
 {
     public bool IsSuccessful => Code == 0;
 
@@ -19,13 +19,7 @@ public class CommandResult : ICommandResult
     {
     }
 
-    public CommandResult(int code, string message)
-    {
-        Code = code;
-        Message = message;
-    }
+    public int Code { get; set; } = code;
 
-    public int Code { get; set; }
-
-    public string Message { get; set; }
+    public string Message { get; set; } = message;
 }

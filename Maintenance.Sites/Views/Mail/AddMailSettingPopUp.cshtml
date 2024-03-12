@@ -1,0 +1,76 @@
+﻿@model MailSetting
+@{
+    ViewBag.Title = ViewResource.Mail_Setting;
+    Layout = null;    
+}
+@{
+    ViewBag.Title = string.Format("{0} {1}", ViewResource.Create_New, ViewResource.Mail_Setting);
+    bool success = ViewBag.Success != null && ViewBag.Success;    
+}
+<div class="form">
+    <div class="form-row summary">
+        <div class="lbl-field">
+        </div>
+        <div class="edit-field" id="messageError">
+            @Html.ValidationSummary()
+        </div>
+    </div>
+    @*<div class="form-row required">
+        <div class="lbl-field">
+            @Html.LabelFor(m => m.SettingName)
+        </div>
+        <div class="edit-field">
+            @Html.TextBoxFor(m => m.SettingName)
+        </div>
+    </div>*@
+    <div class="form-row">
+        <div class="lbl-field">
+            @Html.LabelFor(m => m.Server)
+        </div>
+        <div class="edit-field">
+            @Html.TextBoxFor(m => m.Server)
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="lbl-field">
+            @Html.LabelFor(m => m.Port)
+        </div>
+        <div class="edit-field">
+            @Html.TextBoxFor(m => m.Port)
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="lbl-field">
+            @Html.LabelFor(m => m.Username)
+        </div>
+        <div class="edit-field">
+            @Html.TextBoxFor(m => m.Username)
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="lbl-field">
+            @Html.LabelFor(m => m.Password)
+        </div>
+        <div class="edit-field">
+            @Html.TextBoxFor(m => m.Password)
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="lbl-field">
+            @Html.LabelFor(m => m.IsAuth)
+        </div>
+        <div class="edit-field">
+            @Html.CheckBoxFor(m => m.IsAuth)
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="lbl-field">
+        </div>
+        <div class="edit-field">
+            <input type="button" value="@ViewResource.Create" id="btnAddMailSetting"/>
+            <input type="button" value="@ViewResource.Cancel" id="btnCancelAddSetting"/>
+        </div>
+    </div>
+</div>
+
+<script type="text/ecmascript" src="/scripts/-mail-setting-popup.js"></script>

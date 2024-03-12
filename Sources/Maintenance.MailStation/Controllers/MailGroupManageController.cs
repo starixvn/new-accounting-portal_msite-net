@@ -9,27 +9,26 @@ using Fanex.NAP.Client.Attributes;
 using Fanex.NAP.Client.Helpers.Business;
 using Microsoft.AspNetCore.Mvc;
 
+[Area("MailStation")]
 [NapSuperAuth]
-public class MailGroupManageController : Controller
+public class MailGroupManageController(IMailGroupService mailGroupService) : Controller
 {
-    private readonly MailGroupService mailGroupService = new MailGroupService();
-
     [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMailGroup, Policy = Constant.Policy.Read)]
     public ActionResult Index(GetMailGroupCriteria criteria)
     {
         ViewBag.TimeZoneString = TimeZoneExtension.GetTimeZoneString();
-        return View("~/Areas/MailStation/MailGroup/ManageMailGroup/Index.cshtml", criteria);
+        return View(criteria);
     }
 
     [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMailGroup, Policy = Constant.Policy.Host)]
     public ActionResult CreateMailGroupView()
     {
         ViewBag.TimeZoneString = TimeZoneExtension.GetTimeZoneString();
-        return View("~/Areas/MailStation/MailGroup/CreateMailGroup/Index.cshtml");
+        return View();
     }
 
     [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMailGroup, Policy = Constant.Policy.Host)]
-    public JsonResult CreateMailGroup(CreateMailGroupCriteria criteria)
+    public JsonResult CreateMailGroup([FromBody] CreateMailGroupCriteria criteria)
     {
         var commandResult = mailGroupService.CreateMailGroup(criteria);
 
@@ -37,7 +36,7 @@ public class MailGroupManageController : Controller
     }
 
     [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMailGroup, Policy = Constant.Policy.Read)]
-    public JsonResult MailGroupList(GetMailGroupCriteria criteria)
+    public JsonResult MailGroupList([FromBody] GetMailGroupCriteria criteria)
     {
         var groups = mailGroupService.GetMailGroups(criteria);
 
@@ -45,7 +44,7 @@ public class MailGroupManageController : Controller
     }
 
     [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMailGroup, Policy = Constant.Policy.Host)]
-    public ActionResult DeleteMailGroup(DeleteMailGroupCriteria criteria)
+    public ActionResult DeleteMailGroup([FromBody] DeleteMailGroupCriteria criteria)
     {
         var commandResult = mailGroupService.DeleteMailGroup(criteria);
 
@@ -67,12 +66,12 @@ public class MailGroupManageController : Controller
 
         ViewBag.TimeZoneString = TimeZoneExtension.GetTimeZoneString();
 
-        return View("~/Areas/MailStation/MailGroup/UpdateMailGroup/Index.cshtml", model);
+        return View(model);
     }
 
     [HttpPost]
     [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMailGroup, Policy = Constant.Policy.Host)]
-    public JsonResult UpdateMailGroup(UpdateMailGroupCriteria criteria)
+    public JsonResult UpdateMailGroup([FromBody] UpdateMailGroupCriteria criteria)
     {
         var commandResult = mailGroupService.UpdateMailGroup(criteria);
 

@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="EasyNetQ" Version="7.8.0" />
+    <PackageReference Include="Fanex.Data.ProxyClient" Version="0.0.2-alpha08" />
+    <PackageReference Include="Fanex.Logging" Version="2.0.1.1" />
+    <PackageReference Include="Fanex.MailDeliver.MailClient" Version="2.0.11" />
+    <PackageReference Include="Fanex.MailStation.Core" Version="2.0.0" />
+    <PackageReference Include="Fanex.NAP.Client" Version="2.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Maintenance\Maintenance.csproj" />
+  </ItemGroup>
+
+</Project>

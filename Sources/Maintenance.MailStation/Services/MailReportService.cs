@@ -3,19 +3,41 @@ using Maintenance.MailStation.Models;
 
 namespace Maintenance.MailStation.Services;
 
+using Criteria;
+using Criteria.MailManage;
 using Fanex.Data.Repository;
-using Fanex.MailDeliver.Model;
+using Fanex.MailDeliver.MailClient.Model;
 using Fanex.MailDelivery.Core.Models;
 using Maintenance.Services;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Configuration;
 using Quartz;
 using Quartz.Spi;
 
-public class MailReportService(IDynamicRepository dynamicRepository, IConfiguration configuration) : MailStationBaseService
+public interface IMailReportService
 {
-    private readonly IMailService mailService = MailService.Create();
-    private IJobOperationService jobOperationService;
+    List<MailTaskModel> MailReport(MailReportCriteria criteria);
+    MailTaskStatusCounterModel GetMailTaskStatusCounter();
+    MailRecord MailDetail(MailDetailCriteria criteria);
+    List<MailLogModel> MailLog(MailLogCriteria criteria);
+    void RetrySendMail(RetrySendMailCriteria criteria);
+    void AbortTask(int taskId);
+    void AddMailLog(AddMailLogCriteria criteria);
+    void RetryMissingJob(RetryMissingTaskCriteria criteria);
+    List<SelectListItem> Sites(bool hasAllElement = true);
+    List<SelectListItem> MailGroups(bool hasAllElement = true);
+    List<SelectListItemExtra> Status(bool hasAllElement = true);
+    List<SelectListItemExtra> TaskStatus(bool hasAllElement = true);
+    List<SelectListItemExtra> Trigger(bool hasAllElement = true);
+    List<SuggestMailModel> SuggestMails(SuggestMailCriteria criteria);
+    CommandResult ExecuteNonQuery(UpdateCommandBase command);
+    MailTaskModel GetMailTaskByID(GetMailTaskByIdCriteria criteria);
+    Schedule GetScheduleByMailId(GetScheduleByIdCriteria criteria);
+    string GetTimeZone();
+}
 
+public class MailReportService(IDynamicRepository dynamicRepository, IConfiguration configuration, IMailService mailService) : MailStationBaseService, IMailReportService
+{
     public List<MailTaskModel> MailReport(MailReportCriteria criteria)
     {
         var oldStatus = criteria.Status;
@@ -28,7 +50,7 @@ public class MailReportService(IDynamicRepository dynamicRepository, IConfigurat
             var getAllScheduleCriteria = new GetAllScheduleCriteria { MailName = criteria.MailName, SiteId = criteria.SiteId };
             var mailTaskDetails = GetMailTaskDetails(getAllScheduleCriteria);
 
-            if (criteria.Status == -1 || criteria.Status == (int)JobStatus.Waiting || criteria.Status == (int)JobStatus.Missing)
+            if (criteria.Status is -1 or (int)JobStatus.Waiting or (int)JobStatus.Missing)
             {
                 var ts = new TimeSpan(23, 59, 59);
                 criteria.ToDate += ts;
@@ -143,10 +165,8 @@ public class MailReportService(IDynamicRepository dynamicRepository, IConfigurat
 
         UpdateRunningTask(mailTask.MailTaskId);
 
-        using (jobOperationService = new JobOperationService(configuration))
-        {
-            jobOperationService.Retry(schedule);
-        }
+        using var jobOperationService = new JobOperationService(configuration);
+        jobOperationService.Retry(schedule);
     }
 
     public void AbortTask(int taskId)
@@ -176,10 +196,8 @@ public class MailReportService(IDynamicRepository dynamicRepository, IConfigurat
         schedule.CurrentFireTime = criteria.ScheduledTime;
         schedule.TaskId = mailTaskId;
 
-        using (jobOperationService = new JobOperationService(configuration))
-        {
-            jobOperationService.Retry(schedule);
-        }
+        using var jobOperationService = new JobOperationService(configuration);
+        jobOperationService.Retry(schedule);
     }
 
     private void UpdateRunningTask(int taskId)

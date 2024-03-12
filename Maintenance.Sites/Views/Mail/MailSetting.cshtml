@@ -1,0 +1,105 @@
+﻿@model List<MailSetting>
+@{
+    ViewBag.Title = ViewResource.Mail_Setting;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var hasEditRight = (bool)ViewBag.HasEdit;
+}
+@section Head {
+    
+}
+@section Headline {
+    <h1>
+        <span class="title">@ViewBag.Title</span>
+        @if (hasEditRight)
+        {
+            @Html.ActionLink("+ Create New", "AddMailSetting", "Mail", null, new { @class = "lnk" })
+        }
+    </h1>
+}
+<table class="grid">
+    <thead>
+        <tr>
+            <th>
+                @ViewResource.ID
+            </th>
+            @*<th>
+                    Name
+                </th>*@
+            <th>
+                @ViewResource.Server
+            </th>
+            <th>
+                @ViewResource.Port
+            </th>
+            <th>
+                @ViewResource.Sender_Email
+            </th>
+            <th>
+                @ViewResource.IsAuth
+            </th>
+            <th>
+                @ViewResource.View_Application
+            </th>
+            @if (hasEditRight)
+            {
+                <th>
+                    @ViewResource.Edit
+                </th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            var i = 1;
+            if (!ReferenceEquals(Model, null))
+            {
+                foreach (var mailItem in Model)
+                {
+                    var row_class = i % 2 == 0 ? "alt" : string.Empty;
+
+                    <tr class="@row_class">
+                        <td class="align-center">
+                            @mailItem.SettingID
+                        </td>
+                        @* <td>
+                                @mailItem.SettingName
+                            </td>*@
+                        <td>
+                            @mailItem.Server
+                        </td>
+                        <td>
+                            @mailItem.Port
+                        </td>
+                        <td>
+                            @mailItem.Username
+                        </td>
+                        <td class="align-center">
+                            <input type="checkbox" value="@mailItem.Password" disabled="disabled" @(mailItem.IsAuth ? "checked='checked'" : string.Empty) />
+                        </td>
+                        <td class="align-center">
+                            <div class="action-wrp">
+                                @Html.ActionLink(" ", "MailConfig", new { id = mailItem.SettingID }, new { @class = "icon-link" })
+                            </div>
+                        </td>
+                        @if (hasEditRight)
+                        {
+                            <td class="align-center">
+                                <div class="action-wrp">
+                                    @Html.ActionLink("Edit", "EditMailSetting", new { id = mailItem.SettingID }, new { @class = "btn-edit" })
+                                </div>
+                            </td>
+                        }
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="5">
+                        Not found !
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

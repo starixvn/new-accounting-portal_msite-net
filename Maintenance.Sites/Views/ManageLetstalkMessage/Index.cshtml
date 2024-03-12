@@ -1,0 +1,72 @@
+@{
+    ViewBag.Title = "Report";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var hasEditRight = (bool)ViewBag.HasEdit;
+}
+@section Head {
+    <link href="~/themes/shared/contextmenu.less" rel="stylesheet" type="text/css" />
+    <link href="~/themes/manage/manageletstalkmessage.less" rel="stylesheet" type="text/css" />
+}
+@section Headline {
+    <h1>
+        <span class="title"><span class="black-text">Letstalk Notification </span> / Manage Letstalk Message</span>
+        @if (hasEditRight)
+        {
+            @Html.ActionLink("+ Create Message", "CreateLetstalkMessage", "ManageLetstalkMessage", null, new { @class = "lnk" })
+        }
+    </h1>
+}
+<section id="filter-bar" class="compose-letstalk">
+    <div class="filter-form">
+        <div class="filter-row">
+            <div class="lbl-field width-100">
+                From
+            </div>
+            <div class="edit-field width-250">
+                @Html.TextBox("FromDate", DateTime.Now.ToString("MMM dd,yyyy"), new { style = "width: 100px" })
+            </div>
+            <div class="lbl-field width-100">
+                To
+            </div>
+            <div class="edit-field">
+                @Html.TextBox("ToDate", DateTime.Now.ToString("MMM dd,yyyy"), new { style = "width: 100px" })
+            </div>
+        </div>
+        <div class="filter-row">
+            <div class="lbl-field width-100">
+                Letstalk Group
+            </div>
+            <div class="edit-field ddl-group width-250">
+                @Html.DropDownList("LetstalkGroup", (List<SelectListItem>)ViewBag.LetstalkGroupList, "All", new { @class = "width-250" })
+            </div>
+            <div class="lbl-field width-100">
+                Status
+            </div>
+            <div class="edit-field ddl-status">
+                @Html.DropDownList("Status", (List<SelectListItem>)ViewBag.StatusList, "All")
+            </div>
+            <div class="submit">
+                <input id="btnSubmit" type="submit" value="Submit" style="background: -webkit-linear-gradient(#609fbd, #549cba) #549cba" />
+            </div>
+        </div>
+    </div>
+</section>
+<section id="body">
+    <div id="manage-letstalk-message-container" class="manage-letstalk-message-container">
+        <div id="manage-letstalk-message" class="freegrid display-none" style="width: 500px;">
+        </div>
+    </div>
+    @Html.Hidden("imagePath", (string)@Url.Content("~/images/calendar.gif"))
+</section>
+@section Foot {
+    <script src="~/scripts/lib/contextmenu/contextmenucontroller.js" type="text/javascript"></script>
+    <script src="~/scripts/lib/custom-datepicker.js" type="text/javascript"></script>
+    <script src="~/scripts/lib/popup/dialogbox.js" type="text/javascript"></script>
+    <script src="~/letstalk/manageletstalkmessage.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        window.rootUrl = '@Url.Content("~/")';
+        var viewResources = {
+            CreateMailSuccessMsg: '@string.Format(ViewResource.AddSuccessMsg, "Letstalk", 5)'
+        };
+    </script>
+}

@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Sites>
+  <Site>
+    <Id>NAP</Id>
+    <Name>NAP Accounting</Name>
+  </Site>
+  <Site>
+    <Id>EX-NAP</Id>
+    <Name>External NAP Accounting</Name>
+  </Site>
+  <Site>
+    <Id>DW</Id>
+    <Name>NAP Data Warehouse</Name>
+  </Site>
+  <Site>
+    <Id>PRMS</Id>
+    <Name>Parlay RMS</Name>
+  </Site>
+  <Site>
+    <Id>LC</Id>
+    <Name>Live Chart</Name>
+  </Site>
+  <Site>
+    <Id>ALPHA</Id>
+    <Name>Alpha</Name>
+  </Site>
+  <Site>
+    <Id>LICENSEE</Id>
+    <Name>Licensee</Name>
+  </Site>
+  <Site>
+    <Id>MEMBER</Id>
+    <Name>Member</Name>
+  </Site>
+  <Site>
+    <Id>AFF</Id>
+    <Name>Affiliate</Name>
+  </Site>
+  <Site>
+    <Id>FPS</Id>
+    <Name>Fraud Protection System</Name>
+  </Site>
+  <Site>
+    <Id>FD</Id>
+    <Name>Fraud Sensor</Name>
+  </Site>
+  <Site>
+    <Id>OWP</Id>
+    <Name>Operation Working Page</Name>
+  </Site>
+  <Site>
+    <Id>Ploutos</Id>
+    <Name>Ploutos</Name>
+  </Site>
+</Sites>

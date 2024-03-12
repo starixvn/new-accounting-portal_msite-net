@@ -7,14 +7,16 @@ using Maintenance.MailStation.Services;
 
 namespace Maintenance.MailStation.Controllers;
 
-using System.Linq;
 using Fanex.NAP.Client.Attributes;
 using Fanex.NAP.Client.Helpers.Business;
 using Fanex.NAP.Client.Helpers.Web;
+using Maintenance.MailStation.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
+[Area("MailStation")]
 [NapSuperAuth]
-public class MailManageController(INapSession napSession, MailManageService mailManageService) : Controller
+public class MailManageController(INapSession napSession, IMailManageService mailManageService) : Controller
 {
     [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMail, Policy = Constant.Policy.Read)]
     public ActionResult Index(GetMailListCriteria criteria)
@@ -26,7 +28,7 @@ public class MailManageController(INapSession napSession, MailManageService mail
         ViewBag.TimeZoneString = TimeZoneExtension.GetTimeZoneString();
         ViewBag.IsUseCookie = string.IsNullOrEmpty(criteria.Emails) && string.IsNullOrEmpty(criteria.MailGroupId);
 
-        return View("~/Areas/MailStation/ManageMail/ManageMail/Index.cshtml", criteria);
+        return View(criteria);
     }
 
     public JsonResult Sites()
@@ -40,7 +42,7 @@ public class MailManageController(INapSession napSession, MailManageService mail
     }
 
     [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMail, Policy = Constant.Policy.Host)]
-    public JsonResult AddMailGroup(CreateMailGroupCriteria criteria)
+    public JsonResult AddMailGroup([FromBody] CreateMailGroupCriteria criteria)
     {
         return Json(mailManageService.CreateMailGroup(criteria));
     }
@@ -62,11 +64,11 @@ public class MailManageController(INapSession napSession, MailManageService mail
         ViewBag.TimeZoneString = TimeZoneExtension.GetTimeZoneString();
         var model = new CreateMailCriteria(mailModel);
 
-        return View("~/Areas/MailStation/ManageMail/CreateMail/Index.cshtml", model);
+        return View(model);
     }
 
     [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMail, Policy = Constant.Policy.Host)]
-    public JsonResult CreateMail(CreateMailCriteria criteria)
+    public JsonResult CreateMail([FromBody] CreateMailCriteria criteria)
     {
         if (criteria.StartOn != null)
         {
@@ -83,7 +85,7 @@ public class MailManageController(INapSession napSession, MailManageService mail
     }
 
     [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMail, Policy = Constant.Policy.Read)]
-    public ActionResult MailList(GetMailListCriteria criteria)
+    public ActionResult MailList([FromBody] GetMailListCriteria criteria)
     {
         var result = mailManageService.MailList(criteria);
 
@@ -96,11 +98,11 @@ public class MailManageController(INapSession napSession, MailManageService mail
         var mailLog = mailManageService.MailLogById(new GetMailLogByIdCriteria { MailId = mailId });
         ViewBag.TimeZoneString = TimeZoneExtension.GetTimeZoneString();
 
-        return View("~/Areas/MailStation/ManageMail/MailActionLog/Index.cshtml", mailLog.ToList());
+        return View(mailLog.ToList());
     }
 
     [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMail, Policy = Constant.Policy.Host)]
-    public ActionResult DeleteMail(DeleteMailCriteria criteria)
+    public ActionResult DeleteMail([FromBody] DeleteMailCriteria criteria)
     {
         var commandResult = mailManageService.DeleteMail(criteria);
 
@@ -118,12 +120,12 @@ public class MailManageController(INapSession napSession, MailManageService mail
         var mailModel = mailManageService.MailById(criteria);
         var model = new UpdateMailCriteria(mailModel);
 
-        return View("~/Areas/MailStation/ManageMail/UpdateMail/Index.cshtml", model);
+        return View(model);
     }
 
     [HttpPost]
     [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMail, Policy = Constant.Policy.Host)]
-    public JsonResult UpdateMail(UpdateMailCriteria criteria)
+    public JsonResult UpdateMail([FromBody] UpdateMailCriteria criteria)
     {
         criteria.ModifiedBy = napSession.UserName;
 
@@ -139,8 +141,8 @@ public class MailManageController(INapSession napSession, MailManageService mail
     }
 
     [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMail, Policy = Constant.Policy.Host)]
-    public void RunNow(int mailId)
+    public void RunNow([FromBody] ParamModel paramModel)
     {
-        mailManageService.RunNow(mailId);
+        mailManageService.RunNow(paramModel.MailId);
     }
 }

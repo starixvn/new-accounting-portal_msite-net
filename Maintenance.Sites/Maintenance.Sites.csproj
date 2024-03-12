@@ -1,9 +1,55 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="codeessentials.WebOptimizer.Dotless" Version="3.1.0" />
+    <PackageReference Include="EasyNetQ" Version="7.8.0" />
+    <PackageReference Include="Fanex.Data.ProxyClient" Version="0.0.2-alpha08" />
+    <PackageReference Include="Fanex.Logging.Extensions.AspNetCore" Version="1.0.1" />
+    <PackageReference Include="Fanex.Logging.Extensions.Database" Version="1.0.8" />
+    <PackageReference Include="Fanex.Logging.Sentry.RavenClient" Version="1.0.1.1" />
+    <PackageReference Include="Fanex.MailDeliver.MailClient" Version="2.0.11" />
+    <PackageReference Include="Fanex.MailStation.Core" Version="2.0.0" />
+    <PackageReference Include="Fanex.NAP.Client" Version="2.0.0" />
+    <PackageReference Include="Fanex.NAP.SignIn" Version="2.0.1.1" />
+    <PackageReference Include="LigerShark.WebOptimizer.Core" Version="3.0.396" />
+    <PackageReference Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" Version="8.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="8.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.StackExchangeRedis" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="8.0.0" />
+    <PackageReference Include="ONEbook.UM" Version="3.1.6" />
+    <PackageReference Include="ONEbook.UM.AspNetCore" Version="3.1.1.1" />
+    <PackageReference Include="ONEbook.UM.AspNetCore.Filters" Version="3.1.1.1" />
+    <PackageReference Include="ONEbook.UM.Transport" Version="3.1.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Sources\Maintenance.Letstalk\Maintenance.Letstalk.csproj" />
+    <ProjectReference Include="..\Sources\Maintenance.MailStation\Maintenance.MailStation.csproj" />
+    <ProjectReference Include="..\Sources\Maintenance.Mail\Maintenance.Mail.csproj" />
+    <ProjectReference Include="..\Sources\Maintenance.TraceSp\Maintenance.TraceSp.csproj" />
+    <ProjectReference Include="..\Sources\Maintenance\Maintenance.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="App_Data\Fanex.Data\DBMA.bodb_Maintenance.bodbAdminNet.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="App_Data\Fanex.Data\DBMMS.bodb_MMS.bodbAdminNet.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="App_Data\Fanex.Data\mSiteSpNames.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="App_Data\Fanex.Data\TracingSpToolSpNames.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+ 
 </Project>

@@ -6,7 +6,6 @@ using Fanex.MailDelivery.Core;
 using Fanex.MailDelivery.Core.Models;
 using Logging;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Win32;
 
 public interface IJobOperationService : IDisposable
 {
@@ -32,7 +31,7 @@ public class JobOperationService : IJobOperationService
             rabbitMqConnectionString,
             register =>
             {
-                register.Register<ITypeNameSerializer>(serviceProvider => new LegacyTypeNameSerializer());
+                register.Register<ITypeNameSerializer>(_ => new LegacyTypeNameSerializer());
                 register.Register(typeof(EasyNetQ.Logging.ILogger<>), typeof(RabbitMqLogProvider<>));
             });
     }
@@ -41,9 +40,8 @@ public class JobOperationService : IJobOperationService
     {
         var updateSchedulePublishId = string.Format(MailDeliveryConstants.UpdateScheduleRoutingKeyFormat, schedule.SiteId);
 
-        bus.PubSub.Publish(schedule, updateSchedulePublishId);
-
         legacyBus.PubSub.Publish(schedule, updateSchedulePublishId);
+        bus.PubSub.Publish(schedule, updateSchedulePublishId);
     }
 
     public void RunNow(Schedule schedule)

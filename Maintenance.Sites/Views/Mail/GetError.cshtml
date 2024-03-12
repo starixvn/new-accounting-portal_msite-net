@@ -1,0 +1,51 @@
+﻿@model List<MailError>
+@{
+    Layout = null;
+    var count = 1;
+}
+@if (!ReferenceEquals(Model, null) && Model.Any())
+{
+    <table class="grid">
+        <thead>
+            <tr>
+                <th>
+                    #
+                </th>
+                <th>
+                    Message
+                </th>
+                <th>
+                    ErrorTime
+                </th>
+                <th>
+                    SettingName
+                </th>
+                <th>
+                    StackTrace
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr class="">
+                    <td class="align-center">
+                        @(count++)
+                    </td>
+                    <td>
+                        @item.Message
+                    </td>
+                    <td>
+                        @item.ErrorTime
+                    </td>
+                    <td>
+                        @item.SettingName
+                    </td>
+                    <td>
+                        @item.StackTrace
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

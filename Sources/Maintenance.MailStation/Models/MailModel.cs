@@ -20,15 +20,12 @@ public class MailModel
     {
         get
         {
-            switch (TriggerType)
+            return TriggerType switch
             {
-                case 0:
-                    return "Function";
-                case 1:
-                    return "Schedule";
-                default:
-                    return "Unknown";
-            }
+                0 => "Function",
+                1 => "Schedule",
+                _ => "Unknown"
+            };
         }
     }
 

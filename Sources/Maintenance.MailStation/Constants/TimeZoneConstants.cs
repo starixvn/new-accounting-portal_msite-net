@@ -6,8 +6,6 @@ using System.Diagnostics.CodeAnalysis;
 
 public static class TimeZoneConstants
 {
-    [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules", "SP2101:MethodMustNotContainMoreLinesThan", Justification = "Reviewed. Suppression is OK here.")]
-    [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules", "SP2100:CodeLineMustNotBeLongerThan", Justification = "Reviewed. Suppression is OK here.")]
     [SuppressMessage("Microsoft.Performance", "CA1809:AvoidExcessiveLocals", Justification = "Reviewed. Suppression is OK here.")]
     static TimeZoneConstants()
     {
@@ -83,6 +81,7 @@ public static class TimeZoneConstants
         Timezones.Add(new CustomTimeZone { StandardName = "SA Western Standard Time", DisplayName = "(GMT-04:00) La Paz", TimeZoneString = "-04:00" });
         Timezones.Add(new CustomTimeZone { StandardName = "Central Brazilian Standard Time", DisplayName = "(GMT-04:00) Manaus", TimeZoneString = "-04:00" });
         Timezones.Add(new CustomTimeZone { StandardName = "Pacific SA Standard Time", DisplayName = "(GMT-04:00) Santiago", TimeZoneString = "-04:00" });
+        Timezones.Add(new CustomTimeZone { StandardName = "Bolivia Time", DisplayName = "(GMT-04:00) Santa Cruz, Bolivia", TimeZoneString = "-04:00" });
         Timezones.Add(new CustomTimeZone { StandardName = "Venezuela Standard Time", DisplayName = "(GMT-04:30) Caracas", TimeZoneString = "-04:30" });
         Timezones.Add(new CustomTimeZone { StandardName = "SA Pacific Standard Time", DisplayName = "(GMT-05:00) Bogota, Lima, Quito, Rio Branco", TimeZoneString = "-05:00" });
         Timezones.Add(new CustomTimeZone { StandardName = "Eastern Standard Time", DisplayName = "(GMT-05:00) Eastern Time (US & Canada)", TimeZoneString = "-05:00" });

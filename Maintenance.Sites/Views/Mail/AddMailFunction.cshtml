@@ -1,0 +1,108 @@
+﻿@model MailFunctionViewModel
+@{
+    ViewBag.Title = ViewResource.Mail_Function;
+    Layout = "~/Views/Shared/_Layout.cshtml";   
+}
+@{
+    ViewBag.Title = string.Format("{0} {1}", ViewResource.Create_New, ViewResource.Mail_Function);
+    bool success = ViewBag.Success != null && ViewBag.Success;    
+}
+@section Head {
+    
+    <script type="text/x-jsrender" id="templateMailSetting">
+        <option value="{{:SettingID}}">{{:SettingName}}</option>
+    </script>
+    <script type="text/x-jsrender" id="templateMailConfig">
+        <option value="{{:AppID}}">{{:AppName}}</option>
+    </script>
+}
+@section Headline {
+    <h1>
+        <span class="title">@ViewBag.Title</span>
+        @Html.ActionLink("← " + ViewResource.Back_To_List, "MailFunction", "Mail", null, new { @class = "lnk" })
+    </h1>
+}
+@using (Html.BeginForm())
+{
+    <div class="form">
+        <div class="form-row summary">
+            <div class="lbl-field">
+            </div>
+            <div class="edit-field">
+                @Html.ValidationSummary()
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="lbl-field">
+                @Html.LabelFor(m => m.FunctionName)
+            </div>
+            <div class="edit-field">
+                @Html.TextBoxFor(m => m.FunctionName)
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="lbl-field">
+                @Html.LabelFor(m => m.ConfigId)
+            </div>
+            <div class="edit-field">
+                @Html.DropDownListFor(m => m.ConfigId, (List<SelectListItem>)ViewBag.ListMailConfig)
+            </div>
+            <div class="lbl-field">
+                <div class="grid">
+                    <div class="action-wrp">
+                        <a href="#" title="@ViewResource.Create_New @ViewResource.Mail_Config" class="btn-edit addconfig">@ViewResource.Create_New</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="lbl-field">
+                @Html.LabelFor(m => m.SettingId)
+            </div>
+            <div class="edit-field">
+                @Html.DropDownListFor(m => m.SettingId, (List<SelectListItem>)ViewBag.ListMailSetting)
+            </div>
+            <div class="lbl-field">
+                <div class="grid">
+                    <div class="action-wrp">
+                        <a href="#" title="@ViewResource.Create_New @ViewResource.Mail_Setting" class="btn-edit addsetting">@ViewResource.Create_New</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="lbl-field">
+            </div>
+            <div class="edit-field">
+                @if (!success)
+                {
+                    <input type="submit" value="@ViewResource.Create" />
+                    <input type="reset" value="@ViewResource.Cancel" />  
+                }
+            </div>
+        </div>
+    </div>
+}
+@section Foot
+{
+    <script type="text/ecmascript" src="/scripts/add-mail-function.js"></script>
+    
+    <script type="text/javascript">
+        $(function () {
+            $('input[type=reset]').bind('click', function () {
+                window.location.replace('/Mail/MailFunction');
+            });
+        });
+    </script>
+    @if (success)
+    {
+        var dialogMsg = string.Format(ViewResource.AddSuccessMsg, ViewResource.Mail_Function + " '" + Model.FunctionName, 5);
+
+        <script type="text/javascript">
+            $(function () {
+                NAP.showSuccessMsg('@dialogMsg', '/Mail/MailFunction', 6000);
+            });
+
+        </script>
+    }
+}

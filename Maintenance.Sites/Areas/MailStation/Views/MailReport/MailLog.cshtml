@@ -1,0 +1,47 @@
+
+@model List<MailLogModel>
+@{
+    ViewBag.Title = Labels.Log_details;
+    var mailLog = JsonConvert.SerializeObject(Model);
+}
+<!DOCTYPE html>
+<!--[if IEMobile 7]><html class="no-js iem7 oldie"><![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js ie7 oldie" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js ie8 oldie" lang="en"><![endif]-->
+<!--[if (IE 9)&!(IEMobile)]><html class="no-js ie9" lang="en"><![endif]-->
+<!--[if (gt IE 9)|(gt IEMobile 7)]><!-->
+<html lang="en" class="linen" ng-app="app">
+<!--<![endif]-->
+<head>
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="/css/common.css" type="text/css" />
+    <link rel="stylesheet" href="/css/common-less.css" type="text/css" />
+    <link href="~/mailstation/css/maillog.less" rel="stylesheet" type="text/css" />
+</head>
+<body id="body">
+    <div id="mail-log-container" class="mail-log-container">
+        <div id="mail-log" class="freegrid display-none">
+        </div>
+    </div>
+    <script type="text/ecmascript" src="/scripts/sharedscripts.js"></script>
+    <script src="~/mailstation/maillogcontroller.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        window.rootUrl = '@Url.Content("~/")';
+        var mailLog= @Html.Raw(mailLog);
+        var viewResources = {
+            Symbol_No: '@Labels.Symbol_No',
+            Status: '@Labels.Status',
+            Message: '@Labels.Message',
+            Log_Time: '@Labels.Log_Time',
+            Stack_Trace: '@Labels.Stack_Trace',
+            Waiting: '@Labels.Waiting',
+            Running: '@Labels.Running',
+            Sent: '@Labels.Sent',
+            Data_not_ready: '@Labels.Data_not_ready',
+            Failed: '@Labels.Failed',
+            Aborted: '@Labels.Abort',
+            Succeeded:'@Labels.Succeeded'
+        };
+    </script>
+</body>
+</html>

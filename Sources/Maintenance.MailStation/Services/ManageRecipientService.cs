@@ -2,18 +2,39 @@ namespace Maintenance.MailStation.Services;
 
 using System.Collections.Generic;
 using System.Linq;
+using Criteria;
+using Criteria.MailManage;
+using Criteria.MailReport;
 using Fanex.Data.Repository;
 using Fanex.NAP.Client.Models;
 using Fanex.NAP.Client.Services;
-using Maintenance.MailStation.Criteria.ManageRecipient;
-using Maintenance.MailStation.Models;
+using Criteria.ManageRecipient;
+using Fanex.MailDelivery.Core.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Models;
 
-public class ManageRecipientService : MailStationBaseService
+public interface IManageRecipientService
 {
-    private readonly IUserService userService = new UserService();
+    List<RecipientModel> RecipientList(RecipientListCriteria criteria);
+    RecipientModel RecipientById(RecipientByIdCriteria criteria);
+    CommandResult UpdateRecipient(UpdateRecipientCriteria criteria);
+    CommandResult CreateRecipient(CreateRecipientCriteria criteria);
+    CommandResult DeleteRecipient(DeleteRecipientCriteria criteria);
+    User CheckRecipient(CheckRecipientInfoCriteria criteria);
+    List<SelectListItem> Sites(bool hasAllElement = true);
+    List<SelectListItem> MailGroups(bool hasAllElement = true);
+    List<SelectListItemExtra> Status(bool hasAllElement = true);
+    List<SelectListItemExtra> TaskStatus(bool hasAllElement = true);
+    List<SelectListItemExtra> Trigger(bool hasAllElement = true);
+    List<SuggestMailModel> SuggestMails(SuggestMailCriteria criteria);
+    CommandResult ExecuteNonQuery(UpdateCommandBase command);
+    MailTaskModel GetMailTaskByID(GetMailTaskByIdCriteria criteria);
+    Schedule GetScheduleByMailId(GetScheduleByIdCriteria criteria);
+    string GetTimeZone();
+}
 
-    private readonly IDynamicRepository dynamicRepository= new DynamicRepository();
-
+public class ManageRecipientService(IUserService userService , IDynamicRepository dynamicRepository) : MailStationBaseService, IManageRecipientService
+{
     public List<RecipientModel> RecipientList(RecipientListCriteria criteria)
     {
         return dynamicRepository.Fetch<RecipientModel>(criteria).ToList();

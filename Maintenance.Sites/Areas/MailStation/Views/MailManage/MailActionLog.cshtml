@@ -1,0 +1,32 @@
+﻿@using Newtonsoft.Json
+@model List<MailActionLogModel>
+@{
+    ViewBag.Title = Labels.Log;
+    var mailLog = JsonConvert.SerializeObject(Model);
+}
+<!DOCTYPE html>
+<html lang="en" class="linen">
+<head>
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="/css/common.css" type="text/css" />
+    <link rel="stylesheet" href="/css/common-less.css" type="text/css" />
+    <link href="~/mailstation/css/mailactionlog.less" rel="stylesheet" />
+</head>
+<body id="body">
+    <div id="mail-log-container" class="mail-log-container">
+        <div id="mail-log" class="freegrid display-none">
+        </div>
+    </div>
+    <script type="text/ecmascript" src="/scripts/sharedscripts.js"></script>
+    <script src="~/mailstation/mailactionlogcontroller.js"></script>
+    <script type="text/javascript">
+        window.rootUrl = '@Url.Content("~/")';
+        var mailLog = @Html.Raw(mailLog);
+        var viewResources = {
+            Symbol_No: '@Labels.Symbol_No',
+            Message: '@Labels.Message',
+            Log_Time: '@Labels.Log_Time'
+        };
+    </script>
+</body>
+</html>

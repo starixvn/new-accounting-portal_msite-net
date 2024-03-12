@@ -5,7 +5,14 @@ using Fanex.NAP.Client.Helpers.Business;
 using Fanex.NAP.Client.Helpers.Web;
 using Fanex.NAP.Client.Services;
 
-public class PermissionService(INapSession currentSession, INapSettings napSettings, IUserService userService)
+public interface IPermissionService
+{
+    bool HasReadPermission(string functionName);
+    bool HasHostPermission(string functionName);
+    bool HasPermission(string functionName, Constant.Policy functionPolicy = Constant.Policy.Read);
+}
+
+public class PermissionService(INapSession currentSession, INapSettings napSettings, IUserService userService) : IPermissionService
 {
     public bool HasReadPermission(string functionName)
     {
