@@ -1,6 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Functions>
-  <Function Name="Application Management">
-    <Setting Key="MailRecorder_SelLogConfig" SpName="MailRecorder_SelLogConfig" DbName="DBMA.bodb_Maintenance.bodbAdminNet" />
-  </Function>
-</Functions>
