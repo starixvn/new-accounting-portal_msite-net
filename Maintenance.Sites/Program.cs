@@ -33,6 +33,7 @@ services.AddMail(configuration);
 services.AddMailStation();
 services.AddLetstalk();
 services.AddTraceSp();
+services.AddBotService();
 
 services.AddControllersWithViews(options =>
 {

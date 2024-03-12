@@ -14,6 +14,8 @@ using Fanex.NAP.Client.Session;
 using Letstalk.Services;
 using Mail.Services;
 using MailStation.Services;
+using Maintenance.BotService.Services;
+using Maintenance.BotService.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.DataProtection;
 using NUglify.Css;
@@ -164,6 +166,12 @@ public static class ServiceCollectionExtensions
         services.AddTransient<TraceSp.Services.ISiteService, TraceSp.Services.SiteService>();
         services.AddTransient<ITracingSpService, TracingSpService>();
 
+        return services;
+    }
+
+    public static IServiceCollection AddBotService(this IServiceCollection services)
+    {
+        services.AddTransient<IApplicationSettingService, ApplicationSettingService>();
         return services;
     }
 }

@@ -29,6 +29,10 @@ public static class SiteFunctionKeys
 
     public const string AssignSiteToUser = "AssignSiteToUser";
 
+    public const string BotAppManagement = "BotAppManagement";
+
+    public const string MessageManagement = "MessageManagement";
+
     public const string ComposeEmail = "ComposeEmail";
 
     public const string LetstalkNotification = "LetstalkNotification";

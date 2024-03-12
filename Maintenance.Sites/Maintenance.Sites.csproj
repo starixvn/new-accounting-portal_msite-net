@@ -55,6 +55,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Maintenance.BotService\Maintenance.BotService.csproj" />
     <ProjectReference Include="..\Sources\Maintenance.Letstalk\Maintenance.Letstalk.csproj" />
     <ProjectReference Include="..\Sources\Maintenance.MailStation\Maintenance.MailStation.csproj" />
     <ProjectReference Include="..\Sources\Maintenance.Mail\Maintenance.Mail.csproj" />
@@ -64,6 +65,9 @@
 
   <ItemGroup>
     <None Update="App_Data\Fanex.Data\DBMA.bodb_Maintenance.wsv_nap.xml">
+    <None Update="App_Data\Fanex.Data\BotServiceSpNames.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="App_Data\Fanex.Data\DBMMS.bodb_MMS.wsv_nap.xml">

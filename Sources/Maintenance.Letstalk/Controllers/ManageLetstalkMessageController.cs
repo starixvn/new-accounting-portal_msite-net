@@ -15,8 +15,8 @@ using Services;
 
 [NapSuperAuth]
 public class ManageLetstalkMessageController(
-    INapSession napSession, 
-    INapSettings napSettings, 
+    INapSession napSession,
+    INapSettings napSettings,
     IUserService userService,
     IManageLetstalkMessageService manageLetstalkMessageService) : Controller
 {

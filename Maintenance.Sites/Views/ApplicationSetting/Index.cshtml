@@ -1,0 +1,58 @@
+﻿@model GetApplicationSettingParams
+@{
+    ViewBag.Title = "Bot Service";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var hasHostApplicationSettingPermission = ViewBag.HasHostApplicationSettingPermission;
+}
+@section Head {
+    <link href="~/themes/shared/contextmenu.less" rel="stylesheet" type="text/css" />
+    <link href="~/themes/manage/bot-service/bot-service.less" rel="stylesheet" type="text/css" />
+}
+@section Headline {
+    <h1>
+        <span class="title"><span class="black-text">Bot Service </span> / Application Setting Management</span>
+        @if (hasHostApplicationSettingPermission)
+        {
+            @Html.ActionLink("+ Create Application Setting", "Create", "ApplicationSetting", null, new { @class = "lnk" })
+        }
+    </h1>
+}
+<section id="filter-bar">
+    <div class="filter-form">
+        <div class="filter-row">
+            <div class="lbl-field width-200">
+                @Html.LabelFor(m => m.Name, "Application Name")
+            </div>
+            <div class="edit-field width-300">
+                @Html.TextBoxFor(m => m.Name, new { @class = "width-300" })
+            </div>
+            <div class="lbl-field">
+                @Html.LabelFor(m => m.Active, "Status")
+            </div>
+            <div class="edit-field">
+                <select id="Active" name="Active">
+                    <option value="">All</option>
+                    <option value="1">Active</option>
+                    <option value="0">Inactive</option>
+                </select>
+            </div>
+            <div class="submit">
+                <input id="button-search" type="submit" value="Submit" />
+            </div>
+        </div>
+    </div>
+</section>
+<section id="body">
+    <div id="application-setting-container" class="application-setting-container">
+        <div id="application-setting" class="freegrid display-none"></div>
+    </div>
+    @Html.Hidden("imagePath", (string)@Url.Content("~/images/calendar.gif"))
+</section>
+@section Foot {
+
+    <script src="~/scripts/lib/contextmenu/contextmenucontroller.js" type="text/javascript"></script>
+    <script src="~/bot-service/applicationsetting.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        window.rootUrl = '@Url.Content("~/")';
+    </script>
+}

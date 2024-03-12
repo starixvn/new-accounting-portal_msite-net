@@ -51,6 +51,7 @@ public static class Bundle
             "scripts/lib/InputCombobox/jquery.combobox-ext.less",
             "scripts/lib/Countdown/CountDown.less",
             "themes/manage/ManageLetstalkMessage.less",
+            "themes/manage/bot-service/bot-service.less",
             "themes/manage/log/mail-config.less",
             "themes/manage/log/manage.less",
             "themes/manage/LetstalkReport.less",
