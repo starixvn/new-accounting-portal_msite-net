@@ -83,7 +83,8 @@ var TracingSPController = function () {
 
         $.ajax({
             url: "/TracingSp/GetTracingSpData",
-            data: self.params,
+            data: JSON.stringify(self.params),
+            contentType: "application/json; charset=utf-8",
             type: 'POST',
             dataType: 'json',
             cache: false,
