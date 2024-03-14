@@ -7,6 +7,32 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="App_Data\TraceSp\DBServerList.LOCAL.xml" />
+    <None Remove="App_Data\TraceSp\DBServerList.PROD.xml" />
+    <None Remove="App_Data\TraceSp\DBServerList.SIT.xml" />
+    <None Remove="App_Data\TraceSp\DBServerList.UAT.xml" />
+    <None Remove="App_Data\TraceSp\Sites.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="App_Data\TraceSp\DBServerList.LOCAL.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\TraceSp\DBServerList.PROD.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\TraceSp\DBServerList.SIT.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\TraceSp\DBServerList.UAT.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\TraceSp\Sites.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="codeessentials.WebOptimizer.Dotless" Version="3.1.0" />
     <PackageReference Include="EasyNetQ" Version="7.8.0" />
     <PackageReference Include="Fanex.Data.ProxyClient" Version="0.0.2-alpha08" />
@@ -37,10 +63,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="App_Data\Fanex.Data\DBMA.bodb_Maintenance.bodbAdminNet.xml">
+    <None Update="App_Data\Fanex.Data\DBMA.bodb_Maintenance.wsv_nap.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="App_Data\Fanex.Data\DBMMS.bodb_MMS.bodbAdminNet.xml">
+    <None Update="App_Data\Fanex.Data\DBMMS.bodb_MMS.wsv_nap.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="App_Data\Fanex.Data\mSiteSpNames.xml">

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Functions>
-  <Function Name="TracingSP">
-    <Setting Key="vndba_sp_trace_WebApp" SpName="vndba_sp_trace_WebApp" DbName="DBMON.MonDB.bodbAdminNet" TimeOut="150" />
-  </Function>
+	<Function Name="TracingSP">
+		<Setting Key="vndba_sp_trace_WebApp" SpName="vndba_sp_trace_WebApp" DbName="DBMON.MonDB.wsv_nap" TimeOut="150" />
+	</Function>
 </Functions>
