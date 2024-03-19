@@ -4,5 +4,12 @@
         <Setting Key="ApplicationSetting_GetAll" SpName="ApplicationSetting_GetAll" DbName="BotServiceDB" />
         <Setting Key="ApplicationSetting_Insert" SpName="ApplicationSetting_Insert" DbName="BotServiceDB" />
         <Setting Key="ApplicationSetting_GetById" SpName="ApplicationSetting_GetById" DbName="BotServiceDB" />
+        <Setting Key="ApplicationSetting_Update" SpName="ApplicationSetting_Update" DbName="BotServiceDB" />
+    </Function>
+    <Function Name="Message">
+        <Setting Key="Channel_GetAll" SpName="Channel_GetAll" DbName="BotServiceDB" />
+        <Setting Key="Bot_GetByAppId" SpName="Bot_GetByAppId" DbName="BotServiceDB" />
+        <Setting Key="Message_Get" SpName="Message_Get" DbName="BotServiceDB" />
+        <Setting Key="MessageLog_Get" SpName="MessageLog_Get" DbName="BotServiceDB" />
     </Function>
 </Functions>

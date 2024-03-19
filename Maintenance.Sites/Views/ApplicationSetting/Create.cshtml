@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Create Application Setting";
+    ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section Head {
@@ -8,8 +8,17 @@
 }
 @section Headline {
     <h1>
-        <span class="title"><span class="black-text">Bot Service </span> / Manage Application Setting / Create</span>
-        @Html.ActionLink("← Back To List", "Index", "ApplicationSetting", new { @class = "lnk" })
+        <span class="title">
+            <span class="first">Bot Service / </span><span class="second">
+                Manage Application Setting /
+            </span>
+            @ViewBag.Title
+        </span>
+        <div class="button-action">
+            <a id="btnBackToList" class="lnk" href="~/ApplicationSetting/Index">
+                ← Back to list
+            </a>
+        </div>
     </h1>
 }
 
@@ -53,6 +62,15 @@
             <div class="edit-field lt-content">
                 <textarea id="Description" maxlength="1024" style="width: 402px; height: 152px;"></textarea><br />
                 <span class="red-color">Max Length: 1024 characters</span>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="lbl-field width-180">
+                <b>Hidden content on Message List</b>
+            </div>
+
+            <div class="edit-field ddl-group">
+                <input type="checkbox" id="HiddenContent" value="@Model.HiddenContent" @(Model.HiddenContent ? "checked" : string.Empty) /><br />
             </div>
         </div>
         <div class="form-row">

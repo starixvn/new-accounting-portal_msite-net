@@ -1,7 +1,7 @@
 ﻿@model Maintenance.BotService.Models.App.ApplicationSetting
 
 @{
-    ViewBag.Title = "Report";
+    ViewBag.Title = "Update";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section Head {
@@ -10,8 +10,17 @@
 }
 @section Headline {
     <h1>
-        <span class="title"><span class="black-text">Bot Service </span> / Manage Application Setting / Create</span>
-        @Html.ActionLink("← Back To List", "Index", "ApplicationSetting", new { @class = "lnk" })
+        <span class="title">
+            <span class="first">Bot Service / </span><span class="second">
+                Manage Application Setting /
+            </span>
+            @ViewBag.Title
+        </span>
+        <div class="button-action">
+            <a id="btnBackToList" class="lnk" href="~/ApplicationSetting/Index">
+                ← Back to list
+            </a>
+        </div>
     </h1>
 }
 
@@ -24,6 +33,7 @@
                 <div id="validationSummary" style="width: 100%;"></div>
             </div>
         </div>
+        <input type="text" hidden id="AppId" value="@Model.AppId" readonly />
         <div class="form-row">
             <div class="lbl-field width-180">
                 <b>Application Name</b>
@@ -45,7 +55,9 @@
                 <b>Microsoft App Password</b>
             </div>
             <div class="edit-field">
-                <input type="password" maxlength="200" style="width: 397px;" id="MicrosoftAppPassword" value="@Model.MicrosoftAppPassword" /><br />
+                <input type="password" maxlength="200" style="width: 397px;" id="MicrosoftAppPassword" value="@Model.MicrosoftAppPassword" />
+                <span class="show-pwd">Show</span>
+                <br />
             </div>
         </div>
         <div class="form-row">
@@ -61,8 +73,18 @@
             <div class="lbl-field width-180">
                 <b>Active</b>
             </div>
+           
             <div class="edit-field ddl-group">
-                <input type="checkbox" id="Active" @(!Model.IsDeleted ? "checked" : "") /><br />
+                <input type="checkbox" id="Active" value="@Model.IsActive" @(Model.IsActive ? "checked" : string.Empty) /><br />
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="lbl-field width-180">
+                <b>Hidden content on Message List</b>
+            </div>
+
+            <div class="edit-field ddl-group">
+                <input type="checkbox" id="HiddenContent" value="@Model.IsHideContent" @(Model.IsHideContent ? "checked" : string.Empty) /><br />
             </div>
         </div>
         <div class="form-row">

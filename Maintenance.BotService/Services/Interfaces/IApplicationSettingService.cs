@@ -6,12 +6,12 @@
 
     public interface IApplicationSettingService
     {
-        Task<IEnumerable<ApplicationSetting>> GetApplicationSettingAsync(string name, bool? isDeleted);
+        Task<IEnumerable<ApplicationSetting>> GetApplicationSettingAsync(string name, bool? isActive);
 
         Task<ApplicationSetting> GetApplicationSettingByIdAsync(int appSettingId);
 
         Task<CommandResult> InsertAsync(InsertApplicationSettingCommand command);
 
-        Task<CommandResult> UpdateAsync(ApplicationSetting applicationSetting);
+        Task<CommandResult> UpdateAsync(UpdateApplicationSettingCommand command);
     }
 }

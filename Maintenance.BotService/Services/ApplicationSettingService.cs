@@ -4,16 +4,22 @@
     using System.Threading.Tasks;
     using Fanex.Data;
     using Fanex.Data.Repository;
-    using Fanex.NAP.Client.Helpers.Web;
     using Maintenance.BotService.Criteria.ApplicationSetting;
     using Maintenance.BotService.Models;
     using Maintenance.BotService.Models.App;
     using Maintenance.BotService.Services.Interfaces;
 
-    public class ApplicationSettingService(IDynamicRepository dynamicRepository, INapSession napSession) : IApplicationSettingService
+    public class ApplicationSettingService(IDynamicRepository dynamicRepository) : IApplicationSettingService
     {
-        public async Task<IEnumerable<ApplicationSetting>> GetApplicationSettingAsync(string name, bool? isDeleted)
-        => await dynamicRepository.FetchAsync<ApplicationSetting>(new GetApplicationSettingCriteria { Name = name, IsDeleted = isDeleted });
+        public async Task<IEnumerable<ApplicationSetting>> GetApplicationSettingAsync(string name, bool? isActive)
+        {
+            var (apps, bots) = await dynamicRepository.FetchMultipleAsync<ApplicationSetting, Bot>(new GetApplicationSettingCriteria { Name = name, IsActive = isActive });
+            foreach (var app in apps)
+            {
+                app.Bots = bots.Where(b => b.AppId == app.AppId);
+            }
+            return apps;
+        }
 
         public async Task<ApplicationSetting> GetApplicationSettingByIdAsync(int appSettingId)
         {
@@ -36,9 +42,15 @@
             return result;
         }
 
-        public Task<CommandResult> UpdateAsync(ApplicationSetting applicationSetting)
+        public async Task<CommandResult> UpdateAsync(UpdateApplicationSettingCommand command)
         {
-            throw new NotImplementedException();
+            await dynamicRepository.ExecuteAsync(command);
+            var result = new CommandResult
+            {
+                Code = command.ErrCode,
+                Message = command.ErrMsg
+            };
+            return result;
         }
     }
 }

@@ -32,8 +32,8 @@
             <div class="edit-field">
                 <select id="Active" name="Active">
                     <option value="">All</option>
-                    <option value="1">Active</option>
-                    <option value="0">Inactive</option>
+                    <option value="true" selected>Active</option>
+                    <option value="false">Inactive</option>
                 </select>
             </div>
             <div class="submit">
@@ -54,5 +54,8 @@
     <script src="~/bot-service/applicationsetting.js" type="text/javascript"></script>
     <script type="text/javascript">
         window.rootUrl = '@Url.Content("~/")';
+        var viewResources = {
+            hasEditRight: @(hasHostApplicationSettingPermission ? 1 : 0)
+        };
     </script>
 }

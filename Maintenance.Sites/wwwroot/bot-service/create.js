@@ -11,6 +11,7 @@ var CreateApplicationSettingController = function () {
         MicrosoftAppPssword: null,
         ShowPassword: null,
         Description: null,
+        HiddenContent: null,
         Create: null,
         Cancel: null
     };
@@ -25,6 +26,7 @@ var CreateApplicationSettingController = function () {
         DOMElements.MicrosoftAppId = $('#MicrosoftAppId');
         DOMElements.MicrosoftAppPassword = $('#MicrosoftAppPassword');
         DOMElements.Description = $('#Description');
+        DOMElements.HiddenContent = $('#HiddenContent');
         DOMElements.Cancel = $('#btnCancel');
         DOMElements.Create = $('#btnCreate');
         DOMElements.ShowPassword = $('#ShowPassword');
@@ -83,15 +85,15 @@ var CreateApplicationSettingController = function () {
                     applicationName: DOMElements.ApplicationName.val().trim(),
                     microsoftAppId: DOMElements.MicrosoftAppId.val().trim(),
                     microsoftAppPassword: DOMElements.MicrosoftAppPassword.val(),
-                    description: DOMElements.Description.val()
+                    description: DOMElements.Description.val(),
+                    hiddenConten: DOMElements.HiddenContent.is(':checked')
                 }),
                 success: function (result) {
                     if (result.IsSuccessful) {
                         result.Message = 'Create application setting successfully!';
                         self.resetForm();
-                    } 
+                    }
                     sharedScriptManager.showNonQueryResult(result, "/ApplicationSetting/Index", 3000);
-                    
                 },
                 complete: function () {
                     sharedScriptManager.unblockUI();

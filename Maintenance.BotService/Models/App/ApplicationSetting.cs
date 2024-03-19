@@ -10,5 +10,9 @@
         public string MicrosoftAppTenantId { get; set; }
         public string Description { get; set; } = string.Empty;
         public bool IsDeleted { get; set; }
+        public bool IsActive { get; set; }
+        public bool IsHideContent { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public IEnumerable<Bot> Bots { get; set; }
     }
 }

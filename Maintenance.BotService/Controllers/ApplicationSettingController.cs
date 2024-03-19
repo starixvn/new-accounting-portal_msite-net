@@ -29,11 +29,10 @@
             return View(model);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> GetApplicationSetting([FromBody] GetApplicationSettingParams model)
+        public async Task<IActionResult> GetApplicationSetting(string name, bool? isActive)
         {
-            var data = await applicationSettingService.GetApplicationSettingAsync(model.Name, !model.Active);
-            return Ok(data);
+            var apps = await applicationSettingService.GetApplicationSettingAsync(name, isActive);
+            return Json(apps);
         }
 
         [NapAuth(FunctionKey = SiteFunctionKeys.BotAppManagement, Policy = Constant.Policy.Host)]
@@ -53,7 +52,8 @@
                 AppName = param.ApplicationName,
                 MicrosoftAppPassword = param.MicrosoftAppPassword, // Cryptography.EncryptPassword(param.MicrosoftAppPassword),
                 Description = param.Description,
-                Creator = napSession.UserId
+                Creator = napSession.UserId,
+                IsHideContent = param.HiddenContent
             };
 
             var result = await applicationSettingService.InsertAsync(command);
@@ -69,10 +69,20 @@
 
         [HttpPost]
         [NapAuth(FunctionKey = SiteFunctionKeys.BotAppManagement, Policy = Constant.Policy.Host)]
-        public async Task<IActionResult> Update(int appId, [FromBody] UpdateApplicationSettingParams param)
+        public async Task<IActionResult> Update([FromBody] UpdateApplicationSettingParams param)
         {
-            var appSetting = await applicationSettingService.GetApplicationSettingByIdAsync(appId);
-            return View(appSetting);
+            var command = new UpdateApplicationSettingCommand
+            {
+                AppId = param.AppId,
+                AppName = param.AppName,
+                MicrosoftAppPassword = param.MicrosoftAppPassword,
+                Description = param.Description,
+                IsActive = param.Active,
+                IsHideContent = param.HiddenContent,
+                UpdatedBy = napSession.UserId
+            };
+            var result = await applicationSettingService.UpdateAsync(command);
+            return Json(result);
         }
     }
 }

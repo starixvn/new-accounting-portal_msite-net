@@ -5,7 +5,7 @@
     public class GetApplicationSettingCriteria : CriteriaBase
     {
         public string Name { get; set; }
-        public bool? IsDeleted { get; set; }
+        public bool? IsActive { get; set; }
 
         public override string GetSettingKey() => "ApplicationSetting_GetAll";
 

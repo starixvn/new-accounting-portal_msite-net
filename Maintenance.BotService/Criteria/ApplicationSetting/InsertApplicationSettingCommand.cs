@@ -8,6 +8,7 @@
         public string MicrosoftAppType { get; set; } = "MultiTenant";
         public string MicrosoftAppTenantId { get; set; } = string.Empty;
         public string Description { get; set; }
+        public bool IsHideContent { get; set; }
         public int Creator { get; set; }
 
         public override string GetSettingKey() => "ApplicationSetting_Insert";
