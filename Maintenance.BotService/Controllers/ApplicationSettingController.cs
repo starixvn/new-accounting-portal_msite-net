@@ -50,7 +50,7 @@
             {
                 MicrosoftAppId = param.MicrosoftAppId,
                 AppName = param.ApplicationName,
-                MicrosoftAppPassword = param.MicrosoftAppPassword, // Cryptography.EncryptPassword(param.MicrosoftAppPassword),
+                MicrosoftAppPassword = CryptographyHelper.EncryptPassword(param.MicrosoftAppPassword),
                 Description = param.Description,
                 Creator = napSession.UserId,
                 IsHideContent = param.HiddenContent
@@ -75,7 +75,7 @@
             {
                 AppId = param.AppId,
                 AppName = param.AppName,
-                MicrosoftAppPassword = param.MicrosoftAppPassword,
+                MicrosoftAppPassword = CryptographyHelper.EncryptPassword(param.MicrosoftAppPassword),
                 Description = param.Description,
                 IsActive = param.Active,
                 IsHideContent = param.HiddenContent,

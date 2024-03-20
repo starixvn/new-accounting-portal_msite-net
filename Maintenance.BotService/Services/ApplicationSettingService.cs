@@ -2,7 +2,6 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using Fanex.Data;
     using Fanex.Data.Repository;
     using Maintenance.BotService.Criteria.ApplicationSetting;
     using Maintenance.BotService.Models;
@@ -23,12 +22,12 @@
 
         public async Task<ApplicationSetting> GetApplicationSettingByIdAsync(int appSettingId)
         {
-            var appSetting = await dynamicRepository.GetAsync<ApplicationSetting>(new GetApplicationSettingByIdCriteria { AppId = appSettingId });
-            if (appSetting is not null)
+            var applicationSetting = await dynamicRepository.GetAsync<ApplicationSetting>(new GetApplicationSettingByIdCriteria { AppId = appSettingId });
+            if (applicationSetting is not null)
             {
-                appSetting.MicrosoftAppPassword = Cryptography.EncryptPassword(appSetting.MicrosoftAppPassword);
+                applicationSetting.MicrosoftAppPassword = CryptographyHelper.DecryptPassword(applicationSetting.MicrosoftAppPassword);
             }
-            return appSetting;
+            return applicationSetting;
         }
 
         public async Task<CommandResult> InsertAsync(InsertApplicationSettingCommand command)
