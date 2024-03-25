@@ -55,7 +55,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Maintenance.BotService\Maintenance.BotService.csproj" />
+        <ProjectReference Include="..\Sources\Maintenance.BotService\Maintenance.BotService.csproj" />
         <ProjectReference Include="..\Sources\Maintenance.Letstalk\Maintenance.Letstalk.csproj" />
         <ProjectReference Include="..\Sources\Maintenance.MailStation\Maintenance.MailStation.csproj" />
         <ProjectReference Include="..\Sources\Maintenance.Mail\Maintenance.Mail.csproj" />

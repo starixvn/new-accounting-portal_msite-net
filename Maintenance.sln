@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maintenance.TraceSp", "Sour
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maintenance.Mail", "Sources\Maintenance.Mail\Maintenance.Mail.csproj", "{CC2777A7-F3FE-458A-BB44-796D5E075028}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maintenance.BotService", "Maintenance.BotService\Maintenance.BotService.csproj", "{A861979A-6F57-4AE2-94C8-E8A81F4F14FA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maintenance.BotService", "Sources\Maintenance.BotService\Maintenance.BotService.csproj", "{A861979A-6F57-4AE2-94C8-E8A81F4F14FA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
