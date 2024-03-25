@@ -3,6 +3,7 @@ FROM hub.nexdev.net/base/dotnet/core/sdk:8.0-alpine AS builder
 WORKDIR /src
 COPY ./Sources/Maintenance/*.csproj ./Sources/Maintenance/
 COPY ./Sources/Maintenance.Letstalk/*.csproj ./Sources/Maintenance.Letstalk/
+COPY ./Sources/Maintenance.BotService/*.csproj ./Sources/Maintenance.BotService/
 COPY ./Sources/Maintenance.Mail/*.csproj ./Sources/Maintenance.Mail/
 COPY ./Sources/Maintenance.MailStation/*.csproj ./Maintenance.MailStation/
 COPY ./Sources/Maintenance.TraceSp/*.csproj ./Sources/Maintenance.TraceSp/
