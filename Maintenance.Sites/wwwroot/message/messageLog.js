@@ -10,12 +10,16 @@ var MessageLogController = function () {
         self.renderMessageLog(messageLog);
     };
 
-    self.renderMessageLog = function (result) {
-        var messageLogLenghth = result.length;
+    self.renderMessageLog = function (messageLog) {
+        if (messageLog == null) {
+            return;
+        }
+
+        var messageLogLenghth = messageLog.length;
         var bodyData = [];
 
         for (var i = 0; i < messageLogLenghth; i++) {
-            var log = result[i];
+            var log = messageLog[i];
 
             bodyData.push({
                 Columns: [
@@ -32,21 +36,20 @@ var MessageLogController = function () {
         }
 
         var headerColumns = [
-            { HeaderText: "#", Width: 42, Name: "No", HeaderAlign: "center", CellAlign: "center" },
-            { HeaderText: "From", Width: 150, Name: "ConversationBotId", HeaderAlign: "center", CellAlign: "left"},
-            { HeaderText: "To", Width: 180, Name: "ConversationId", HeaderAlign: "center", CellAlign: "left" },
+            { HeaderText: "#", Width: 45, Name: "No", HeaderAlign: "center", CellAlign: "center" },
+            { HeaderText: "Bot Conversation Id", Width: 200, Name: "ConversationBotId", HeaderAlign: "center", CellAlign: "left" },
+            { HeaderText: "Conversation Id", Width: 200, Name: "ConversationId", HeaderAlign: "center", CellAlign: "left" },
             { HeaderText: "Start At", Width: 150, Name: "StartSendTime", HeaderAlign: "center", CellAlign: "left", FormatDateTime: "MMM DD, YYYY hh:mm:ss A" },
             { HeaderText: "End at", Width: 150, Name: "EndSentTime", HeaderAlign: "center", CellAlign: "left", FormatDateTime: "MMM DD, YYYY hh:mm:ss A" },
-            { HeaderText: "Duration", Width: 50, Name: "Duration", HeaderAlign: "center", CellAlign: "center" },
+            { HeaderText: "Duration", Width: 60, Name: "Duration", HeaderAlign: "center", CellAlign: "center" },
             { HeaderText: "Status", Width: 60, Name: "Status", HeaderAlign: "center", CellAlign: "center" },
-            { HeaderText: "Error Message", Width: 200, Name: "ErrorMessage", HeaderAlign: "center", CellAlign: "left" }
+            { HeaderText: "Error Message", Width: 220, Name: "ErrorMessage", HeaderAlign: "center", CellAlign: "left" }
         ];
 
         var gridOptions = {
             columns: headerColumns,
             showTitle: false,
             bodyRows: bodyData,
-            numberOfFrozenColumn: 8,
             showDistinctRow: false,
             showHighlightRow: true,
             headerColumnHeight: 29,
@@ -59,7 +62,7 @@ var MessageLogController = function () {
     };
 
     self.renderConversationId = function (conversationId) {
-        return `<div class="overflow" title="` + conversationId + `">` + conversationId + `</div>`;
+        return `<p class="overflow-text" title="` + conversationId + `">` + conversationId + `</p>`;
     }
 };
 

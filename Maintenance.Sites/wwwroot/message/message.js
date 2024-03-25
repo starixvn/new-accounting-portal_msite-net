@@ -120,6 +120,7 @@ var MessageController = function () {
             rowColumns.push({ Name: "BotName", Value: dataRow.BotName });
             rowColumns.push({ Name: "Content", Value: dataRow.IsHideContent ? `<i>Content hidden<i/>` : dataRow.Content });
             rowColumns.push({ Name: "Status", Value: status.toLowerCase() });
+            rowColumns.push({ Name: "ErrorMessage", Value: dataRow.ErrorMessage });
             rowColumns.push({ Name: "Log", Value: '<div class="icon-view-log" title="View log message ' + dataRow.MessageId + '" data-message-id="' + dataRow.MessageId + '"></div>' });
             rowColumns.push({ Name: "CreatedDate", Value: dataRow.CreatedDate });
 
@@ -133,11 +134,11 @@ var MessageController = function () {
             { HeaderText: "App", Width: 150, Name: "AppName", HeaderAlign: "center", CellAlign: "left" },
             { HeaderText: "Channel", Width: 100, Name: "ChannelName", HeaderAlign: "center", CellAlign: "center" },
             { HeaderText: "Bot", Width: 120, Name: "BotName", HeaderAlign: "center", CellAlign: "left" },
-            { HeaderText: "Content", Width: 500, Name: "Content", HeaderAlign: "center", CellAlign: "left" },
-            { HeaderText: "Status", Width: 100, Name: "Status", HeaderAlign: "center", CellAlign: "center" },
+            { HeaderText: "Content", Width: 400, Name: "Content", HeaderAlign: "center", CellAlign: "left" },
+            { HeaderText: "Status", Width: 80, Name: "Status", HeaderAlign: "center", CellAlign: "center" },
+            { HeaderText: "Error Message", Width: 250, Name: "ErrorMessage", HeaderAlign: "center", CellAlign: "left" },
             { HeaderText: "Log", Width: 60, Name: "Log", HeaderAlign: "center", CellAlign: "center" },
-            { HeaderText: "Created Date", Width: 200, Name: "CreatedDate", HeaderAlign: "center", CellAlign: "center", FormatDateTime: "MMM DD, YYYY hh:mm:ss A" }
-
+            { HeaderText: "Created Date", Width: 150, Name: "CreatedDate", HeaderAlign: "center", CellAlign: "center", FormatDateTime: "MMM DD, YYYY hh:mm:ss A" }
         ];
 
         var gridOptions = {
@@ -146,7 +147,7 @@ var MessageController = function () {
             bodyRows: bodyData,
             showDistinctRow: false,
             showHighlightRow: true,
-            gridExpandHeight: 350,
+            gridExpandHeight: 270,
             headerColumnHeight: 29,
             showPager: true,
             customPager: true,

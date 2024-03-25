@@ -64,6 +64,8 @@
         public async Task<IActionResult> Update(int appId)
         {
             var appSetting = await applicationSettingService.GetApplicationSettingByIdAsync(appId);
+            string hiddenPwd = new('*', appSetting.MicrosoftAppPassword.Length);
+            appSetting.MicrosoftAppPassword = hiddenPwd;
             return View(appSetting);
         }
 
@@ -75,11 +77,12 @@
             {
                 AppId = param.AppId,
                 AppName = param.AppName,
-                MicrosoftAppPassword = CryptographyHelper.EncryptPassword(param.MicrosoftAppPassword),
+                MicrosoftAppPassword = param.IsChangedPassword ? CryptographyHelper.EncryptPassword(param.MicrosoftAppPassword) : string.Empty,
                 Description = param.Description,
                 IsActive = param.Active,
                 IsHideContent = param.HiddenContent,
-                UpdatedBy = napSession.UserId
+                UpdatedBy = napSession.UserId,
+                IsChangedPassword = param.IsChangedPassword
             };
             var result = await applicationSettingService.UpdateAsync(command);
             return Json(result);

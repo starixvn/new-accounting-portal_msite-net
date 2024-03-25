@@ -16,9 +16,9 @@
 <section id="filter-bar">
     <div class="filter-form">
         <div class="filter-row">
-            <div class="lbl-field width-100">App Name</div>
-            <div class="edit-field width-130">
-                <select id="AppId" class="select2-choice width-140">
+            <div class="lbl-field width-80">App Name</div>
+            <div class="edit-field width-120">
+                <select id="AppId" class="select2-choice width-120">
                     <option value="">All</option>
                     @foreach (var item in ViewBag.AppList)
                     {
@@ -27,9 +27,9 @@
                 </select>
             </div>
           
-            <div class="lbl-field width-100">Channel</div>
-            <div class="edit-field width-130">
-                <select id="Channel" class="select2-choice width-140">
+            <div class="lbl-field width-60">Channel</div>
+            <div class="edit-field width-120">
+                <select id="Channel" class="select2-choice width-120">
                     <option value="">All</option>
                     @foreach (var item in ViewBag.ChannelList)
                     {
@@ -38,9 +38,9 @@
                 </select>
             </div>
 
-            <div class="lbl-field width-80">Bot</div>
-            <div class="edit-field width-130">
-                <select id="Bot" class="select2-choice width-140">
+            <div class="lbl-field width-40">Bot</div>
+            <div class="edit-field width-120">
+                <select id="Bot" class="select2-choice width-120">
                     <option value="">All</option>
                     @foreach (var item in ViewBag.BotList)
                     {
@@ -49,9 +49,9 @@
                 </select>
             </div>
 
-            <div class="lbl-field width-100">Status</div>
-            <div class="edit-field width-130">
-                <select id="Status" class="select2-choice width-140">
+            <div class="lbl-field width-40">Status</div>
+            <div class="edit-field width-120">
+                <select id="Status" class="select2-choice width-120">
                     <option value="">All</option>
                     @foreach (var item in ViewBag.StatusList)
                     {
@@ -60,12 +60,12 @@
                 </select>
             </div>
             
-            <div class="lbl-field width-100">@Html.LabelFor(m => m.FromDate, "From")</div>
+            <div class="lbl-field width-40">@Html.LabelFor(m => m.FromDate, "From")</div>
             <div class="edit-field width-130">
                 @Html.TextBox("FromDate", Model.FromDate.ToString("MMM dd,yyyy"), "", new { style = "width: 100px" })
             </div>
 
-            <div class="lbl-field width-80">@Html.LabelFor(m => m.ToDate, "To")</div>
+            <div class="lbl-field width-40">@Html.LabelFor(m => m.ToDate, "To")</div>
             <div class="edit-field width-130">
                 @Html.TextBox("ToDate", Model.ToDate.ToString("MMM dd,yyyy"), "", new { style = "width: 100px" })
             </div>

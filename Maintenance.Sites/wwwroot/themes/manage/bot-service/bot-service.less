@@ -9,10 +9,9 @@
     height: 20px;
 }
 
-.show-pwd {
+.show-pwd, .change-pwd {
     cursor: pointer;
 }
-
 
 #message-list {
     .status {
@@ -25,15 +24,15 @@
     }
 
     .success {
-        background-color: green;
+        color: green;
     }
 
     .failed {
-        background-color: red;
+        color: red;
     }
 
     .new {
-        background-color: #549cba;
+        color: #549cba;
     }
 }
 
@@ -47,8 +46,7 @@
     left: 10px;
 }
 
-.overflow {
-    overflow : hidden;
-    text-overflow: ellipsis;
+.overflow-text {
+    word-break: break-all;
+    margin: 2px !important;
 }
-

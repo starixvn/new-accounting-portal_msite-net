@@ -13,7 +13,8 @@ var CreateApplicationSettingController = function () {
         Description: null,
         HiddenContent: null,
         Create: null,
-        Cancel: null
+        Cancel: null,
+        ShowPwd: null
     };
 
     self.initPage = function () {
@@ -29,7 +30,7 @@ var CreateApplicationSettingController = function () {
         DOMElements.HiddenContent = $('#HiddenContent');
         DOMElements.Cancel = $('#btnCancel');
         DOMElements.Create = $('#btnCreate');
-        DOMElements.ShowPassword = $('#ShowPassword');
+        DOMElements.ShowPwd = $('.show-pwd');
     };
 
     self.bindEvents = function () {
@@ -42,6 +43,17 @@ var CreateApplicationSettingController = function () {
                 window.location.replace("/ApplicationSetting/Index");
             })
         })
+
+        DOMElements.ShowPwd.click(function () {
+            var inputType = DOMElements.MicrosoftAppPassword.prop("type");
+            if (inputType === "password") {
+                DOMElements.MicrosoftAppPassword.prop("type", "text");
+                $(this).html('Hide');
+            } else {
+                DOMElements.MicrosoftAppPassword.prop("type", "password");
+                $(this).html('Show');
+            }
+        });
     }
     self.resetForm = function () {
         DOMElements.ApplicationName.val('');

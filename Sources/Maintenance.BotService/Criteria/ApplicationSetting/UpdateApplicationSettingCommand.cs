@@ -9,9 +9,10 @@
         public bool IsActive { get; set; }
         public bool IsHideContent { get; set; }
         public int UpdatedBy { get; set; }
+        public bool IsChangedPassword { get; set; }
 
         public override string GetSettingKey() => "ApplicationSetting_Update";
 
-        public override bool IsValid() => true;
+        public override bool IsValid() => UpdatedBy > 0;
     }
 }

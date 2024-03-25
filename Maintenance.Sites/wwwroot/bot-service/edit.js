@@ -10,14 +10,16 @@ var UpdateApplicationSettingController = function () {
         ApplicationName: null,
         MicrosoftAppId: null,
         MicrosoftAppPassword: null,
-        ShowPassword: null,
         Description: null,
         Update: null,
         Cancel: null,
         Active: null,
         HiddenContent: null,
-        ShowPwd: null
+        ShowPwd: null,
+        ChangePwd: null,
     };
+
+    var isChangedPassword = false;
 
     self.initPage = function () {
         self.cacheDOMElement();
@@ -27,6 +29,7 @@ var UpdateApplicationSettingController = function () {
     self.cacheDOMElement = function () {
         DOMElements.AppId = $('#AppId');
         DOMElements.ShowPwd = $('.show-pwd');
+        DOMElements.ChangePwd = $('.change-pwd');
         DOMElements.ApplicationName = $('#ApplicationName');
         DOMElements.MicrosoftAppPassword = $('#MicrosoftAppPassword');
         DOMElements.Description = $('#Description');
@@ -34,7 +37,6 @@ var UpdateApplicationSettingController = function () {
         DOMElements.Active = $('#Active');
         DOMElements.HiddenContent = $('#HiddenContent');
         DOMElements.Update = $('#btnUpdate');
-        DOMElements.ShowPassword = $('#ShowPassword');
     };
 
     self.bindEvents = function () {
@@ -57,6 +59,14 @@ var UpdateApplicationSettingController = function () {
                 DOMElements.MicrosoftAppPassword.prop("type", "password");
                 $(this).html('Show');
             }
+        });
+
+        DOMElements.ChangePwd.click(function () {
+            $(this).hide();
+            DOMElements.ShowPwd.show();
+            DOMElements.MicrosoftAppPassword.val('');
+            DOMElements.MicrosoftAppPassword.prop("disabled", false).prop("readonly", false); 
+            isChangedPassword = true;
         });
     }
     self.validateForm = function () {
@@ -91,7 +101,8 @@ var UpdateApplicationSettingController = function () {
                     microsoftAppPassword: DOMElements.MicrosoftAppPassword.val(),
                     active: DOMElements.Active.is(':checked'),
                     description: DOMElements.Description.val(),
-                    hiddenContent: DOMElements.HiddenContent.is(':checked')
+                    hiddenContent: DOMElements.HiddenContent.is(':checked'),
+                    isChangedPassword: isChangedPassword
                 }),
                 success: function (result) {
                     if (result.IsSuccessful) {
