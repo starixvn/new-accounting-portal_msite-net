@@ -1,6 +1,4 @@
-﻿/* global NAP: false */
-/* global sharedScriptManager: false */
-$(document).ready(function () {
+﻿$(document).ready(function () {
     messageController.initPage();
 });
 
@@ -21,7 +19,6 @@ var MessageController = function () {
         self.cacheDOMElement();
         self.initDateTimePicker();
         self.fetchData();
-
         self.initEvent();
     }
 
@@ -114,16 +111,24 @@ var MessageController = function () {
             var dataRow = messages[i];
             var rowColumns = [];
             var status = `<div class='status ` + dataRow.Status.toLowerCase() + `'>` + dataRow.Status + `<div/>`;
+            var retry = dataRow.Retry > 0 ? `<div class="view-retry-log" data-message-id="` + dataRow.MessageId + `">` + dataRow.Retry + `</div>` : dataRow.Retry;
+
             rowColumns.push({ Name: "No", Value: i + 1 + ((pageIndex - 1) * pageSize) });
             rowColumns.push({ Name: "AppName", Value: dataRow.AppName });
             rowColumns.push({ Name: "ChannelName", Value: dataRow.ChannelName });
             rowColumns.push({ Name: "BotName", Value: dataRow.BotName });
             rowColumns.push({ Name: "Content", Value: dataRow.IsHideContent ? `<i>Content hidden<i/>` : dataRow.Content });
-            rowColumns.push({ Name: "Status", Value: status.toLowerCase() });
+            rowColumns.push({ Name: "Status", Value: status });
             rowColumns.push({ Name: "ErrorMessage", Value: dataRow.ErrorMessage });
+            rowColumns.push({ Name: "Retry", Value: retry });
             rowColumns.push({ Name: "Log", Value: '<div class="icon-view-log" title="View log message ' + dataRow.MessageId + '" data-message-id="' + dataRow.MessageId + '"></div>' });
             rowColumns.push({ Name: "CreatedDate", Value: dataRow.CreatedDate });
+            rowColumns.push({ Name: "UpdatedDate", Value: dataRow.UpdatedDate });
 
+            if (viewResources.hasEditRight) {
+                var resendBtn = dataRow.Status.toLowerCase() === 'failed' ? `<div class="resend-icon" title="Retry message ` + dataRow.MessageId + `" data-message-id="` + dataRow.MessageId + `"></div>` : '';
+                rowColumns.push({ Name: "Action", Value: resendBtn });
+            }
             bodyData.push({
                 Columns: rowColumns
             });
@@ -137,9 +142,15 @@ var MessageController = function () {
             { HeaderText: "Content", Width: 400, Name: "Content", HeaderAlign: "center", CellAlign: "left" },
             { HeaderText: "Status", Width: 80, Name: "Status", HeaderAlign: "center", CellAlign: "center" },
             { HeaderText: "Error Message", Width: 250, Name: "ErrorMessage", HeaderAlign: "center", CellAlign: "left" },
+            { HeaderText: "Retry time", Width: 60, Name: "Retry", HeaderAlign: "center", CellAlign: "center" },
             { HeaderText: "Log", Width: 60, Name: "Log", HeaderAlign: "center", CellAlign: "center" },
-            { HeaderText: "Created Date", Width: 150, Name: "CreatedDate", HeaderAlign: "center", CellAlign: "center", FormatDateTime: "MMM DD, YYYY hh:mm:ss A" }
+            { HeaderText: "Created Date", Width: 150, Name: "CreatedDate", HeaderAlign: "center", CellAlign: "center", FormatDateTime: "MMM DD, YYYY hh:mm:ss A" },
+            { HeaderText: "Last Updated", Width: 150, Name: "UpdatedDate", HeaderAlign: "center", CellAlign: "center", FormatDateTime: "MMM DD, YYYY hh:mm:ss A" }
         ];
+
+        if (viewResources.hasEditRight) {
+            headerColumns.push({ HeaderText: "Action", Width: 60, Name: "Action", HeaderAlign: "center", CellAlign: "center" });
+        }
 
         var gridOptions = {
             columns: headerColumns,
@@ -179,6 +190,50 @@ var MessageController = function () {
                 "Logs for message " + msgId,
                 1200,
                 500,
+                true,
+                false,
+                parent.window,
+                3000,
+                null,
+                null,
+                ['center', 80]);
+        });
+
+        DOMElements.GridContainer.find(".resend-icon").click(function () {
+            var msgId = $(this).attr('data-message-id');
+            NAP.confirm("Confirm Notification", "Are you sure you want to resend this message?", function () {
+                sharedScriptManager.blockUI();
+                $.ajax({
+                    type: 'POST',
+                    url: "/Message/RetryMessage",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    data: msgId,
+                    success: function (result) {
+                        var title = result.IsSuccessful ? 'Successfully!' : 'Error';
+                        NAP.alert(title, result.Message, function () {
+                            NAP.closeDialog();
+                            self.fetchData();
+                        })
+                    },
+                    complete: function () {
+                        sharedScriptManager.unblockUI();
+                    }
+                })
+                NAP.closeDialog();
+            })
+        });
+
+        DOMElements.GridContainer.find(".view-retry-log").click(function () {
+            var msgId = parseInt($(this).attr("data-message-id"));
+            popUpManager.openPopup(
+                '/Message/MessageRetryLog?' +
+                $.param({
+                    messageId: msgId
+                }),
+                "Retry logs for message " + msgId,
+                500,
+                400,
                 true,
                 false,
                 parent.window,

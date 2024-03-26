@@ -21,5 +21,29 @@
 
         public async Task<IEnumerable<MessageLog>> GetMessageLogAsync(int messageId)
             => await dynamicRepository.FetchAsync<MessageLog>(new GetLogMessageCriteria { MessageId = messageId });
+
+        public async Task<CommandResult> RetryMessageAsync(int messageId, int currentUserId, string currentUsername)
+        {
+            RetryMessageCommand command = new()
+            {
+                MessageId = messageId,
+                UserId = currentUserId,
+                Username = currentUsername
+            };
+            await dynamicRepository.ExecuteAsync(command);
+
+            var result = new CommandResult
+            {
+                Code = command.ErrCode,
+                Message = command.ErrMsg
+            };
+            return result;
+        }
+
+        public async Task<MessageResend> GetByIdAsync(int messageId)
+         => await dynamicRepository.GetAsync<MessageResend>(new GetMessageByIdCriteria { MessageId = messageId });
+
+        public async Task<IEnumerable<MessageRetryLog>> GetMessageRetryLogAsync(int messageId)
+        => await dynamicRepository.FetchAsync<MessageRetryLog>(new GetRetryLogCriteria { MessageId = messageId });
     }
 }

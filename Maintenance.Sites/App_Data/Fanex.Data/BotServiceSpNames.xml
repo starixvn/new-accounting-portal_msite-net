@@ -11,5 +11,8 @@
         <Setting Key="Bot_GetByAppId" SpName="Bot_GetByAppId" DbName="BotServiceDB" />
         <Setting Key="Message_Get" SpName="Message_Get" DbName="BotServiceDB" />
         <Setting Key="MessageLog_Get" SpName="MessageLog_Get" DbName="BotServiceDB" />
+        <Setting Key="MessageRetryLog_Insert" SpName="MessageRetryLog_Insert" DbName="BotServiceDB" />
+        <Setting Key="Message_GetById" SpName="Message_GetById" DbName="BotServiceDB" />
+        <Setting Key="MessageRetryLog_Get" SpName="MessageRetryLog_Get" DbName="BotServiceDB" />
     </Function>
 </Functions>

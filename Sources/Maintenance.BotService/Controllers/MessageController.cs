@@ -6,6 +6,8 @@
     using Fanex.NAP.Client.Services;
     using Maintenance.BotService.Constants;
     using Maintenance.BotService.Criteria.Message;
+    using Maintenance.BotService.Models;
+    using Maintenance.BotService.Models.Message;
     using Maintenance.BotService.Params;
     using Maintenance.BotService.Services.Interfaces;
     using Microsoft.AspNetCore.Mvc;
@@ -16,10 +18,12 @@
     public class MessageController(
         IMessageService messageService,
         IApplicationSettingService applicationSettingService,
+        IBotConnector botConnector,
         INapSession napSession,
         IUserService userService,
         INapSettings napSettings) : Controller
     {
+        [NapAuth(FunctionKey = SiteFunctionKeys.MessageManagement, Policy = Policy.Read)]
         public async Task<IActionResult> Index()
         {
             DateTime current = DateTime.Now;
@@ -60,6 +64,7 @@
         }
 
         [HttpPost]
+        [NapAuth(FunctionKey = SiteFunctionKeys.MessageManagement, Policy = Policy.Read)]
         public async Task<IActionResult> GetMessage([FromBody] GetMessageParams param)
         {
             var criteria = new GetMessageCriteria
@@ -74,14 +79,51 @@
                 ToDate = param.ToDate,
             };
 
-            var messages = await messageService.GetAsync(criteria);
+            IEnumerable<Message> messages = await messageService.GetAsync(criteria);
             return Json(new { TotalItems = criteria.TotalRows, Messages = messages });
         }
 
+        [NapAuth(FunctionKey = SiteFunctionKeys.MessageManagement, Policy = Policy.Read)]
         public async Task<IActionResult> MessageLog(int messageId)
         {
             var logs = await messageService.GetMessageLogAsync(messageId);
             return View(logs);
+        }
+
+        [NapAuth(FunctionKey = SiteFunctionKeys.MessageManagement, Policy = Policy.Read)]
+        public async Task<IActionResult> MessageRetryLog(int messageId)
+        {
+            var retryLogs = await messageService.GetMessageRetryLogAsync(messageId);
+            return View(retryLogs);
+        }
+
+        [HttpPost]
+        [NapAuth(FunctionKey = SiteFunctionKeys.MessageManagement, Policy = Policy.Host)]
+        public async Task<IActionResult> RetryMessage([FromBody] int messageId)
+        {
+            var commandResult = new CommandResult { Code = -1 };
+            MessageResend msg = await messageService.GetByIdAsync(messageId);
+            if (msg is null || msg.Status.Equals(MessageStatus.Success, StringComparison.OrdinalIgnoreCase))
+            {
+                commandResult.Message = $"Message {messageId} does not existed or invalid to retry";
+            }
+            else
+            {
+                commandResult = await messageService.RetryMessageAsync(messageId, napSession.UserId, napSession.UserName);
+                if (commandResult.IsSuccessful)
+                {
+                    try
+                    {
+                        await botConnector.RetryMessageAsync(msg);
+                    }
+                    catch (Exception ex)
+                    {
+                        commandResult.Code = -1;
+                        commandResult.Message = ex.Message;
+                    }
+                }
+            }
+            return Json(commandResult);
         }
     }
 }

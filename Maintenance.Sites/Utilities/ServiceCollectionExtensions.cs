@@ -171,8 +171,10 @@ public static class ServiceCollectionExtensions
 
     public static IServiceCollection AddBotService(this IServiceCollection services)
     {
+        services.AddHttpClient();
         services.AddTransient<IApplicationSettingService, ApplicationSettingService>();
         services.AddTransient<IMessageService, MessageService>();
+        services.AddTransient<IBotConnector, BotConnector>();
         return services;
     }
 }
