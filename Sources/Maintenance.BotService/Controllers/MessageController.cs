@@ -6,7 +6,6 @@
     using Fanex.NAP.Client.Services;
     using Maintenance.BotService.Constants;
     using Maintenance.BotService.Criteria.Message;
-    using Maintenance.BotService.Models;
     using Maintenance.BotService.Models.Message;
     using Maintenance.BotService.Params;
     using Maintenance.BotService.Services.Interfaces;
@@ -103,26 +102,18 @@
         [NapAuth(FunctionKey = SiteFunctionKeys.MessageManagement, Policy = Policy.Host)]
         public async Task<IActionResult> RetryMessage([FromBody] int messageId)
         {
-            var commandResult = new CommandResult { Code = -1 };
-            MessageResend msg = await messageService.GetByIdAsync(messageId);
-            if (msg is null || msg.Status.Equals(MessageStatus.Success, StringComparison.OrdinalIgnoreCase))
+            var commandResult = await messageService.RetryMessageAsync(messageId, napSession.UserId, napSession.UserName);
+            if (commandResult.IsSuccessful)
             {
-                commandResult.Message = $"Message {messageId} does not existed or invalid to retry";
-            }
-            else
-            {
-                commandResult = await messageService.RetryMessageAsync(messageId, napSession.UserId, napSession.UserName);
-                if (commandResult.IsSuccessful)
+                try
                 {
-                    try
-                    {
-                        await botConnector.RetryMessageAsync(msg);
-                    }
-                    catch (Exception ex)
-                    {
-                        commandResult.Code = -1;
-                        commandResult.Message = ex.Message;
-                    }
+                    var msg = await messageService.GetByIdAsync(messageId);
+                    await botConnector.RetryMessageAsync(msg);
+                }
+                catch (Exception ex)
+                {
+                    commandResult.Code = -1;
+                    commandResult.Message = ex.Message;
                 }
             }
             return Json(commandResult);
