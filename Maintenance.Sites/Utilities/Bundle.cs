@@ -36,7 +36,7 @@ public static class Bundle
             "scripts/lib/moment/moment-timezone-with-data.js",
             "scripts/lib/tipsy/tipsy-1.0.0.min.js",
             "scripts/lib/msgbox/msgbox-0.0.1.min.js",
-            "scripts/ShareScripts/SharedScriptManager.js",
+            "scripts/ShareScripts/sharedscriptmanager.js",
             "scripts/Maintenance.js",
             "scripts/lib/Fanex.Grid/Fanex.Grid.js",
             "scripts/lib/Fanex.Grid/Fanex.Pagination.js",

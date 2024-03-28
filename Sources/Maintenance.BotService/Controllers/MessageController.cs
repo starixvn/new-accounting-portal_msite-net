@@ -44,8 +44,10 @@
             ViewBag.AppList = await apps;
             ViewBag.StatusList = new List<SelectListItem>()
             {
-                new() {Value = MessageStatus.Failed, Text = MessageStatus.Failed},
-                new() {Value = MessageStatus.Success, Text = MessageStatus.Success}
+                new() { Value = MessageStatus.New, Text = MessageStatus.New},
+                new() { Value = MessageStatus.Success, Text = MessageStatus.Success },
+                new() { Value = MessageStatus.Failed, Text = MessageStatus.Failed },
+                new() { Value = MessageStatus.Resending, Text = MessageStatus.Resending }
             };
             ViewBag.HasHostManageMessage = await userService.IsHavingPermissionAsync(napSession.UserId, napSettings.SiteId, SiteFunctionKeys.MessageManagement, Policy.Host);
 

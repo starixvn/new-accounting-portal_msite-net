@@ -49,9 +49,7 @@
     <script type="text/javascript">
         window.rootUrl = '@Url.Content("~")';
     </script>
-    
-    
-    <script type="text/ecmascript" src="/scripts/sharedscripts.js"></script>
+    <script type="text/ecmascript" src="/scripts/sharedscripts.js" asp-append-version="true"></script>
     @if (napSettings.EnableReCheckIn)
     {
         <script src="/auth/recheckin.js" type="text/javascript"></script>

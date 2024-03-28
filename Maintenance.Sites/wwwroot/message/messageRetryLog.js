@@ -24,7 +24,7 @@ var MessageRetryLogController = function () {
             bodyData.push({
                 Columns: [
                     { Name: "No", Value: i + 1 },
-                    { Name: "RetryDate", Value: log.RetryDate },
+                    { Name: "RetryDate", Value: sharedScriptManager.toLocalDate(log.RetryDate) },
                     { Name: "RetryById", Value: log.RetryBy },
                     { Name: "RetryByUsername", Value: log.RetryByUsername },
                 ]
@@ -33,7 +33,7 @@ var MessageRetryLogController = function () {
 
         var headerColumns = [
             { HeaderText: "#", Width: 60, Name: "No", HeaderAlign: "center", CellAlign: "center" },
-            { HeaderText: "Retry Date", Width: 150, Name: "RetryDate", HeaderAlign: "center", CellAlign: "left", FormatDateTime: "MMM DD, YYYY hh:mm:ss A" },
+            { HeaderText: "Retry Date (GMT " + sharedScriptManager.currentTimeZone() + ")", Width: 150, Name: "RetryDate", HeaderAlign: "center", CellAlign: "left", FormatDateTime: "MMM DD, YYYY hh:mm:ss A" },
             { HeaderText: "Retry By", Width: 60, Name: "RetryById", HeaderAlign: "center", CellAlign: "center" },
             { HeaderText: "Username", Width: 150, Name: "RetryByUsername", HeaderAlign: "center", CellAlign: "center" }
         ];

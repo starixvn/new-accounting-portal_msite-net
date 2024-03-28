@@ -112,6 +112,16 @@ var SharedScriptManager = function () {
             }
         }
     }
+
+    self.currentTimeZone = function () {
+        var offset = new Date().getTimezoneOffset();
+        var timezone = offset / -60;
+        return timezone > 0 ? '+' + timezone : timezone;
+    }
+
+    self.toLocalDate = function (utcDateString) {
+        return utcDateString === null || utcDateString === '' ? '' : new Date(utcDateString + 'Z');
+    }
 };
 
 sharedScriptManager = new SharedScriptManager();

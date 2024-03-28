@@ -112,7 +112,6 @@ var MessageController = function () {
             var rowColumns = [];
             var status = `<div class='status ` + dataRow.Status.toLowerCase() + `'>` + dataRow.Status + `<div/>`;
             var retry = dataRow.Retry > 0 ? `<div class="view-retry-log" data-message-id="` + dataRow.MessageId + `">` + dataRow.Retry + `</div>` : dataRow.Retry;
-
             rowColumns.push({ Name: "No", Value: i + 1 + ((pageIndex - 1) * pageSize) });
             rowColumns.push({ Name: "AppName", Value: dataRow.AppName });
             rowColumns.push({ Name: "ChannelName", Value: dataRow.ChannelName });
@@ -120,10 +119,10 @@ var MessageController = function () {
             rowColumns.push({ Name: "Content", Value: dataRow.IsHideContent ? `<i>Content hidden<i/>` : dataRow.Content });
             rowColumns.push({ Name: "Status", Value: status });
             rowColumns.push({ Name: "ErrorMessage", Value: dataRow.ErrorMessage });
+            rowColumns.push({ Name: "CreatedDate", Value: dataRow.CreatedDate !== null ? sharedScriptManager.toLocalDate(dataRow.CreatedDate) : '' });
+            rowColumns.push({ Name: "UpdatedDate", Value: dataRow.UpdatedDate !== null ? sharedScriptManager.toLocalDate(dataRow.UpdatedDate) : '' });
             rowColumns.push({ Name: "Retry", Value: retry });
             rowColumns.push({ Name: "Log", Value: '<div class="icon-view-log" title="View log message ' + dataRow.MessageId + '" data-message-id="' + dataRow.MessageId + '"></div>' });
-            rowColumns.push({ Name: "CreatedDate", Value: dataRow.CreatedDate });
-            rowColumns.push({ Name: "UpdatedDate", Value: dataRow.UpdatedDate });
 
             if (viewResources.hasEditRight) {
                 var resendBtn = dataRow.Status.toLowerCase() === 'failed' ? `<div class="resend-icon" title="Retry message ` + dataRow.MessageId + `" data-message-id="` + dataRow.MessageId + `"></div>` : '';
@@ -142,10 +141,10 @@ var MessageController = function () {
             { HeaderText: "Content", Width: 400, Name: "Content", HeaderAlign: "center", CellAlign: "left" },
             { HeaderText: "Status", Width: 80, Name: "Status", HeaderAlign: "center", CellAlign: "center" },
             { HeaderText: "Error Message", Width: 250, Name: "ErrorMessage", HeaderAlign: "center", CellAlign: "left" },
+            { HeaderText: "Created Date (GTM " + sharedScriptManager.currentTimeZone() + ")", Width: 150, Name: "CreatedDate", HeaderAlign: "center", CellAlign: "center", FormatDateTime: "MMM DD, YYYY hh:mm:ss A" },
+            { HeaderText: "Last Updated (GTM " + sharedScriptManager.currentTimeZone() + ")", Width: 150, Name: "UpdatedDate", HeaderAlign: "center", CellAlign: "center", FormatDateTime: "MMM DD, YYYY hh:mm:ss A" },
             { HeaderText: "Retry time", Width: 60, Name: "Retry", HeaderAlign: "center", CellAlign: "center" },
             { HeaderText: "Log", Width: 60, Name: "Log", HeaderAlign: "center", CellAlign: "center" },
-            { HeaderText: "Created Date", Width: 150, Name: "CreatedDate", HeaderAlign: "center", CellAlign: "center", FormatDateTime: "MMM DD, YYYY hh:mm:ss A" },
-            { HeaderText: "Last Updated", Width: 150, Name: "UpdatedDate", HeaderAlign: "center", CellAlign: "center", FormatDateTime: "MMM DD, YYYY hh:mm:ss A" }
         ];
 
         if (viewResources.hasEditRight) {
