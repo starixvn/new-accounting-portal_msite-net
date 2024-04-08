@@ -17,6 +17,7 @@ var MessageController = function () {
     };
     self.initPage = function () {
         self.cacheDOMElement();
+        self.setValueDatePickerClientTime();
         self.initDateTimePicker();
         self.fetchData();
         self.initEvent();
@@ -32,6 +33,14 @@ var MessageController = function () {
         DOMElements.SearchBtn = $('#button-search');
         DOMElements.GridContainer = $('#message-list');
     };
+
+    self.setValueDatePickerClientTime = function () {
+        var fromDate = new Date();
+        var toDate = new Date();
+        fromDate.setDate(fromDate.getDate() - 7);
+        DOMElements.FromDate.val(fromDate);
+        DOMElements.ToDate.val(toDate);
+    }
 
     self.initEvent = function () {
         DOMElements.AppId.on("change", function (e) {
@@ -245,7 +254,7 @@ var MessageController = function () {
 
     self.initDateTimePicker = function () {
         DOMElements.FromDate.datepicker({
-            defaultDate: "+1w",
+            defaultDate: "-1w",
             changeMonth: true,
             changeYear: true,
             numberOfMonths: 1,
@@ -257,7 +266,7 @@ var MessageController = function () {
         }).datepicker('init', '#FromDate');
 
         DOMElements.ToDate.datepicker({
-            defaultDate: "+1w",
+            defaultDate: new Date(),
             changeMonth: true,
             changeYear: true,
             numberOfMonths: 1,

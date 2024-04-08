@@ -25,12 +25,7 @@
         [NapAuth(FunctionKey = SiteFunctionKeys.MessageManagement, Policy = Policy.Read)]
         public async Task<IActionResult> Index()
         {
-            DateTime current = DateTime.Now;
-            var model = new GetMessageParams
-            {
-                FromDate = current.AddDays(-7),
-                ToDate = current
-            };
+            var model = new GetMessageParams();
 
             var channels = messageService.GetAllChannelAsync();
             var bots = messageService.GetBotByAppAsync();
