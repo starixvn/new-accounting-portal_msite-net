@@ -125,9 +125,9 @@ var MessageController = function () {
             rowColumns.push({ Name: "AppName", Value: dataRow.AppName });
             rowColumns.push({ Name: "ChannelName", Value: dataRow.ChannelName });
             rowColumns.push({ Name: "BotName", Value: dataRow.BotName });
-            rowColumns.push({ Name: "Content", Value: dataRow.IsHideContent ? `<i>Content hidden<i/>` : dataRow.Content });
+            rowColumns.push({ Name: "Content", Value: dataRow.IsHideContent ? `<i>Content hidden<i/>` : `<p class="overflow-text">` + dataRow.Content + `</p>` });
             rowColumns.push({ Name: "Status", Value: status });
-            rowColumns.push({ Name: "ErrorMessage", Value: dataRow.ErrorMessage });
+            rowColumns.push({ Name: "ErrorMessage", Value: `<p class="overflow-text">` + dataRow.ErrorMessage + `</p>` });
             rowColumns.push({ Name: "CreatedDate", Value: dataRow.CreatedDate !== null ? sharedScriptManager.toLocalDate(dataRow.CreatedDate) : '' });
             rowColumns.push({ Name: "UpdatedDate", Value: dataRow.UpdatedDate !== null ? sharedScriptManager.toLocalDate(dataRow.UpdatedDate) : '' });
             rowColumns.push({ Name: "Retry", Value: retry });
