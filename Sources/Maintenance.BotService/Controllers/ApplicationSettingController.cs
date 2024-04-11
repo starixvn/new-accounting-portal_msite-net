@@ -80,7 +80,6 @@
                 MicrosoftAppPassword = param.IsChangedPassword ? CryptographyHelper.EncryptPassword(param.MicrosoftAppPassword) : string.Empty,
                 Description = param.Description,
                 IsActive = param.Active,
-                IsHideContent = param.HiddenContent,
                 UpdatedBy = napSession.UserId,
                 IsChangedPassword = param.IsChangedPassword
             };

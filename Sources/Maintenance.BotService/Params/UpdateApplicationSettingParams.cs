@@ -7,7 +7,6 @@
         public string MicrosoftAppPassword { get; set; }
         public string Description { get; set; }
         public bool Active { get; set; }
-        public bool HiddenContent { get; set; }
         public bool IsChangedPassword { get; set; }
     }
 }

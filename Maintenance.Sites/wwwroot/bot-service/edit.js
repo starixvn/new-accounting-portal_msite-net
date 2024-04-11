@@ -14,7 +14,6 @@ var UpdateApplicationSettingController = function () {
         Update: null,
         Cancel: null,
         Active: null,
-        HiddenContent: null,
         ShowPwd: null,
         ChangePwd: null,
     };
@@ -35,7 +34,6 @@ var UpdateApplicationSettingController = function () {
         DOMElements.Description = $('#Description');
         DOMElements.Cancel = $('#btnCancel');
         DOMElements.Active = $('#Active');
-        DOMElements.HiddenContent = $('#HiddenContent');
         DOMElements.Update = $('#btnUpdate');
     };
 
@@ -65,7 +63,7 @@ var UpdateApplicationSettingController = function () {
             $(this).hide();
             DOMElements.ShowPwd.show();
             DOMElements.MicrosoftAppPassword.val('');
-            DOMElements.MicrosoftAppPassword.prop("disabled", false).prop("readonly", false); 
+            DOMElements.MicrosoftAppPassword.prop("disabled", false).prop("readonly", false);
             isChangedPassword = true;
         });
     }
@@ -101,7 +99,6 @@ var UpdateApplicationSettingController = function () {
                     microsoftAppPassword: DOMElements.MicrosoftAppPassword.val(),
                     active: DOMElements.Active.is(':checked'),
                     description: DOMElements.Description.val(),
-                    hiddenContent: DOMElements.HiddenContent.is(':checked'),
                     isChangedPassword: isChangedPassword
                 }),
                 success: function (result) {

@@ -38,8 +38,8 @@ var MessageController = function () {
         var fromDate = new Date();
         var toDate = new Date();
         fromDate.setDate(fromDate.getDate() - 7);
-        DOMElements.FromDate.val(fromDate);
-        DOMElements.ToDate.val(toDate);
+        DOMElements.FromDate.val(fromDate.toDateString('MMM DD, YYYY'));
+        DOMElements.ToDate.val(toDate.toDateString('MMM DD, YYYY'));
     }
 
     self.initEvent = function () {
