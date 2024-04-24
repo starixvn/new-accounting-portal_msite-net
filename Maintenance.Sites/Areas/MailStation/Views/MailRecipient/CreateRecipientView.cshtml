@@ -1,7 +1,7 @@
 @model CreateRecipientCriteria
 @{
     ViewBag.Title = Labels.Insert_Recipient;
-    Layout = "~/Views/Shared/_LayoutWithTimer.cshtml";  
+    Layout = "~/Views/Shared/_LayoutWithTimer.cshtml";
 }
 @section Head {
     <link href="~/themes/shared/formedit.less" rel="stylesheet" type="text/css" />
@@ -75,10 +75,10 @@
                 @Html.LabelFor(m => m.Status)
             </div>
             <div class="edit-field">
-                @Html.CheckBoxFor(m => m.Status, new { @class = "check-box" })
+	            @Html.CheckBoxFor(m => m.Status, new { @class = "check-box" })
             </div>
-            @Html.HiddenFor(m => m.IsNAPUser)
-            @Html.HiddenFor(m => m.NAPUserID)
+            <input type="hidden" id="IsNAPUser" name="IsNAPUser" value="false">
+            <input type="hidden" id="NAPUserID" name="NAPUserID" value="0">
         </div>
         <div class="form-row">
             <div class="lbl-field width-100">
