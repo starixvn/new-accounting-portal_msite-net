@@ -1,18 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Functions>
     <Function Name="ApplicationSetting">
-        <Setting Key="ApplicationSetting_GetAll" SpName="ApplicationSetting_GetAll" DbName="BotServiceDB" />
-        <Setting Key="ApplicationSetting_Insert" SpName="ApplicationSetting_Insert" DbName="BotServiceDB" />
-        <Setting Key="ApplicationSetting_GetById" SpName="ApplicationSetting_GetById" DbName="BotServiceDB" />
-        <Setting Key="ApplicationSetting_Update" SpName="ApplicationSetting_Update" DbName="BotServiceDB" />
+        <Setting Key="ApplicationSetting_GetAll" SpName="ApplicationSetting_GetAll" DbName="HERMES.BotService.wsv_hermes" />
+        <Setting Key="ApplicationSetting_Insert" SpName="ApplicationSetting_Insert" DbName="HERMES.BotService.wsv_hermes" />
+        <Setting Key="ApplicationSetting_GetById" SpName="ApplicationSetting_GetById" DbName="HERMES.BotService.wsv_hermes" />
+        <Setting Key="ApplicationSetting_Update" SpName="ApplicationSetting_Update" DbName="HERMES.BotService.wsv_hermes" />
     </Function>
     <Function Name="Message">
-        <Setting Key="Channel_GetAll" SpName="Channel_GetAll" DbName="BotServiceDB" />
-        <Setting Key="Bot_GetByAppId" SpName="Bot_GetByAppId" DbName="BotServiceDB" />
-        <Setting Key="Message_Get" SpName="Message_Get" DbName="BotServiceDB" />
-        <Setting Key="MessageLog_Get" SpName="MessageLog_Get" DbName="BotServiceDB" />
-        <Setting Key="MessageRetryLog_Insert" SpName="MessageRetryLog_Insert" DbName="BotServiceDB" />
-        <Setting Key="Message_GetById" SpName="Message_GetById" DbName="BotServiceDB" />
-        <Setting Key="MessageRetryLog_Get" SpName="MessageRetryLog_Get" DbName="BotServiceDB" />
+        <Setting Key="Channel_GetAll" SpName="Channel_GetAll" DbName="HERMES.BotService.wsv_hermes" />
+        <Setting Key="Bot_GetByAppId" SpName="Bot_GetByAppId" DbName="HERMES.BotService.wsv_hermes" />
+        <Setting Key="Message_Get" SpName="Message_Get" DbName="HERMES.BotService.wsv_hermes" />
+        <Setting Key="MessageLog_Get" SpName="MessageLog_Get" DbName="HERMES.BotService.wsv_hermes" />
+        <Setting Key="MessageRetryLog_Insert" SpName="MessageRetryLog_Insert" DbName="HERMES.BotService.wsv_hermes" />
+        <Setting Key="Message_GetById" SpName="Message_GetById" DbName="HERMES.BotService.wsv_hermes" />
+        <Setting Key="MessageRetryLog_Get" SpName="MessageRetryLog_Get" DbName="HERMES.BotService.wsv_hermes" />
     </Function>
 </Functions>
