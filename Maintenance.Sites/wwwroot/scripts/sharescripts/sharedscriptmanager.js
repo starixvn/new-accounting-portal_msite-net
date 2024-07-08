@@ -120,7 +120,10 @@ var SharedScriptManager = function () {
     }
 
     self.toLocalDate = function (utcDateString) {
-        return utcDateString === null || utcDateString === '' ? '' : new Date(utcDateString + 'Z');
+        if (!utcDateString.endsWith('Z') && !utcDateString.endsWith('z')) {
+            utcDateString += 'Z';
+        }
+        return utcDateString === null || utcDateString === '' ? '' : new Date(utcDateString);
     }
 };
 
