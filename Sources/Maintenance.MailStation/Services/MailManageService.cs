@@ -14,22 +14,39 @@ using Microsoft.Extensions.Configuration;
 public interface IMailManageService
 {
     IList<MailModel> MailList(GetMailListCriteria criteria);
+
     MailModel MailById(GetMailByIdCriteria criteria);
+
     IList<MailActionLogModel> MailLogById(GetMailLogByIdCriteria criteria);
+
     CommandResult CreateMail(CreateMailCriteria criteria);
+
     CommandResult UpdateMail(UpdateMailCriteria criteria);
+
     CommandResult DeleteMail(DeleteMailCriteria criteria);
+
     CommandResult CreateMailGroup(CreateMailGroupCriteria criteria);
+
     void RunNow(int mailId);
+
     List<SelectListItem> Sites(bool hasAllElement = true);
+
     List<SelectListItem> MailGroups(bool hasAllElement = true);
+
     List<SelectListItemExtra> Status(bool hasAllElement = true);
+
     List<SelectListItemExtra> TaskStatus(bool hasAllElement = true);
+
     List<SelectListItemExtra> Trigger(bool hasAllElement = true);
+
     List<SuggestMailModel> SuggestMails(SuggestMailCriteria criteria);
+
     CommandResult ExecuteNonQuery(UpdateCommandBase command);
+
     MailTaskModel GetMailTaskByID(GetMailTaskByIdCriteria criteria);
+
     Schedule GetScheduleByMailId(GetScheduleByIdCriteria criteria);
+
     string GetTimeZone();
 }
 
@@ -37,6 +54,10 @@ public class MailManageService(IJobOperationService jobOperationService, IConfig
 {
     public IList<MailModel> MailList(GetMailListCriteria criteria)
     {
+        var command = new GetAllSitesCommand();
+        dynamicRepository.Execute(command);
+        criteria.TransformJson = command.TransformJson;
+
         var clientNotifyTimeOutInSecond = configuration.GetValue<int>("MailStation:ClientNotifyTimeOutInSecond");
         var (mailModels, dates) = dynamicRepository.FetchMultiple<MailModel, CurrentTime>(criteria);
         var now = dates.FirstOrDefault().Now;

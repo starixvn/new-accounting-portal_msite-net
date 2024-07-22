@@ -17,22 +17,39 @@ using Quartz.Spi;
 public interface IMailReportService
 {
     List<MailTaskModel> MailReport(MailReportCriteria criteria);
+
     MailTaskStatusCounterModel GetMailTaskStatusCounter();
+
     MailRecord MailDetail(MailDetailCriteria criteria);
+
     List<MailLogModel> MailLog(MailLogCriteria criteria);
+
     void RetrySendMail(RetrySendMailCriteria criteria);
+
     void AbortTask(int taskId);
+
     void AddMailLog(AddMailLogCriteria criteria);
+
     void RetryMissingJob(RetryMissingTaskCriteria criteria);
+
     List<SelectListItem> Sites(bool hasAllElement = true);
+
     List<SelectListItem> MailGroups(bool hasAllElement = true);
+
     List<SelectListItemExtra> Status(bool hasAllElement = true);
+
     List<SelectListItemExtra> TaskStatus(bool hasAllElement = true);
+
     List<SelectListItemExtra> Trigger(bool hasAllElement = true);
+
     List<SuggestMailModel> SuggestMails(SuggestMailCriteria criteria);
+
     CommandResult ExecuteNonQuery(UpdateCommandBase command);
+
     MailTaskModel GetMailTaskByID(GetMailTaskByIdCriteria criteria);
+
     Schedule GetScheduleByMailId(GetScheduleByIdCriteria criteria);
+
     string GetTimeZone();
 }
 
@@ -40,14 +57,19 @@ public class MailReportService(IDynamicRepository dynamicRepository, IConfigurat
 {
     public List<MailTaskModel> MailReport(MailReportCriteria criteria)
     {
+        var command = new GetAllSitesCommand();
+        dynamicRepository.Execute(command);
+
         var oldStatus = criteria.Status;
         criteria.Status = -1;
+        criteria.TransformJson = command.TransformJson;
         var mailTasks = GetMailTasks(criteria);
 
         if (criteria.TriggerType != (int)MailType.Function)
         {
             criteria.Status = oldStatus;
-            var getAllScheduleCriteria = new GetAllScheduleCriteria { MailName = criteria.MailName, SiteId = criteria.SiteId };
+
+            var getAllScheduleCriteria = new GetAllScheduleCriteria { MailName = criteria.MailName, SiteId = criteria.SiteId, TransformJson = command.TransformJson };
             var mailTaskDetails = GetMailTaskDetails(getAllScheduleCriteria);
 
             if (criteria.Status is -1 or (int)JobStatus.Waiting or (int)JobStatus.Missing)
@@ -69,11 +91,11 @@ public class MailReportService(IDynamicRepository dynamicRepository, IConfigurat
                             new DateTimeOffset(fromDate),
                             new DateTimeOffset(toDate));
                         triggerTimes = (from time in triggerTimes
-                            where !(from task in mailTasks
-                                    where task.MailId == schedule.MailId
-                                    select task.ScheduledTime)
-                                .Contains(time.LocalDateTime)
-                            select time).ToList();
+                                        where !(from task in mailTasks
+                                                where task.MailId == schedule.MailId
+                                                select task.ScheduledTime)
+                                            .Contains(time.LocalDateTime)
+                                        select time).ToList();
 
                         foreach (var time in triggerTimes)
                         {

@@ -1,3 +1,4 @@
+using Fanex.Data;
 using Fanex.Data.Repository;
 
 namespace Maintenance.MailStation.Criteria.MailManage;
@@ -15,6 +16,9 @@ public class GetMailListCriteria : CriteriaBase
     public int TriggerType { get; set; } = -1;
 
     public string Emails { get; set; }
+
+    [SpParam(IsSpecialType = true)]
+    public byte[] TransformJson { get; set; }
 
     public override bool IsValid()
     {

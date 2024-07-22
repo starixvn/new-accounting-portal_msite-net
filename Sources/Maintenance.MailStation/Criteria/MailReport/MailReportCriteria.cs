@@ -1,7 +1,8 @@
 namespace Maintenance.MailStation.Criteria.MailReport;
 
-using System;
+using Fanex.Data;
 using Fanex.Data.Repository;
+using System;
 
 public class MailReportCriteria : CriteriaBase
 {
@@ -16,6 +17,9 @@ public class MailReportCriteria : CriteriaBase
     public int Status { get; set; }
 
     public int TriggerType { get; set; }
+
+    [SpParam(IsSpecialType = true)]
+    public byte[] TransformJson { get; set; }
 
     public override string GetSettingKey() => "MailStation_MailReport_GetMailTaskList";
 
