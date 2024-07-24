@@ -54,17 +54,19 @@ public class MailManageService(IJobOperationService jobOperationService, IConfig
 {
     public IList<MailModel> MailList(GetMailListCriteria criteria)
     {
-        var command = new GetAllSitesCommand();
-        dynamicRepository.Execute(command);
-        criteria.TransformJson = command.TransformJson;
-
         var clientNotifyTimeOutInSecond = configuration.GetValue<int>("MailStation:ClientNotifyTimeOutInSecond");
         var (mailModels, dates) = dynamicRepository.FetchMultiple<MailModel, CurrentTime>(criteria);
         var now = dates.FirstOrDefault().Now;
-
+        var baseService = new MailStationBaseService();
+        var sites = baseService.Sites();
         var mailModelList = mailModels.ToList();
         mailModelList.ForEach(n =>
         {
+            var siteName = sites.FirstOrDefault(s => s.Value == n.SiteId.ToString());
+            if (siteName != null)
+            {
+                n.SiteName = siteName.Text;
+            }
             if (n.TriggerType == (int)MailType.Schedule)
             {
                 n.IsClientOnline = n.LastActive != null && n.LastActive.Value.AddSeconds(clientNotifyTimeOutInSecond) >= now;

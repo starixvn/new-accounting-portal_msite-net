@@ -4,5 +4,4 @@
 		<Mapping DataField="SiteId" ObjectProperty="Value" />
 		<Mapping DataField="SiteName" ObjectProperty="Text" />
 	</Setting>
-	<Setting Key="Mail_NapSite_Select" SpName="Mail_NapSite_Select_xtest" DbName="DBPOL.NAP_UserControl.wsv_nap"></Setting>
 </Functions>

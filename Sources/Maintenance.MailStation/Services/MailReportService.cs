@@ -57,19 +57,21 @@ public class MailReportService(IDynamicRepository dynamicRepository, IConfigurat
 {
     public List<MailTaskModel> MailReport(MailReportCriteria criteria)
     {
-        var command = new GetAllSitesCommand();
-        dynamicRepository.Execute(command);
-
         var oldStatus = criteria.Status;
         criteria.Status = -1;
-        criteria.TransformJson = command.TransformJson;
         var mailTasks = GetMailTasks(criteria);
+        var baseService = new MailStationBaseService();
+        var sites = baseService.Sites();
+        mailTasks.ForEach(mail =>
+        {
+            mail.SiteName = sites.FirstOrDefault(s => s.Value == mail.SiteId.ToString())?.Text;
+        });
 
         if (criteria.TriggerType != (int)MailType.Function)
         {
             criteria.Status = oldStatus;
 
-            var getAllScheduleCriteria = new GetAllScheduleCriteria { MailName = criteria.MailName, SiteId = criteria.SiteId, TransformJson = command.TransformJson };
+            var getAllScheduleCriteria = new GetAllScheduleCriteria { MailName = criteria.MailName, SiteId = criteria.SiteId };
             var mailTaskDetails = GetMailTaskDetails(getAllScheduleCriteria);
 
             if (criteria.Status is -1 or (int)JobStatus.Waiting or (int)JobStatus.Missing)
@@ -79,6 +81,7 @@ public class MailReportService(IDynamicRepository dynamicRepository, IConfigurat
 
                 foreach (var schedule in mailTaskDetails)
                 {
+                    schedule.SiteName = sites.FirstOrDefault(s => s.Value == schedule.SiteId.ToString())?.Text;
                     var fromDate = MaxDateTime(criteria.FromDate, schedule.StartOn).ToUniversalTime();
                     var toDate = MinDateTime(criteria.ToDate, schedule.EndOn).ToUniversalTime();
 
