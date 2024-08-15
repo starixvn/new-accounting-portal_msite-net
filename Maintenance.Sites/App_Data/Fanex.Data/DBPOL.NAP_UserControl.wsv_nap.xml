@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Functions>
+	<Setting Key="MailStation_GetAllSites" SpName="NAP_Site_GetAll" DbName="DBPOL.NAP_UserControl.wsv_nap">
+		<Mapping DataField="SiteId" ObjectProperty="Value" />
+		<Mapping DataField="SiteName" ObjectProperty="Text" />
+	</Setting>
+</Functions>

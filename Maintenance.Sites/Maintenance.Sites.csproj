@@ -7,6 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+    <None Remove="App_Data\Fanex.Data\DBPOL.NAP_UserControl.wsv_nap.xml" />
         <None Remove="App_Data\TraceSp\DBServerList.LOCAL.xml" />
         <None Remove="App_Data\TraceSp\DBServerList.PROD.xml" />
         <None Remove="App_Data\TraceSp\DBServerList.SIT.xml" />
@@ -15,6 +16,9 @@
     </ItemGroup>
 
     <ItemGroup>
+    <Content Include="App_Data\Fanex.Data\DBPOL.NAP_UserControl.wsv_nap.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
         <Content Include="App_Data\TraceSp\DBServerList.LOCAL.xml">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </Content>

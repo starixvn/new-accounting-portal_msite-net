@@ -5,10 +5,6 @@
 			<Mapping DataField="MailGroupID" ObjectProperty="Value" />
 			<Mapping DataField="MailGroupName" ObjectProperty="Text" />
 		</Setting>
-		<Setting Key="MailStation_GetAllSites" SpName="NAP_Site_GetAll" DbName="DBPOL.NAP_UserControl.wsv_nap">
-			<Mapping DataField="SiteId" ObjectProperty="Value" />
-			<Mapping DataField="SiteName" ObjectProperty="Text" />
-		</Setting>
 		<Setting Key="MailStation_GetAllSuggestedMails" SpName="Mail_MailManagement_GetSuggesionEmailList" DbName="DBMMS.bodb_MMS.wsv_nap">
 			<Mapping DataField="EmailID" ObjectProperty="id" />
 			<Mapping DataField="EmailAddress" ObjectProperty="name" />

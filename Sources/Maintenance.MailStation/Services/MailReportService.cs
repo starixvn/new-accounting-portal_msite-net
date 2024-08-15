@@ -17,22 +17,39 @@ using Quartz.Spi;
 public interface IMailReportService
 {
     List<MailTaskModel> MailReport(MailReportCriteria criteria);
+
     MailTaskStatusCounterModel GetMailTaskStatusCounter();
+
     MailRecord MailDetail(MailDetailCriteria criteria);
+
     List<MailLogModel> MailLog(MailLogCriteria criteria);
+
     void RetrySendMail(RetrySendMailCriteria criteria);
+
     void AbortTask(int taskId);
+
     void AddMailLog(AddMailLogCriteria criteria);
+
     void RetryMissingJob(RetryMissingTaskCriteria criteria);
+
     List<SelectListItem> Sites(bool hasAllElement = true);
+
     List<SelectListItem> MailGroups(bool hasAllElement = true);
+
     List<SelectListItemExtra> Status(bool hasAllElement = true);
+
     List<SelectListItemExtra> TaskStatus(bool hasAllElement = true);
+
     List<SelectListItemExtra> Trigger(bool hasAllElement = true);
+
     List<SuggestMailModel> SuggestMails(SuggestMailCriteria criteria);
+
     CommandResult ExecuteNonQuery(UpdateCommandBase command);
+
     MailTaskModel GetMailTaskByID(GetMailTaskByIdCriteria criteria);
+
     Schedule GetScheduleByMailId(GetScheduleByIdCriteria criteria);
+
     string GetTimeZone();
 }
 
@@ -43,10 +60,17 @@ public class MailReportService(IDynamicRepository dynamicRepository, IConfigurat
         var oldStatus = criteria.Status;
         criteria.Status = -1;
         var mailTasks = GetMailTasks(criteria);
+        var baseService = new MailStationBaseService();
+        var sites = baseService.Sites();
+        mailTasks.ForEach(mail =>
+        {
+            mail.SiteName = sites.FirstOrDefault(s => s.Value == mail.SiteId.ToString())?.Text;
+        });
 
         if (criteria.TriggerType != (int)MailType.Function)
         {
             criteria.Status = oldStatus;
+
             var getAllScheduleCriteria = new GetAllScheduleCriteria { MailName = criteria.MailName, SiteId = criteria.SiteId };
             var mailTaskDetails = GetMailTaskDetails(getAllScheduleCriteria);
 
@@ -57,6 +81,7 @@ public class MailReportService(IDynamicRepository dynamicRepository, IConfigurat
 
                 foreach (var schedule in mailTaskDetails)
                 {
+                    schedule.SiteName = sites.FirstOrDefault(s => s.Value == schedule.SiteId.ToString())?.Text;
                     var fromDate = MaxDateTime(criteria.FromDate, schedule.StartOn).ToUniversalTime();
                     var toDate = MinDateTime(criteria.ToDate, schedule.EndOn).ToUniversalTime();
 
@@ -69,11 +94,11 @@ public class MailReportService(IDynamicRepository dynamicRepository, IConfigurat
                             new DateTimeOffset(fromDate),
                             new DateTimeOffset(toDate));
                         triggerTimes = (from time in triggerTimes
-                            where !(from task in mailTasks
-                                    where task.MailId == schedule.MailId
-                                    select task.ScheduledTime)
-                                .Contains(time.LocalDateTime)
-                            select time).ToList();
+                                        where !(from task in mailTasks
+                                                where task.MailId == schedule.MailId
+                                                select task.ScheduledTime)
+                                            .Contains(time.LocalDateTime)
+                                        select time).ToList();
 
                         foreach (var time in triggerTimes)
                         {

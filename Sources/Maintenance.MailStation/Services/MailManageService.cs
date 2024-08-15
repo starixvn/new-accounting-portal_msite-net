@@ -14,22 +14,39 @@ using Microsoft.Extensions.Configuration;
 public interface IMailManageService
 {
     IList<MailModel> MailList(GetMailListCriteria criteria);
+
     MailModel MailById(GetMailByIdCriteria criteria);
+
     IList<MailActionLogModel> MailLogById(GetMailLogByIdCriteria criteria);
+
     CommandResult CreateMail(CreateMailCriteria criteria);
+
     CommandResult UpdateMail(UpdateMailCriteria criteria);
+
     CommandResult DeleteMail(DeleteMailCriteria criteria);
+
     CommandResult CreateMailGroup(CreateMailGroupCriteria criteria);
+
     void RunNow(int mailId);
+
     List<SelectListItem> Sites(bool hasAllElement = true);
+
     List<SelectListItem> MailGroups(bool hasAllElement = true);
+
     List<SelectListItemExtra> Status(bool hasAllElement = true);
+
     List<SelectListItemExtra> TaskStatus(bool hasAllElement = true);
+
     List<SelectListItemExtra> Trigger(bool hasAllElement = true);
+
     List<SuggestMailModel> SuggestMails(SuggestMailCriteria criteria);
+
     CommandResult ExecuteNonQuery(UpdateCommandBase command);
+
     MailTaskModel GetMailTaskByID(GetMailTaskByIdCriteria criteria);
+
     Schedule GetScheduleByMailId(GetScheduleByIdCriteria criteria);
+
     string GetTimeZone();
 }
 
@@ -40,10 +57,16 @@ public class MailManageService(IJobOperationService jobOperationService, IConfig
         var clientNotifyTimeOutInSecond = configuration.GetValue<int>("MailStation:ClientNotifyTimeOutInSecond");
         var (mailModels, dates) = dynamicRepository.FetchMultiple<MailModel, CurrentTime>(criteria);
         var now = dates.FirstOrDefault().Now;
-
+        var baseService = new MailStationBaseService();
+        var sites = baseService.Sites();
         var mailModelList = mailModels.ToList();
         mailModelList.ForEach(n =>
         {
+            var siteName = sites.FirstOrDefault(s => s.Value == n.SiteId.ToString());
+            if (siteName != null)
+            {
+                n.SiteName = siteName.Text;
+            }
             if (n.TriggerType == (int)MailType.Schedule)
             {
                 n.IsClientOnline = n.LastActive != null && n.LastActive.Value.AddSeconds(clientNotifyTimeOutInSecond) >= now;
