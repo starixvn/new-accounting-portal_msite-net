@@ -290,10 +290,11 @@ var LetstalkReportController = function () {
     self.renderTarget = function (result) {
         var targetOptions = [];
         targetOptions.push("<option value='All'>All</option>");
-
-        for (var i = 0; i < result.length; i++) {
-            targetOptions.push("<option value='" + result[i].TargetName + "'>" + result[i].TargetName + "</option>");
-        };
+        if (result !== null) {
+            for (var i = 0; i < result.length; i++) {
+                targetOptions.push("<option value='" + result[i].TargetName + "'>" + result[i].TargetName + "</option>");
+            };
+        }
 
         $('#Target').html(targetOptions.join());
     };
@@ -318,9 +319,11 @@ var LetstalkReportController = function () {
     self.renderGroupsByTarget = function (result) {
         var groups = [];
         groups.push("<option value='All'>All</option>");
-        for (var i = 0; i < result.length; i++) {
-            groups.push("<option value='" + result[i].Group + "'>" + result[i].Group + "</option>");
-        };
+        if (result !== null) {
+            for (var i = 0; i < result.length; i++) {
+                groups.push("<option value='" + result[i].Group + "'>" + result[i].Group + "</option>");
+            };
+        }
 
         $('#Group').html(groups.join());
     };
