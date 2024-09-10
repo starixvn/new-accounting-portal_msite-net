@@ -121,12 +121,22 @@ var MessageController = function () {
             var rowColumns = [];
             var status = `<div class='status ` + dataRow.Status.toLowerCase() + `'>` + dataRow.Status + `<div/>`;
             var retry = dataRow.Retry > 0 ? `<div class="view-retry-log" data-message-id="` + dataRow.MessageId + `">` + dataRow.Retry + `</div>` : dataRow.Retry;
+
+            var attachments = `<div class='attachments'>`;
+            if (dataRow.AttachmentUrls) {
+                dataRow.AttachmentUrls.spilit(",").map((a, i) => {
+                    attachments += `<a class="attachment-url" href="` + a + `">Attchment ` + i + 1 + `</a>`
+                });
+            }
+            attachments += `</div>`;
+
             rowColumns.push({ Name: "No", Value: i + 1 + ((pageIndex - 1) * pageSize) });
             rowColumns.push({ Name: "AppName", Value: dataRow.AppName });
             rowColumns.push({ Name: "ChannelName", Value: dataRow.ChannelName });
             rowColumns.push({ Name: "BotName", Value: dataRow.BotName });
             rowColumns.push({ Name: "Content", Value: dataRow.IsHideContent ? `<i>Content hidden<i/>` : `<div class="overflow-text">` + dataRow.Content + `</div>` });
             rowColumns.push({ Name: "Status", Value: status });
+            rowColumns.push({ Name: "Attachments", Value: dataRow.AttachmentUrls ? attachments : '' });
             rowColumns.push({ Name: "ErrorMessage", Value: `<p class="overflow-text">` + dataRow.ErrorMessage + `</p>` });
             rowColumns.push({ Name: "CreatedDate", Value: dataRow.CreatedDate !== null ? sharedScriptManager.toLocalDate(dataRow.CreatedDate) : '' });
             rowColumns.push({ Name: "UpdatedDate", Value: dataRow.UpdatedDate !== null ? sharedScriptManager.toLocalDate(dataRow.UpdatedDate) : '' });
@@ -149,6 +159,7 @@ var MessageController = function () {
             { HeaderText: "Bot", Width: 120, Name: "BotName", HeaderAlign: "center", CellAlign: "left" },
             { HeaderText: "Content", Width: 400, Name: "Content", HeaderAlign: "center", CellAlign: "left" },
             { HeaderText: "Status", Width: 80, Name: "Status", HeaderAlign: "center", CellAlign: "center" },
+            { HeaderText: "Attachments", Width: 60, Name: "Attachments", HeaderAlign: "center", CellAlign: "center" },
             { HeaderText: "Error Message", Width: 250, Name: "ErrorMessage", HeaderAlign: "center", CellAlign: "left" },
             { HeaderText: "Created Date (GTM " + sharedScriptManager.currentTimeZone() + ")", Width: 150, Name: "CreatedDate", HeaderAlign: "center", CellAlign: "center", FormatDateTime: "MMM DD, YYYY hh:mm:ss A" },
             { HeaderText: "Last Updated (GTM " + sharedScriptManager.currentTimeZone() + ")", Width: 150, Name: "UpdatedDate", HeaderAlign: "center", CellAlign: "center", FormatDateTime: "MMM DD, YYYY hh:mm:ss A" },
