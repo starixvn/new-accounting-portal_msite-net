@@ -122,13 +122,13 @@ var MessageController = function () {
             var status = `<div class='status ` + dataRow.Status.toLowerCase() + `'>` + dataRow.Status + `<div/>`;
             var retry = dataRow.Retry > 0 ? `<div class="view-retry-log" data-message-id="` + dataRow.MessageId + `">` + dataRow.Retry + `</div>` : dataRow.Retry;
 
-            var attachments = `<div class='attachments'>`;
+            var attachments = `<ul class="msg-attachments">`;
             if (dataRow.AttachmentUrls) {
-                dataRow.AttachmentUrls.spilit(",").map((a, i) => {
-                    attachments += `<a class="attachment-url" href="` + a + `">Attchment ` + i + 1 + `</a>`
+                dataRow.AttachmentUrls.split(",").map((a, i) => {
+                    attachments += `<li><a class="attachment-url" href="` + a + `" target="_blank">Attchment ` + (i + 1) + `</a></li>`
                 });
             }
-            attachments += `</div>`;
+            attachments += `</ul>`;
 
             rowColumns.push({ Name: "No", Value: i + 1 + ((pageIndex - 1) * pageSize) });
             rowColumns.push({ Name: "AppName", Value: dataRow.AppName });
@@ -159,7 +159,7 @@ var MessageController = function () {
             { HeaderText: "Bot", Width: 120, Name: "BotName", HeaderAlign: "center", CellAlign: "left" },
             { HeaderText: "Content", Width: 400, Name: "Content", HeaderAlign: "center", CellAlign: "left" },
             { HeaderText: "Status", Width: 80, Name: "Status", HeaderAlign: "center", CellAlign: "center" },
-            { HeaderText: "Attachments", Width: 60, Name: "Attachments", HeaderAlign: "center", CellAlign: "center" },
+            { HeaderText: "Attachments", Width: 100, Name: "Attachments", HeaderAlign: "center", CellAlign: "left" },
             { HeaderText: "Error Message", Width: 250, Name: "ErrorMessage", HeaderAlign: "center", CellAlign: "left" },
             { HeaderText: "Created Date (GTM " + sharedScriptManager.currentTimeZone() + ")", Width: 150, Name: "CreatedDate", HeaderAlign: "center", CellAlign: "center", FormatDateTime: "MMM DD, YYYY hh:mm:ss A" },
             { HeaderText: "Last Updated (GTM " + sharedScriptManager.currentTimeZone() + ")", Width: 150, Name: "UpdatedDate", HeaderAlign: "center", CellAlign: "center", FormatDateTime: "MMM DD, YYYY hh:mm:ss A" },
