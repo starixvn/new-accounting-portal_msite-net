@@ -19,15 +19,6 @@
         public DateTime? SentDate { get; set; }
         public string Status { get; set; }
         public string ErrorMessage { get; set; }
-        public string AttachmentUrls { get; set; }
-
-        public string[] Attachments
-        {
-            get
-            {
-                if (string.IsNullOrWhiteSpace(AttachmentUrls)) return [];
-                return AttachmentUrls.Split(",");
-            }
-        }
+        public IEnumerable<Attachment> Attachments { get; set; }
     }
 }

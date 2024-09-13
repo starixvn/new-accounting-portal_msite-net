@@ -17,7 +17,15 @@
             => await dynamicRepository.FetchAsync<Bot>(new GetBotByAppIdCriteria { AppId = appId });
 
         public async Task<IEnumerable<Message>> GetAsync(GetMessageCriteria criteria)
-            => await dynamicRepository.FetchAsync<Message>(criteria);
+        {
+            var (messages, attachments) = await dynamicRepository.FetchMultipleAsync<Message, Attachment>(criteria);
+            foreach (var message in messages)
+            {
+                var listAtt = attachments.Where(a => a.MessageId == message.MessageId);
+                message.Attachments = listAtt;
+            }
+            return messages;
+        }
 
         public async Task<IEnumerable<MessageLog>> GetMessageLogAsync(int messageId)
             => await dynamicRepository.FetchAsync<MessageLog>(new GetLogMessageCriteria { MessageId = messageId });
