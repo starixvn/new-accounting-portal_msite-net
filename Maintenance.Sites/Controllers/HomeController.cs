@@ -4,7 +4,7 @@ namespace Maintenance.Sites.Controllers
     using Fanex.NAP.Client.Attributes;
     using Microsoft.AspNetCore.Mvc;
 
-    [NapSuperAuth]
+    [SessionAuthorize]
     public class HomeController : Controller
     {
         public ActionResult Index()

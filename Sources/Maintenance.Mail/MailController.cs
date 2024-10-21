@@ -11,7 +11,7 @@ namespace Maintenance.Mail
     using Fanex.NAP.Client.Attributes;
     using Fanex.NAP.Client.Configuration;
     using Fanex.NAP.Client.Helpers.Business;
-    using Fanex.NAP.Client.Helpers.Web;
+    using Fanex.NAP.Client;
     using Fanex.NAP.Client.Services;
     using Maintenance.Services;
     using Microsoft.AspNetCore.Mvc;
@@ -19,7 +19,7 @@ namespace Maintenance.Mail
     using Microsoft.Extensions.Configuration;
     using Services;
 
-    [NapSuperAuth]
+    [SessionAuthorize]
     public class MailController(
         IMailService mailServer,
         IUserService userService,

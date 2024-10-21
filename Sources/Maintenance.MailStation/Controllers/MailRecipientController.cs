@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using Services;
 
 [Area("MailStation")]
-[NapSuperAuth]
+[SessionAuthorize]
 public class MailRecipientController(IManageRecipientService manageRecipientService) : Controller
 {
     [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageRecipient, Policy = Constant.Policy.Read)]

@@ -7,11 +7,11 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="EasyNetQ" Version="7.8.0" />
-    <PackageReference Include="Fanex.Data.ProxyClient" Version="0.0.4-beta5" />
+    <PackageReference Include="Fanex.Data.ProxyClient" Version="1.0.0" />
     <PackageReference Include="Fanex.Logging" Version="2.0.1.1" />
     <PackageReference Include="Fanex.MailDeliver.MailClient" Version="2.0.11" />
     <PackageReference Include="Fanex.MailStation.Core" Version="2.0.1" />
-    <PackageReference Include="Fanex.NAP.Client" Version="2.0.0.1" />
+    <PackageReference Include="Fanex.NAP.Client" Version="2.0.2" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SiteFunctionKeys.cs">

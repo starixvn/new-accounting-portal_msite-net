@@ -1,7 +1,6 @@
 ﻿@inject INapSession napSession
 
 @using Fanex.NAP.Client.Models
-@using Fanex.NAP.Client.Helpers.Web
 @{
     var menuItemList = napSession.MenuItemList != null ? napSession.MenuItemList : new List<MenuItem>();
     var lvl0MenuItemList = menuItemList.Where(m => m.ParentId == 0).OrderBy(m => m.DisplayOrder).ToList();
