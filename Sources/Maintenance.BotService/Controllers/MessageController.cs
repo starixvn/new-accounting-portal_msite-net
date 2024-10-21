@@ -2,7 +2,7 @@
 {
     using Fanex.NAP.Client.Attributes;
     using Fanex.NAP.Client.Configuration;
-    using Fanex.NAP.Client.Helpers.Web;
+    using Fanex.NAP.Client;
     using Fanex.NAP.Client.Services;
     using Maintenance.BotService.Constants;
     using Maintenance.BotService.Criteria.Message;
@@ -13,7 +13,7 @@
     using Microsoft.AspNetCore.Mvc.Rendering;
     using static Fanex.NAP.Client.Helpers.Business.Constant;
 
-    [NapSuperAuth]
+    [SessionAuthorize]
     public class MessageController(
         IMessageService messageService,
         IApplicationSettingService applicationSettingService,

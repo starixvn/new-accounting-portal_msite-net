@@ -3,7 +3,7 @@ namespace Maintenance.Letstalk.Controllers;
 using Fanex.NAP.Client.Attributes;
 using Microsoft.AspNetCore.Mvc;
 
-[NapSuperAuth]
+[SessionAuthorize]
 [Route("LetstalkNotification/ManageLetstalkMessage")]
 public class ManageLetstalkMessageOldController() : Controller
 {

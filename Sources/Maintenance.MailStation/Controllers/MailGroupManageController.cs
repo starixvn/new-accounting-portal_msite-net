@@ -10,7 +10,7 @@ using Fanex.NAP.Client.Helpers.Business;
 using Microsoft.AspNetCore.Mvc;
 
 [Area("MailStation")]
-[NapSuperAuth]
+[SessionAuthorize]
 public class MailGroupManageController(IMailGroupService mailGroupService) : Controller
 {
     [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMailGroup, Policy = Constant.Policy.Read)]

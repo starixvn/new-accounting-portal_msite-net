@@ -8,7 +8,7 @@ using Fanex.Logging.Extensions.Database;
 using Fanex.Logging.Sentry.RavenClient;
 using Fanex.MailDeliver.MailClient;
 using Fanex.NAP.Client.Configuration;
-using Fanex.NAP.Client.Helpers.Web;
+using Fanex.NAP.Client;
 using Fanex.NAP.Client.Services;
 using Fanex.NAP.Client.Session;
 using Letstalk.Services;
@@ -24,6 +24,7 @@ using Services;
 using SharpRaven;
 using StackExchange.Redis;
 using TraceSp.Services;
+using WebOptimizer.Processors;
 
 public static class ServiceCollectionExtensions
 {
@@ -80,9 +81,9 @@ public static class ServiceCollectionExtensions
         services.AddWebOptimizer(pipeline =>
         {
             var cssSetting = new CssSettings { OutputMode = NUglify.OutputMode.MultipleLines, CommentMode = CssComment.None };
-            var scriptSetting = new CodeSettings { MinifyCode = false };
+            var jsSettings = new JsSettings { GenerateSourceMap = true, CodeSettings = new CodeSettings { MinifyCode = false } };
             pipeline.AddRawLess();
-            pipeline.AddLayoutBundle(cssSetting, scriptSetting);
+            pipeline.AddLayoutBundle(cssSetting, jsSettings);
             pipeline.AddMailBundle();
         });
 
@@ -92,20 +93,6 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddCommonServices(this IServiceCollection services)
     {
         services.AddSingleton<IDynamicRepository, DynamicRepository>();
-
-        return services;
-    }
-
-    public static IServiceCollection AddNapClient(this IServiceCollection services, IConfiguration configuration)
-    {
-        services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-        services.AddTransient<ILogger, Logger>();
-        services.AddSingleton<INapSettings>(new NapSettings(configuration));
-        services.AddSingleton<INapSession, NapSession>();
-        services.AddSingleton<IGroupService, GroupService>();
-        services.AddSingleton<IUserService, UserService>();
-        services.AddSingleton<ISecurityService, SecurityService>();
-        services.AddSingleton<Fanex.NAP.Client.Services.ISiteService, Fanex.NAP.Client.Services.SiteService>();
 
         return services;
     }
@@ -126,6 +113,7 @@ public static class ServiceCollectionExtensions
             .UseConfig(new LoggingConfiguration())
             .UseGetDbExceptionInfo(DatabaseInfoGetters.GetDbExceptionInfo);
 
+        services.AddSingleton<ILogger, Logger>();
         return services;
     }
 

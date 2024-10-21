@@ -1,8 +1,7 @@
 using Fanex.Data;
 using Fanex.NAP.Client;
+using Fanex.NAP.Client.Attributes;
 using Fanex.NAP.Client.Configuration;
-using Fanex.NAP.Client.Helpers.Web;
-using Fanex.NAP.SignIn.Attribute;
 using Maintenance.Sites.Utilities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -60,14 +59,10 @@ app.UseMiddleware<ErrorHandlerMiddleware>();
 app.UseAuthentication();
 app.UseAuthorization();
 
-NapClientManager
-    .UseConfig(app.Services.GetService<INapSettings>())
-    .UseSession(app.Services.GetService<INapSession>());
-
 app.MapControllerRoute(
     name: "MailStation",
     pattern: "{area:exists}/{controller=MailManage}/{action=Index}/{id?}");
 app.MapControllerRoute(
     "default",
     "{controller=Home}/{action=Index}/{id?}");
-app.Run();
+await app.RunAsync();

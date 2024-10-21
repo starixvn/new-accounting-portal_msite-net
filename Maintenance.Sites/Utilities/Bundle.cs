@@ -4,9 +4,11 @@ using WebOptimizer;
 
 namespace Maintenance.Sites.Utilities;
 
+using WebOptimizer.Processors;
+
 public static class Bundle
 {
-    public static void AddLayoutBundle(this IAssetPipeline pipeline, CssSettings cssSetting, CodeSettings scriptSetting)
+    public static void AddLayoutBundle(this IAssetPipeline pipeline, CssSettings cssSetting, JsSettings jsSettings)
     {
         pipeline.AddCssBundle(
             "/css/common.css",
@@ -27,7 +29,7 @@ public static class Bundle
             "themes/manage/refreshcountdown.less",
             "themes/manage/letstalknotification.less");
 
-        pipeline.AddJavaScriptBundle("/scripts/sharedscripts.js", scriptSetting,
+        pipeline.AddJavaScriptBundle("/scripts/sharedscripts.js", jsSettings,
             "scripts/lib/jquery-1.8.0.min.js",
             "scripts/lib/jquery-ui-1.8.23.min.js",
             "scripts/lib/jquery.cookie.js",

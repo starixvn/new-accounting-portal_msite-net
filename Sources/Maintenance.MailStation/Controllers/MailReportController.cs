@@ -8,12 +8,12 @@ namespace Maintenance.MailStation.Controllers;
 using Fanex.MailDelivery.Core.Models;
 using Fanex.NAP.Client.Attributes;
 using Fanex.NAP.Client.Helpers.Business;
-using Fanex.NAP.Client.Helpers.Web;
+using Fanex.NAP.Client;
 using Maintenance.MailStation.Models;
 using Microsoft.AspNetCore.Mvc;
 
 [Area("MailStation")]
-[NapSuperAuth]
+[SessionAuthorize]
 public class MailReportController(INapSession napSession, IMailReportService mailReportService) : Controller
 {
     [NapAuth(FunctionKey = MailDeliveryFunctionKeys.MailReport, Policy = Constant.Policy.Read)]

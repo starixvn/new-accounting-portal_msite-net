@@ -1,16 +1,17 @@
 ﻿namespace Maintenance.BotService.Controllers
 {
+    using Fanex.NAP.Client;
     using Fanex.NAP.Client.Attributes;
     using Fanex.NAP.Client.Configuration;
     using Fanex.NAP.Client.Helpers.Business;
-    using Fanex.NAP.Client.Helpers.Web;
+    using Fanex.NAP.Client;
     using Fanex.NAP.Client.Services;
     using Maintenance.BotService.Criteria.ApplicationSetting;
     using Maintenance.BotService.Params;
     using Maintenance.BotService.Services.Interfaces;
     using Microsoft.AspNetCore.Mvc;
 
-    [NapSuperAuth]
+    [SessionAuthorize]
     public class ApplicationSettingController(
         IApplicationSettingService applicationSettingService,
         INapSession napSession,
