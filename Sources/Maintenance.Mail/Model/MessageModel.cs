@@ -1,13 +1,12 @@
-namespace Maintenance.Mail.Model
+namespace Maintenance.Mail.Model;
+
+public class MessageModel
 {
-    public class MessageModel
-    {
-        public string Email { get; set; }
+    public string Email { get; set; }
 
-        public string Message { get; set; }
+    public string Message { get; set; }
 
-        public bool EmailSuccess { get; set; }
+    public bool EmailSuccess { get; set; }
 
-        public bool MessageSuccess { get; set; }
-    }
+    public bool MessageSuccess { get; set; }
 }

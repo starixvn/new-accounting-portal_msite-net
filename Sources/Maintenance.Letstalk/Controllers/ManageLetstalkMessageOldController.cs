@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 [SessionAuthorize]
 [Route("LetstalkNotification/ManageLetstalkMessage")]
-public class ManageLetstalkMessageOldController() : Controller
+public class ManageLetstalkMessageOldController : Controller
 {
     [Route("Index")]
     public ActionResult Index()

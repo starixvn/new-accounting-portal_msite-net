@@ -3,7 +3,7 @@ namespace Maintenance.Letstalk.Controllers;
 using Microsoft.AspNetCore.Mvc;
 
 [Route("LetstalkNotification/LetstalkReport")]
-public class LetstalkReportOldController() : Controller
+public class LetstalkReportOldController : Controller
 {
     [Route("Index")]
     public ActionResult Index()

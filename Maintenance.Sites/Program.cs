@@ -1,7 +1,5 @@
 using Fanex.Data;
-using Fanex.NAP.Client;
 using Fanex.NAP.Client.Attributes;
-using Fanex.NAP.Client.Configuration;
 using Maintenance.Sites.Utilities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -38,7 +36,7 @@ services.AddControllersWithViews(options =>
 {
     options.Filters.Add(new ServiceFilterAttribute(typeof(CheckUMFilterAttribute)));
     options.Filters.Add(new SessionAuthorizeAttribute());
-}).AddNewtonsoftJson((options) =>
+}).AddNewtonsoftJson(options =>
 {
     options.SerializerSettings.ContractResolver = new DefaultContractResolver();
 });

@@ -61,11 +61,6 @@ public class MailService : IMailService
 
     private MailStatus _mailStatus;
 
-    public MailService()
-    {
-
-    }
-
     public List<MailConfig> GetListConfig(string ip = "")
     {
         var configs = new List<MailConfig>();

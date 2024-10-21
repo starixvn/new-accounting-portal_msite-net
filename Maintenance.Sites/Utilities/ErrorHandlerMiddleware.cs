@@ -1,5 +1,5 @@
-﻿using Fanex.Logging.Extensions.Database;
-using Fanex.Logging.Extensions;
+﻿using Fanex.Logging.Extensions;
+using Fanex.Logging.Extensions.Database;
 
 namespace Maintenance.Sites.Utilities;
 

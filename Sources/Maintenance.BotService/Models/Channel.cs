@@ -1,8 +1,7 @@
-﻿namespace Maintenance.BotService.Models
+﻿namespace Maintenance.BotService.Models;
+
+public class Channel
 {
-    public class Channel
-    {
-        public byte ChannelId { get; set; }
-        public string ChannelName { get; set; }
-    }
+    public byte ChannelId { get; set; }
+    public string ChannelName { get; set; }
 }

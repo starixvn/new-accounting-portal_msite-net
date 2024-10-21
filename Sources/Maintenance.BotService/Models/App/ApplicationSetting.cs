@@ -1,18 +1,17 @@
-﻿namespace Maintenance.BotService.Models.App
+﻿namespace Maintenance.BotService.Models.App;
+
+public class ApplicationSetting
 {
-    public class ApplicationSetting
-    {
-        public int AppId { get; set; }
-        public string AppName { get; set; }
-        public string MicrosoftAppId { get; set; }
-        public string MicrosoftAppPassword { get; set; }
-        public string MicrosoftAppType { get; set; }
-        public string MicrosoftAppTenantId { get; set; }
-        public string Description { get; set; } = string.Empty;
-        public bool IsDeleted { get; set; }
-        public bool IsActive { get; set; }
-        public bool IsHideContent { get; set; }
-        public DateTime CreatedDate { get; set; }
-        public IEnumerable<Bot> Bots { get; set; }
-    }
+    public int AppId { get; set; }
+    public string AppName { get; set; }
+    public string MicrosoftAppId { get; set; }
+    public string MicrosoftAppPassword { get; set; }
+    public string MicrosoftAppType { get; set; }
+    public string MicrosoftAppTenantId { get; set; }
+    public string Description { get; set; } = string.Empty;
+    public bool IsDeleted { get; set; }
+    public bool IsActive { get; set; }
+    public bool IsHideContent { get; set; }
+    public DateTime CreatedDate { get; set; }
+    public IEnumerable<Bot> Bots { get; set; }
 }

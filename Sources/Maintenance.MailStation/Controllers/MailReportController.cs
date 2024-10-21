@@ -6,11 +6,11 @@ using Maintenance.MailStation.Services;
 namespace Maintenance.MailStation.Controllers;
 
 using Fanex.MailDelivery.Core.Models;
+using Fanex.NAP.Client;
 using Fanex.NAP.Client.Attributes;
 using Fanex.NAP.Client.Helpers.Business;
-using Fanex.NAP.Client;
-using Maintenance.MailStation.Models;
 using Microsoft.AspNetCore.Mvc;
+using Models;
 
 [Area("MailStation")]
 [SessionAuthorize]

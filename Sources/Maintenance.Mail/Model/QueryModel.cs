@@ -1,9 +1,8 @@
-namespace Maintenance.Mail.Model
-{
-    public class QueryModel
-    {
-        public bool IsPro { get; set; }
+namespace Maintenance.Mail.Model;
 
-        public string Message { get; set; }
-    }
+public class QueryModel
+{
+    public bool IsPro { get; set; }
+
+    public string Message { get; set; }
 }

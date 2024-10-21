@@ -38,11 +38,6 @@ public class TracingSpService : ITracingSpService
             ErrorMsg = string.Empty,
             HasError = false
         };
-        if (IsExistedError(criteria, model))
-        {
-            return new List<TracingSpViewModel>();
-        }
-
-        return dynamicRepository.Fetch<TracingSpViewModel>(criteria, model.Server).ToList();
+        return IsExistedError(criteria, model) ? [] : dynamicRepository.Fetch<TracingSpViewModel>(criteria, model.Server).ToList();
     }
 }
