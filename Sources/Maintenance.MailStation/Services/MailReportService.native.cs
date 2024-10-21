@@ -64,7 +64,7 @@ public class MailReportService(IDynamicRepository dynamicRepository, IConfigurat
         var sites = baseService.Sites();
         mailTasks.ForEach(mail =>
         {
-            mail.SiteName = sites.FirstOrDefault(s => s.Value == mail.SiteId.ToString())?.Text;
+            mail.SiteName = sites.Find(s => s.Value == mail.SiteId.ToString())?.Text;
         });
 
         if (criteria.TriggerType != (int)MailType.Function)
@@ -81,7 +81,7 @@ public class MailReportService(IDynamicRepository dynamicRepository, IConfigurat
 
                 foreach (var schedule in mailTaskDetails)
                 {
-                    schedule.SiteName = sites.FirstOrDefault(s => s.Value == schedule.SiteId.ToString())?.Text;
+                    schedule.SiteName = sites.Find(s => s.Value == schedule.SiteId.ToString())?.Text;
                     var fromDate = MaxDateTime(criteria.FromDate, schedule.StartOn).ToUniversalTime();
                     var toDate = MinDateTime(criteria.ToDate, schedule.EndOn).ToUniversalTime();
 
@@ -102,7 +102,7 @@ public class MailReportService(IDynamicRepository dynamicRepository, IConfigurat
 
                         foreach (var time in triggerTimes)
                         {
-                            var status = time.LocalDateTime.AddSeconds(5) > DateTime.Now ? (int)JobStatus.Waiting : (int)JobStatus.Missing;
+                            var status = time.LocalDateTime.AddSeconds(5) > DateTimeOffset.Now.DateTime ? (int)JobStatus.Waiting : (int)JobStatus.Missing;
 
                             if (criteria.Status == -1 || criteria.Status == status)
                             {
@@ -139,8 +139,8 @@ public class MailReportService(IDynamicRepository dynamicRepository, IConfigurat
     {
         var criteria = new MailReportCriteria
         {
-            FromDate = DateTime.Now.Date,
-            ToDate = DateTime.Now.Date,
+            FromDate = DateTimeOffset.Now.Date,
+            ToDate = DateTimeOffset.Now.Date,
             MailName = null,
             SiteId = -1,
             Status = -1,
@@ -156,7 +156,7 @@ public class MailReportService(IDynamicRepository dynamicRepository, IConfigurat
             RunningItemCount = mailTasks.Count(x => x.Status == (int)JobStatus.Running),
             SentItemCount = mailTasks.Count(x => x.Status == (int)JobStatus.Success),
             SucceededItemCount = mailTasks.Count(x => x.Status == (int)JobStatus.SuccessWithoutSendmail),
-            CurrentDate = DateTime.Now.Date
+            CurrentDate = DateTimeOffset.Now.Date
         };
 
         return counter;
@@ -200,7 +200,7 @@ public class MailReportService(IDynamicRepository dynamicRepository, IConfigurat
         {
             TaskId = taskId,
             Status = (int)JobStatus.Abort,
-            LastSent = DateTime.Now
+            LastSent = DateTimeOffset.Now.DateTime
         };
 
         ExecuteNonQuery(criteria);
@@ -231,7 +231,7 @@ public class MailReportService(IDynamicRepository dynamicRepository, IConfigurat
         {
             TaskId = taskId,
             Status = (int)JobStatus.Running,
-            LastSent = DateTime.Now
+            LastSent = DateTimeOffset.Now.DateTime
         };
 
         ExecuteNonQuery(criteria);

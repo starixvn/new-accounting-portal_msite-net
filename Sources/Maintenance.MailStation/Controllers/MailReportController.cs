@@ -23,7 +23,7 @@ public class MailReportController(INapSession napSession, IMailReportService mai
         ViewBag.ListSite = mailReportService.Sites();
         ViewBag.ListTriggerType = mailReportService.Trigger();
         ViewBag.TimeZoneString = TimeZoneExtension.GetTimeZoneString();
-        ViewBag.DateTime = DateTime.Now.ToString("MMM dd,yyyy");
+        ViewBag.DateTime = DateTimeOffset.Now.ToString("MMM dd,yyyy");
 
         return View();
     }
@@ -68,7 +68,7 @@ public class MailReportController(INapSession napSession, IMailReportService mai
         mailReportService.AddMailLog(new AddMailLogCriteria
         {
             ExceptionMessage = $"> It's aborted by \"{napSession.UserName}\"",
-            LogTime = DateTime.Now,
+            LogTime = DateTimeOffset.Now.DateTime,
             Status = (int)JobStatus.Abort,
             TaskId = taskId
         });
@@ -80,7 +80,7 @@ public class MailReportController(INapSession napSession, IMailReportService mai
         mailReportService.AddMailLog(new AddMailLogCriteria
         {
             ExceptionMessage = $"> It's retried by \"{napSession.UserName}\"",
-            LogTime = DateTime.Now,
+            LogTime = DateTimeOffset.Now.DateTime,
             Status = (int)JobStatus.Running,
             TaskId = criteria.TaskId
         });

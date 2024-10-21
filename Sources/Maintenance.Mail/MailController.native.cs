@@ -42,12 +42,12 @@ public class MailController(
 
         var totalRows = 0;
 
-        ViewBag.DateFrom = DateTime.Now.ToString("dd/MM/yyyy");
-        ViewBag.DateTo = DateTime.Now.ToString("dd/MM/yyyy");
+        ViewBag.DateFrom = DateTimeOffset.Now.ToString("dd/MM/yyyy");
+        ViewBag.DateTo = DateTimeOffset.Now.ToString("dd/MM/yyyy");
 
         var listMail = mailServer.WithApp(appId)
-            .FromDate(DateTime.Now.ToShortDateString())
-            .ToDate(DateTime.Now.ToShortDateString())
+            .FromDate(DateTimeOffset.Now.Date.ToShortDateString())
+            .ToDate(DateTimeOffset.Now.Date.ToShortDateString())
             .WithStatus(0)
             .WithPagination(1, 10)
             .GetListMailByDate(ref totalRows);
@@ -128,6 +128,28 @@ public class MailController(
         return View(new MailSetting());
     }
 
+    [HttpPost]
+    public ActionResult AddMailSettingPopUp(
+        string server,
+        int port,
+        string username,
+        string password,
+        bool isAuthor)
+    {
+        var mail = new MailSetting
+        {
+            SettingName = server + ":" + port + " (" + username + ") ",
+            Server = server,
+            Port = port,
+            Username = username,
+            Password = password,
+            IsAuth = isAuthor
+        };
+
+        mailServer.StoreSetting(mail);
+        return Json(mail);
+    }
+
     [HttpGet]
     [NapAuth(FunctionKey = SiteFunctionKeys.SmtpServers, Policy = Constant.Policy.Host)]
     public ActionResult EditMailSetting(int id)
@@ -200,16 +222,7 @@ public class MailController(
     [NapAuth(FunctionKey = SiteFunctionKeys.ApplicationManagement, Policy = Constant.Policy.Host)]
     public ActionResult AddMailConfig(MailConfigViewModel model)
     {
-        InitDataMailSetting();
-
-        ViewBag.Success = false;
-
-        if (ModelState.IsValid)
-        {
-            var mailConfig = model.GetMailConfig(napSession.UserId);
-
-            ViewBag.Success = mailServer.StoreConfig(mailConfig);
-        }
+        AddOrEditMailConfig(model);
 
         return View(model);
     }
@@ -240,6 +253,13 @@ public class MailController(
     [NapAuth(FunctionKey = SiteFunctionKeys.ApplicationManagement, Policy = Constant.Policy.Host)]
     public ActionResult EditMailConfig(MailConfigViewModel model)
     {
+        AddOrEditMailConfig(model);
+
+        return View(model);
+    }
+
+    private void AddOrEditMailConfig(MailConfigViewModel model)
+    {
         InitDataMailSetting();
 
         ViewBag.Success = false;
@@ -250,8 +270,6 @@ public class MailController(
 
             ViewBag.Success = mailServer.StoreConfig(mailConfig);
         }
-
-        return View(model);
     }
 
     [HttpGet]
@@ -357,7 +375,7 @@ public class MailController(
         {
             var extension = Path.GetExtension(mailRecord.FileAttachments);
 
-            var fileExtension = extension.ToLower() switch
+            var fileExtension = extension.ToLower(CultureInfo.CurrentCulture) switch
             {
                 ".xls" => FileExtentions.MS_EXCEL,
                 ".doc" => FileExtentions.MS_DOC,
@@ -388,28 +406,6 @@ public class MailController(
     #endregion Action
 
     #region Ajax
-
-    [HttpPost]
-    public ActionResult AddMailSettingPopUp(
-        string server,
-        int port,
-        string username,
-        string password,
-        bool isAuthor)
-    {
-        var mail = new MailSetting
-        {
-            SettingName = server + ":" + port + " (" + username + ") ",
-            Server = server,
-            Port = port,
-            Username = username,
-            Password = password,
-            IsAuth = isAuthor
-        };
-
-        mailServer.StoreSetting(mail);
-        return Json(mail);
-    }
 
     [HttpPost]
     public ActionResult AddMailConfigPopUp(string appName, string description, int settingId)
@@ -487,8 +483,8 @@ public class MailController(
 
         var totalRows = 0;
 
-        var dateFrom = !string.IsNullOrWhiteSpace(from) ? DateTime.ParseExact(from, "dd/MM/yyyy", CultureInfo.InvariantCulture) : DateTime.Now;
-        var dateTo = !string.IsNullOrWhiteSpace(from) ? DateTime.ParseExact(to, "dd/MM/yyyy", CultureInfo.InvariantCulture) : DateTime.Now;
+        var dateFrom = !string.IsNullOrWhiteSpace(from) ? DateTime.ParseExact(from, "dd/MM/yyyy", CultureInfo.InvariantCulture) : DateTimeOffset.Now;
+        var dateTo = !string.IsNullOrWhiteSpace(from) ? DateTime.ParseExact(to, "dd/MM/yyyy", CultureInfo.InvariantCulture) : DateTimeOffset.Now;
 
         var listMail = mailServer.WithApp(applicationID)
             .FromDate(dateFrom.ToString(CultureInfo.CurrentCulture))

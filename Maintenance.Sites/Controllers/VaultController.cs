@@ -1,6 +1,5 @@
 namespace Maintenance.Sites.Controllers;
 
-using Fanex.Data.Vault;
 using Fanex.NAP.Client.Attributes;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;

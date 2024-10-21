@@ -11,8 +11,5 @@ public class Controller12monitor : ControllerBase
 {
     [HttpGet]
     [Route("")]
-    public string Index()
-    {
-        return "12monitor";
-    }
+    public string Index() => "12monitor";
 }

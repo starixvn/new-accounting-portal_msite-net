@@ -33,7 +33,7 @@ public class HttpClientService(IConfiguration configuration) : IHttpClientServic
 
         var content = new StringContent(JsonConvert.SerializeObject(inputParams), Encoding.UTF8, "application/json");
 
-        var responseResult = Client.PostAsync(letstalkApiUrl, content).Result;
+        var responseResult = Client.PostAsync(letstalkApiUrl, content).GetAwaiter().GetResult();
 
         if (responseResult.IsSuccessStatusCode)
         {

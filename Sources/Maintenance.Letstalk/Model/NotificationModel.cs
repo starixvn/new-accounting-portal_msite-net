@@ -4,6 +4,8 @@ using System;
 
 public class NotificationModel
 {
+    private const string TimeFormat = "MMM dd, yyyy HH:mm:ss";
+
     public int NotificationID { get; set; }
 
     public string Title { get; set; }
@@ -22,21 +24,21 @@ public class NotificationModel
 
     public DateTime ConfigSendTime { get; set; }
 
-    public string ConfigSendTimeString => ConfigSendTime.ToString("MMM dd, yyyy HH:mm:ss");
+    public string ConfigSendTimeString => ConfigSendTime.ToString(TimeFormat);
 
     public DateTime? LastSentTime { get; set; }
 
-    public string LastSentTimeString => !LastSentTime.HasValue ? "" : LastSentTime.Value.ToString("MMM dd, yyyy HH:mm:ss");
+    public string LastSentTimeString => !LastSentTime.HasValue ? "" : LastSentTime.Value.ToString(TimeFormat);
 
     public string Status { get; set; }
 
     public DateTime LastUpdTime { get; set; }
 
-    public string LastUpdTimeString => LastUpdTime.ToString("MMM dd, yyyy HH:mm:ss");
+    public string LastUpdTimeString => LastUpdTime.ToString(TimeFormat);
 
     public DateTime CreatedTime { get; set; }
 
-    public string CreatedTimeString => CreatedTime.ToString("MMM dd, yyyy HH:mm:ss");
+    public string CreatedTimeString => CreatedTime.ToString(TimeFormat);
 
     public int CreatedBy { get; set; }
 

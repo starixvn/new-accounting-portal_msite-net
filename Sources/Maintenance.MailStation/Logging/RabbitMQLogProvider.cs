@@ -79,7 +79,7 @@ internal static class LogMessageFormatter
         return text[..pos] + replace + text[(pos + search.Length)..];
     }
 
-    public static string FormatStructuredMessage(string targetMessage, object[] formatParameters)
+    internal static string FormatStructuredMessage(string targetMessage, object[] formatParameters)
     {
         if (formatParameters == null || formatParameters.Length == 0)
         {

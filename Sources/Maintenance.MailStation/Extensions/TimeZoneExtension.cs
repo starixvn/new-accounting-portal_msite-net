@@ -1,7 +1,6 @@
 namespace Maintenance.MailStation.Extensions;
 
 using System;
-using System.Linq;
 using Constants;
 
 public static class TimeZoneExtension
@@ -10,7 +9,7 @@ public static class TimeZoneExtension
     {
         TimeZoneInfo.ClearCachedData();
         var standardName = TimeZoneInfo.Local.StandardName;
-        var timezone = TimeZoneConstants.Timezones.FirstOrDefault(timeZone => timeZone.StandardName.Equals(standardName));
+        var timezone = TimeZoneConstants.Timezones.Find(timeZone => timeZone.StandardName.Equals(standardName));
         return timezone?.TimeZoneString;
     }
 }

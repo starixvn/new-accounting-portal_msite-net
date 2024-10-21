@@ -1,6 +1,7 @@
 namespace Maintenance.MailStation.Constants;
 
 using System.Collections.Generic;
+using System.Globalization;
 using Models;
 
 public static class MailStationConstants
@@ -21,13 +22,13 @@ public static class MailStationConstants
 
     public static List<SelectListItemExtra> TaskStatus { get; } =
     [
-        new() { Text = "Waiting".ToUpper(), Value = "0" },
-        new() { Text = "Running".ToUpper(), Value = "1" },
-        new() { Text = "Data not ready".ToUpper(), Value = "2" },
-        new() { Text = "Failed".ToUpper(), Value = "3" },
-        new() { Text = "Sent".ToUpper(), Value = "4" },
-        new() { Text = "Aborted".ToUpper(), Value = "6" },
-        new() { Text = "Succeeded".ToUpper(), Value = "7" },
-        new() { Text = "Missing".ToUpper(), Value = "8" }
+        new() { Text = "Waiting".ToUpper(CultureInfo.InvariantCulture), Value = "0" },
+        new() { Text = "Running".ToUpper(CultureInfo.InvariantCulture), Value = "1" },
+        new() { Text = "Data not ready".ToUpper(CultureInfo.InvariantCulture), Value = "2" },
+        new() { Text = "Failed".ToUpper(CultureInfo.InvariantCulture), Value = "3" },
+        new() { Text = "Sent".ToUpper(CultureInfo.InvariantCulture), Value = "4" },
+        new() { Text = "Aborted".ToUpper(CultureInfo.InvariantCulture), Value = "6" },
+        new() { Text = "Succeeded".ToUpper(CultureInfo.InvariantCulture), Value = "7" },
+        new() { Text = "Missing".ToUpper(CultureInfo.InvariantCulture), Value = "8" }
     ];
 }
