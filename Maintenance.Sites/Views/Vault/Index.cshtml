@@ -1,0 +1,70 @@
+﻿@model Maintenance.Sites.Controllers.VaultRequest
+@{
+    ViewBag.Title = "Vault";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Head {
+}
+@section HeadLine
+{
+    <h1>
+        <span class="title">@ViewBag.Title</span>
+    </h1>
+}
+@using (Html.BeginForm())
+{
+    <div class="form">
+
+        <div class="form-row">
+            <div class="lbl-field">
+                @Html.LabelFor(m => m.Address)
+            </div>
+            <div class="edit-field">
+                @Html.TextBoxFor(m => m.Address)
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="lbl-field">
+                @Html.LabelFor(m => m.SecretId)
+            </div>
+            <div class="edit-field">
+                @Html.TextBoxFor(m => m.SecretId)
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="lbl-field">
+                @Html.LabelFor(m => m.Role)
+            </div>
+            <div class="edit-field">
+                @Html.TextBoxFor(m => m.Role)
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="lbl-field">
+                @Html.LabelFor(m => m.MountPath)
+            </div>
+            <div class="edit-field">
+                @Html.TextBoxFor(m => m.MountPath)
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="lbl-field">
+                @Html.LabelFor(m => m.SecretPath)
+            </div>
+            <div class="edit-field">
+                @Html.TextBoxFor(m => m.SecretPath)
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="lbl-field">
+            </div>
+            <div class="edit-field">
+                <input type="submit" value="Submit" />
+            </div>
+        </div>
+    </div>
+}
+
+<div class="form">
+    <textarea readonly="readonly" rows="15" cols="80" style="width:100%">@Html.Raw(ViewBag.SecretData)</textarea>
+</div>
