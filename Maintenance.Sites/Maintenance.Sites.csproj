@@ -39,14 +39,14 @@
     <ItemGroup>
         <PackageReference Include="codeessentials.WebOptimizer.Dotless" Version="3.1.0" />
         <PackageReference Include="EasyNetQ" Version="7.8.0" />
-    <PackageReference Include="Fanex.Data.ProxyClient" Version="1.0.0" />
+    <PackageReference Include="Fanex.Data.ProxyClient" Version="1.0.1" />
         <PackageReference Include="Fanex.Logging.Extensions.AspNetCore" Version="1.0.1" />
         <PackageReference Include="Fanex.Logging.Extensions.Database" Version="1.0.8" />
     <PackageReference Include="Fanex.Logging.Sentry.RavenClient" Version="1.0.1.2" />
         <PackageReference Include="Fanex.MailDeliver.MailClient" Version="2.0.11" />
     <PackageReference Include="Fanex.MailStation.Core" Version="2.0.1" />
     <PackageReference Include="Fanex.NAP.Client" Version="2.0.2" />
-        <PackageReference Include="Fanex.NAP.SignIn" Version="2.0.2" />
+        <PackageReference Include="Fanex.NAP.SignIn" Version="2.0.2.2" />
     <PackageReference Include="LigerShark.WebOptimizer.Core" Version="3.0.426" />
     <PackageReference Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" Version="8.0.10" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="8.0.10" />
