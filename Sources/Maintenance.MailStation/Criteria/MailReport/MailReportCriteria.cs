@@ -1,7 +1,7 @@
 namespace Maintenance.MailStation.Criteria.MailReport;
 
-using Fanex.Data.Repository;
 using System;
+using Fanex.Data.Repository;
 
 public class MailReportCriteria : CriteriaBase
 {

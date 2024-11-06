@@ -7,10 +7,6 @@ using Fanex.Logging.Extensions.AspNetCore;
 using Fanex.Logging.Extensions.Database;
 using Fanex.Logging.Sentry.RavenClient;
 using Fanex.MailDeliver.MailClient;
-using Fanex.NAP.Client.Configuration;
-using Fanex.NAP.Client;
-using Fanex.NAP.Client.Services;
-using Fanex.NAP.Client.Session;
 using Letstalk.Services;
 using Mail.Services;
 using MailStation.Services;
@@ -151,7 +147,7 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddTraceSp(this IServiceCollection services)
     {
         services.AddTransient<IDbServerService, DbServerService>();
-        services.AddTransient<TraceSp.Services.ISiteService, TraceSp.Services.SiteService>();
+        services.AddTransient<ISiteService, SiteService>();
         services.AddTransient<ITracingSpService, TracingSpService>();
 
         return services;

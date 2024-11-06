@@ -1,12 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Maintenance.Sites.ViewComponents
+namespace Maintenance.Sites.ViewComponents;
+
+public class MenuViewComponent : ViewComponent
 {
-    public class MenuViewComponent : ViewComponent
+    public IViewComponentResult Invoke()
     {
-        public IViewComponentResult Invoke()
-        {
-            return View("Default");
-        }
+        return View("Default");
     }
 }

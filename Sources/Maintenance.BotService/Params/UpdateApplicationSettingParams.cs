@@ -1,12 +1,11 @@
-﻿namespace Maintenance.BotService.Params
+﻿namespace Maintenance.BotService.Params;
+
+public class UpdateApplicationSettingParams
 {
-    public class UpdateApplicationSettingParams
-    {
-        public int AppId { get; set; }
-        public string AppName { get; set; }
-        public string MicrosoftAppPassword { get; set; }
-        public string Description { get; set; }
-        public bool Active { get; set; }
-        public bool IsChangedPassword { get; set; }
-    }
+    public int AppId { get; set; }
+    public string AppName { get; set; }
+    public string MicrosoftAppPassword { get; set; }
+    public string Description { get; set; }
+    public bool Active { get; set; }
+    public bool IsChangedPassword { get; set; }
 }

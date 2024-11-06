@@ -21,6 +21,6 @@ public class SiteService : ISiteService
             sites = deserializer.Deserialize(stream) as List<Site>;
         }
 
-        return sites.OrderBy(x => x.Name).ToList();
+        return sites?.OrderBy(x => x.Name).ToList();
     }
 }

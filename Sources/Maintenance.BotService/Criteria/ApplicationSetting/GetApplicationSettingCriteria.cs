@@ -1,14 +1,13 @@
-﻿namespace Maintenance.BotService.Criteria.ApplicationSetting
+﻿namespace Maintenance.BotService.Criteria.ApplicationSetting;
+
+using Fanex.Data.Repository;
+
+public class GetApplicationSettingCriteria : CriteriaBase
 {
-    using Fanex.Data.Repository;
+    public string Name { get; set; }
+    public bool? IsActive { get; set; }
 
-    public class GetApplicationSettingCriteria : CriteriaBase
-    {
-        public string Name { get; set; }
-        public bool? IsActive { get; set; }
+    public override string GetSettingKey() => "ApplicationSetting_GetAll";
 
-        public override string GetSettingKey() => "ApplicationSetting_GetAll";
-
-        public override bool IsValid() => true;
-    }
+    public override bool IsValid() => true;
 }

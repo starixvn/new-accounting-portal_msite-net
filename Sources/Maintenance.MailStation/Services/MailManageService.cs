@@ -56,26 +56,20 @@ public class MailManageService(IJobOperationService jobOperationService, IConfig
     {
         var clientNotifyTimeOutInSecond = configuration.GetValue<int>("MailStation:ClientNotifyTimeOutInSecond");
         var (mailModels, dates) = dynamicRepository.FetchMultiple<MailModel, CurrentTime>(criteria);
-        var now = dates.FirstOrDefault().Now;
+        var now = dates.Select(d => d.Now).FirstOrDefault();
         var baseService = new MailStationBaseService();
         var sites = baseService.Sites();
         var mailModelList = mailModels.ToList();
         mailModelList.ForEach(n =>
         {
-            var siteName = sites.FirstOrDefault(s => s.Value == n.SiteId.ToString());
+            var siteName = sites.Find(s => s.Value == n.SiteId.ToString());
             if (siteName != null)
             {
                 n.SiteName = siteName.Text;
             }
-            if (n.TriggerType == (int)MailType.Schedule)
-            {
-                n.IsClientOnline = n.LastActive != null && n.LastActive.Value.AddSeconds(clientNotifyTimeOutInSecond) >= now;
-            }
-            else
-            {
-                // Function and others always true
-                n.IsClientOnline = true;
-            }
+
+            n.IsClientOnline = n.TriggerType != (int)MailType.Schedule
+                               || (n.LastActive != null && n.LastActive.Value.AddSeconds(clientNotifyTimeOutInSecond) >= now);
         });
 
         return mailModelList;
@@ -107,7 +101,7 @@ public class MailManageService(IJobOperationService jobOperationService, IConfig
                 Id = criteria.MailId,
                 Active = criteria.IsActive,
                 EndTime = criteria.EndOn,
-                StartTime = criteria.StartOn ?? DateTime.Now,
+                StartTime = criteria.StartOn ?? DateTimeOffset.Now.DateTime,
                 MaxRetryTimes = criteria.Attempt,
                 Name = criteria.MailName,
                 RepeatExpression = criteria.CronExpression,

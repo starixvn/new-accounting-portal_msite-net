@@ -1,9 +1,8 @@
-﻿namespace Maintenance.BotService.Models
+﻿namespace Maintenance.BotService.Models;
+
+public class CommandResult
 {
-    public class CommandResult
-    {
-        public int Code { get; set; }
-        public string Message { get; set; }
-        public bool IsSuccessful => Code == 0;
-    }
+    public int Code { get; set; }
+    public string Message { get; set; }
+    public bool IsSuccessful => Code == 0;
 }

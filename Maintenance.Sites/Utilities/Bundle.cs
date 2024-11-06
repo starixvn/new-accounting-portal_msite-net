@@ -1,5 +1,4 @@
 ﻿using NUglify.Css;
-using NUglify.JavaScript;
 using WebOptimizer;
 
 namespace Maintenance.Sites.Utilities;

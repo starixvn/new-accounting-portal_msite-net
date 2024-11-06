@@ -1,9 +1,8 @@
-﻿namespace Maintenance.BotService.Services.Interfaces
-{
-    using Maintenance.BotService.Models.Message;
+﻿namespace Maintenance.BotService.Services.Interfaces;
 
-    public interface IBotConnector
-    {
-        Task RetryMessageAsync(MessageResend message);
-    }
+using Models.Message;
+
+public interface IBotConnector
+{
+    Task RetryMessageAsync(MessageResend message);
 }

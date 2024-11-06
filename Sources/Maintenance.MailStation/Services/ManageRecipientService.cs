@@ -5,11 +5,11 @@ using System.Linq;
 using Criteria;
 using Criteria.MailManage;
 using Criteria.MailReport;
+using Criteria.ManageRecipient;
 using Fanex.Data.Repository;
+using Fanex.MailDelivery.Core.Models;
 using Fanex.NAP.Client.Models;
 using Fanex.NAP.Client.Services;
-using Criteria.ManageRecipient;
-using Fanex.MailDelivery.Core.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Models;
 

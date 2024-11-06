@@ -1,20 +1,19 @@
-namespace Maintenance.Mail.Services
+namespace Maintenance.Mail.Services;
+
+using System.Collections.Generic;
+using Criteria.MailService;
+using Fanex.Data.Repository;
+
+public interface IMailRepository
 {
-    using System.Collections.Generic;
-    using Criteria.MailService;
-    using Fanex.Data.Repository;
+    IEnumerable<MailConfigLogModel> GetMailConfigLogs(int id);
+}
 
-    public interface IMailRepository
+public class MailRepository(IDynamicRepository dynamicRepository) : IMailRepository
+{
+    public IEnumerable<MailConfigLogModel> GetMailConfigLogs(int id)
     {
-        IEnumerable<MailConfigLogModel> GetMailConfigLogs(int id);
-    }
-
-    public class MailRepository(IDynamicRepository dynamicRepository) : IMailRepository
-    {
-        public IEnumerable<MailConfigLogModel> GetMailConfigLogs(int id)
-        {
-            var criteria = new GetMailConfigLogsCriteria { AppID = id };
-            return dynamicRepository.Fetch<MailConfigLogModel>(criteria).ToList();
-        }
+        var criteria = new GetMailConfigLogsCriteria { AppID = id };
+        return dynamicRepository.Fetch<MailConfigLogModel>(criteria).ToList();
     }
 }

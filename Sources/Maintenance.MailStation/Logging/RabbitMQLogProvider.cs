@@ -40,7 +40,7 @@ public static class RabbitMqLogger
 
 public class RabbitMqLogProvider : EasyNetQ.Logging.ILogger
 {
-    public bool Log(EasyNetQ.Logging.LogLevel logLevel, Func<string> messageFunc, Exception exception = null, params object[] formatParameters)
+    public bool Log(LogLevel logLevel, Func<string> messageFunc, Exception exception = null, params object[] formatParameters)
     {
         if ((logLevel != LogLevel.Error && logLevel != LogLevel.Fatal) || messageFunc == null)
         {
@@ -61,9 +61,7 @@ public class RabbitMqLogProvider : EasyNetQ.Logging.ILogger
     }
 }
 
-public class RabbitMqLogProvider<TCategory> : RabbitMqLogProvider, EasyNetQ.Logging.ILogger<TCategory>
-{
-}
+public class RabbitMqLogProvider<TCategory> : RabbitMqLogProvider, ILogger<TCategory>;
 
 internal static class LogMessageFormatter
 {
@@ -81,7 +79,7 @@ internal static class LogMessageFormatter
         return text[..pos] + replace + text[(pos + search.Length)..];
     }
 
-    public static string FormatStructuredMessage(string targetMessage, object[] formatParameters)
+    internal static string FormatStructuredMessage(string targetMessage, object[] formatParameters)
     {
         if (formatParameters == null || formatParameters.Length == 0)
         {

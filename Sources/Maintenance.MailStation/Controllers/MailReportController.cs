@@ -6,11 +6,11 @@ using Maintenance.MailStation.Services;
 namespace Maintenance.MailStation.Controllers;
 
 using Fanex.MailDelivery.Core.Models;
+using Fanex.NAP.Client;
 using Fanex.NAP.Client.Attributes;
 using Fanex.NAP.Client.Helpers.Business;
-using Fanex.NAP.Client;
-using Maintenance.MailStation.Models;
 using Microsoft.AspNetCore.Mvc;
+using Models;
 
 [Area("MailStation")]
 [SessionAuthorize]
@@ -23,7 +23,7 @@ public class MailReportController(INapSession napSession, IMailReportService mai
         ViewBag.ListSite = mailReportService.Sites();
         ViewBag.ListTriggerType = mailReportService.Trigger();
         ViewBag.TimeZoneString = TimeZoneExtension.GetTimeZoneString();
-        ViewBag.DateTime = DateTime.Now.ToString("MMM dd,yyyy");
+        ViewBag.DateTime = DateTimeOffset.Now.ToString("MMM dd,yyyy");
 
         return View();
     }
@@ -68,7 +68,7 @@ public class MailReportController(INapSession napSession, IMailReportService mai
         mailReportService.AddMailLog(new AddMailLogCriteria
         {
             ExceptionMessage = $"> It's aborted by \"{napSession.UserName}\"",
-            LogTime = DateTime.Now,
+            LogTime = DateTimeOffset.Now.DateTime,
             Status = (int)JobStatus.Abort,
             TaskId = taskId
         });
@@ -80,7 +80,7 @@ public class MailReportController(INapSession napSession, IMailReportService mai
         mailReportService.AddMailLog(new AddMailLogCriteria
         {
             ExceptionMessage = $"> It's retried by \"{napSession.UserName}\"",
-            LogTime = DateTime.Now,
+            LogTime = DateTimeOffset.Now.DateTime,
             Status = (int)JobStatus.Running,
             TaskId = criteria.TaskId
         });

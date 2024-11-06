@@ -1,8 +1,7 @@
-﻿namespace Maintenance.BotService.Params
+﻿namespace Maintenance.BotService.Params;
+
+public class GetApplicationSettingParams
 {
-    public class GetApplicationSettingParams
-    {
-        public string Name { get; set; }
-        public bool? Active { get; set; }
-    }
+    public string Name { get; set; }
+    public bool? Active { get; set; }
 }
