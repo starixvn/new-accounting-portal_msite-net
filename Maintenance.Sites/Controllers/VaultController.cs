@@ -1,6 +1,7 @@
 namespace Maintenance.Sites.Controllers;
 
 using Fanex.NAP.Client.Attributes;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using VaultSharp;
@@ -19,7 +20,7 @@ public class VaultRequest
     public string SecretId { get; set; }
 }
 
-[SessionAuthorize]
+[AllowAnonymous]
 public class VaultController(IConfiguration configuration) : Controller
 {
     [HttpGet]

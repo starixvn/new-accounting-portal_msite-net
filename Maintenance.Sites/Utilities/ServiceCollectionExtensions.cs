@@ -93,23 +93,12 @@ public static class ServiceCollectionExtensions
         return services;
     }
 
-    public static IServiceCollection AddFanexLog(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddExceptionHandler(this IServiceCollection services, IConfiguration configuration)
     {
-        LogManager
-            .SetDefaultLogCategory(configuration.GetSection("LogCategory").Value)
-            .Use(new List<ILogEngine>
-            {
-                new SentryLogging(new SentryEngineOptions
-                {
-                    Dsn = new Dsn(configuration.GetSection("SentryEngineOptions:Dsn").Value)
-                })
-            });
-
         ExceptionHandler
             .UseConfig(new LoggingConfiguration())
             .UseGetDbExceptionInfo(DatabaseInfoGetters.GetDbExceptionInfo);
 
-        services.AddSingleton<ILogger, Logger>();
         return services;
     }
 
