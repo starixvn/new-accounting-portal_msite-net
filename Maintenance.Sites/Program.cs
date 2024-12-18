@@ -1,13 +1,13 @@
 using Fanex.Data;
 using Fanex.Logging.Sentry.RavenClient;
 using Fanex.NAP.Client.Attributes;
-using Fanex.NAP.SignIn;
 using Maintenance.Sites.Utilities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Newtonsoft.Json.Serialization;
-using ONEbook.UM.AspNetCore.Filters;
+using ONEbook.UM.DependencyInjection;
+using ONEbook.UM.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;

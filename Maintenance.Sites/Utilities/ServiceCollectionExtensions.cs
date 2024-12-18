@@ -1,11 +1,9 @@
 ﻿namespace Maintenance.Sites.Utilities;
 
 using Fanex.Data.Repository;
-using Fanex.Logging;
 using Fanex.Logging.Extensions;
 using Fanex.Logging.Extensions.AspNetCore;
 using Fanex.Logging.Extensions.Database;
-using Fanex.Logging.Sentry.RavenClient;
 using Fanex.MailDeliver.MailClient;
 using Letstalk.Services;
 using Mail.Services;
@@ -17,7 +15,6 @@ using Microsoft.AspNetCore.DataProtection;
 using NUglify.Css;
 using NUglify.JavaScript;
 using Services;
-using SharpRaven;
 using StackExchange.Redis;
 using TraceSp.Services;
 using WebOptimizer.Processors;

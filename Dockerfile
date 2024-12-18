@@ -1,4 +1,11 @@
-FROM hub.nexdev.net/base/dotnet/core/sdk:8.0-alpine AS builder
+ARG CI_REGISTRY_IMAGE
+FROM $CI_REGISTRY_IMAGE:builder as deps
+RUN mkdir -p /src/packages
+
+FROM hub.nexdev.net/base/dotnet/core/sdk:9.0-alpine AS builder
+
+ENV NUGET_PACKAGES=/src/packages
+COPY --from=deps $NUGET_PACKAGES/. $NUGET_PACKAGES/
 
 WORKDIR /src
 COPY ./Sources/Maintenance/*.csproj ./Sources/Maintenance/
@@ -10,17 +17,15 @@ COPY ./Sources/Maintenance.TraceSp/*.csproj ./Sources/Maintenance.TraceSp/
 COPY ./Maintenance.Sites/*.csproj  ./Maintenance.Sites/
 
 RUN dotnet nuget add source https://nuget.nexdev.net/api/v2
-RUN --mount=type=cache,target=/root/.nuget/packages \ 
-	dotnet restore Maintenance.Sites/Maintenance.Sites.csproj
+RUN dotnet restore -v n -r linux-x64 Maintenance.Sites/Maintenance.Sites.csproj
 
 COPY ./Sources/. ./Sources
 COPY ./Maintenance.Sites/. ./Maintenance.Sites
 
 WORKDIR /src/Maintenance.Sites
-RUN --mount=type=cache,target=/root/.nuget/packages \
-	dotnet publish -c release -o /app
+RUN dotnet publish -r linux-x64 --self-contained false -o /app
 
-FROM hub.nexdev.net/base/dotnet/core/aspnet:8.0-alpine AS base
+FROM hub.nexdev.net/base/dotnet/core/aspnet:9.0-alpine AS base
 
 WORKDIR /app
 COPY --from=builder /app .
