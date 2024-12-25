@@ -7,5 +7,6 @@
 		<Setting Key="Notif_EditNotification" SpName="Notif_EditNotification" DbName="DBWH.bodb_Notification.wsv_nap" />
 		<Setting Key="Notif_DeleteNotification" SpName="Notif_DeleteNotification" DbName="DBWH.bodb_Notification.wsv_nap" />
 		<Setting Key="Notif_ResendNotification" SpName="Notif_ResendNotification" DbName="DBWH.bodb_Notification.wsv_nap" />
+    <Setting Key="NAP_SaveBet_GetQueueCnt" SpName="NAP_SaveBet_GetQueueCnt" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="0" />
 	</Function>
 </Functions>
