@@ -1,84 +1,44 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
-    <PropertyGroup>
-        <TargetFramework>net9.0</TargetFramework>
-        <Nullable>disable</Nullable>
-        <ImplicitUsings>enable</ImplicitUsings>
-    </PropertyGroup>
-
-    <ItemGroup>
-    <None Remove="App_Data\Fanex.Data\DBPOL.NAP_UserControl.wsv_nap.xml" />
-        <None Remove="App_Data\TraceSp\DBServerList.LOCAL.xml" />
-        <None Remove="App_Data\TraceSp\DBServerList.PROD.xml" />
-        <None Remove="App_Data\TraceSp\DBServerList.SIT.xml" />
-        <None Remove="App_Data\TraceSp\DBServerList.UAT.xml" />
-        <None Remove="App_Data\TraceSp\Sites.xml" />
-    </ItemGroup>
-
-    <ItemGroup>
-    <Content Include="App_Data\Fanex.Data\DBPOL.NAP_UserControl.wsv_nap.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-        <Content Include="App_Data\TraceSp\DBServerList.LOCAL.xml">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </Content>
-        <Content Include="App_Data\TraceSp\DBServerList.PROD.xml">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </Content>
-        <Content Include="App_Data\TraceSp\DBServerList.SIT.xml">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </Content>
-        <Content Include="App_Data\TraceSp\DBServerList.UAT.xml">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </Content>
-        <Content Include="App_Data\TraceSp\Sites.xml">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </Content>
-    </ItemGroup>
-
-    <ItemGroup>
-        <PackageReference Include="codeessentials.WebOptimizer.Dotless" Version="3.1.0" />
-        <PackageReference Include="EasyNetQ" Version="7.8.0" />
-    <PackageReference Include="Fanex.Data.ProxyClient" Version="1.0.3" />
-        <PackageReference Include="Fanex.Logging.Extensions.AspNetCore" Version="1.1.0" />
-        <PackageReference Include="Fanex.Logging.Extensions.Database" Version="1.1.0" />
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="codeessentials.WebOptimizer.Dotless" Version="3.1.0" />
+    <PackageReference Include="EasyNetQ" Version="7.8.0" />
+    <PackageReference Include="Fanex.Data.ProxyClient" Version="1.0.3.5" />
+    <PackageReference Include="Fanex.Logging.Extensions.AspNetCore" Version="1.1.0" />
+    <PackageReference Include="Fanex.Logging.Extensions.Database" Version="1.1.0" />
     <PackageReference Include="Fanex.Logging.Sentry.RavenClient" Version="2.0.2" />
-        <PackageReference Include="Fanex.MailDeliver.MailClient" Version="2.1.0" />
+    <PackageReference Include="Fanex.MailDeliver.MailClient" Version="2.1.0" />
     <PackageReference Include="Fanex.MailStation.Core" Version="2.1.2" />
-    <PackageReference Include="Fanex.NAP.Client" Version="2.0.2" />
-        <PackageReference Include="Fanex.NAP.SignIn" Version="2.0.2.7" />
+    <PackageReference Include="Fanex.NAP.Client" Version="2.0.3" />
+    <PackageReference Include="Fanex.NAP.SignIn" Version="2.0.3" />
     <PackageReference Include="LigerShark.WebOptimizer.Core" Version="3.0.433" />
-    <PackageReference Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" Version="9.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="9.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.SignalR.StackExchangeRedis" Version="9.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="9.0.0" />
-        <PackageReference Include="ONEbook.UM" Version="3.1.8" />
-    </ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" Version="9.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="9.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.StackExchangeRedis" Version="9.0.3" />
+    <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="9.0.2" />
+    <PackageReference Include="ONEbook.UM" Version="3.2.4" />
+  </ItemGroup>
 
-    <ItemGroup>
-        <ProjectReference Include="..\Sources\Maintenance.BotService\Maintenance.BotService.csproj" />
-        <ProjectReference Include="..\Sources\Maintenance.Letstalk\Maintenance.Letstalk.csproj" />
-        <ProjectReference Include="..\Sources\Maintenance.MailStation\Maintenance.MailStation.csproj" />
-        <ProjectReference Include="..\Sources\Maintenance.Mail\Maintenance.Mail.csproj" />
-        <ProjectReference Include="..\Sources\Maintenance.TraceSp\Maintenance.TraceSp.csproj" />
-        <ProjectReference Include="..\Sources\Maintenance\Maintenance.csproj" />
-    </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Sources\Maintenance.BotService\Maintenance.BotService.csproj" />
+    <ProjectReference Include="..\Sources\Maintenance.Letstalk\Maintenance.Letstalk.csproj" />
+    <ProjectReference Include="..\Sources\Maintenance.MailStation\Maintenance.MailStation.csproj" />
+    <ProjectReference Include="..\Sources\Maintenance.Mail\Maintenance.Mail.csproj" />
+    <ProjectReference Include="..\Sources\Maintenance.TraceSp\Maintenance.TraceSp.csproj" />
+    <ProjectReference Include="..\Sources\Maintenance\Maintenance.csproj" />
+  </ItemGroup>
 
-    <ItemGroup>
-        <None Update="App_Data\Fanex.Data\BotServiceSpNames.xml">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </None>
-        <None Update="App_Data\Fanex.Data\DBMA.bodb_Maintenance.wsv_nap.xml">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </None>
-        <None Update="App_Data\Fanex.Data\DBMMS.bodb_MMS.wsv_nap.xml">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </None>
-        <None Update="App_Data\Fanex.Data\mSiteSpNames.xml">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </None>
-        <None Update="App_Data\Fanex.Data\TracingSpToolSpNames.xml">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </None>
-    </ItemGroup>
+  <ItemGroup>
+    <None Include="App_Data\**">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Views\**">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>
