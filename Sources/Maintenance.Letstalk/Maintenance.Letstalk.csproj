@@ -10,12 +10,12 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="EasyNetQ" Version="7.8.0" />
-    <PackageReference Include="Fanex.Data.ProxyClient" Version="1.0.3" />
+    <PackageReference Include="Fanex.Data.ProxyClient" Version="1.0.3.5" />
     <PackageReference Include="Fanex.Logging" Version="2.0.2" />
     <PackageReference Include="Fanex.MailDeliver.MailClient" Version="2.1.0" />
     <PackageReference Include="Fanex.MailStation.Core" Version="2.1.2" />
-    <PackageReference Include="Fanex.NAP.Client" Version="2.0.2" />
-    <PackageReference Include="Quartz" Version="3.13.1" />
+    <PackageReference Include="Fanex.NAP.Client" Version="2.0.3" />
+    <PackageReference Include="Quartz" Version="3.14.0" />
   </ItemGroup>
 
   <ItemGroup>

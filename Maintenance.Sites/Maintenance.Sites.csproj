@@ -39,20 +39,20 @@
     <ItemGroup>
         <PackageReference Include="codeessentials.WebOptimizer.Dotless" Version="3.1.0" />
         <PackageReference Include="EasyNetQ" Version="7.8.0" />
-    <PackageReference Include="Fanex.Data.ProxyClient" Version="1.0.3" />
+    <PackageReference Include="Fanex.Data.ProxyClient" Version="1.0.3.5" />
         <PackageReference Include="Fanex.Logging.Extensions.AspNetCore" Version="1.1.0" />
         <PackageReference Include="Fanex.Logging.Extensions.Database" Version="1.1.0" />
     <PackageReference Include="Fanex.Logging.Sentry.RavenClient" Version="2.0.2" />
         <PackageReference Include="Fanex.MailDeliver.MailClient" Version="2.1.0" />
     <PackageReference Include="Fanex.MailStation.Core" Version="2.1.2" />
-    <PackageReference Include="Fanex.NAP.Client" Version="2.0.2" />
-        <PackageReference Include="Fanex.NAP.SignIn" Version="2.0.2.7" />
+    <PackageReference Include="Fanex.NAP.Client" Version="2.0.3" />
+        <PackageReference Include="Fanex.NAP.SignIn" Version="2.0.3" />
     <PackageReference Include="LigerShark.WebOptimizer.Core" Version="3.0.433" />
-    <PackageReference Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" Version="9.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="9.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.SignalR.StackExchangeRedis" Version="9.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="9.0.0" />
-        <PackageReference Include="ONEbook.UM" Version="3.1.8" />
+    <PackageReference Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" Version="9.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="9.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.StackExchangeRedis" Version="9.0.3" />
+    <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="9.0.2" />
+        <PackageReference Include="ONEbook.UM" Version="3.2.4" />
     </ItemGroup>
 
     <ItemGroup>

@@ -1,5 +1,6 @@
 using Fanex.Data;
 using Fanex.Logging.Sentry.RavenClient;
+using Fanex.NAP.Client;
 using Fanex.NAP.Client.Attributes;
 using Maintenance.Sites.Utilities;
 using Microsoft.AspNetCore.Authorization;
@@ -25,7 +26,7 @@ services.AddControllers(config =>
 services.AddRedisSession(configuration);
 services.AddFanexData(configuration);
 services.AddFanexLogSentry(configuration);
-services.AddOneBookUm(configuration);
+services.AddOneBookUmForWeb(configuration);
 services.AddNapClient(configuration);
 services.AddExceptionHandler(configuration);
 services.AddCommonServices();
