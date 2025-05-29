@@ -30,6 +30,7 @@
     <ProjectReference Include="..\Sources\Maintenance.Letstalk\Maintenance.Letstalk.csproj" />
     <ProjectReference Include="..\Sources\Maintenance.MailStation\Maintenance.MailStation.csproj" />
     <ProjectReference Include="..\Sources\Maintenance.Mail\Maintenance.Mail.csproj" />
+    <ProjectReference Include="..\Sources\Maintenance.Mattermost\Maintenance.Mattermost.csproj" />
     <ProjectReference Include="..\Sources\Maintenance.TraceSp\Maintenance.TraceSp.csproj" />
     <ProjectReference Include="..\Sources\Maintenance\Maintenance.csproj" />
   </ItemGroup>

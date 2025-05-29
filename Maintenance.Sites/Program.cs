@@ -33,6 +33,7 @@ services.AddCommonServices();
 services.AddMail(configuration);
 services.AddMailStation();
 services.AddLetstalk();
+services.AddMattermost();
 services.AddTraceSp();
 services.AddBotService();
 

@@ -19,6 +19,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maintenance.Mail", "Sources
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maintenance.BotService", "Sources\Maintenance.BotService\Maintenance.BotService.csproj", "{A861979A-6F57-4AE2-94C8-E8A81F4F14FA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maintenance.Mattermost", "Sources\Maintenance.Mattermost\Maintenance.Mattermost.csproj", "{456444FF-9A71-4B77-82F5-94129FD705D8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,10 @@ Global
 		{A861979A-6F57-4AE2-94C8-E8A81F4F14FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A861979A-6F57-4AE2-94C8-E8A81F4F14FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A861979A-6F57-4AE2-94C8-E8A81F4F14FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{456444FF-9A71-4B77-82F5-94129FD705D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{456444FF-9A71-4B77-82F5-94129FD705D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{456444FF-9A71-4B77-82F5-94129FD705D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{456444FF-9A71-4B77-82F5-94129FD705D8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -64,6 +70,7 @@ Global
 		{597D062C-5880-47EB-AADB-B2952A5C0571} = {957A115C-D934-4E93-9F8C-F09750E69CA7}
 		{CC2777A7-F3FE-458A-BB44-796D5E075028} = {957A115C-D934-4E93-9F8C-F09750E69CA7}
 		{A861979A-6F57-4AE2-94C8-E8A81F4F14FA} = {957A115C-D934-4E93-9F8C-F09750E69CA7}
+		{456444FF-9A71-4B77-82F5-94129FD705D8} = {957A115C-D934-4E93-9F8C-F09750E69CA7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {83106DCB-A4BA-4BE6-B825-287670B4DCA1}

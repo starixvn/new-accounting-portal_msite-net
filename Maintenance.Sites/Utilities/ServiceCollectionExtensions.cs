@@ -1,4 +1,6 @@
-﻿namespace Maintenance.Sites.Utilities;
+﻿using Maintenance.Mattermost.Services;
+
+namespace Maintenance.Sites.Utilities;
 
 using Fanex.Data.Repository;
 using Fanex.Logging.Extensions;
@@ -126,6 +128,14 @@ public static class ServiceCollectionExtensions
         services.AddTransient<IHttpClientService, HttpClientService>();
         services.AddTransient<ILetstalkReportRestClientService, LetstalkReportRestClientService>();
         services.AddTransient<IManageLetstalkMessageService, ManageLetstalkMessageService>();
+
+        return services;
+    }
+
+    public static IServiceCollection AddMattermost(this IServiceCollection services)
+    {
+        services.AddTransient<Mattermost.Services.IHttpClientService, Mattermost.Services.HttpClientService>();
+        services.AddTransient<MattermostReportRestClientService, MattermostReportRestClientServiceImp>();
 
         return services;
     }
