@@ -1,4 +1,5 @@
-﻿using Maintenance.Mattermost.Params;
+﻿using Fanex.Mattermost.Client.Models;
+using Maintenance.Mattermost.Params;
 using Maintenance.Mattermost.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,23 +13,23 @@ public class MattermostReportController(MattermostReportRestClientService servic
     }
 
     [HttpPost]
-    public ActionResult GetTargets([FromBody] HttpGetLogParams httpParams)
+    public async Task<ActionResult> GetTargets([FromBody] HttpGetLogParams httpParams)
     {
-        var queryParams = new GetLogParams
+        var queryParams = new QueryParams
         {
             FromDate = httpParams.FromDate,
             ToDate = httpParams.ToDate,
             Id = 0
         };
 
-        var result = service.GetTargets(queryParams);
+        var result = await service.GetTargets(queryParams);
         return Json(result);
     }
 
     [HttpPost]
-    public ActionResult GetGroupsByTarget([FromBody] HttpGetLogParams httpParams)
+    public async Task<ActionResult> GetGroupsByTarget([FromBody] HttpGetLogParams httpParams)
     {
-        var queryParams = new GetLogParams
+        var queryParams = new QueryParams
         {
             FromDate = httpParams.FromDate,
             ToDate = httpParams.ToDate,
@@ -36,24 +37,24 @@ public class MattermostReportController(MattermostReportRestClientService servic
             Id = 0
         };
 
-        var result = service.GetGroupsByTarget(queryParams);
+        var result = await service.GetGroupsByTarget(queryParams);
         return Json(result);
     }
 
     [HttpPost]
-    public ActionResult GetReport([FromBody] HttpGetLogParams httpParams)
+    public async Task<ActionResult> GetReport([FromBody] HttpGetLogParams httpParams)
     {
-        var queryParams = new GetLogParams
+        var queryParams = new QueryParams
         {
             FromDate = httpParams.FromDate,
             ToDate = httpParams.ToDate.AddDays(1),
             TargetName = httpParams.TargetName,
             Group = httpParams.Group,
             Id = 0,
-            Status = httpParams.Status
+            Status = (Status)httpParams.Status
         };
 
-        var result = service.GetLogs(queryParams);
+        var result = await service.GetLogs(queryParams);
 
         return Json(result);
     }

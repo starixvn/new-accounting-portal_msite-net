@@ -1,33 +1,39 @@
-﻿using Maintenance.Mattermost.Model;
-using Maintenance.Mattermost.Params;
+﻿using Fanex.Mattermost.Client;
+using Fanex.Mattermost.Client.Models;
+using Microsoft.Extensions.Configuration;
 
 namespace Maintenance.Mattermost.Services;
 
 public interface MattermostReportRestClientService
 {
-    List<MattermostRecord> GetLogs(GetLogParams queryParams);
+    Task<List<MattermostRecord>> GetLogs(QueryParams queryParams);
 
-    List<FilterTarget> GetTargets(GetLogParams queryParams);
+    Task<List<FilterTarget>> GetTargets(QueryParams queryParams);
 
-    List<FilterGroup> GetGroupsByTarget(GetLogParams queryParams);
+    Task<List<FilterGroup>> GetGroupsByTarget(QueryParams queryParams);
 }
 
-public class MattermostReportRestClientServiceImp(IHttpClientService clientService) : MattermostReportRestClientService
+public class MattermostReportRestClientServiceImp : MattermostReportRestClientService
 {
-    public List<MattermostRecord> GetLogs(GetLogParams queryParams)
+    private readonly MattermostAdminService service;
+
+    public MattermostReportRestClientServiceImp(MattermostAdminService service, IConfiguration configuration)
     {
-        var result = clientService.PostAsync<List<MattermostRecord>, GetLogParams>("GetLogs", queryParams);
+        this.service = service;
+        AppConfigService.Config.MattermostServiceApi = configuration.GetValue<string>("Mattermost:MattermostApiUrl");
+    }
+    public async Task<List<MattermostRecord>> GetLogs(QueryParams queryParams)
+    {
+        var result = await service.GetLogs(queryParams);
         return result;
     }
 
-    public List<FilterTarget> GetTargets(GetLogParams queryParams)
+    public async Task<List<FilterTarget>> GetTargets(QueryParams queryParams)
     {
-        var result = clientService.PostAsync<List<FilterTarget>, GetLogParams>("GetTargets", queryParams);
-        return result;
+        return await service.GetTargets(queryParams);
     }
-    public List<FilterGroup> GetGroupsByTarget(GetLogParams queryParams)
+    public async Task<List<FilterGroup>> GetGroupsByTarget(QueryParams queryParams)
     {
-        var result = clientService.PostAsync<List<FilterGroup>, GetLogParams>("GetGroupsByTarget", queryParams);
-        return result;
+        return await service.GetGroupsByTarget(queryParams);
     }
 }

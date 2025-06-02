@@ -1,4 +1,5 @@
-﻿using Maintenance.Mattermost.Services;
+﻿using Fanex.Mattermost.Client;
+using Maintenance.Mattermost.Services;
 
 namespace Maintenance.Sites.Utilities;
 
@@ -134,7 +135,7 @@ public static class ServiceCollectionExtensions
 
     public static IServiceCollection AddMattermost(this IServiceCollection services)
     {
-        services.AddTransient<Mattermost.Services.IHttpClientService, Mattermost.Services.HttpClientService>();
+        services.AddTransient<MattermostAdminService, MattermostAdminServiceImp>();
         services.AddTransient<MattermostReportRestClientService, MattermostReportRestClientServiceImp>();
 
         return services;

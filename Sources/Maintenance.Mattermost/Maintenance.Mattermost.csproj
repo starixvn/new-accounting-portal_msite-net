@@ -12,6 +12,9 @@
 	  <Folder Include="Criteria\" />
 	</ItemGroup>
 	<ItemGroup>
+	  <PackageReference Include="Fanex.Mattermost.Client" Version="1.0.6" />
+	</ItemGroup>
+	<ItemGroup>
 	  <ProjectReference Include="..\Maintenance\Maintenance.csproj" />
 	</ItemGroup>
 </Project>
