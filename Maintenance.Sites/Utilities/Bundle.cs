@@ -56,6 +56,7 @@ public static class Bundle
             "themes/manage/log/mail-config.less",
             "themes/manage/log/manage.less",
             "themes/manage/LetstalkReport.less",
+            "themes/manage/mattermostreport.less",
             "mailstation/css/createmail.less",
             "mailstation/css/mailactionlog.less",
             "mailstation/css/managemail.less",

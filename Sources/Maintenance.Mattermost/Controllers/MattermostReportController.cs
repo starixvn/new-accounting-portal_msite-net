@@ -1,4 +1,5 @@
 ﻿using Fanex.Mattermost.Client.Models;
+using Maintenance.Mattermost.Constants;
 using Maintenance.Mattermost.Params;
 using Maintenance.Mattermost.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -19,7 +20,8 @@ public class MattermostReportController(MattermostReportRestClientService servic
         {
             FromDate = httpParams.FromDate,
             ToDate = httpParams.ToDate,
-            Id = 0
+            TargetName = CommonConstants.Mattermost,
+            Group = CommonConstants.All
         };
 
         var result = await service.GetTargets(queryParams);
@@ -33,8 +35,8 @@ public class MattermostReportController(MattermostReportRestClientService servic
         {
             FromDate = httpParams.FromDate,
             ToDate = httpParams.ToDate,
-            TargetName = httpParams.TargetName,
-            Id = 0
+            TargetName = CommonConstants.Mattermost,
+            Group = CommonConstants.All
         };
 
         var result = await service.GetGroupsByTarget(queryParams);
@@ -50,11 +52,62 @@ public class MattermostReportController(MattermostReportRestClientService servic
             ToDate = httpParams.ToDate.AddDays(1),
             TargetName = httpParams.TargetName,
             Group = httpParams.Group,
-            Id = 0,
             Status = (Status)httpParams.Status
         };
 
         var result = await service.GetLogs(queryParams);
+
+        return Json(result);
+    }
+
+    [HttpPost]
+    public async Task<ActionResult> ReSendMessage([FromBody] HttpResendParams httpParams)
+    {
+        var resendParams = new QueryParams
+        {
+            FromDate = httpParams.FromDate,
+            ToDate = httpParams.ToDate,
+            Id = httpParams.Id
+        };
+
+        var result = await service.ReSendMessage(resendParams);
+
+        return Json(result);
+    }
+
+    [HttpPost]
+    public async Task<ActionResult> ReSendMail([FromBody] HttpResendParams httpParams)
+    {
+        var resendParams = new QueryParams
+        {
+            FromDate = httpParams.FromDate,
+            ToDate = httpParams.ToDate,
+            Id = httpParams.Id
+        };
+
+        var result = await service.ReSendMail(resendParams);
+
+        return Json(result);
+    }
+
+    [HttpPost]
+    public async Task<ActionResult> ResendMultiple([FromBody] HttpResendMultipleParams httpParams)
+    {
+        var result = new List<bool>();
+        foreach (var item in httpParams.Data)
+        {
+            var resendParams = new QueryParams
+            {
+                FromDate = httpParams.FromDate,
+                ToDate = httpParams.ToDate,
+                Id = item.Id
+            };
+            var temp = item.IsMessage ? await service.ReSendMessage(resendParams) : await service.ReSendMail(resendParams);
+            if (!temp)
+            {
+                result.Add(false);
+            }
+        }
 
         return Json(result);
     }

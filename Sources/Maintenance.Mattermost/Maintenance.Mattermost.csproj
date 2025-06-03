@@ -9,9 +9,6 @@
 		<FrameworkReference Include="Microsoft.AspNetCore.App" />
 	</ItemGroup>
 	<ItemGroup>
-	  <Folder Include="Criteria\" />
-	</ItemGroup>
-	<ItemGroup>
 	  <PackageReference Include="Fanex.Mattermost.Client" Version="1.0.6" />
 	</ItemGroup>
 	<ItemGroup>
