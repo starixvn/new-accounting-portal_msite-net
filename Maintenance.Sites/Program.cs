@@ -46,6 +46,7 @@ services.AddControllersWithViews(options =>
 });
 
 services.AddBundle();
+services.AddHealthChecks();
 
 var app = builder.Build();
 
@@ -67,4 +68,6 @@ app.MapControllerRoute(
 app.MapControllerRoute(
     "default",
     "{controller=Home}/{action=Index}/{id?}");
+app.MapHealthChecks("/healthz");
+
 await app.RunAsync();
