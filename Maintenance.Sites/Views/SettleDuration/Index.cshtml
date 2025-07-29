@@ -1,4 +1,4 @@
-@model IEnumerable<Maintenance.Sites.Controllers.SettleDurationController.SettleDurationModel>
+@model IEnumerable<Maintenance.Sites.Services.SettleDurationService.SettleDurationModel>
 @{
     ViewBag.Title = "Settle Duration Report";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -73,6 +73,7 @@
                 <th>Date</th>
                 <th>Sport Name</th>
                 <th>Match Count</th>
+                <th>Match Count Action</th>
                 <th>Settle Duration (ms)</th>
             </tr>
         </thead>
@@ -83,6 +84,7 @@
                     <td>@item.Date.ToString("yyyy-MM-dd")</td>
                     <td>@item.SportName</td>
                     <td class="count-cell">@item.MatchCount.ToString("N0")</td>
+                    <td class="count-cell">@item.MatchCountAction.ToString("N0")</td>
                     <td class="duration-cell">@item.SettleDuration.ToString("N0")</td>
                 </tr>
             }

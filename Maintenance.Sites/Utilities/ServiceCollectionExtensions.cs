@@ -1,4 +1,5 @@
 ﻿using Fanex.LetstalkService.Client;
+using Maintenance.Services;
 
 namespace Maintenance.Sites.Utilities;
 
@@ -12,11 +13,11 @@ using Mail.Services;
 using MailStation.Services;
 using Maintenance.BotService.Services;
 using Maintenance.BotService.Services.Interfaces;
+using Maintenance.Sites.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.DataProtection;
 using NUglify.Css;
 using NUglify.JavaScript;
-using Services;
 using StackExchange.Redis;
 using TraceSp.Services;
 using WebOptimizer.Processors;
@@ -130,6 +131,7 @@ public static class ServiceCollectionExtensions
         services.AddTransient<IHttpClientService, HttpClientService>();
         services.AddTransient<ILetstalkReportRestClientService, LetstalkReportRestClientService>();
         services.AddTransient<IManageLetstalkMessageService, ManageLetstalkMessageService>();
+        services.AddSingleton<LetstalkClientService, LetstalkClientServiceImp>();
 
         return services;
     }
@@ -149,6 +151,8 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<IApplicationSettingService, ApplicationSettingService>();
         services.AddSingleton<IMessageService, MessageService>();
         services.AddSingleton<IBotConnector, BotConnector>();
+
+        services.AddSingleton<SettleDurationService, SettleDurationService>();
         return services;
     }
 }

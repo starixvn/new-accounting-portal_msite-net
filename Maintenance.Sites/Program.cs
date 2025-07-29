@@ -2,6 +2,7 @@ using Fanex.Data;
 using Fanex.Logging.Sentry.RavenClient;
 using Fanex.NAP.Client;
 using Fanex.NAP.Client.Attributes;
+using Maintenance.Sites.Services;
 using Maintenance.Sites.Utilities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -35,6 +36,9 @@ services.AddMailStation();
 services.AddLetstalk(configuration);
 services.AddTraceSp();
 services.AddBotService();
+
+// Add background services
+services.AddHostedService<SettleDurationBackgroundService>();
 
 services.AddControllersWithViews(options =>
 {
