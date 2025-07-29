@@ -1,0 +1,105 @@
+@model IEnumerable<Maintenance.Sites.Controllers.SettleDurationController.SettleDurationModel>
+@{
+    ViewBag.Title = "Settle Duration Report";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Head{
+    <style>
+        .settle-duration-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        .settle-duration-table th,
+        .settle-duration-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        
+        .settle-duration-table th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        
+        .settle-duration-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        .settle-duration-table tr:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .duration-cell {
+            text-align: right;
+        }
+        
+        .count-cell {
+            text-align: center;
+        }
+        
+        .report-header {
+            margin-bottom: 20px;
+        }
+        
+        .report-summary {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e8f4f8;
+            border-radius: 5px;
+        }
+    </style>
+}
+
+@section HeadLine
+{
+    <h1>
+        <span class="title">@ViewBag.Title</span>
+    </h1>
+}
+
+<div class="report-header">
+    <h2>Settle Duration Report</h2>
+    <p>This report shows the settle duration statistics for different sports over from @DateTimeOffset.UtcNow.Date.AddMonths(-1).ToShortDateString() to @DateTimeOffset.UtcNow.Date.ToShortDateString().</p>
+</div>
+
+@if (Model != null && Model.Any())
+{
+    <table class="settle-duration-table">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Sport Name</th>
+                <th>Match Count</th>
+                <th>Settle Duration (ms)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.OrderBy(x => x.Date).ThenBy(x => x.SportName))
+            {
+                <tr>
+                    <td>@item.Date.ToString("yyyy-MM-dd")</td>
+                    <td>@item.SportName</td>
+                    <td class="count-cell">@item.MatchCount.ToString("N0")</td>
+                    <td class="duration-cell">@item.SettleDuration.ToString("N0")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    
+    <div class="report-summary">
+        <h3>Summary</h3>
+        <p><strong>Total Records:</strong> @Model.Count()</p>
+        <p><strong>Date Range:</strong> @Model.Min(x => x.Date).ToString("yyyy-MM-dd") to @Model.Max(x => x.Date).ToString("yyyy-MM-dd")</p>
+        <p><strong>Total Matches:</strong> @Model.Sum(x => x.MatchCount).ToString("N0")</p>
+        <p><strong>Average Settle Duration:</strong> @Model.Average(x => x.SettleDuration).ToString("N0") ms</p>
+    </div>
+}
+else
+{
+    <div style="padding: 20px; text-align: center; color: #666;">
+        <p>No settle duration data found for the selected period.</p>
+    </div>
+} 

@@ -1,4 +1,6 @@
-﻿namespace Maintenance.Sites.Utilities;
+﻿using Fanex.LetstalkService.Client;
+
+namespace Maintenance.Sites.Utilities;
 
 using Fanex.Data.Repository;
 using Fanex.Logging.Extensions;
@@ -121,8 +123,10 @@ public static class ServiceCollectionExtensions
         return services;
     }
 
-    public static IServiceCollection AddLetstalk(this IServiceCollection services)
+    public static IServiceCollection AddLetstalk(this IServiceCollection services, IConfiguration configuration)
     {
+        AppConfigService.Config.LetstalkServiceApi = configuration.GetValue<string>("Letstalk:LetstalkApiUrl");
+
         services.AddTransient<IHttpClientService, HttpClientService>();
         services.AddTransient<ILetstalkReportRestClientService, LetstalkReportRestClientService>();
         services.AddTransient<IManageLetstalkMessageService, ManageLetstalkMessageService>();

@@ -8,7 +8,8 @@
   <ItemGroup>
     <PackageReference Include="codeessentials.WebOptimizer.Dotless" Version="3.1.0" />
     <PackageReference Include="EasyNetQ" Version="7.8.0" />
-    <PackageReference Include="Fanex.Data.ProxyClient" Version="1.0.5.6" />
+    <PackageReference Include="Fanex.Data.ProxyClient" Version="1.0.6.1" />
+    <PackageReference Include="Fanex.LetstalkService.Client" Version="2.0.0" />
     <PackageReference Include="Fanex.Logging.Extensions.AspNetCore" Version="1.1.0" />
     <PackageReference Include="Fanex.Logging.Extensions.Database" Version="2.0.2.1" />
     <PackageReference Include="Fanex.Logging.Sentry.RavenClient" Version="2.0.2" />

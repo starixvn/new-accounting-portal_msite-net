@@ -32,7 +32,7 @@ services.AddExceptionHandler(configuration);
 services.AddCommonServices();
 services.AddMail(configuration);
 services.AddMailStation();
-services.AddLetstalk();
+services.AddLetstalk(configuration);
 services.AddTraceSp();
 services.AddBotService();
 
