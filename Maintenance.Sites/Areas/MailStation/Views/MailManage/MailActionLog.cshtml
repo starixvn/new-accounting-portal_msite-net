@@ -1,5 +1,4 @@
-﻿@using Newtonsoft.Json
-@model List<MailActionLogModel>
+﻿@model List<MailActionLogModel>
 @{
     ViewBag.Title = Labels.Log;
     var mailLog = JsonConvert.SerializeObject(Model);
