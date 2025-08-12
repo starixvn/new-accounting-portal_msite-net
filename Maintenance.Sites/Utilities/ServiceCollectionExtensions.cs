@@ -8,12 +8,13 @@ using Fanex.Logging.Extensions;
 using Fanex.Logging.Extensions.AspNetCore;
 using Fanex.Logging.Extensions.Database;
 using Fanex.MailDeliver.MailClient;
+using Fanex.RocketChat.Client;
 using Letstalk.Services;
 using Mail.Services;
 using MailStation.Services;
 using Maintenance.BotService.Services;
 using Maintenance.BotService.Services.Interfaces;
-using Maintenance.Sites.Services;
+using Maintenance.Synergy.Settle;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.DataProtection;
 using NUglify.Css;
@@ -21,6 +22,8 @@ using NUglify.JavaScript;
 using StackExchange.Redis;
 using TraceSp.Services;
 using WebOptimizer.Processors;
+using LetstalkAppConfigService = Fanex.LetstalkService.Client.AppConfigService;
+using RocketChatAppConfigService = Fanex.RocketChat.Client.AppConfigService;
 
 public static class ServiceCollectionExtensions
 {
@@ -126,12 +129,21 @@ public static class ServiceCollectionExtensions
 
     public static IServiceCollection AddLetstalk(this IServiceCollection services, IConfiguration configuration)
     {
-        AppConfigService.Config.LetstalkServiceApi = configuration.GetValue<string>("Letstalk:LetstalkApiUrl");
+        LetstalkAppConfigService.Config.LetstalkServiceApi = configuration.GetValue<string>("Letstalk:LetstalkApiUrl");
 
         services.AddTransient<IHttpClientService, HttpClientService>();
         services.AddTransient<ILetstalkReportRestClientService, LetstalkReportRestClientService>();
         services.AddTransient<IManageLetstalkMessageService, ManageLetstalkMessageService>();
         services.AddSingleton<LetstalkClientService, LetstalkClientServiceImp>();
+
+        return services;
+    }
+
+    public static IServiceCollection AddRocketChat(this IServiceCollection services, IConfiguration configuration)
+    {
+        RocketChatAppConfigService.Config.RocketChatServiceApi = configuration.GetValue<string>("RocketChat:RocketChatApiUrl");
+
+        services.AddSingleton<RocketChatClientService, RocketChatClientServiceImp>();
 
         return services;
     }
@@ -151,8 +163,10 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<IApplicationSettingService, ApplicationSettingService>();
         services.AddSingleton<IMessageService, MessageService>();
         services.AddSingleton<IBotConnector, BotConnector>();
-
+        
         services.AddSingleton<SettleDurationService, SettleDurationService>();
+        services.AddSingleton<AutoPayoutService, AutoPayoutService>();
+        
         return services;
     }
 }

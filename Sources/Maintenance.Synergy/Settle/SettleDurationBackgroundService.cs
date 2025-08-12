@@ -1,8 +1,12 @@
-namespace Maintenance.Sites.Services;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+
+namespace Maintenance.Synergy.Settle;
 
 public class SettleDurationBackgroundService(
     ILogger<SettleDurationBackgroundService> logger,
-    SettleDurationService service) : BackgroundService
+    SettleDurationService service,
+    AutoPayoutService autoPayoutService) : BackgroundService
 {
     private readonly TimeZoneInfo _timeZone = TimeZoneInfo.FindSystemTimeZoneById("SE Asia Standard Time"); // UTC+7
 
@@ -23,7 +27,8 @@ public class SettleDurationBackgroundService(
                     await Task.Delay(delay, stoppingToken);
                 }
 
-                await service.SendLetstalk();
+                await service.Send();
+                await autoPayoutService.Send();
             }
             catch (Exception ex)
             {
@@ -35,7 +40,7 @@ public class SettleDurationBackgroundService(
         logger.LogInformation("SettleDurationBackgroundService is stopping.");
     }
 
-    private DateTime GetNextRunTime(DateTime currentTime)
+    private static DateTime GetNextRunTime(DateTime currentTime)
     {
         var nextRunTime = new DateTime(currentTime.Year, currentTime.Month, currentTime.Day, 14, 0, 0); // 2 PM
 

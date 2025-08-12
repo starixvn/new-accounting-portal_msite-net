@@ -9,5 +9,6 @@
 		<Setting Key="Notif_ResendNotification" SpName="Notif_ResendNotification" DbName="DBWH.bodb_Notification.wsv_nap" />
 		<Setting Key="NAP_SaveBet_GetQueueCnt" SpName="NAP_SaveBet_GetQueueCnt" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="0" />
 		<Setting Key="NAP_Set_SettleDurationReport" SpName="NAP_Set_SettleDurationReport" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="0" />
+		<Setting Key="NAP_Settlement_AutoSettle_Statistics" SpName="NAP_Settlement_AutoSettle_Statistics" DbName="DBACC.bodb02.wsv_nap" TimeOut="0" />		
 	</Function>
 </Functions>

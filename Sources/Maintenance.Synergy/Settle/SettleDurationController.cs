@@ -1,9 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
-
-namespace Maintenance.Sites.Controllers;
-
-using Maintenance.Sites.Services;
 using Microsoft.AspNetCore.Mvc;
+
+namespace Maintenance.Synergy.Settle;
 
 [AllowAnonymous]
 public class SettleDurationController(SettleDurationService service) : Controller
@@ -23,7 +21,14 @@ public class SettleDurationController(SettleDurationService service) : Controlle
         return Json(lines);
     }
 
-    private static string[] ModelToString(SettleDurationService.SettleDurationModel model)
+    public async Task<ActionResult> Test()
+    {
+        await service.Send();
+        return Ok("Done");
+    }
+
+
+    private static string[] ModelToString(SettleDurationModel model)
     {
         return
         [
