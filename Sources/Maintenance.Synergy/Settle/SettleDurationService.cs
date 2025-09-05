@@ -56,7 +56,7 @@ public class SettleDurationService(
         });
 
         var message = !models.Any()
-            ? $"{environment} - No settle duration data found for date {DateTimeOffset.UtcNow.Date.AddDays(-1).ToShortDateString()}."
+            ? $"{environment} - No settle duration data found for date {date.ToShortDateString()}."
             : GenerateNonEmptyMessage(models, template, environment, date);
 
         var groupName = configuration.GetValue<string>("Letstalk:RichardGroupName");
@@ -68,7 +68,7 @@ public class SettleDurationService(
 
         var result = letstalkService.SendMessageByBotApi(letstalkModel);
 
-        var excelBytes = await GenerateSettleDurationDetail(details);
+        var excelBytes = await GenerateSettleDurationDetail(details, date);
 
         var messageRequest = new MessageRequest
         {
@@ -114,14 +114,13 @@ public class SettleDurationService(
         return message;
     }
 
-    public async Task<byte[]> GenerateSettleDurationDetail(IEnumerable<SettleDurationDetail> models)
+    public async Task<byte[]> GenerateSettleDurationDetail(IEnumerable<SettleDurationDetail> models, DateTime date)
     {
         const string templateAbsolutelyPath = "App_Data/Templates/SettleDuration.xlsx";
         await using var stream = new FileStream(templateAbsolutelyPath, FileMode.Open, FileAccess.Read);
         using var excelPackage = new ExcelPackage(stream);
         var summarySheet = excelPackage.Workbook.Worksheets["Detail"];
 
-        var date = DateTimeOffset.UtcNow.Date.AddDays(-1);
         summarySheet.Cells["A1"].Value = date.ToShortDateString();
         summarySheet.ApplyVertical(models, 3);
 

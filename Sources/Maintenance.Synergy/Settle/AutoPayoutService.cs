@@ -27,9 +27,9 @@ public class AutoPayoutService(
         ? DateTimeOffset.UtcNow.Date.AddDays(-1)
         : DateTime.ParseExact(dateInString, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
 
-        var (details, summary, soccer, basketball) = await Query();
+        var (details, summary, soccer, basketball) = await Query(date);
 
-        var message = GenerateMessage(environment, summary, soccer, basketball);
+        var message = GenerateMessage(environment, date, summary, soccer, basketball);
 
         var groupName = configuration.GetValue<string>("Letstalk:RichardGroupName");
         var letstalkModel = new LetstalkModel
@@ -40,7 +40,7 @@ public class AutoPayoutService(
 
         letstalkService.SendMessageByBotApi(letstalkModel);
 
-        var excelBytes = await GenerateAutoPayoutDetail(details);
+        var excelBytes = await GenerateAutoPayoutDetail(details, date);
 
         var messageRequest = new MessageRequest
         {
@@ -64,12 +64,11 @@ public class AutoPayoutService(
 
     private string GenerateMessage(
         string environment,
+        DateTime date,
         IEnumerable<AutoPayoutRate> summary,
         IEnumerable<AutoPayoutRate> soccer,
         IEnumerable<AutoPayoutRate> basketball)
     {
-        var date = DateTimeOffset.UtcNow.Date.AddDays(-1);
-
         var total = summary.Sum(m => m.AutoCalculate + m.AutoRefund + m.ManualCalculate + m.ManualRefund);
         var auto = summary.Sum(m => m.AutoCalculate + m.AutoRefund);
         var rate = total == 0 ? "NA" : $"{(double)auto * 100 / total:N2}%";
@@ -121,14 +120,13 @@ public class AutoPayoutService(
         return message;
     }
 
-    public async Task<byte[]> GenerateAutoPayoutDetail(IEnumerable<AutoPayoutRateDetail> details)
+    public async Task<byte[]> GenerateAutoPayoutDetail(IEnumerable<AutoPayoutRateDetail> details, DateTime date)
     {
         const string templateAbsolutelyPath = "App_Data/Templates/SettleAutoPayout.xlsx";
         await using var stream = new FileStream(templateAbsolutelyPath, FileMode.Open, FileAccess.Read);
         using var excelPackage = new ExcelPackage(stream);
         var detailSheet = excelPackage.Workbook.Worksheets["Detail"];
 
-        var date = DateTimeOffset.UtcNow.Date.AddDays(-1);
         detailSheet.Cells["A1"].Value = date.ToShortDateString();
         detailSheet.ApplyVertical(details, 3);
 
@@ -140,9 +138,8 @@ public class AutoPayoutService(
         return await excelPackage.GetAsByteArrayAsync();
     }
 
-    public async Task<(List<AutoPayoutRateDetail> details, List<AutoPayoutRate> summary, List<AutoPayoutRate> soccer, List<AutoPayoutRate> basketball)> Query()
+    public async Task<(List<AutoPayoutRateDetail> details, List<AutoPayoutRate> summary, List<AutoPayoutRate> soccer, List<AutoPayoutRate> basketball)> Query(DateTime date)
     {
-        var date = DateTimeOffset.UtcNow.Date.AddDays(-1);
         var criteria = new AutoPayoutRateCriteria
         {
             FromDate = date,
