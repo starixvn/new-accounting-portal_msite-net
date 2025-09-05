@@ -10,7 +10,7 @@ using OfficeOpenXml;
 namespace Maintenance.Synergy.Settle;
 
 public class SettleDurationService(
-    IDynamicRepository repository, 
+    IDynamicRepository repository,
     IConfiguration configuration,
     LetstalkClientService letstalkService,
     RocketChatClientService rocketChatClientService)
@@ -22,11 +22,11 @@ public class SettleDurationService(
             FromDate = fromDate,
             ToDate = toDate
         });
-        
+
         return [.. models];
     }
 
-    public async Task<bool> Send()
+    public async Task<bool> Send(string dateInString = "")
     {
         const string template = """
                                 Date {date}({environment}): 
@@ -45,16 +45,19 @@ public class SettleDurationService(
             return false;
         }
 
-        var date = DateTimeOffset.UtcNow.Date.AddDays(-1);
+        var date = string.IsNullOrEmpty(dateInString)
+            ? DateTimeOffset.UtcNow.Date.AddDays(-1)
+            : DateTime.ParseExact(dateInString, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
+
         var (models, details) = await repository.FetchMultipleAsync<SettleDurationModel, SettleDurationDetail>(new SettleDurationCriteria
         {
             FromDate = date,
             ToDate = date
         });
-        
+
         var message = !models.Any()
-            ? $"{environment} - No settle duration data found for date {DateTimeOffset.UtcNow.Date.AddDays(-1).ToShortDateString()}." 
-            :GenerateNonEmptyMessage(models, template, environment, date);
+            ? $"{environment} - No settle duration data found for date {date.ToShortDateString()}."
+            : GenerateNonEmptyMessage(models, template, environment, date);
 
         var groupName = configuration.GetValue<string>("Letstalk:RichardGroupName");
         var letstalkModel = new LetstalkModel
@@ -65,7 +68,7 @@ public class SettleDurationService(
 
         var result = letstalkService.SendMessageByBotApi(letstalkModel);
 
-        var excelBytes = await GenerateSettleDurationDetail(details);
+        var excelBytes = await GenerateSettleDurationDetail(details, date);
 
         var messageRequest = new MessageRequest
         {
@@ -111,14 +114,13 @@ public class SettleDurationService(
         return message;
     }
 
-    public async Task<byte[]> GenerateSettleDurationDetail(IEnumerable<SettleDurationDetail> models)
+    public async Task<byte[]> GenerateSettleDurationDetail(IEnumerable<SettleDurationDetail> models, DateTime date)
     {
         const string templateAbsolutelyPath = "App_Data/Templates/SettleDuration.xlsx";
         await using var stream = new FileStream(templateAbsolutelyPath, FileMode.Open, FileAccess.Read);
         using var excelPackage = new ExcelPackage(stream);
         var summarySheet = excelPackage.Workbook.Worksheets["Detail"];
 
-        var date = DateTimeOffset.UtcNow.Date.AddDays(-1);
         summarySheet.Cells["A1"].Value = date.ToShortDateString();
         summarySheet.ApplyVertical(models, 3);
 

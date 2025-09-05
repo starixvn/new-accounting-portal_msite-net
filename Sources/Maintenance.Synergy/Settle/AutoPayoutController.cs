@@ -11,4 +11,10 @@ public class AutoPayoutController(AutoPayoutService service) : Controller
         await service.Send();
         return Ok("ok");
     }
+
+    public async Task<ActionResult> Adhoc(string date = "")
+    {
+        await service.Send(date);
+        return Ok("ok");
+    }
 }
