@@ -21,10 +21,10 @@ public class SettleDurationController(SettleDurationService service) : Controlle
         return Json(lines);
     }
 
-    public async Task<ActionResult> Test()
+    public async Task<ActionResult> Adhoc(string date = "")
     {
-        await service.Send();
-        return Ok("Done");
+        await service.Send(date);
+        return Ok("ok");
     }
 
 

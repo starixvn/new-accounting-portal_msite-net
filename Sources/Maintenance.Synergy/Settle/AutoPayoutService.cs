@@ -15,13 +15,17 @@ public class AutoPayoutService(
     RocketChatClientService rocketChatClientService,
     LetstalkClientService letstalkService)
 {
-    public async Task<bool> Send()
+    public async Task<bool> Send(string dateInString = "")
     {
         var environment = configuration.GetValue<string>("RocketChat:Environment");
         if (string.IsNullOrEmpty(environment) || !environment.Contains("PROD"))
         {
             return false;
         }
+
+        var date = string.IsNullOrEmpty(dateInString)
+        ? DateTimeOffset.UtcNow.Date.AddDays(-1)
+        : DateTime.ParseExact(dateInString, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
 
         var (details, summary, soccer, basketball) = await Query();
 
@@ -36,7 +40,6 @@ public class AutoPayoutService(
 
         letstalkService.SendMessageByBotApi(letstalkModel);
 
-        var date = DateTimeOffset.UtcNow.Date.AddDays(-1);
         var excelBytes = await GenerateAutoPayoutDetail(details);
 
         var messageRequest = new MessageRequest
@@ -128,12 +131,12 @@ public class AutoPayoutService(
         var date = DateTimeOffset.UtcNow.Date.AddDays(-1);
         detailSheet.Cells["A1"].Value = date.ToShortDateString();
         detailSheet.ApplyVertical(details, 3);
-        
+
         if (!details.Any())
         {
             detailSheet.DeleteRow(3);
         }
-        
+
         return await excelPackage.GetAsByteArrayAsync();
     }
 

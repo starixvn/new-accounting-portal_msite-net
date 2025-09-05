@@ -10,7 +10,7 @@ using OfficeOpenXml;
 namespace Maintenance.Synergy.Settle;
 
 public class SettleDurationService(
-    IDynamicRepository repository, 
+    IDynamicRepository repository,
     IConfiguration configuration,
     LetstalkClientService letstalkService,
     RocketChatClientService rocketChatClientService)
@@ -22,11 +22,11 @@ public class SettleDurationService(
             FromDate = fromDate,
             ToDate = toDate
         });
-        
+
         return [.. models];
     }
 
-    public async Task<bool> Send()
+    public async Task<bool> Send(string dateInString = "")
     {
         const string template = """
                                 Date {date}({environment}): 
@@ -45,16 +45,19 @@ public class SettleDurationService(
             return false;
         }
 
-        var date = DateTimeOffset.UtcNow.Date.AddDays(-1);
+        var date = string.IsNullOrEmpty(dateInString)
+            ? DateTimeOffset.UtcNow.Date.AddDays(-1)
+            : DateTime.ParseExact(dateInString, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
+
         var (models, details) = await repository.FetchMultipleAsync<SettleDurationModel, SettleDurationDetail>(new SettleDurationCriteria
         {
             FromDate = date,
             ToDate = date
         });
-        
+
         var message = !models.Any()
-            ? $"{environment} - No settle duration data found for date {DateTimeOffset.UtcNow.Date.AddDays(-1).ToShortDateString()}." 
-            :GenerateNonEmptyMessage(models, template, environment, date);
+            ? $"{environment} - No settle duration data found for date {DateTimeOffset.UtcNow.Date.AddDays(-1).ToShortDateString()}."
+            : GenerateNonEmptyMessage(models, template, environment, date);
 
         var groupName = configuration.GetValue<string>("Letstalk:RichardGroupName");
         var letstalkModel = new LetstalkModel
