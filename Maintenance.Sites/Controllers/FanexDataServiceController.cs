@@ -35,7 +35,7 @@ public class ServicePostedModel
 public class FanexDataServiceController(IConfiguration configuration, IHttpClientFactory httpClientFactory) : Controller
 {
     private readonly List<string> ServiceUrls =
-        configuration.GetValue<string>("AllFanexDataServiceApi").Split(';').ToList();
+        configuration.GetSection("AllFanexDataServiceApis").Get<List<string>>();
 
     [HttpGet]
     public async Task<ActionResult> Index()
