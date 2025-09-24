@@ -26,11 +26,18 @@
 <body>
     <div class="container-fluid">
         <div class="row mb-4">
-            <div class="col-md-3">
+            <div class="col-md-12">
+                <div class="alert alert-info mb-0">                    
+                    <h5 class="card-title">Server: @Model.Server, Uptime: @Model.UptimeMinutes/@Model.MaximumUptimeMinutes minutes</h5>                    
+                </div>
+            </div>
+        </div>
+        <div class="row mb-4">
+            <div class="col-md-6">
                 @using (Html.BeginForm("Index", "FanexDataService", FormMethod.Post))
                 {
-                    <div class="form-group">
-                        <label for="SelectedService">Select Service:</label>
+                    <div class="d-flex align-items-center gap-3">
+                        <label for="SelectedService" class="mb-0">Service:</label>
                         @Html.DropDownListFor(m => m.SelectedService,
                         Model.ServiceUrls.Select(url => new SelectListItem
                         {
@@ -38,12 +45,12 @@
                             Value = url,
                             Selected = url == Model.SelectedService
                         }),
-                                        new { @class = "form-control" })
-                </div>
-                <button type="submit" class="btn btn-primary mt-3">Submit</button>
-                                }
-            </div>
-        </div>
+                        new { @class = "form-control" })
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                }
+            </div>            
+        </div>      
 
         <div class="row mb-4">
             <div class="col-md-6">

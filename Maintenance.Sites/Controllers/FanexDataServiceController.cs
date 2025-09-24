@@ -4,6 +4,14 @@ using System.Text.Json;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
+public class ServiceHealthModel
+{
+    public string MachineName { get; set; } = string.Empty;
+    public bool Alive { get; set; }
+    public int MinutesToLive { get; set; }
+    public int MinutesWorked { get; set; }
+}
+
 public class ServiceViewModel
 {
     public List<string> ServiceUrls { get; set; } = [];
@@ -12,6 +20,10 @@ public class ServiceViewModel
     public List<int> Responses { get; set; } = [];
     public Dictionary<string, int> DbStatistic { get; set; } = new();
     public Dictionary<string, int> SpStatistic { get; set; } = new();
+    public int ServiceUptime { get; set; }
+    public int UptimeMinutes { get; set; }
+    public int MaximumUptimeMinutes { get; set; }
+    public string Server { get; set; }
 }
 
 public class ServicePostedModel
@@ -32,7 +44,7 @@ public class FanexDataServiceController(IConfiguration configuration, IHttpClien
         var model = await CreateServiceViewModel(selectedService);
         model.SelectedService = selectedService;
         model.ServiceUrls = ServiceUrls;
-
+        
         return View(model);
     }
 
