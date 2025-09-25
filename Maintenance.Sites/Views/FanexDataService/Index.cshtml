@@ -27,8 +27,12 @@
     <div class="container-fluid">
         <div class="row mb-4">
             <div class="col-md-12">
-                <div class="alert alert-info mb-0">                    
-                    <h5 class="card-title">Server: @Model.Server, Uptime: @Model.UptimeMinutes/@Model.MaximumUptimeMinutes minutes</h5>                    
+                <div class="alert-info mb-0">                    
+                    <h5 class="card-title">Server: @Model.Server, Uptime: @Model.UptimeMinutes/@Model.MaximumUptimeMinutes minutes</h5>                                        
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="alert-info mb-0" id="service-status">                                        
                 </div>
             </div>
         </div>
@@ -47,9 +51,10 @@
                         }),
                         new { @class = "form-control" })
                         <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="button" class="btn btn-warning" id="gcButton">Gc</button>
                     </div>
                 }
-            </div>            
+            </div>                   
         </div>      
 
         <div class="row mb-4">
@@ -140,6 +145,20 @@
 
     <script>
         $(document).ready(function() {
+                // Handle GC button click
+                $('#gcButton').click(function() {
+                    var selectedService = $('#SelectedService').val();
+                    if (selectedService) {
+                        $.get('/FanexDataService/Gc', { serviceUrl: selectedService })
+                            .done(function(result) {
+                                $('#service-status').text(result);
+                            })
+                            .fail(function(jqXHR, textStatus, errorThrown) {
+                                $('#service-status').text('Error performing GC: ' + textStatus);
+                            });
+                    }
+                });
+
                 // Initialize DataTables
                 $('#dbStatTable').DataTable({
                     order: [[1, 'desc']], // Sort by count column descending
@@ -177,6 +196,27 @@
                                  text: 'Request Rate Over Time',
                                  font: {
                                      size: 16
+                                 }
+                             },
+                             tooltip: {
+                                 callbacks: {
+                                     title: function(context) {
+                                         const xValue = context[0].dataIndex;
+                                         const m = @Model.Requests.Count - xValue;
+                                         const now = new Date();
+                                         const timeValue = new Date(now - m * 60000); // Convert minutes to milliseconds
+                                         return timeValue.toLocaleString('en-US', { 
+                                            year: 'numeric',
+                                            month: '2-digit',
+                                            day: '2-digit',
+                                            hour: '2-digit',
+                                            minute: '2-digit',
+                                            hour12: false
+                                         });
+                                     },
+                                     label: function(context) {
+                                         return `Requests: ${context.raw}`;
+                                     }
                                  }
                              }
                          },

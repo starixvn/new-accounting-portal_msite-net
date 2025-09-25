@@ -4,14 +4,6 @@ using System.Text.Json;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-public class ServiceHealthModel
-{
-    public string MachineName { get; set; } = string.Empty;
-    public bool Alive { get; set; }
-    public int MinutesToLive { get; set; }
-    public int MinutesWorked { get; set; }
-}
-
 public class ServiceViewModel
 {
     public List<string> ServiceUrls { get; set; } = [];
@@ -72,5 +64,19 @@ public class FanexDataServiceController(IConfiguration configuration, IHttpClien
         };
 
         return JsonSerializer.Deserialize<ServiceViewModel>(jsonString, options);
+    }
+
+    [HttpGet]
+    public async Task<ActionResult> Gc(string serviceUrl)
+    {
+        using var client = httpClientFactory.CreateClient();
+        client.Timeout = TimeSpan.FromSeconds(30);
+        var endpoint = $"{serviceUrl}/gc";
+        var response = await client.GetAsync(endpoint);
+        response.EnsureSuccessStatusCode();
+
+        var gcResult = await response.Content.ReadAsStringAsync();
+        
+        return Content(gcResult);
     }
 }
