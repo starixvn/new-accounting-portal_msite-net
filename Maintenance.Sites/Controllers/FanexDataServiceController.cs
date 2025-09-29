@@ -63,7 +63,10 @@ public class FanexDataServiceController(IConfiguration configuration, IHttpClien
             PropertyNameCaseInsensitive = true
         };
 
-        return JsonSerializer.Deserialize<ServiceViewModel>(jsonString, options);
+        var viewModel = JsonSerializer.Deserialize<ServiceViewModel>(jsonString, options);
+        viewModel.Responses = TrimZeroRight(viewModel.Responses);
+
+        return viewModel;
     }
 
     [HttpGet]
@@ -78,5 +81,26 @@ public class FanexDataServiceController(IConfiguration configuration, IHttpClien
         var gcResult = await response.Content.ReadAsStringAsync();
         
         return Content(gcResult);
+    }
+
+    /// <summary>
+    /// Removes trailing zeros from a list of integers until encountering the first non-zero number from the right.
+    /// </summary>
+    /// <param name="input">The list of integers to process</param>
+    /// <returns>A new list with trailing zeros removed</returns>
+    private static List<int> TrimZeroRight(List<int> input)
+    {
+        if (input == null || input.Count == 0)
+        {
+            return [];
+        }
+
+        var lastNonZeroIndex = input.Count - 1;
+        while (lastNonZeroIndex >= 0 && input[lastNonZeroIndex] == 0)
+        {
+            lastNonZeroIndex--;
+        }
+
+        return input.Take(lastNonZeroIndex + 1).ToList();
     }
 }
