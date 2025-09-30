@@ -83,6 +83,34 @@ public class FanexDataServiceController(IConfiguration configuration, IHttpClien
         return Content(gcResult);
     }
 
+    [HttpGet]
+    public async Task<ActionResult> Kill(string serviceUrl)
+    {
+        using var client = httpClientFactory.CreateClient();
+        client.Timeout = TimeSpan.FromSeconds(30);
+        var endpoint = $"{serviceUrl}/kill";
+        var response = await client.GetAsync(endpoint);
+        response.EnsureSuccessStatusCode();
+
+        var killResult = await response.Content.ReadAsStringAsync();
+        
+        return Content(killResult);
+    }
+
+    [HttpGet]
+    public async Task<ActionResult> Status(string serviceUrl)
+    {
+        using var client = httpClientFactory.CreateClient();
+        client.Timeout = TimeSpan.FromSeconds(30);
+        var endpoint = $"{serviceUrl}";
+        var response = await client.GetAsync(endpoint);
+        response.EnsureSuccessStatusCode();
+
+        var statusResult = await response.Content.ReadAsStringAsync();
+        
+        return Content(statusResult);
+    }
+
     /// <summary>
     /// Removes trailing zeros from a list of integers until encountering the first non-zero number from the right.
     /// </summary>

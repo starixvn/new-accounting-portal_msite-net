@@ -50,8 +50,10 @@
                             Selected = url == Model.SelectedService
                         }),
                         new { @class = "form-control" })
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary">Statistic</button>
                         <button type="button" class="btn btn-warning" id="gcButton">Gc</button>
+                        <button type="button" class="btn btn-danger" id="killButton">Kill</button>
+                        <button type="button" class="btn btn-info" id="statusButton">Status</button>
                     </div>
                 }
             </div>                   
@@ -155,6 +157,34 @@
                             })
                             .fail(function(jqXHR, textStatus, errorThrown) {
                                 $('#service-status').text('Error performing GC: ' + textStatus);
+                            });
+                    }
+                });
+
+                // Handle Kill button click
+                $('#killButton').click(function() {
+                    var selectedService = $('#SelectedService').val();
+                    if (selectedService) {
+                        $.get('/FanexDataService/Kill', { serviceUrl: selectedService })
+                            .done(function(result) {
+                                $('#service-status').text(result);
+                            })
+                            .fail(function(jqXHR, textStatus, errorThrown) {
+                                $('#service-status').text('Error killing service: ' + textStatus);
+                            });
+                    }
+                });
+
+                // Handle Status button click
+                $('#statusButton').click(function() {
+                    var selectedService = $('#SelectedService').val();
+                    if (selectedService) {
+                        $.get('/FanexDataService/Status', { serviceUrl: selectedService })
+                            .done(function(result) {
+                                $('#service-status').text(result);
+                            })
+                            .fail(function(jqXHR, textStatus, errorThrown) {
+                                $('#service-status').text('Error checking status: ' + textStatus);
                             });
                     }
                 });
