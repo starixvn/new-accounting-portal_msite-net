@@ -1,3 +1,5 @@
+using System.Net.Http.Headers;
+
 namespace Maintenance.Sites.Controllers;
 
 using System.Text.Json;
@@ -51,8 +53,7 @@ public class FanexDataServiceController(IConfiguration configuration, IHttpClien
 
     private async Task<ServiceViewModel> CreateServiceViewModel(string serviceUrl)
     {
-        using var client = httpClientFactory.CreateClient();
-        client.Timeout = TimeSpan.FromSeconds(30);
+        using var client = CreateHttpClient();
         var endpoint = $"{serviceUrl}/statistic";
         var response = await client.GetAsync(endpoint);
         response.EnsureSuccessStatusCode();
@@ -72,8 +73,7 @@ public class FanexDataServiceController(IConfiguration configuration, IHttpClien
     [HttpGet]
     public async Task<ActionResult> Gc(string serviceUrl)
     {
-        using var client = httpClientFactory.CreateClient();
-        client.Timeout = TimeSpan.FromSeconds(30);
+        using var client = CreateHttpClient();
         var endpoint = $"{serviceUrl}/gc";
         var response = await client.GetAsync(endpoint);
         response.EnsureSuccessStatusCode();
@@ -86,8 +86,7 @@ public class FanexDataServiceController(IConfiguration configuration, IHttpClien
     [HttpGet]
     public async Task<ActionResult> Kill(string serviceUrl)
     {
-        using var client = httpClientFactory.CreateClient();
-        client.Timeout = TimeSpan.FromSeconds(30);
+        using var client = CreateHttpClient();
         var endpoint = $"{serviceUrl}/kill";
         var response = await client.GetAsync(endpoint);
         response.EnsureSuccessStatusCode();
@@ -98,17 +97,30 @@ public class FanexDataServiceController(IConfiguration configuration, IHttpClien
     }
 
     [HttpGet]
+    [ResponseCache(NoStore = true, Location = ResponseCacheLocation.None)]
     public async Task<ActionResult> Status(string serviceUrl)
     {
-        using var client = httpClientFactory.CreateClient();
-        client.Timeout = TimeSpan.FromSeconds(30);
+        using var client = CreateHttpClient();
         var endpoint = $"{serviceUrl}";
         var response = await client.GetAsync(endpoint);
         response.EnsureSuccessStatusCode();
 
         var statusResult = await response.Content.ReadAsStringAsync();
-        
+
         return Content(statusResult);
+    }
+
+    private HttpClient CreateHttpClient()
+    {
+        var client = httpClientFactory.CreateClient();
+        client.Timeout = TimeSpan.FromSeconds(30);
+        client.DefaultRequestHeaders.CacheControl = new CacheControlHeaderValue
+        {
+            NoCache = true,
+            NoStore = true
+        };
+        client.DefaultRequestHeaders.Add("Pragma", "no-cache");
+        return client;
     }
 
     /// <summary>
