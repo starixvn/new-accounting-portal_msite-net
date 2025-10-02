@@ -21,6 +21,29 @@
         .form-group {
             margin-bottom: 15px;
         }
+
+        .btn-loading {
+            position: relative;
+            pointer-events: none;
+            opacity: 0.65;
+        }
+
+        .btn-loading::after {
+            content: '';
+            display: inline-block;
+            width: 1rem;
+            height: 1rem;
+            margin-left: 0.5rem;
+            vertical-align: text-bottom;
+            border: 0.2em solid currentColor;
+            border-right-color: transparent;
+            border-radius: 50%;
+            animation: spinner-border .75s linear infinite;
+        }
+
+        @@keyframes spinner-border {
+            to { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body>
@@ -147,16 +170,31 @@
 
     <script>
         $(document).ready(function() {
+                function setButtonLoading(button, isLoading) {
+                    if (isLoading) {
+                        button.addClass('btn-loading');
+                        button.prop('disabled', true);
+                    } else {
+                        button.removeClass('btn-loading');
+                        button.prop('disabled', false);
+                    }
+                }
+
                 // Handle GC button click
                 $('#gcButton').click(function() {
                     var selectedService = $('#SelectedService').val();
+                    var $button = $(this);
                     if (selectedService) {
+                        setButtonLoading($button, true);
                         $.get('/FanexDataService/Gc', { serviceUrl: selectedService })
                             .done(function(result) {
                                 $('#service-status').text(result);
                             })
                             .fail(function(jqXHR, textStatus, errorThrown) {
                                 $('#service-status').text('Error performing GC: ' + textStatus);
+                            })
+                            .always(function() {
+                                setButtonLoading($button, false);
                             });
                     }
                 });
@@ -164,13 +202,18 @@
                 // Handle Kill button click
                 $('#killButton').click(function() {
                     var selectedService = $('#SelectedService').val();
+                    var $button = $(this);
                     if (selectedService) {
+                        setButtonLoading($button, true);
                         $.get('/FanexDataService/Kill', { serviceUrl: selectedService })
                             .done(function(result) {
                                 $('#service-status').text(result);
                             })
                             .fail(function(jqXHR, textStatus, errorThrown) {
                                 $('#service-status').text('Error killing service: ' + textStatus);
+                            })
+                            .always(function() {
+                                setButtonLoading($button, false);
                             });
                     }
                 });
@@ -178,13 +221,18 @@
                 // Handle Status button click
                 $('#statusButton').click(function() {
                     var selectedService = $('#SelectedService').val();
+                    var $button = $(this);
                     if (selectedService) {
+                        setButtonLoading($button, true);
                         $.get('/FanexDataService/Status', { serviceUrl: selectedService })
                             .done(function(result) {
                                 $('#service-status').text(result);
                             })
                             .fail(function(jqXHR, textStatus, errorThrown) {
                                 $('#service-status').text('Error checking status: ' + textStatus);
+                            })
+                            .always(function() {
+                                setButtonLoading($button, false);
                             });
                     }
                 });

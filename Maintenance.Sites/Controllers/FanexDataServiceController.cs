@@ -103,11 +103,9 @@ public class FanexDataServiceController(IConfiguration configuration, IHttpClien
         using var client = CreateHttpClient();
         var endpoint = $"{serviceUrl}";
         var response = await client.GetAsync(endpoint);
-        response.EnsureSuccessStatusCode();
-
         var statusResult = await response.Content.ReadAsStringAsync();
 
-        return Content(statusResult);
+        return Content($"StatusCode: {response.StatusCode}. {statusResult}");
     }
 
     private HttpClient CreateHttpClient()
