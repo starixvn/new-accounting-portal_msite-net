@@ -1,10 +1,10 @@
 using System.Net.Http.Headers;
-
-namespace Maintenance.Sites.Controllers;
-
 using System.Text.Json;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+
+namespace Maintenance.Synergy.FanexDataMonitoring;
 
 public class ServiceViewModel
 {
@@ -94,6 +94,19 @@ public class FanexDataServiceController(IConfiguration configuration, IHttpClien
         var killResult = await response.Content.ReadAsStringAsync();
         
         return Content(killResult);
+    }
+
+    [HttpGet]
+    public async Task<ActionResult> Clear(string serviceUrl)
+    {
+        using var client = CreateHttpClient();
+        var endpoint = $"{serviceUrl}/api/cache/clean";
+        var response = await client.GetAsync(endpoint);
+        response.EnsureSuccessStatusCode();
+
+        var clearResult = await response.Content.ReadAsStringAsync();
+
+        return Content($"Fanex Data cache of {clearResult} was cleared");
     }
 
     [HttpGet]

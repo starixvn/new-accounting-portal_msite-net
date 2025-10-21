@@ -1,4 +1,4 @@
-@model Maintenance.Sites.Controllers.ServiceViewModel
+@model Maintenance.Synergy.FanexDataMonitoring.ServiceViewModel
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,21 +28,23 @@
             opacity: 0.65;
         }
 
-        .btn-loading::after {
-            content: '';
-            display: inline-block;
-            width: 1rem;
-            height: 1rem;
-            margin-left: 0.5rem;
-            vertical-align: text-bottom;
-            border: 0.2em solid currentColor;
-            border-right-color: transparent;
-            border-radius: 50%;
-            animation: spinner-border .75s linear infinite;
-        }
+            .btn-loading::after {
+                content: '';
+                display: inline-block;
+                width: 1rem;
+                height: 1rem;
+                margin-left: 0.5rem;
+                vertical-align: text-bottom;
+                border: 0.2em solid currentColor;
+                border-right-color: transparent;
+                border-radius: 50%;
+                animation: spinner-border .75s linear infinite;
+            }
 
         @@keyframes spinner-border {
-            to { transform: rotate(360deg); }
+            to {
+                transform: rotate(360deg);
+            }
         }
     </style>
 </head>
@@ -50,12 +52,12 @@
     <div class="container-fluid">
         <div class="row mb-4">
             <div class="col-md-12">
-                <div class="alert-info mb-0">                    
-                    <h5 class="card-title">Server: @Model.Server, Uptime: @Model.UptimeMinutes/@Model.MaximumUptimeMinutes minutes</h5>                                        
+                <div class="alert-info mb-0">
+                    <h5 class="card-title">Server: @Model.Server, Uptime: @Model.UptimeMinutes/@Model.MaximumUptimeMinutes minutes</h5>
                 </div>
             </div>
             <div class="col-md-12">
-                <div class="alert-info mb-0" id="service-status">                                        
+                <div class="alert-info mb-0" id="service-status">
                 </div>
             </div>
         </div>
@@ -72,15 +74,16 @@
                             Value = url,
                             Selected = url == Model.SelectedService
                         }),
-                        new { @class = "form-control" })
-                        <button type="submit" class="btn btn-primary">Statistic</button>
-                        <button type="button" class="btn btn-warning" id="gcButton">Gc</button>
-                        <button type="button" class="btn btn-danger" id="killButton">Kill</button>
-                        <button type="button" class="btn btn-info" id="statusButton">Status</button>
-                    </div>
-                }
-            </div>                   
-        </div>      
+                                        new { @class = "form-control" })
+                    <button type="submit" class="btn btn-primary">Statistic</button>
+                    <button type="button" class="btn btn-warning" id="gcButton">Gc</button>
+                    <button type="button" class="btn btn-warning" id="clearButton">Clear</button>
+                    <button type="button" class="btn btn-danger" id="killButton">Kill</button>
+                    <button type="button" class="btn btn-info" id="statusButton">Status</button>
+                </div>
+                                }
+            </div>
+        </div>
 
         <div class="row mb-4">
             <div class="col-md-6">
@@ -199,6 +202,25 @@
                     }
                 });
 
+                // Handle Clear button click
+                $('#clearButton').click(function() {
+                    var selectedService = $('#SelectedService').val();
+                    var $button = $(this);
+                    if (selectedService) {
+                        setButtonLoading($button, true);
+                        $.get('/FanexDataService/clear', { serviceUrl: selectedService })
+                            .done(function(result) {
+                                $('#service-status').text(result);
+                            })
+                            .fail(function(jqXHR, textStatus, errorThrown) {
+                                $('#service-status').text('Error performing clearing cache: ' + textStatus);
+                            })
+                            .always(function() {
+                                setButtonLoading($button, false);
+                            });
+                    }
+                });
+
                 // Handle Kill button click
                 $('#killButton').click(function() {
                     var selectedService = $('#SelectedService').val();
@@ -283,7 +305,7 @@
                                          const m = @Model.Requests.Count - xValue;
                                          const now = new Date();
                                          const timeValue = new Date(now - m * 60000); // Convert minutes to milliseconds
-                                         return timeValue.toLocaleString('en-US', { 
+                                         return timeValue.toLocaleString('en-US', {
                                             year: 'numeric',
                                             month: '2-digit',
                                             day: '2-digit',
