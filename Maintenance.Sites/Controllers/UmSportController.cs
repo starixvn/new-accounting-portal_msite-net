@@ -1,7 +1,10 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Fanex.Logging;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
+using System.Net;
+using System.Net.Sockets;
 using System.Text;
 
 namespace Maintenance.Sites.Controllers;
@@ -83,6 +86,8 @@ public class UmSportController(IConfiguration configuration) : Controller
 
             TempData["Error"] = null;
             TempData["Result"] = JsonConvert.SerializeObject(result);
+            var systemInfo = GetSystemInfo();
+            await LogService.InfoAsync($"{systemInfo}, Action: {endpoint}, SportTypeIds: {request.SportTypeIds}, Time: {DateTime.Now}");
             return RedirectToAction("Index");
         }
         catch (Exception ex)
@@ -138,5 +143,12 @@ public class UmSportController(IConfiguration configuration) : Controller
                 ErrorDescription = $"Unexpected error: {ex.Message}"
             };
         }
+    }
+
+    private static string GetSystemInfo()
+    {
+        var computerName = Dns.GetHostName();
+        var ipAddresses = Array.Find(Dns.GetHostEntry(computerName).AddressList,  a => a.AddressFamily == AddressFamily.InterNetwork)?.ToString();
+        return $"ComputerName: {computerName}, IP: {ipAddresses ?? "Unknown"}";
     }
 }
