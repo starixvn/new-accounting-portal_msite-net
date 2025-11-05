@@ -3,8 +3,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
-using System.Net;
-using System.Net.Sockets;
 using System.Text;
 
 namespace Maintenance.Sites.Controllers;
@@ -23,9 +21,9 @@ public class UmSportRequest
 
     public int SportTypeId { get; set; }
 
-    public string StartTime { get; } = DateTime.MinValue.ToString("yyyy-MM-dd HH:mm:ss");
+    public string StartTime { get; } = DateTime.UtcNow.ToString("2025-01-01 12:12:00");
 
-    public string EndTime { get; } = DateTime.MaxValue.ToString("yyyy-MM-dd HH:mm:ss");
+    public string EndTime { get; } = DateTime.UtcNow.ToString("2099-01-01 12:12:00");
 }
 
 public class ResultModel
@@ -69,7 +67,12 @@ public class UmSportController(IConfiguration configuration) : Controller
                 return RedirectToAction("Index");
             }
 
-            var endpoint = submitType == "Set UM" ? "Set3RdPartyUm" : "Remove3rdPartyUM";
+            var endpoint = submitType switch
+            {
+                "Set UM" => "Set3RdPartyUm",
+                "Remove UM" => "Remove3rdPartyUM",
+                _ => "Get3RdPartyUm"
+            };
             var result = new List<ResultModel>();
             var ids = request.SportTypeIds.Trim().Split(",");
             foreach (var id in ids)
@@ -86,8 +89,7 @@ public class UmSportController(IConfiguration configuration) : Controller
 
             TempData["Error"] = null;
             TempData["Result"] = JsonConvert.SerializeObject(result);
-            var systemInfo = GetSystemInfo();
-            await LogService.InfoAsync($"{systemInfo}, Action: {endpoint}, SportTypeIds: {request.SportTypeIds}, Time: {DateTime.Now}");
+            await LogService.InfoAsync($"Action: {endpoint}, SportTypeIds: {request.SportTypeIds}, Result: {JsonConvert.SerializeObject(result)}, Time: {DateTime.Now}");
             return RedirectToAction("Index");
         }
         catch (Exception ex)
@@ -143,12 +145,5 @@ public class UmSportController(IConfiguration configuration) : Controller
                 ErrorDescription = $"Unexpected error: {ex.Message}"
             };
         }
-    }
-
-    private static string GetSystemInfo()
-    {
-        var computerName = Dns.GetHostName();
-        var ipAddresses = Array.Find(Dns.GetHostEntry(computerName).AddressList,  a => a.AddressFamily == AddressFamily.InterNetwork)?.ToString();
-        return $"ComputerName: {computerName}, IP: {ipAddresses ?? "Unknown"}";
     }
 }
