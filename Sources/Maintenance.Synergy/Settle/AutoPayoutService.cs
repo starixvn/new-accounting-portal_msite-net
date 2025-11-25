@@ -127,8 +127,7 @@ public class AutoPayoutService(
         using var excelPackage = new ExcelPackage(stream);
         var detailSheet = excelPackage.Workbook.Worksheets["Detail"];
 
-        detailSheet.Cells["A1"].Value = date.ToShortDateString();
-        detailSheet.ApplyVertical(details, 3);
+        detailSheet.ApplyVertical(details, 2);
 
         if (!details.Any())
         {

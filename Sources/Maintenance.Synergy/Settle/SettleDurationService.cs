@@ -121,8 +121,7 @@ public class SettleDurationService(
         using var excelPackage = new ExcelPackage(stream);
         var summarySheet = excelPackage.Workbook.Worksheets["Detail"];
 
-        summarySheet.Cells["A1"].Value = date.ToShortDateString();
-        summarySheet.ApplyVertical(models, 3);
+        summarySheet.ApplyVertical(models, 2);
 
         if (!models.Any())
         {
