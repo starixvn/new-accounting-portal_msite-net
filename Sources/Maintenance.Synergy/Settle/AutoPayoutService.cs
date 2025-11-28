@@ -24,8 +24,8 @@ public class AutoPayoutService(
         }
 
         var date = string.IsNullOrEmpty(dateInString)
-        ? DateTimeOffset.UtcNow.Date.AddDays(-1)
-        : DateTime.ParseExact(dateInString, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
+            ? DateTimeOffset.UtcNow.Date.AddDays(-1)
+            : DateTime.ParseExact(dateInString, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
 
         var (details, summary, soccer, basketball) = await Query(date);
 
@@ -73,11 +73,13 @@ public class AutoPayoutService(
         var auto = summary.Sum(m => m.AutoCalculate + m.AutoRefund);
         var rate = total == 0 ? "NA" : $"{(double)auto * 100 / total:N2}%";
 
-        var realTotal = summary.Where(m => m.LeagueType == "Real").Sum(m => m.AutoCalculate + m.AutoRefund + m.ManualCalculate + m.ManualRefund);
+        var realTotal = summary.Where(m => m.LeagueType == "Real")
+            .Sum(m => m.AutoCalculate + m.AutoRefund + m.ManualCalculate + m.ManualRefund);
         var realAuto = summary.Where(m => m.LeagueType == "Real").Sum(m => m.AutoCalculate + m.AutoRefund);
         var realRate = realTotal == 0 ? "NA" : $"{(double)realAuto * 100 / realTotal:N2}%";
 
-        var virtualTotal = summary.Where(m => m.LeagueType == "Virtual").Sum(m => m.AutoCalculate + m.AutoRefund + m.ManualCalculate + m.ManualRefund);
+        var virtualTotal = summary.Where(m => m.LeagueType == "Virtual")
+            .Sum(m => m.AutoCalculate + m.AutoRefund + m.ManualCalculate + m.ManualRefund);
         var virtualAuto = summary.Where(m => m.LeagueType == "Virtual").Sum(m => m.AutoCalculate + m.AutoRefund);
         var virtualRate = virtualTotal == 0 ? "NA" : $"{(double)virtualAuto * 100 / virtualTotal:N2}%";
 
@@ -85,28 +87,39 @@ public class AutoPayoutService(
         var soccerAuto = soccer.Sum(m => m.AutoCalculate + m.AutoRefund);
         var soccerRate = soccerTotal == 0 ? "NA" : $"{(double)soccerAuto * 100 / soccerTotal:N2}%";
 
-        var soccerRealTotal = soccer.Where(m => m.LeagueType == "Real").Sum(m => m.AutoCalculate + m.AutoRefund + m.ManualCalculate + m.ManualRefund);
+        var soccerRealTotal = soccer.Where(m => m.LeagueType == "Real")
+            .Sum(m => m.AutoCalculate + m.AutoRefund + m.ManualCalculate + m.ManualRefund);
         var soccerRealAuto = soccer.Where(m => m.LeagueType == "Real").Sum(m => m.AutoCalculate + m.AutoRefund);
         var soccerRealRate = soccerRealTotal == 0 ? "NA" : $"{(double)soccerRealAuto * 100 / soccerRealTotal:N2}%";
 
-        var soccerVirtualTotal = soccer.Where(m => m.LeagueType == "Virtual").Sum(m => m.AutoCalculate + m.AutoRefund + m.ManualCalculate + m.ManualRefund);
+        var soccerVirtualTotal = soccer.Where(m => m.LeagueType == "Virtual")
+            .Sum(m => m.AutoCalculate + m.AutoRefund + m.ManualCalculate + m.ManualRefund);
         var soccerVirtualAuto = soccer.Where(m => m.LeagueType == "Virtual").Sum(m => m.AutoCalculate + m.AutoRefund);
-        var soccerVirtualRate = soccerVirtualTotal == 0 ? "NA" : $"{(double)soccerVirtualAuto * 100 / soccerVirtualTotal:N2}%";
+        var soccerVirtualRate = soccerVirtualTotal == 0
+            ? "NA"
+            : $"{(double)soccerVirtualAuto * 100 / soccerVirtualTotal:N2}%";
 
         var basketballTotal = basketball.Sum(m => m.AutoCalculate + m.AutoRefund + m.ManualCalculate + m.ManualRefund);
         var basketballAuto = basketball.Sum(m => m.AutoCalculate + m.AutoRefund);
         var basketballRate = basketballTotal == 0 ? "NA" : $"{(double)basketballAuto * 100 / basketballTotal:N2}%";
 
-        var basketballRealTotal = basketball.Where(m => m.LeagueType == "Real").Sum(m => m.AutoCalculate + m.AutoRefund + m.ManualCalculate + m.ManualRefund);
+        var basketballRealTotal = basketball.Where(m => m.LeagueType == "Real")
+            .Sum(m => m.AutoCalculate + m.AutoRefund + m.ManualCalculate + m.ManualRefund);
         var basketballRealAuto = basketball.Where(m => m.LeagueType == "Real").Sum(m => m.AutoCalculate + m.AutoRefund);
-        var basketballRealRate = basketballRealTotal == 0 ? "NA" : $"{(double)basketballRealAuto * 100 / basketballRealTotal:N2}%";
+        var basketballRealRate = basketballRealTotal == 0
+            ? "NA"
+            : $"{(double)basketballRealAuto * 100 / basketballRealTotal:N2}%";
 
-        var basketballVirtualTotal = basketball.Where(m => m.LeagueType == "Virtual").Sum(m => m.AutoCalculate + m.AutoRefund + m.ManualCalculate + m.ManualRefund);
-        var basketballVirtualAuto = basketball.Where(m => m.LeagueType == "Virtual").Sum(m => m.AutoCalculate + m.AutoRefund);
-        var basketballVirtualRate = basketballVirtualTotal == 0 ? "NA" : $"{(double)basketballVirtualAuto * 100 / basketballVirtualTotal:N2}%";
+        var basketballVirtualTotal = basketball.Where(m => m.LeagueType == "Virtual")
+            .Sum(m => m.AutoCalculate + m.AutoRefund + m.ManualCalculate + m.ManualRefund);
+        var basketballVirtualAuto =
+            basketball.Where(m => m.LeagueType == "Virtual").Sum(m => m.AutoCalculate + m.AutoRefund);
+        var basketballVirtualRate = basketballVirtualTotal == 0
+            ? "NA"
+            : $"{(double)basketballVirtualAuto * 100 / basketballVirtualTotal:N2}%";
 
         var message = $""""
-                       Date {date} ({environment}): 
+                       Date {date} ({environment}):
                        1. All Sports: {rate} ({auto:N0} / {total:N0})
                        - Real: {realRate} ({realAuto:N0} / {realTotal:N0})
                        - Virtual: {virtualRate} ({virtualAuto:N0} / {virtualTotal:N0})
@@ -128,6 +141,12 @@ public class AutoPayoutService(
         var detailSheet = excelPackage.Workbook.Worksheets["Detail"];
 
         detailSheet.ApplyVertical(details, 2);
+        var endCol = detailSheet.Dimension.End.Column;
+        var endRow = detailSheet.Dimension.End.Row;
+        for (var colIndex = 1; colIndex <= endCol; colIndex++)
+        {
+            detailSheet.Cells[3, colIndex, endRow, colIndex].StyleID = detailSheet.Cells[3, colIndex].StyleID;
+        }
 
         if (!details.Any())
         {
@@ -137,14 +156,17 @@ public class AutoPayoutService(
         return await excelPackage.GetAsByteArrayAsync();
     }
 
-    public async Task<(List<AutoPayoutRateDetail> details, List<AutoPayoutRate> summary, List<AutoPayoutRate> soccer, List<AutoPayoutRate> basketball)> Query(DateTime date)
+    public async Task<(List<AutoPayoutRateDetail> details, List<AutoPayoutRate> summary, List<AutoPayoutRate> soccer,
+        List<AutoPayoutRate> basketball)> Query(DateTime date)
     {
         var criteria = new AutoPayoutRateCriteria
         {
             FromDate = date,
             ToDate = date
         };
-        var (a, b, c, d) = await repository.FetchMultipleAsync<AutoPayoutRateDetail, AutoPayoutRate, AutoPayoutRate, AutoPayoutRate>(criteria);
+        var (a, b, c, d) =
+            await repository
+                .FetchMultipleAsync<AutoPayoutRateDetail, AutoPayoutRate, AutoPayoutRate, AutoPayoutRate>(criteria);
         return (a.ToList(), b.ToList(), c.ToList(), d.ToList());
     }
 }

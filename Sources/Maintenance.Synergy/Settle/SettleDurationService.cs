@@ -29,7 +29,7 @@ public class SettleDurationService(
     public async Task<bool> Send(string dateInString = "")
     {
         const string template = """
-                                Date {date}({environment}): 
+                                Date {date}({environment}):
                                 1. Soccer:
                                 - Total Match Count: {soccerMatchCount}
                                 - Total Match Count Action: {soccerMatchCountAction}
@@ -49,11 +49,12 @@ public class SettleDurationService(
             ? DateTimeOffset.UtcNow.Date.AddDays(-1)
             : DateTime.ParseExact(dateInString, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
 
-        var (models, details) = await repository.FetchMultipleAsync<SettleDurationModel, SettleDurationDetail>(new SettleDurationCriteria
-        {
-            FromDate = date,
-            ToDate = date
-        });
+        var (models, details) = await repository.FetchMultipleAsync<SettleDurationModel, SettleDurationDetail>(
+            new SettleDurationCriteria
+            {
+                FromDate = date,
+                ToDate = date
+            });
 
         var message = !models.Any()
             ? $"{environment} - No settle duration data found for date {date.ToShortDateString()}."
@@ -87,11 +88,11 @@ public class SettleDurationService(
 
         await rocketChatClientService.Send(messageRequest);
 
-
         return result;
     }
 
-    private static string GenerateNonEmptyMessage(IEnumerable<SettleDurationModel> models, string template, string environment, DateTime date)
+    private static string GenerateNonEmptyMessage(IEnumerable<SettleDurationModel> models, string template,
+        string environment, DateTime date)
     {
         var soccerModel = models
             .FirstOrDefault(m => "Soccer".Equals(m.SportName, StringComparison.CurrentCultureIgnoreCase));
@@ -99,9 +100,12 @@ public class SettleDurationService(
             .FirstOrDefault(m => "Basketball".Equals(m.SportName, StringComparison.CurrentCultureIgnoreCase));
         var soccerMatchCount = soccerModel == null ? "NA" : soccerModel.MatchCount.ToString();
         var soccerMatchCountAction = soccerModel == null ? "NA" : soccerModel.MatchCountAction.ToString();
-        var soccerDuration = soccerModel == null ? "NA" : ((decimal)soccerModel.SettleDuration / 1000).ToString("#,##0.00");
+        var soccerDuration =
+            soccerModel == null ? "NA" : ((decimal)soccerModel.SettleDuration / 1000).ToString("#,##0.00");
         var basketballMatchCount = basketballModel == null ? "NA" : basketballModel.MatchCount.ToString();
-        var basketballDuration = basketballModel == null ? "NA" : ((decimal)basketballModel.SettleDuration / 1000).ToString("#,##0.00");
+        var basketballDuration = basketballModel == null
+            ? "NA"
+            : ((decimal)basketballModel.SettleDuration / 1000).ToString("#,##0.00");
         var basketballMatchCountAction = basketballModel == null ? "NA" : basketballModel.MatchCountAction.ToString();
         var message = template.Replace("{environment}", environment)
             .Replace("{date}", date.ToString("MM/dd/yyyy"))
@@ -122,6 +126,12 @@ public class SettleDurationService(
         var summarySheet = excelPackage.Workbook.Worksheets["Detail"];
 
         summarySheet.ApplyVertical(models, 2);
+        var endCol = summarySheet.Dimension.End.Column;
+        var endRow = summarySheet.Dimension.End.Row;
+        for (var colIndex = 1; colIndex <= endCol; colIndex++)
+        {
+            summarySheet.Cells[3, colIndex, endRow, colIndex].StyleID = summarySheet.Cells[3, colIndex].StyleID;
+        }
 
         if (!models.Any())
         {
